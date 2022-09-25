@@ -1,0 +1,8 @@
+{
+    "files.associations": {
+        "types.h": "c",
+        "bat-right.h": "c",
+        "bat.h": "c",
+        "bat-left.h": "c"
+    }
+}
