@@ -2,6 +2,11 @@
 #include <cpctelera.h>
 #include "sprites/g_palette.h"
 #include "bat/bat.h"
+#include "background/background.h"
+
+
+#include <map/tiles.h>   // Tile declarations      (file generated after processing img/tiles.png)
+#include <map/level01.h> // Court map declarations (file generated after processing img/court.tmx)
 
 
 void initializeCpc() {
@@ -20,19 +25,18 @@ void initializeCpc() {
 
 
 void main(void) {
-   u8* pvmem;  // Pointer to video memory
 
    initializeCpc();
 
-
-   resetBat();
+   initializeBackground();
+   initializeBat();
 
    while (1) {
+
 
       cpct_scanKeyboard_f();
 
       updateBat();
-
       drawBat();
 
       cpct_waitVSYNC();

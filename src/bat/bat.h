@@ -6,7 +6,7 @@
 
 extern void drawBat();
 extern void updateBat();
-extern void resetBat();
+extern void initializeBat();
 
 
 #endif
