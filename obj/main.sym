@@ -8,6 +8,8 @@ Symbol Table
     .__.CPU.                                                    =  0000 L
     .__.H$L.                                                    =  0000 L
     _cpct_disableFirmware                                          **** GX
+    _cpct_drawSprite                                               **** GX
+    _cpct_getScreenPtr                                             **** GX
     _cpct_scanKeyboard_f                                           **** GX
     _cpct_setPALColour                                             **** GX
     _cpct_setPalette                                               **** GX
@@ -19,6 +21,7 @@ Symbol Table
     _initializeBat                                                 **** GX
   0 _initializeCpc                                                 0000 GR
   0 _main                                                          001B GR
+    _sp_ball                                                       **** GX
     _updateBat                                                     **** GX
 
 
@@ -27,7 +30,7 @@ Hexadecimal [16-Bits]
 
 Area Table
 
-   0 _CODE                                      size   32   flags    0
+   0 _CODE                                      size   49   flags    0
    1 _DATA                                      size    0   flags    0
    2 _INITIALIZED                               size    0   flags    0
    3 _DABS                                      size    0   flags    8

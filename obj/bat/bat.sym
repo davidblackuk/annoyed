@@ -17,7 +17,7 @@ Symbol Table
     _cpct_drawSprite                                               **** GX
     _cpct_getScreenPtr                                             **** GX
     _cpct_isKeyPressed                                             **** GX
-  0 _drawBat                                                       006E GR
+  0 _drawBat                                                       0072 GR
   0 _initializeBat                                                 0000 GR
   2 _oldBatX                                                       0002 GR
     _restoreBackground                                             **** GX
@@ -32,7 +32,7 @@ Hexadecimal [16-Bits]
 
 Area Table
 
-   0 _CODE                                      size   E7   flags    0
+   0 _CODE                                      size   E5   flags    0
    1 _DATA                                      size    0   flags    0
    2 _INITIALIZED                               size    4   flags    0
    3 _DABS                                      size    0   flags    8

@@ -1,6 +1,6 @@
 // Data created with Img2CPC - (c) Retroworks - 2007-2017
-#ifndef _CPC_ASSETS_BAT_LEFT_H_
-#define _CPC_ASSETS_BAT_LEFT_H_
+#ifndef _ASSETS_BAT_LEFT_H_
+#define _ASSETS_BAT_LEFT_H_
 
 #include <types.h>
 #define SP_BAT_LEFT_W 2

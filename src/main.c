@@ -6,8 +6,9 @@
 
 
 #include <map/tiles.h>   // Tile declarations      (file generated after processing img/tiles.png)
-#include <map/level01.h> // Court map declarations (file generated after processing img/court.tmx)
+#include <map/level-01.h> // Court map declarations (file generated after processing img/court.tmx)
 
+#include "sprites/ball.h"
 
 void initializeCpc() {
    
@@ -23,7 +24,6 @@ void initializeCpc() {
 }
 
 
-
 void main(void) {
 
    initializeCpc();
@@ -34,11 +34,19 @@ void main(void) {
    while (1) {
 
 
-      cpct_scanKeyboard_f();
-
-      updateBat();
-      drawBat();
 
       cpct_waitVSYNC();
+      
+      drawBat();
+
+      cpct_scanKeyboard_f();
+      updateBat();
+
+      {
+         u8* svmem = cpct_getScreenPtr(CPCT_VMEM_START, 100, 150);
+         cpct_drawSprite(sp_ball, svmem ,SP_BALL_W, SP_BALL_H);
+      }
    }
 }
+
+

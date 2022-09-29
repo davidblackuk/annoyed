@@ -30,9 +30,10 @@ $(eval $(call IMG2SP, SET_FOLDER      , src/sprites               ))
 $(eval $(call IMG2SP, SET_PALETTE_FW  , $(PALETTE)         ))
 $(eval $(call IMG2SP, CONVERT_PALETTE , $(PALETTE), g_palette ))
 
-$(eval $(call IMG2SP, CONVERT         , cpc-assets/bat-left.png , 0, 0, sp_bat_left))
-$(eval $(call IMG2SP, CONVERT         , cpc-assets/bat-mid.png , 0, 0, sp_bat_mid))
-$(eval $(call IMG2SP, CONVERT         , cpc-assets/bat-right.png , 0, 0, sp_bat_right))
+$(eval $(call IMG2SP, CONVERT         , assets/bat-left.png , 0, 0, sp_bat_left))
+$(eval $(call IMG2SP, CONVERT         , assets/bat-mid.png , 0, 0, sp_bat_mid))
+$(eval $(call IMG2SP, CONVERT         , assets/bat-right.png , 0, 0, sp_bat_right))
+$(eval $(call IMG2SP, CONVERT         , assets/ball.png , 0, 0, sp_ball))
 
 # CONVERT TILES:
 #  Converts img/tiles.png into src/map/tiles.c & src/map/tiles.h
@@ -51,4 +52,4 @@ $(eval $(call IMG2SP, CONVERT         , cpc-assets/bat-right.png , 0, 0, sp_bat_
 
 # $(eval $(call IMG2SPRITES,cpc-assets/tiles.png,0,g,8,8,{$(PALETTE)},zgtiles,src/map/,))
 
-$(eval $(call IMG2SPRITES,cpc-assets/tiles.png,0,g,8,8,{$(PALETTE)},zgtiles,src/map/,))
+$(eval $(call IMG2SPRITES,assets/tiles.png,0,g,4,4,{$(PALETTE)},tileset,src/map/,))

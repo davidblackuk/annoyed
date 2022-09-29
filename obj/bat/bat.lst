@@ -58,177 +58,176 @@
                              58 ; code
                              59 ;--------------------------------------------------------
                              60 	.area _CODE
-                             61 ;src/bat/bat.c:30: void initializeBat() {
+                             61 ;src/bat/bat.c:29: void initializeBat() {
                              62 ;	---------------------------------
                              63 ; Function initializeBat
                              64 ; ---------------------------------
    0000                      65 _initializeBat::
-                             66 ;src/bat/bat.c:31: batW = 8;
+                             66 ;src/bat/bat.c:30: batW = 8;
    0000 21r03r00      [10]   67 	ld	hl,#_batW + 0
    0003 36 08         [10]   68 	ld	(hl), #0x08
-                             69 ;src/bat/bat.c:32: batX = (SCREEN_WIDTH_BYTES- batW) / 2;
+                             69 ;src/bat/bat.c:31: batX = (SCREEN_WIDTH_BYTES- batW) / 2;
    0005 21r01r00      [10]   70 	ld	hl,#_batX + 0
    0008 36 24         [10]   71 	ld	(hl), #0x24
-                             72 ;src/bat/bat.c:33: batY = SCREEN_HEIGHT_ROWS - BAT_HEIGHT_PIXELS - BAT_BOTTOM_OFFSET_PIXELS;
+                             72 ;src/bat/bat.c:32: batY = SCREEN_HEIGHT_ROWS - BAT_HEIGHT_PIXELS - BAT_BOTTOM_OFFSET_PIXELS;
    000A 21r00r00      [10]   73 	ld	hl,#_batY + 0
    000D 36 B8         [10]   74 	ld	(hl), #0xb8
-                             75 ;src/bat/bat.c:34: oldBatX = batX;
+                             75 ;src/bat/bat.c:33: oldBatX = batX;
    000F 21r02r00      [10]   76 	ld	hl,#_oldBatX + 0
    0012 36 24         [10]   77 	ld	(hl), #0x24
    0014 C9            [10]   78 	ret
-                             79 ;src/bat/bat.c:38: void updateBat() {
+                             79 ;src/bat/bat.c:37: void updateBat() {
                              80 ;	---------------------------------
                              81 ; Function updateBat
                              82 ; ---------------------------------
    0015                      83 _updateBat::
-                             84 ;src/bat/bat.c:40: if (cpct_isKeyPressed(Key_CursorLeft)) {
-   0015 21 01 01      [10]   85 	ld	hl, #0x0101
-   0018 CDr00r00      [17]   86 	call	_cpct_isKeyPressed
-   001B 7D            [ 4]   87 	ld	a, l
-   001C B7            [ 4]   88 	or	a, a
-   001D 28 0E         [12]   89 	jr	Z,00108$
-                             90 ;src/bat/bat.c:41: if (batX > BAT_MIN_X_BYTE_OFFSET) {
-   001F 3E 0C         [ 7]   91 	ld	a, #0x0c
-   0021 FD 21r01r00   [14]   92 	ld	iy, #_batX
-   0025 FD 96 00      [19]   93 	sub	a, 0 (iy)
-   0028 D0            [11]   94 	ret	NC
-                             95 ;src/bat/bat.c:42: batX--;
-   0029 FD 35 00      [23]   96 	dec	0 (iy)
-   002C C9            [10]   97 	ret
-   002D                      98 00108$:
-                             99 ;src/bat/bat.c:44: } else if (cpct_isKeyPressed(Key_CursorRight)) {
-   002D 21 00 02      [10]  100 	ld	hl, #0x0200
-   0030 CDr00r00      [17]  101 	call	_cpct_isKeyPressed
-   0033 7D            [ 4]  102 	ld	a, l
-   0034 B7            [ 4]  103 	or	a, a
-   0035 C8            [11]  104 	ret	Z
-                            105 ;src/bat/bat.c:45: batX++;
-   0036 21r01r00      [10]  106 	ld	hl, #_batX+0
-   0039 34            [11]  107 	inc	(hl)
-                            108 ;src/bat/bat.c:46: if (batX > BAT_MAX_X_BYTE_OFFSET - batW) {
-   003A 21r03r00      [10]  109 	ld	hl,#_batW + 0
-   003D 4E            [ 7]  110 	ld	c, (hl)
-   003E 06 00         [ 7]  111 	ld	b, #0x00
-   0040 3E 44         [ 7]  112 	ld	a, #0x44
-   0042 91            [ 4]  113 	sub	a, c
-   0043 4F            [ 4]  114 	ld	c, a
-   0044 3E 00         [ 7]  115 	ld	a, #0x00
-   0046 98            [ 4]  116 	sbc	a, b
-   0047 47            [ 4]  117 	ld	b, a
-   0048 21r01r00      [10]  118 	ld	hl,#_batX + 0
-   004B 5E            [ 7]  119 	ld	e, (hl)
-   004C 16 00         [ 7]  120 	ld	d, #0x00
-   004E 79            [ 4]  121 	ld	a, c
-   004F 93            [ 4]  122 	sub	a, e
-   0050 78            [ 4]  123 	ld	a, b
-   0051 9A            [ 4]  124 	sbc	a, d
-   0052 E2r57r00      [10]  125 	jp	PO, 00128$
-   0055 EE 80         [ 7]  126 	xor	a, #0x80
-   0057                     127 00128$:
-   0057 F2r67r00      [10]  128 	jp	P, 00104$
-                            129 ;src/bat/bat.c:47: batX = BAT_MAX_X_BYTE_OFFSET - batW;
-   005A 21r03r00      [10]  130 	ld	hl, #_batW
-   005D FD 21r01r00   [14]  131 	ld	iy, #_batX
-   0061 3E 44         [ 7]  132 	ld	a, #0x44
-   0063 96            [ 7]  133 	sub	a, (hl)
-   0064 FD 77 00      [19]  134 	ld	0 (iy), a
-   0067                     135 00104$:
-                            136 ;src/bat/bat.c:49: oldBatX = batX;
-   0067 3Ar01r00      [13]  137 	ld	a,(#_batX + 0)
-   006A 32r02r00      [13]  138 	ld	(#_oldBatX + 0),a
-   006D C9            [10]  139 	ret
-                            140 ;src/bat/bat.c:54: void drawBat()
-                            141 ;	---------------------------------
-                            142 ; Function drawBat
-                            143 ; ---------------------------------
-   006E                     144 _drawBat::
-                            145 ;src/bat/bat.c:57: u8 *pvmem = cpct_getScreenPtr(CPCT_VMEM_START, batX, batY);
-   006E 3Ar00r00      [13]  146 	ld	a, (_batY)
-   0071 F5            [11]  147 	push	af
-   0072 33            [ 6]  148 	inc	sp
-   0073 3Ar01r00      [13]  149 	ld	a, (_batX)
-   0076 F5            [11]  150 	push	af
-   0077 33            [ 6]  151 	inc	sp
-   0078 21 00 C0      [10]  152 	ld	hl, #0xc000
-   007B E5            [11]  153 	push	hl
-   007C CDr00r00      [17]  154 	call	_cpct_getScreenPtr
-   007F 4D            [ 4]  155 	ld	c, l
-   0080 44            [ 4]  156 	ld	b, h
-                            157 ;src/bat/bat.c:62: restoreBackground(oldBatX, batY / 8, batW, BAT_HEIGHT_PIXELS);
-   0081 21r00r00      [10]  158 	ld	hl,#_batY + 0
-   0084 56            [ 7]  159 	ld	d, (hl)
-   0085 CB 3A         [ 8]  160 	srl	d
-   0087 CB 3A         [ 8]  161 	srl	d
-   0089 CB 3A         [ 8]  162 	srl	d
-   008B C5            [11]  163 	push	bc
-   008C 3E 08         [ 7]  164 	ld	a, #0x08
-   008E F5            [11]  165 	push	af
-   008F 33            [ 6]  166 	inc	sp
-   0090 3Ar03r00      [13]  167 	ld	a, (_batW)
-   0093 F5            [11]  168 	push	af
-   0094 33            [ 6]  169 	inc	sp
-   0095 D5            [11]  170 	push	de
-   0096 33            [ 6]  171 	inc	sp
-   0097 3Ar02r00      [13]  172 	ld	a, (_oldBatX)
-   009A F5            [11]  173 	push	af
-   009B 33            [ 6]  174 	inc	sp
-   009C CDr00r00      [17]  175 	call	_restoreBackground
-   009F F1            [10]  176 	pop	af
-   00A0 F1            [10]  177 	pop	af
-   00A1 C1            [10]  178 	pop	bc
-                            179 ;src/bat/bat.c:67: cpct_drawSprite(sp_bat_left, pvmem, SP_BAT_LEFT_W, SP_BAT_LEFT_H);
-   00A2 59            [ 4]  180 	ld	e, c
-   00A3 50            [ 4]  181 	ld	d, b
-   00A4 C5            [11]  182 	push	bc
-   00A5 21 02 08      [10]  183 	ld	hl, #0x0802
-   00A8 E5            [11]  184 	push	hl
-   00A9 D5            [11]  185 	push	de
-   00AA 21r00r00      [10]  186 	ld	hl, #_sp_bat_left
-   00AD E5            [11]  187 	push	hl
-   00AE CDr00r00      [17]  188 	call	_cpct_drawSprite
-   00B1 C1            [10]  189 	pop	bc
-                            190 ;src/bat/bat.c:68: cpct_drawSprite(sp_bat_mid, pvmem + BAT_SEGMENT_WIDTH_BYTES, SP_BAT_MID_W, SP_BAT_MID_H);
-   00B2 59            [ 4]  191 	ld	e, c
-   00B3 50            [ 4]  192 	ld	d, b
-   00B4 13            [ 6]  193 	inc	de
-   00B5 13            [ 6]  194 	inc	de
-   00B6 C5            [11]  195 	push	bc
-   00B7 21 02 08      [10]  196 	ld	hl, #0x0802
-   00BA E5            [11]  197 	push	hl
-   00BB D5            [11]  198 	push	de
-   00BC 21r00r00      [10]  199 	ld	hl, #_sp_bat_mid
-   00BF E5            [11]  200 	push	hl
-   00C0 CDr00r00      [17]  201 	call	_cpct_drawSprite
-   00C3 C1            [10]  202 	pop	bc
-                            203 ;src/bat/bat.c:69: cpct_drawSprite(sp_bat_mid, pvmem + 2*BAT_SEGMENT_WIDTH_BYTES, SP_BAT_MID_W, SP_BAT_MID_H);
-   00C4 21 04 00      [10]  204 	ld	hl, #0x0004
-   00C7 09            [11]  205 	add	hl, bc
-   00C8 C5            [11]  206 	push	bc
-   00C9 11 02 08      [10]  207 	ld	de, #0x0802
-   00CC D5            [11]  208 	push	de
-   00CD E5            [11]  209 	push	hl
-   00CE 21r00r00      [10]  210 	ld	hl, #_sp_bat_mid
-   00D1 E5            [11]  211 	push	hl
-   00D2 CDr00r00      [17]  212 	call	_cpct_drawSprite
-   00D5 C1            [10]  213 	pop	bc
-                            214 ;src/bat/bat.c:70: cpct_drawSprite(sp_bat_right, pvmem + 3*BAT_SEGMENT_WIDTH_BYTES, SP_BAT_RIGHT_W, SP_BAT_RIGHT_H);
-   00D6 21 06 00      [10]  215 	ld	hl, #0x0006
-   00D9 09            [11]  216 	add	hl, bc
-   00DA 01r00r00      [10]  217 	ld	bc, #_sp_bat_right+0
-   00DD 11 02 08      [10]  218 	ld	de, #0x0802
-   00E0 D5            [11]  219 	push	de
-   00E1 E5            [11]  220 	push	hl
-   00E2 C5            [11]  221 	push	bc
-   00E3 CDr00r00      [17]  222 	call	_cpct_drawSprite
-   00E6 C9            [10]  223 	ret
-                            224 	.area _CODE
-                            225 	.area _INITIALIZER
-   0000                     226 __xinit__batY:
-   0000 00                  227 	.db #0x00	; 0
-   0001                     228 __xinit__batX:
-   0001 00                  229 	.db #0x00	; 0
-   0002                     230 __xinit__oldBatX:
-   0002 00                  231 	.db #0x00	; 0
-   0003                     232 __xinit__batW:
-   0003 00                  233 	.db #0x00	; 0
-                            234 	.area _CABS (ABS)
+                             84 ;src/bat/bat.c:38: oldBatX = batX;
+   0015 3Ar01r00      [13]   85 	ld	a,(#_batX + 0)
+   0018 32r02r00      [13]   86 	ld	(#_oldBatX + 0),a
+                             87 ;src/bat/bat.c:39: if (cpct_isKeyPressed(Key_CursorLeft)) {
+   001B 21 01 01      [10]   88 	ld	hl, #0x0101
+   001E CDr00r00      [17]   89 	call	_cpct_isKeyPressed
+   0021 7D            [ 4]   90 	ld	a, l
+   0022 B7            [ 4]   91 	or	a, a
+   0023 28 14         [12]   92 	jr	Z,00108$
+                             93 ;src/bat/bat.c:40: if (batX > BAT_MIN_X_BYTE_OFFSET) {
+   0025 3E 0C         [ 7]   94 	ld	a, #0x0c
+   0027 FD 21r01r00   [14]   95 	ld	iy, #_batX
+   002B FD 96 00      [19]   96 	sub	a, 0 (iy)
+   002E D0            [11]   97 	ret	NC
+                             98 ;src/bat/bat.c:41: batX--;
+   002F FD 35 00      [23]   99 	dec	0 (iy)
+                            100 ;src/bat/bat.c:42: oldBatX = batX;
+   0032 FD 7E 00      [19]  101 	ld	a, 0 (iy)
+   0035 32r02r00      [13]  102 	ld	(#_oldBatX + 0),a
+   0038 C9            [10]  103 	ret
+   0039                     104 00108$:
+                            105 ;src/bat/bat.c:44: } else if (cpct_isKeyPressed(Key_CursorRight)) {
+   0039 21 00 02      [10]  106 	ld	hl, #0x0200
+   003C CDr00r00      [17]  107 	call	_cpct_isKeyPressed
+   003F 7D            [ 4]  108 	ld	a, l
+   0040 B7            [ 4]  109 	or	a, a
+   0041 C8            [11]  110 	ret	Z
+                            111 ;src/bat/bat.c:45: batX++;
+   0042 21r01r00      [10]  112 	ld	hl, #_batX+0
+   0045 34            [11]  113 	inc	(hl)
+                            114 ;src/bat/bat.c:46: if (batX > BAT_MAX_X_BYTE_OFFSET - batW) {
+   0046 21r03r00      [10]  115 	ld	hl,#_batW + 0
+   0049 4E            [ 7]  116 	ld	c, (hl)
+   004A 06 00         [ 7]  117 	ld	b, #0x00
+   004C 3E 42         [ 7]  118 	ld	a, #0x42
+   004E 91            [ 4]  119 	sub	a, c
+   004F 4F            [ 4]  120 	ld	c, a
+   0050 3E 00         [ 7]  121 	ld	a, #0x00
+   0052 98            [ 4]  122 	sbc	a, b
+   0053 47            [ 4]  123 	ld	b, a
+   0054 21r01r00      [10]  124 	ld	hl,#_batX + 0
+   0057 5E            [ 7]  125 	ld	e, (hl)
+   0058 16 00         [ 7]  126 	ld	d, #0x00
+   005A 79            [ 4]  127 	ld	a, c
+   005B 93            [ 4]  128 	sub	a, e
+   005C 78            [ 4]  129 	ld	a, b
+   005D 9A            [ 4]  130 	sbc	a, d
+   005E E2r63r00      [10]  131 	jp	PO, 00128$
+   0061 EE 80         [ 7]  132 	xor	a, #0x80
+   0063                     133 00128$:
+   0063 F0            [11]  134 	ret	P
+                            135 ;src/bat/bat.c:47: batX = BAT_MAX_X_BYTE_OFFSET - batW;
+   0064 21r03r00      [10]  136 	ld	hl, #_batW
+   0067 FD 21r01r00   [14]  137 	ld	iy, #_batX
+   006B 3E 42         [ 7]  138 	ld	a, #0x42
+   006D 96            [ 7]  139 	sub	a, (hl)
+   006E FD 77 00      [19]  140 	ld	0 (iy), a
+   0071 C9            [10]  141 	ret
+                            142 ;src/bat/bat.c:53: void drawBat()
+                            143 ;	---------------------------------
+                            144 ; Function drawBat
+                            145 ; ---------------------------------
+   0072                     146 _drawBat::
+                            147 ;src/bat/bat.c:59: restoreBackground(oldBatX, batY, batW+2, BAT_HEIGHT_PIXELS);
+   0072 21r03r00      [10]  148 	ld	hl,#_batW + 0
+   0075 46            [ 7]  149 	ld	b, (hl)
+   0076 04            [ 4]  150 	inc	b
+   0077 04            [ 4]  151 	inc	b
+   0078 3E 08         [ 7]  152 	ld	a, #0x08
+   007A F5            [11]  153 	push	af
+   007B 33            [ 6]  154 	inc	sp
+   007C C5            [11]  155 	push	bc
+   007D 33            [ 6]  156 	inc	sp
+   007E 3Ar00r00      [13]  157 	ld	a, (_batY)
+   0081 F5            [11]  158 	push	af
+   0082 33            [ 6]  159 	inc	sp
+   0083 3Ar02r00      [13]  160 	ld	a, (_oldBatX)
+   0086 F5            [11]  161 	push	af
+   0087 33            [ 6]  162 	inc	sp
+   0088 CDr00r00      [17]  163 	call	_restoreBackground
+   008B F1            [10]  164 	pop	af
+   008C F1            [10]  165 	pop	af
+                            166 ;src/bat/bat.c:61: svmem = cpct_getScreenPtr(CPCT_VMEM_START, batX, batY);
+   008D 3Ar00r00      [13]  167 	ld	a, (_batY)
+   0090 F5            [11]  168 	push	af
+   0091 33            [ 6]  169 	inc	sp
+   0092 3Ar01r00      [13]  170 	ld	a, (_batX)
+   0095 F5            [11]  171 	push	af
+   0096 33            [ 6]  172 	inc	sp
+   0097 21 00 C0      [10]  173 	ld	hl, #0xc000
+   009A E5            [11]  174 	push	hl
+   009B CDr00r00      [17]  175 	call	_cpct_getScreenPtr
+   009E 4D            [ 4]  176 	ld	c, l
+   009F 44            [ 4]  177 	ld	b, h
+                            178 ;src/bat/bat.c:63: cpct_drawSprite(sp_bat_left, svmem, SP_BAT_LEFT_W, SP_BAT_LEFT_H);
+   00A0 59            [ 4]  179 	ld	e, c
+   00A1 50            [ 4]  180 	ld	d, b
+   00A2 C5            [11]  181 	push	bc
+   00A3 21 02 08      [10]  182 	ld	hl, #0x0802
+   00A6 E5            [11]  183 	push	hl
+   00A7 D5            [11]  184 	push	de
+   00A8 21r00r00      [10]  185 	ld	hl, #_sp_bat_left
+   00AB E5            [11]  186 	push	hl
+   00AC CDr00r00      [17]  187 	call	_cpct_drawSprite
+   00AF C1            [10]  188 	pop	bc
+                            189 ;src/bat/bat.c:64: cpct_drawSprite(sp_bat_mid, svmem + BAT_SEGMENT_WIDTH_BYTES, SP_BAT_MID_W, SP_BAT_MID_H);
+   00B0 59            [ 4]  190 	ld	e, c
+   00B1 50            [ 4]  191 	ld	d, b
+   00B2 13            [ 6]  192 	inc	de
+   00B3 13            [ 6]  193 	inc	de
+   00B4 C5            [11]  194 	push	bc
+   00B5 21 02 08      [10]  195 	ld	hl, #0x0802
+   00B8 E5            [11]  196 	push	hl
+   00B9 D5            [11]  197 	push	de
+   00BA 21r00r00      [10]  198 	ld	hl, #_sp_bat_mid
+   00BD E5            [11]  199 	push	hl
+   00BE CDr00r00      [17]  200 	call	_cpct_drawSprite
+   00C1 C1            [10]  201 	pop	bc
+                            202 ;src/bat/bat.c:65: cpct_drawSprite(sp_bat_mid, svmem + 2*BAT_SEGMENT_WIDTH_BYTES, SP_BAT_MID_W, SP_BAT_MID_H);
+   00C2 21 04 00      [10]  203 	ld	hl, #0x0004
+   00C5 09            [11]  204 	add	hl, bc
+   00C6 C5            [11]  205 	push	bc
+   00C7 11 02 08      [10]  206 	ld	de, #0x0802
+   00CA D5            [11]  207 	push	de
+   00CB E5            [11]  208 	push	hl
+   00CC 21r00r00      [10]  209 	ld	hl, #_sp_bat_mid
+   00CF E5            [11]  210 	push	hl
+   00D0 CDr00r00      [17]  211 	call	_cpct_drawSprite
+   00D3 C1            [10]  212 	pop	bc
+                            213 ;src/bat/bat.c:66: cpct_drawSprite(sp_bat_right, svmem + 3*BAT_SEGMENT_WIDTH_BYTES, SP_BAT_RIGHT_W, SP_BAT_RIGHT_H);
+   00D4 21 06 00      [10]  214 	ld	hl, #0x0006
+   00D7 09            [11]  215 	add	hl, bc
+   00D8 01r00r00      [10]  216 	ld	bc, #_sp_bat_right+0
+   00DB 11 02 08      [10]  217 	ld	de, #0x0802
+   00DE D5            [11]  218 	push	de
+   00DF E5            [11]  219 	push	hl
+   00E0 C5            [11]  220 	push	bc
+   00E1 CDr00r00      [17]  221 	call	_cpct_drawSprite
+   00E4 C9            [10]  222 	ret
+                            223 	.area _CODE
+                            224 	.area _INITIALIZER
+   0000                     225 __xinit__batY:
+   0000 00                  226 	.db #0x00	; 0
+   0001                     227 __xinit__batX:
+   0001 00                  228 	.db #0x00	; 0
+   0002                     229 __xinit__oldBatX:
+   0002 00                  230 	.db #0x00	; 0
+   0003                     231 __xinit__batW:
+   0003 00                  232 	.db #0x00	; 0
+                            233 	.area _CABS (ABS)

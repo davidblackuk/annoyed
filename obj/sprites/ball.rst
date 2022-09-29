@@ -2,13 +2,13 @@
                               2 ; File Created by SDCC : free open source ANSI-C Compiler
                               3 ; Version 3.6.8 #9946 (Linux)
                               4 ;--------------------------------------------------------
-                              5 	.module g_palette
+                              5 	.module ball
                               6 	.optsdcc -mz80
                               7 	
                               8 ;--------------------------------------------------------
                               9 ; Public variables in this module
                              10 ;--------------------------------------------------------
-                             11 	.globl _g_palette
+                             11 	.globl _sp_ball
                              12 ;--------------------------------------------------------
                              13 ; special function registers
                              14 ;--------------------------------------------------------
@@ -41,22 +41,24 @@
                              41 ;--------------------------------------------------------
                              42 	.area _CODE
                              43 	.area _CODE
-   4AD4                      44 _g_palette:
-   4AD4 44                   45 	.db #0x44	; 68	'D'
-   4AD5 54                   46 	.db #0x54	; 84	'T'
-   4AD6 55                   47 	.db #0x55	; 85	'U'
-   4AD7 5C                   48 	.db #0x5c	; 92
-   4AD8 4C                   49 	.db #0x4c	; 76	'L'
-   4AD9 56                   50 	.db #0x56	; 86	'V'
-   4ADA 57                   51 	.db #0x57	; 87	'W'
-   4ADB 5E                   52 	.db #0x5e	; 94
-   4ADC 40                   53 	.db #0x40	; 64
-   4ADD 4E                   54 	.db #0x4e	; 78	'N'
-   4ADE 47                   55 	.db #0x47	; 71	'G'
-   4ADF 52                   56 	.db #0x52	; 82	'R'
-   4AE0 53                   57 	.db #0x53	; 83	'S'
-   4AE1 4A                   58 	.db #0x4a	; 74	'J'
-   4AE2 43                   59 	.db #0x43	; 67	'C'
-   4AE3 4B                   60 	.db #0x4b	; 75	'K'
-                             61 	.area _INITIALIZER
-                             62 	.area _CABS (ABS)
+   4A92                      44 _sp_ball:
+   4A92 C0                   45 	.db #0xc0	; 192
+   4A93 C0                   46 	.db #0xc0	; 192
+   4A94 C0                   47 	.db #0xc0	; 192
+   4A95 C0                   48 	.db #0xc0	; 192
+   4A96 FF                   49 	.db #0xff	; 255
+   4A97 C0                   50 	.db #0xc0	; 192
+   4A98 D5                   51 	.db #0xd5	; 213
+   4A99 30                   52 	.db #0x30	; 48	'0'
+   4A9A EA                   53 	.db #0xea	; 234
+   4A9B D5                   54 	.db #0xd5	; 213
+   4A9C 30                   55 	.db #0x30	; 48	'0'
+   4A9D EA                   56 	.db #0xea	; 234
+   4A9E C0                   57 	.db #0xc0	; 192
+   4A9F FF                   58 	.db #0xff	; 255
+   4AA0 C0                   59 	.db #0xc0	; 192
+   4AA1 C0                   60 	.db #0xc0	; 192
+   4AA2 C0                   61 	.db #0xc0	; 192
+   4AA3 C0                   62 	.db #0xc0	; 192
+                             63 	.area _INITIALIZER
+                             64 	.area _CABS (ABS)

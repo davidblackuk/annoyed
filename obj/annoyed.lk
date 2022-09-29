@@ -7,8 +7,9 @@
 -k /home/davidb/git/cpctelera/cpctelera/tools/sdcc-3.6.8-r9946/share/sdcc/lib/z80
 -l /home/davidb/git/cpctelera/cpctelera/cpctelera.lib
 -l z80
-obj/map/level01.rel
+obj/map/level-01.rel
 obj/map/tiles.rel
+obj/sprites/ball.rel
 obj/sprites/bat-right.rel
 obj/sprites/bat-mid.rel
 obj/sprites/bat-left.rel

@@ -41,22 +41,22 @@
                              41 ;--------------------------------------------------------
                              42 	.area _CODE
                              43 	.area _CODE
-   4570                      44 _sp_bat_right:
-   4570 C0                   45 	.db #0xc0	; 192
-   4571 C0                   46 	.db #0xc0	; 192
-   4572 CC                   47 	.db #0xcc	; 204
-   4573 C0                   48 	.db #0xc0	; 192
-   4574 C3                   49 	.db #0xc3	; 195
-   4575 C0                   50 	.db #0xc0	; 192
-   4576 FF                   51 	.db #0xff	; 255
-   4577 60                   52 	.db #0x60	; 96
-   4578 C3                   53 	.db #0xc3	; 195
-   4579 60                   54 	.db #0x60	; 96
-   457A C3                   55 	.db #0xc3	; 195
-   457B C0                   56 	.db #0xc0	; 192
-   457C CC                   57 	.db #0xcc	; 204
-   457D C0                   58 	.db #0xc0	; 192
-   457E C0                   59 	.db #0xc0	; 192
-   457F C0                   60 	.db #0xc0	; 192
+   4AA4                      44 _sp_bat_right:
+   4AA4 C0                   45 	.db #0xc0	; 192
+   4AA5 C0                   46 	.db #0xc0	; 192
+   4AA6 CC                   47 	.db #0xcc	; 204
+   4AA7 C0                   48 	.db #0xc0	; 192
+   4AA8 C3                   49 	.db #0xc3	; 195
+   4AA9 C0                   50 	.db #0xc0	; 192
+   4AAA FF                   51 	.db #0xff	; 255
+   4AAB 60                   52 	.db #0x60	; 96
+   4AAC C3                   53 	.db #0xc3	; 195
+   4AAD 60                   54 	.db #0x60	; 96
+   4AAE C3                   55 	.db #0xc3	; 195
+   4AAF C0                   56 	.db #0xc0	; 192
+   4AB0 CC                   57 	.db #0xcc	; 204
+   4AB1 C0                   58 	.db #0xc0	; 192
+   4AB2 C0                   59 	.db #0xc0	; 192
+   4AB3 C0                   60 	.db #0xc0	; 192
                              61 	.area _INITIALIZER
                              62 	.area _CABS (ABS)
