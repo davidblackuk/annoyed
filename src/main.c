@@ -1,7 +1,8 @@
 
 #include <cpctelera.h>
 #include "sprites/g_palette.h"
-#include "bat/bat.h"
+#include "entities/bat.h"
+#include "entities/ball.h"
 #include "background/background.h"
 
 
@@ -20,7 +21,7 @@ void initializeCpc() {
 
    cpct_setBorder(HW_BRIGHT_YELLOW);
 
-   cpct_setPalette(g_palette, 16);
+   cpct_setPalette((u8*)g_palette, 16);
 }
 
 
@@ -29,22 +30,32 @@ void main(void) {
    initializeCpc();
 
    initializeBackground();
-   initializeBat();
+
+   bat_initialize();
+   balls_initialize();
 
    while (1) {
+      int w = 0;
 
-
-
+      // wait for vsynv before rendering
       cpct_waitVSYNC();
+
+      // restore the background of moving items
+      bat_restore_background();
+      balls_restore_background();
+
+      // draw that which must be drawn
+      bat_draw();
+      balls_draw();
       
-      drawBat();
 
+      // update state for next render (after vsync)
       cpct_scanKeyboard_f();
-      updateBat();
+      bat_update();
+      balls_update();
 
-      {
-         u8* svmem = cpct_getScreenPtr(CPCT_VMEM_START, 100, 150);
-         cpct_drawSprite(sp_ball, svmem ,SP_BALL_W, SP_BALL_H);
+      for (int o = 0; o< 5000; o++) {
+         w += 1;
       }
    }
 }

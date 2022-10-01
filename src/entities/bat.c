@@ -26,7 +26,7 @@ u8 batX = 0;
 u8 oldBatX = 0; 
 u8 batW = 0; 
 
-void initializeBat() {
+void bat_initialize() {
     batW = 8;
     batX = (SCREEN_WIDTH_BYTES- batW) / 2;
     batY = SCREEN_HEIGHT_ROWS - BAT_HEIGHT_PIXELS - BAT_BOTTOM_OFFSET_PIXELS;
@@ -34,29 +34,27 @@ void initializeBat() {
 }
 
 
-void updateBat() {
-    oldBatX = batX;
+void bat_update() {
     if (cpct_isKeyPressed(Key_CursorLeft)) {
         if (batX > BAT_MIN_X_BYTE_OFFSET) {
-            batX--;
             oldBatX = batX;
+            batX--;
         }
     } else if (cpct_isKeyPressed(Key_CursorRight)) {
-        batX++;
-        if (batX > BAT_MAX_X_BYTE_OFFSET - batW) {
-            batX = BAT_MAX_X_BYTE_OFFSET - batW;
+        if (batX < BAT_MAX_X_BYTE_OFFSET - batW) {
+            oldBatX = batX;
+            batX++;
         }
     } 
 }
 
+void bat_restore_background() {
+    restoreBackground(oldBatX, batY, batW, BAT_HEIGHT_PIXELS);
+}
 
-void drawBat()
+void bat_draw()
 {
      u8 *svmem;
-
-
-
-    restoreBackground(oldBatX, batY, batW+2, BAT_HEIGHT_PIXELS);
 
     svmem = cpct_getScreenPtr(CPCT_VMEM_START, batX, batY);
 
