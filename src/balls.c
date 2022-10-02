@@ -85,7 +85,8 @@ void balls_draw()
     }
 }
 
-Ball * balls_get_first_active() {
+Ball *balls_get_first_active()
+{
     Ball *ball = balls;
     for (u8 i = 0; i < MAX_BALLS; i++)
     {
@@ -97,7 +98,6 @@ Ball * balls_get_first_active() {
     }
     return NULL;
 }
-
 
 /* ---------------------------------------------------------------------
     Private methods
@@ -114,11 +114,17 @@ void update_ball(Ball *ball)
 {
     ball->prev_x = ball->x;
     ball->prev_y = ball->y;
+    move_ball_x(ball);
+    move_ball_y(ball);
+}
 
+
+void move_ball_x(Ball *ball)
+{
     if (ball->active)
     {
         u8 new_x = ball->x + ball->dx;
-        u8 new_y = ball->y + ball->dy;
+
         if (ball->dx > 0)
         {
             if (new_x >= PLAY_AREA_RIGHT_EDGE - SP_BALL_W)
@@ -144,7 +150,17 @@ void update_ball(Ball *ball)
                 ball->x = new_x;
             }
         }
+    }
+}
 
+    // handle ball y movement, flipping if hitting a bloack, the top side wall
+    // or the bat
+    void move_ball_y(Ball * ball)
+    {
+
+        u8 new_y = ball->y + ball->dy;
+
+        // Ball moving up the screen
         if (ball->dy < 0)
         {
             if (new_y <= PLAY_AREA_TOP_EDGE)
@@ -159,16 +175,23 @@ void update_ball(Ball *ball)
         }
         else
         {
+            // Ball moving down the screen
+
             if (new_y >= YOUR_DEAD_PIXEL_ROW)
             {
-//                ball->active = 0;
+                // ball lost or life lost, or game over
+                ball->active = 0;
                 ball->dy = -ball->dy;
             }
             else
             {
-                ball->y = new_y;
+                // moving down hit test the bat and the tiles and sprites
+                check_bat_collision(ball, new_y);
             }
         }
-
     }
-}
+
+    void check_bat_collision(Ball * ball, u8 new_y)
+    {
+        ball->y = new_y;
+    }

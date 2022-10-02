@@ -22,4 +22,7 @@ u8 serving;
 void center_ball(Ball* ball);
 void update_ball(Ball* ball);
 
+void move_ball_x(Ball *ball);
+void move_ball_y(Ball *ball);
+void check_bat_collision(Ball *ball, u8 new_y);
 #endif
