@@ -1,24 +1,22 @@
 
 
 #include <cpctelera.h>
-#include "bat.h"
-#include "background/background.h"
+#include "h/keys.h"
+#include "h/bat.h"
+#include "h/background.h"
+#include "h/globals.h"
 #include "sprites/bat-left.h"
 #include "sprites/bat-mid.h"
 #include "sprites/bat-right.h"
 #include <map/tiles.h>   // Tile declarations      (file generated after processing img/tiles.png)
 
-#define MODE_0_PIXELS_PER_BYTE 2
-#define SCREEN_WIDTH_BYTES 80
-#define SCREEN_HEIGHT_ROWS 200
+
 
 #define BAT_HEIGHT_PIXELS 8
 #define BAT_BOTTOM_OFFSET_PIXELS 8
 #define BAT_SEGMENT_WIDTH_PIXELS 4
 #define BAT_SEGMENT_WIDTH_BYTES 2
 
-#define BAT_MIN_X_BYTE_OFFSET 3*4
-#define BAT_MAX_X_BYTE_OFFSET SCREEN_WIDTH_BYTES - (2+(3*4))
 
 
 u8 batY = 0;
@@ -35,13 +33,13 @@ void bat_initialize() {
 
 
 void bat_update() {
-    if (cpct_isKeyPressed(Key_CursorLeft)) {
-        if (batX > BAT_MIN_X_BYTE_OFFSET) {
+    if (key_left_is_pressed) {
+        if (batX > PLAY_AREA_LEFT_EDGE) {
             oldBatX = batX;
             batX--;
         }
-    } else if (cpct_isKeyPressed(Key_CursorRight)) {
-        if (batX < BAT_MAX_X_BYTE_OFFSET - batW) {
+    } else if (key_right_is_pressed) {
+        if (batX < PLAY_AREA_RIGHT_EDGE - batW) {
             oldBatX = batX;
             batX++;
         }

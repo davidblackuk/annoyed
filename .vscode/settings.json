@@ -3,6 +3,9 @@
         "types.h": "c",
         "bat-right.h": "c",
         "bat.h": "c",
-        "bat-left.h": "c"
+        "bat-left.h": "c",
+        "background.h": "c",
+        "level-01.h": "c",
+        "balls.h": "c"
     }
 }

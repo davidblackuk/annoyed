@@ -4,7 +4,7 @@
 #include <types.h>
 
 
-extern void drawNumber(int num);
+extern void dbg_displayNumber(int num);
 
 
 

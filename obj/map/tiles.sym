@@ -1,0 +1,165 @@
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 1.
+Hexadecimal [16-Bits]
+
+Symbol Table
+
+    .__.$$$.                                                    =  2710 L
+    .__.ABS.                                                    =  0000 G
+    .__.CPU.                                                    =  0000 L
+    .__.H$L.                                                    =  0000 L
+  0 _g_tiles_000                                                   0100 GR
+  0 _g_tiles_001                                                   0108 GR
+  0 _g_tiles_002                                                   0110 GR
+  0 _g_tiles_003                                                   0118 GR
+  0 _g_tiles_004                                                   0120 GR
+  0 _g_tiles_005                                                   0128 GR
+  0 _g_tiles_006                                                   0130 GR
+  0 _g_tiles_007                                                   0138 GR
+  0 _g_tiles_008                                                   0140 GR
+  0 _g_tiles_009                                                   0148 GR
+  0 _g_tiles_010                                                   0150 GR
+  0 _g_tiles_011                                                   0158 GR
+  0 _g_tiles_012                                                   0160 GR
+  0 _g_tiles_013                                                   0168 GR
+  0 _g_tiles_014                                                   0170 GR
+  0 _g_tiles_015                                                   0178 GR
+  0 _g_tiles_016                                                   0180 GR
+  0 _g_tiles_017                                                   0188 GR
+  0 _g_tiles_018                                                   0190 GR
+  0 _g_tiles_019                                                   0198 GR
+  0 _g_tiles_020                                                   01A0 GR
+  0 _g_tiles_021                                                   01A8 GR
+  0 _g_tiles_022                                                   01B0 GR
+  0 _g_tiles_023                                                   01B8 GR
+  0 _g_tiles_024                                                   01C0 GR
+  0 _g_tiles_025                                                   01C8 GR
+  0 _g_tiles_026                                                   01D0 GR
+  0 _g_tiles_027                                                   01D8 GR
+  0 _g_tiles_028                                                   01E0 GR
+  0 _g_tiles_029                                                   01E8 GR
+  0 _g_tiles_030                                                   01F0 GR
+  0 _g_tiles_031                                                   01F8 GR
+  0 _g_tiles_032                                                   0200 GR
+  0 _g_tiles_033                                                   0208 GR
+  0 _g_tiles_034                                                   0210 GR
+  0 _g_tiles_035                                                   0218 GR
+  0 _g_tiles_036                                                   0220 GR
+  0 _g_tiles_037                                                   0228 GR
+  0 _g_tiles_038                                                   0230 GR
+  0 _g_tiles_039                                                   0238 GR
+  0 _g_tiles_040                                                   0240 GR
+  0 _g_tiles_041                                                   0248 GR
+  0 _g_tiles_042                                                   0250 GR
+  0 _g_tiles_043                                                   0258 GR
+  0 _g_tiles_044                                                   0260 GR
+  0 _g_tiles_045                                                   0268 GR
+  0 _g_tiles_046                                                   0270 GR
+  0 _g_tiles_047                                                   0278 GR
+  0 _g_tiles_048                                                   0280 GR
+  0 _g_tiles_049                                                   0288 GR
+  0 _g_tiles_050                                                   0290 GR
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 2.
+Hexadecimal [16-Bits]
+
+Symbol Table
+
+  0 _g_tiles_051                                                   0298 GR
+  0 _g_tiles_052                                                   02A0 GR
+  0 _g_tiles_053                                                   02A8 GR
+  0 _g_tiles_054                                                   02B0 GR
+  0 _g_tiles_055                                                   02B8 GR
+  0 _g_tiles_056                                                   02C0 GR
+  0 _g_tiles_057                                                   02C8 GR
+  0 _g_tiles_058                                                   02D0 GR
+  0 _g_tiles_059                                                   02D8 GR
+  0 _g_tiles_060                                                   02E0 GR
+  0 _g_tiles_061                                                   02E8 GR
+  0 _g_tiles_062                                                   02F0 GR
+  0 _g_tiles_063                                                   02F8 GR
+  0 _g_tiles_064                                                   0300 GR
+  0 _g_tiles_065                                                   0308 GR
+  0 _g_tiles_066                                                   0310 GR
+  0 _g_tiles_067                                                   0318 GR
+  0 _g_tiles_068                                                   0320 GR
+  0 _g_tiles_069                                                   0328 GR
+  0 _g_tiles_070                                                   0330 GR
+  0 _g_tiles_071                                                   0338 GR
+  0 _g_tiles_072                                                   0340 GR
+  0 _g_tiles_073                                                   0348 GR
+  0 _g_tiles_074                                                   0350 GR
+  0 _g_tiles_075                                                   0358 GR
+  0 _g_tiles_076                                                   0360 GR
+  0 _g_tiles_077                                                   0368 GR
+  0 _g_tiles_078                                                   0370 GR
+  0 _g_tiles_079                                                   0378 GR
+  0 _g_tiles_080                                                   0380 GR
+  0 _g_tiles_081                                                   0388 GR
+  0 _g_tiles_082                                                   0390 GR
+  0 _g_tiles_083                                                   0398 GR
+  0 _g_tiles_084                                                   03A0 GR
+  0 _g_tiles_085                                                   03A8 GR
+  0 _g_tiles_086                                                   03B0 GR
+  0 _g_tiles_087                                                   03B8 GR
+  0 _g_tiles_088                                                   03C0 GR
+  0 _g_tiles_089                                                   03C8 GR
+  0 _g_tiles_090                                                   03D0 GR
+  0 _g_tiles_091                                                   03D8 GR
+  0 _g_tiles_092                                                   03E0 GR
+  0 _g_tiles_093                                                   03E8 GR
+  0 _g_tiles_094                                                   03F0 GR
+  0 _g_tiles_095                                                   03F8 GR
+  0 _g_tiles_096                                                   0400 GR
+  0 _g_tiles_097                                                   0408 GR
+  0 _g_tiles_098                                                   0410 GR
+  0 _g_tiles_099                                                   0418 GR
+  0 _g_tiles_100                                                   0420 GR
+  0 _g_tiles_101                                                   0428 GR
+  0 _g_tiles_102                                                   0430 GR
+  0 _g_tiles_103                                                   0438 GR
+  0 _g_tiles_104                                                   0440 GR
+  0 _g_tiles_105                                                   0448 GR
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 3.
+Hexadecimal [16-Bits]
+
+Symbol Table
+
+  0 _g_tiles_106                                                   0450 GR
+  0 _g_tiles_107                                                   0458 GR
+  0 _g_tiles_108                                                   0460 GR
+  0 _g_tiles_109                                                   0468 GR
+  0 _g_tiles_110                                                   0470 GR
+  0 _g_tiles_111                                                   0478 GR
+  0 _g_tiles_112                                                   0480 GR
+  0 _g_tiles_113                                                   0488 GR
+  0 _g_tiles_114                                                   0490 GR
+  0 _g_tiles_115                                                   0498 GR
+  0 _g_tiles_116                                                   04A0 GR
+  0 _g_tiles_117                                                   04A8 GR
+  0 _g_tiles_118                                                   04B0 GR
+  0 _g_tiles_119                                                   04B8 GR
+  0 _g_tiles_120                                                   04C0 GR
+  0 _g_tiles_121                                                   04C8 GR
+  0 _g_tiles_122                                                   04D0 GR
+  0 _g_tiles_123                                                   04D8 GR
+  0 _g_tiles_124                                                   04E0 GR
+  0 _g_tiles_125                                                   04E8 GR
+  0 _g_tiles_126                                                   04F0 GR
+  0 _g_tiles_127                                                   04F8 GR
+  0 _g_tileset                                                     0000 GR
+
+
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 4.
+Hexadecimal [16-Bits]
+
+Area Table
+
+   0 _CODE                                      size  500   flags    0
+   1 _DATA                                      size    0   flags    0
+   2 _INITIALIZED                               size    0   flags    0
+   3 _DABS                                      size    0   flags    8
+   4 _HOME                                      size    0   flags    0
+   5 _GSINIT                                    size    0   flags    0
+   6 _GSFINAL                                   size    0   flags    0
+   7 _INITIALIZER                               size    0   flags    0
+   8 _CABS                                      size    0   flags    8
+

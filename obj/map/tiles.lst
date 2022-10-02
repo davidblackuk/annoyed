@@ -1,0 +1,1454 @@
+                              1 ;--------------------------------------------------------
+                              2 ; File Created by SDCC : free open source ANSI-C Compiler
+                              3 ; Version 3.6.8 #9946 (Linux)
+                              4 ;--------------------------------------------------------
+                              5 	.module tiles
+                              6 	.optsdcc -mz80
+                              7 	
+                              8 ;--------------------------------------------------------
+                              9 ; Public variables in this module
+                             10 ;--------------------------------------------------------
+                             11 	.globl _g_tiles_127
+                             12 	.globl _g_tiles_126
+                             13 	.globl _g_tiles_125
+                             14 	.globl _g_tiles_124
+                             15 	.globl _g_tiles_123
+                             16 	.globl _g_tiles_122
+                             17 	.globl _g_tiles_121
+                             18 	.globl _g_tiles_120
+                             19 	.globl _g_tiles_119
+                             20 	.globl _g_tiles_118
+                             21 	.globl _g_tiles_117
+                             22 	.globl _g_tiles_116
+                             23 	.globl _g_tiles_115
+                             24 	.globl _g_tiles_114
+                             25 	.globl _g_tiles_113
+                             26 	.globl _g_tiles_112
+                             27 	.globl _g_tiles_111
+                             28 	.globl _g_tiles_110
+                             29 	.globl _g_tiles_109
+                             30 	.globl _g_tiles_108
+                             31 	.globl _g_tiles_107
+                             32 	.globl _g_tiles_106
+                             33 	.globl _g_tiles_105
+                             34 	.globl _g_tiles_104
+                             35 	.globl _g_tiles_103
+                             36 	.globl _g_tiles_102
+                             37 	.globl _g_tiles_101
+                             38 	.globl _g_tiles_100
+                             39 	.globl _g_tiles_099
+                             40 	.globl _g_tiles_098
+                             41 	.globl _g_tiles_097
+                             42 	.globl _g_tiles_096
+                             43 	.globl _g_tiles_095
+                             44 	.globl _g_tiles_094
+                             45 	.globl _g_tiles_093
+                             46 	.globl _g_tiles_092
+                             47 	.globl _g_tiles_091
+                             48 	.globl _g_tiles_090
+                             49 	.globl _g_tiles_089
+                             50 	.globl _g_tiles_088
+                             51 	.globl _g_tiles_087
+                             52 	.globl _g_tiles_086
+                             53 	.globl _g_tiles_085
+                             54 	.globl _g_tiles_084
+                             55 	.globl _g_tiles_083
+                             56 	.globl _g_tiles_082
+                             57 	.globl _g_tiles_081
+                             58 	.globl _g_tiles_080
+                             59 	.globl _g_tiles_079
+                             60 	.globl _g_tiles_078
+                             61 	.globl _g_tiles_077
+                             62 	.globl _g_tiles_076
+                             63 	.globl _g_tiles_075
+                             64 	.globl _g_tiles_074
+                             65 	.globl _g_tiles_073
+                             66 	.globl _g_tiles_072
+                             67 	.globl _g_tiles_071
+                             68 	.globl _g_tiles_070
+                             69 	.globl _g_tiles_069
+                             70 	.globl _g_tiles_068
+                             71 	.globl _g_tiles_067
+                             72 	.globl _g_tiles_066
+                             73 	.globl _g_tiles_065
+                             74 	.globl _g_tiles_064
+                             75 	.globl _g_tiles_063
+                             76 	.globl _g_tiles_062
+                             77 	.globl _g_tiles_061
+                             78 	.globl _g_tiles_060
+                             79 	.globl _g_tiles_059
+                             80 	.globl _g_tiles_058
+                             81 	.globl _g_tiles_057
+                             82 	.globl _g_tiles_056
+                             83 	.globl _g_tiles_055
+                             84 	.globl _g_tiles_054
+                             85 	.globl _g_tiles_053
+                             86 	.globl _g_tiles_052
+                             87 	.globl _g_tiles_051
+                             88 	.globl _g_tiles_050
+                             89 	.globl _g_tiles_049
+                             90 	.globl _g_tiles_048
+                             91 	.globl _g_tiles_047
+                             92 	.globl _g_tiles_046
+                             93 	.globl _g_tiles_045
+                             94 	.globl _g_tiles_044
+                             95 	.globl _g_tiles_043
+                             96 	.globl _g_tiles_042
+                             97 	.globl _g_tiles_041
+                             98 	.globl _g_tiles_040
+                             99 	.globl _g_tiles_039
+                            100 	.globl _g_tiles_038
+                            101 	.globl _g_tiles_037
+                            102 	.globl _g_tiles_036
+                            103 	.globl _g_tiles_035
+                            104 	.globl _g_tiles_034
+                            105 	.globl _g_tiles_033
+                            106 	.globl _g_tiles_032
+                            107 	.globl _g_tiles_031
+                            108 	.globl _g_tiles_030
+                            109 	.globl _g_tiles_029
+                            110 	.globl _g_tiles_028
+                            111 	.globl _g_tiles_027
+                            112 	.globl _g_tiles_026
+                            113 	.globl _g_tiles_025
+                            114 	.globl _g_tiles_024
+                            115 	.globl _g_tiles_023
+                            116 	.globl _g_tiles_022
+                            117 	.globl _g_tiles_021
+                            118 	.globl _g_tiles_020
+                            119 	.globl _g_tiles_019
+                            120 	.globl _g_tiles_018
+                            121 	.globl _g_tiles_017
+                            122 	.globl _g_tiles_016
+                            123 	.globl _g_tiles_015
+                            124 	.globl _g_tiles_014
+                            125 	.globl _g_tiles_013
+                            126 	.globl _g_tiles_012
+                            127 	.globl _g_tiles_011
+                            128 	.globl _g_tiles_010
+                            129 	.globl _g_tiles_009
+                            130 	.globl _g_tiles_008
+                            131 	.globl _g_tiles_007
+                            132 	.globl _g_tiles_006
+                            133 	.globl _g_tiles_005
+                            134 	.globl _g_tiles_004
+                            135 	.globl _g_tiles_003
+                            136 	.globl _g_tiles_002
+                            137 	.globl _g_tiles_001
+                            138 	.globl _g_tiles_000
+                            139 	.globl _g_tileset
+                            140 ;--------------------------------------------------------
+                            141 ; special function registers
+                            142 ;--------------------------------------------------------
+                            143 ;--------------------------------------------------------
+                            144 ; ram data
+                            145 ;--------------------------------------------------------
+                            146 	.area _DATA
+                            147 ;--------------------------------------------------------
+                            148 ; ram data
+                            149 ;--------------------------------------------------------
+                            150 	.area _INITIALIZED
+                            151 ;--------------------------------------------------------
+                            152 ; absolute external ram data
+                            153 ;--------------------------------------------------------
+                            154 	.area _DABS (ABS)
+                            155 ;--------------------------------------------------------
+                            156 ; global & static initialisations
+                            157 ;--------------------------------------------------------
+                            158 	.area _HOME
+                            159 	.area _GSINIT
+                            160 	.area _GSFINAL
+                            161 	.area _GSINIT
+                            162 ;--------------------------------------------------------
+                            163 ; Home
+                            164 ;--------------------------------------------------------
+                            165 	.area _HOME
+                            166 	.area _HOME
+                            167 ;--------------------------------------------------------
+                            168 ; code
+                            169 ;--------------------------------------------------------
+                            170 	.area _CODE
+                            171 	.area _CODE
+   0000                     172 _g_tileset:
+   0000r00r01               173 	.dw _g_tiles_000
+   0002r08r01               174 	.dw _g_tiles_001
+   0004r10r01               175 	.dw _g_tiles_002
+   0006r18r01               176 	.dw _g_tiles_003
+   0008r20r01               177 	.dw _g_tiles_004
+   000Ar28r01               178 	.dw _g_tiles_005
+   000Cr30r01               179 	.dw _g_tiles_006
+   000Er38r01               180 	.dw _g_tiles_007
+   0010r40r01               181 	.dw _g_tiles_008
+   0012r48r01               182 	.dw _g_tiles_009
+   0014r50r01               183 	.dw _g_tiles_010
+   0016r58r01               184 	.dw _g_tiles_011
+   0018r60r01               185 	.dw _g_tiles_012
+   001Ar68r01               186 	.dw _g_tiles_013
+   001Cr70r01               187 	.dw _g_tiles_014
+   001Er78r01               188 	.dw _g_tiles_015
+   0020r80r01               189 	.dw _g_tiles_016
+   0022r88r01               190 	.dw _g_tiles_017
+   0024r90r01               191 	.dw _g_tiles_018
+   0026r98r01               192 	.dw _g_tiles_019
+   0028rA0r01               193 	.dw _g_tiles_020
+   002ArA8r01               194 	.dw _g_tiles_021
+   002CrB0r01               195 	.dw _g_tiles_022
+   002ErB8r01               196 	.dw _g_tiles_023
+   0030rC0r01               197 	.dw _g_tiles_024
+   0032rC8r01               198 	.dw _g_tiles_025
+   0034rD0r01               199 	.dw _g_tiles_026
+   0036rD8r01               200 	.dw _g_tiles_027
+   0038rE0r01               201 	.dw _g_tiles_028
+   003ArE8r01               202 	.dw _g_tiles_029
+   003CrF0r01               203 	.dw _g_tiles_030
+   003ErF8r01               204 	.dw _g_tiles_031
+   0040r00r02               205 	.dw _g_tiles_032
+   0042r08r02               206 	.dw _g_tiles_033
+   0044r10r02               207 	.dw _g_tiles_034
+   0046r18r02               208 	.dw _g_tiles_035
+   0048r20r02               209 	.dw _g_tiles_036
+   004Ar28r02               210 	.dw _g_tiles_037
+   004Cr30r02               211 	.dw _g_tiles_038
+   004Er38r02               212 	.dw _g_tiles_039
+   0050r40r02               213 	.dw _g_tiles_040
+   0052r48r02               214 	.dw _g_tiles_041
+   0054r50r02               215 	.dw _g_tiles_042
+   0056r58r02               216 	.dw _g_tiles_043
+   0058r60r02               217 	.dw _g_tiles_044
+   005Ar68r02               218 	.dw _g_tiles_045
+   005Cr70r02               219 	.dw _g_tiles_046
+   005Er78r02               220 	.dw _g_tiles_047
+   0060r80r02               221 	.dw _g_tiles_048
+   0062r88r02               222 	.dw _g_tiles_049
+   0064r90r02               223 	.dw _g_tiles_050
+   0066r98r02               224 	.dw _g_tiles_051
+   0068rA0r02               225 	.dw _g_tiles_052
+   006ArA8r02               226 	.dw _g_tiles_053
+   006CrB0r02               227 	.dw _g_tiles_054
+   006ErB8r02               228 	.dw _g_tiles_055
+   0070rC0r02               229 	.dw _g_tiles_056
+   0072rC8r02               230 	.dw _g_tiles_057
+   0074rD0r02               231 	.dw _g_tiles_058
+   0076rD8r02               232 	.dw _g_tiles_059
+   0078rE0r02               233 	.dw _g_tiles_060
+   007ArE8r02               234 	.dw _g_tiles_061
+   007CrF0r02               235 	.dw _g_tiles_062
+   007ErF8r02               236 	.dw _g_tiles_063
+   0080r00r03               237 	.dw _g_tiles_064
+   0082r08r03               238 	.dw _g_tiles_065
+   0084r10r03               239 	.dw _g_tiles_066
+   0086r18r03               240 	.dw _g_tiles_067
+   0088r20r03               241 	.dw _g_tiles_068
+   008Ar28r03               242 	.dw _g_tiles_069
+   008Cr30r03               243 	.dw _g_tiles_070
+   008Er38r03               244 	.dw _g_tiles_071
+   0090r40r03               245 	.dw _g_tiles_072
+   0092r48r03               246 	.dw _g_tiles_073
+   0094r50r03               247 	.dw _g_tiles_074
+   0096r58r03               248 	.dw _g_tiles_075
+   0098r60r03               249 	.dw _g_tiles_076
+   009Ar68r03               250 	.dw _g_tiles_077
+   009Cr70r03               251 	.dw _g_tiles_078
+   009Er78r03               252 	.dw _g_tiles_079
+   00A0r80r03               253 	.dw _g_tiles_080
+   00A2r88r03               254 	.dw _g_tiles_081
+   00A4r90r03               255 	.dw _g_tiles_082
+   00A6r98r03               256 	.dw _g_tiles_083
+   00A8rA0r03               257 	.dw _g_tiles_084
+   00AArA8r03               258 	.dw _g_tiles_085
+   00ACrB0r03               259 	.dw _g_tiles_086
+   00AErB8r03               260 	.dw _g_tiles_087
+   00B0rC0r03               261 	.dw _g_tiles_088
+   00B2rC8r03               262 	.dw _g_tiles_089
+   00B4rD0r03               263 	.dw _g_tiles_090
+   00B6rD8r03               264 	.dw _g_tiles_091
+   00B8rE0r03               265 	.dw _g_tiles_092
+   00BArE8r03               266 	.dw _g_tiles_093
+   00BCrF0r03               267 	.dw _g_tiles_094
+   00BErF8r03               268 	.dw _g_tiles_095
+   00C0r00r04               269 	.dw _g_tiles_096
+   00C2r08r04               270 	.dw _g_tiles_097
+   00C4r10r04               271 	.dw _g_tiles_098
+   00C6r18r04               272 	.dw _g_tiles_099
+   00C8r20r04               273 	.dw _g_tiles_100
+   00CAr28r04               274 	.dw _g_tiles_101
+   00CCr30r04               275 	.dw _g_tiles_102
+   00CEr38r04               276 	.dw _g_tiles_103
+   00D0r40r04               277 	.dw _g_tiles_104
+   00D2r48r04               278 	.dw _g_tiles_105
+   00D4r50r04               279 	.dw _g_tiles_106
+   00D6r58r04               280 	.dw _g_tiles_107
+   00D8r60r04               281 	.dw _g_tiles_108
+   00DAr68r04               282 	.dw _g_tiles_109
+   00DCr70r04               283 	.dw _g_tiles_110
+   00DEr78r04               284 	.dw _g_tiles_111
+   00E0r80r04               285 	.dw _g_tiles_112
+   00E2r88r04               286 	.dw _g_tiles_113
+   00E4r90r04               287 	.dw _g_tiles_114
+   00E6r98r04               288 	.dw _g_tiles_115
+   00E8rA0r04               289 	.dw _g_tiles_116
+   00EArA8r04               290 	.dw _g_tiles_117
+   00ECrB0r04               291 	.dw _g_tiles_118
+   00EErB8r04               292 	.dw _g_tiles_119
+   00F0rC0r04               293 	.dw _g_tiles_120
+   00F2rC8r04               294 	.dw _g_tiles_121
+   00F4rD0r04               295 	.dw _g_tiles_122
+   00F6rD8r04               296 	.dw _g_tiles_123
+   00F8rE0r04               297 	.dw _g_tiles_124
+   00FArE8r04               298 	.dw _g_tiles_125
+   00FCrF0r04               299 	.dw _g_tiles_126
+   00FErF8r04               300 	.dw _g_tiles_127
+   0100                     301 _g_tiles_000:
+   0100 C0                  302 	.db #0xc0	; 192
+   0101 C0                  303 	.db #0xc0	; 192
+   0102 90                  304 	.db #0x90	; 144
+   0103 30                  305 	.db #0x30	; 48	'0'
+   0104 90                  306 	.db #0x90	; 144
+   0105 30                  307 	.db #0x30	; 48	'0'
+   0106 90                  308 	.db #0x90	; 144
+   0107 30                  309 	.db #0x30	; 48	'0'
+   0108                     310 _g_tiles_001:
+   0108 C0                  311 	.db #0xc0	; 192
+   0109 C0                  312 	.db #0xc0	; 192
+   010A 30                  313 	.db #0x30	; 48	'0'
+   010B 30                  314 	.db #0x30	; 48	'0'
+   010C 30                  315 	.db #0x30	; 48	'0'
+   010D 30                  316 	.db #0x30	; 48	'0'
+   010E 30                  317 	.db #0x30	; 48	'0'
+   010F 30                  318 	.db #0x30	; 48	'0'
+   0110                     319 _g_tiles_002:
+   0110 C0                  320 	.db #0xc0	; 192
+   0111 C0                  321 	.db #0xc0	; 192
+   0112 30                  322 	.db #0x30	; 48	'0'
+   0113 60                  323 	.db #0x60	; 96
+   0114 30                  324 	.db #0x30	; 48	'0'
+   0115 60                  325 	.db #0x60	; 96
+   0116 30                  326 	.db #0x30	; 48	'0'
+   0117 60                  327 	.db #0x60	; 96
+   0118                     328 _g_tiles_003:
+   0118 C0                  329 	.db #0xc0	; 192
+   0119 C0                  330 	.db #0xc0	; 192
+   011A 84                  331 	.db #0x84	; 132
+   011B 0C                  332 	.db #0x0c	; 12
+   011C 84                  333 	.db #0x84	; 132
+   011D 0C                  334 	.db #0x0c	; 12
+   011E 84                  335 	.db #0x84	; 132
+   011F 0C                  336 	.db #0x0c	; 12
+   0120                     337 _g_tiles_004:
+   0120 C0                  338 	.db #0xc0	; 192
+   0121 C0                  339 	.db #0xc0	; 192
+   0122 0C                  340 	.db #0x0c	; 12
+   0123 0C                  341 	.db #0x0c	; 12
+   0124 0C                  342 	.db #0x0c	; 12
+   0125 0C                  343 	.db #0x0c	; 12
+   0126 0C                  344 	.db #0x0c	; 12
+   0127 0C                  345 	.db #0x0c	; 12
+   0128                     346 _g_tiles_005:
+   0128 C0                  347 	.db #0xc0	; 192
+   0129 C0                  348 	.db #0xc0	; 192
+   012A 0C                  349 	.db #0x0c	; 12
+   012B 48                  350 	.db #0x48	; 72	'H'
+   012C 0C                  351 	.db #0x0c	; 12
+   012D 48                  352 	.db #0x48	; 72	'H'
+   012E 0C                  353 	.db #0x0c	; 12
+   012F 48                  354 	.db #0x48	; 72	'H'
+   0130                     355 _g_tiles_006:
+   0130 C0                  356 	.db #0xc0	; 192
+   0131 C0                  357 	.db #0xc0	; 192
+   0132 D1                  358 	.db #0xd1	; 209
+   0133 F3                  359 	.db #0xf3	; 243
+   0134 D1                  360 	.db #0xd1	; 209
+   0135 F3                  361 	.db #0xf3	; 243
+   0136 D1                  362 	.db #0xd1	; 209
+   0137 F3                  363 	.db #0xf3	; 243
+   0138                     364 _g_tiles_007:
+   0138 C0                  365 	.db #0xc0	; 192
+   0139 C0                  366 	.db #0xc0	; 192
+   013A F3                  367 	.db #0xf3	; 243
+   013B F3                  368 	.db #0xf3	; 243
+   013C F3                  369 	.db #0xf3	; 243
+   013D F3                  370 	.db #0xf3	; 243
+   013E F3                  371 	.db #0xf3	; 243
+   013F F3                  372 	.db #0xf3	; 243
+   0140                     373 _g_tiles_008:
+   0140 C0                  374 	.db #0xc0	; 192
+   0141 C0                  375 	.db #0xc0	; 192
+   0142 F3                  376 	.db #0xf3	; 243
+   0143 E2                  377 	.db #0xe2	; 226
+   0144 F3                  378 	.db #0xf3	; 243
+   0145 E2                  379 	.db #0xe2	; 226
+   0146 F3                  380 	.db #0xf3	; 243
+   0147 E2                  381 	.db #0xe2	; 226
+   0148                     382 _g_tiles_009:
+   0148 C0                  383 	.db #0xc0	; 192
+   0149 C0                  384 	.db #0xc0	; 192
+   014A C1                  385 	.db #0xc1	; 193
+   014B C3                  386 	.db #0xc3	; 195
+   014C C1                  387 	.db #0xc1	; 193
+   014D C3                  388 	.db #0xc3	; 195
+   014E C1                  389 	.db #0xc1	; 193
+   014F C3                  390 	.db #0xc3	; 195
+   0150                     391 _g_tiles_010:
+   0150 C0                  392 	.db #0xc0	; 192
+   0151 C0                  393 	.db #0xc0	; 192
+   0152 C3                  394 	.db #0xc3	; 195
+   0153 C3                  395 	.db #0xc3	; 195
+   0154 C3                  396 	.db #0xc3	; 195
+   0155 C3                  397 	.db #0xc3	; 195
+   0156 C3                  398 	.db #0xc3	; 195
+   0157 C3                  399 	.db #0xc3	; 195
+   0158                     400 _g_tiles_011:
+   0158 C0                  401 	.db #0xc0	; 192
+   0159 C0                  402 	.db #0xc0	; 192
+   015A C3                  403 	.db #0xc3	; 195
+   015B C2                  404 	.db #0xc2	; 194
+   015C C3                  405 	.db #0xc3	; 195
+   015D C2                  406 	.db #0xc2	; 194
+   015E C3                  407 	.db #0xc3	; 195
+   015F C2                  408 	.db #0xc2	; 194
+   0160                     409 _g_tiles_012:
+   0160 80                  410 	.db #0x80	; 128
+   0161 80                  411 	.db #0x80	; 128
+   0162 40                  412 	.db #0x40	; 64
+   0163 40                  413 	.db #0x40	; 64
+   0164 80                  414 	.db #0x80	; 128
+   0165 80                  415 	.db #0x80	; 128
+   0166 40                  416 	.db #0x40	; 64
+   0167 04                  417 	.db #0x04	; 4
+   0168                     418 _g_tiles_013:
+   0168 08                  419 	.db #0x08	; 8
+   0169 80                  420 	.db #0x80	; 128
+   016A 04                  421 	.db #0x04	; 4
+   016B 48                  422 	.db #0x48	; 72	'H'
+   016C 80                  423 	.db #0x80	; 128
+   016D 84                  424 	.db #0x84	; 132
+   016E 68                  425 	.db #0x68	; 104	'h'
+   016F 40                  426 	.db #0x40	; 64
+   0170                     427 _g_tiles_014:
+   0170 80                  428 	.db #0x80	; 128
+   0171 84                  429 	.db #0x84	; 132
+   0172 04                  430 	.db #0x04	; 4
+   0173 48                  431 	.db #0x48	; 72	'H'
+   0174 08                  432 	.db #0x08	; 8
+   0175 80                  433 	.db #0x80	; 128
+   0176 40                  434 	.db #0x40	; 64
+   0177 40                  435 	.db #0x40	; 64
+   0178                     436 _g_tiles_015:
+   0178 80                  437 	.db #0x80	; 128
+   0179 84                  438 	.db #0x84	; 132
+   017A 40                  439 	.db #0x40	; 64
+   017B 48                  440 	.db #0x48	; 72	'H'
+   017C 84                  441 	.db #0x84	; 132
+   017D 80                  442 	.db #0x80	; 128
+   017E 48                  443 	.db #0x48	; 72	'H'
+   017F 40                  444 	.db #0x40	; 64
+   0180                     445 _g_tiles_016:
+   0180 90                  446 	.db #0x90	; 144
+   0181 30                  447 	.db #0x30	; 48	'0'
+   0182 90                  448 	.db #0x90	; 144
+   0183 30                  449 	.db #0x30	; 48	'0'
+   0184 90                  450 	.db #0x90	; 144
+   0185 30                  451 	.db #0x30	; 48	'0'
+   0186 C0                  452 	.db #0xc0	; 192
+   0187 C0                  453 	.db #0xc0	; 192
+   0188                     454 _g_tiles_017:
+   0188 30                  455 	.db #0x30	; 48	'0'
+   0189 30                  456 	.db #0x30	; 48	'0'
+   018A 30                  457 	.db #0x30	; 48	'0'
+   018B 30                  458 	.db #0x30	; 48	'0'
+   018C 30                  459 	.db #0x30	; 48	'0'
+   018D 30                  460 	.db #0x30	; 48	'0'
+   018E C0                  461 	.db #0xc0	; 192
+   018F C0                  462 	.db #0xc0	; 192
+   0190                     463 _g_tiles_018:
+   0190 30                  464 	.db #0x30	; 48	'0'
+   0191 60                  465 	.db #0x60	; 96
+   0192 30                  466 	.db #0x30	; 48	'0'
+   0193 60                  467 	.db #0x60	; 96
+   0194 30                  468 	.db #0x30	; 48	'0'
+   0195 60                  469 	.db #0x60	; 96
+   0196 C0                  470 	.db #0xc0	; 192
+   0197 C0                  471 	.db #0xc0	; 192
+   0198                     472 _g_tiles_019:
+   0198 84                  473 	.db #0x84	; 132
+   0199 0C                  474 	.db #0x0c	; 12
+   019A 84                  475 	.db #0x84	; 132
+   019B 0C                  476 	.db #0x0c	; 12
+   019C 84                  477 	.db #0x84	; 132
+   019D 0C                  478 	.db #0x0c	; 12
+   019E C0                  479 	.db #0xc0	; 192
+   019F C0                  480 	.db #0xc0	; 192
+   01A0                     481 _g_tiles_020:
+   01A0 0C                  482 	.db #0x0c	; 12
+   01A1 0C                  483 	.db #0x0c	; 12
+   01A2 0C                  484 	.db #0x0c	; 12
+   01A3 0C                  485 	.db #0x0c	; 12
+   01A4 0C                  486 	.db #0x0c	; 12
+   01A5 0C                  487 	.db #0x0c	; 12
+   01A6 C0                  488 	.db #0xc0	; 192
+   01A7 C0                  489 	.db #0xc0	; 192
+   01A8                     490 _g_tiles_021:
+   01A8 0C                  491 	.db #0x0c	; 12
+   01A9 48                  492 	.db #0x48	; 72	'H'
+   01AA 0C                  493 	.db #0x0c	; 12
+   01AB 48                  494 	.db #0x48	; 72	'H'
+   01AC 0C                  495 	.db #0x0c	; 12
+   01AD 48                  496 	.db #0x48	; 72	'H'
+   01AE C0                  497 	.db #0xc0	; 192
+   01AF C0                  498 	.db #0xc0	; 192
+   01B0                     499 _g_tiles_022:
+   01B0 D1                  500 	.db #0xd1	; 209
+   01B1 F3                  501 	.db #0xf3	; 243
+   01B2 D1                  502 	.db #0xd1	; 209
+   01B3 F3                  503 	.db #0xf3	; 243
+   01B4 D1                  504 	.db #0xd1	; 209
+   01B5 F3                  505 	.db #0xf3	; 243
+   01B6 C0                  506 	.db #0xc0	; 192
+   01B7 C0                  507 	.db #0xc0	; 192
+   01B8                     508 _g_tiles_023:
+   01B8 F3                  509 	.db #0xf3	; 243
+   01B9 F3                  510 	.db #0xf3	; 243
+   01BA F3                  511 	.db #0xf3	; 243
+   01BB F3                  512 	.db #0xf3	; 243
+   01BC F3                  513 	.db #0xf3	; 243
+   01BD F3                  514 	.db #0xf3	; 243
+   01BE C0                  515 	.db #0xc0	; 192
+   01BF C0                  516 	.db #0xc0	; 192
+   01C0                     517 _g_tiles_024:
+   01C0 F3                  518 	.db #0xf3	; 243
+   01C1 E2                  519 	.db #0xe2	; 226
+   01C2 F3                  520 	.db #0xf3	; 243
+   01C3 E2                  521 	.db #0xe2	; 226
+   01C4 F3                  522 	.db #0xf3	; 243
+   01C5 E2                  523 	.db #0xe2	; 226
+   01C6 C0                  524 	.db #0xc0	; 192
+   01C7 C0                  525 	.db #0xc0	; 192
+   01C8                     526 _g_tiles_025:
+   01C8 C1                  527 	.db #0xc1	; 193
+   01C9 C3                  528 	.db #0xc3	; 195
+   01CA C1                  529 	.db #0xc1	; 193
+   01CB C3                  530 	.db #0xc3	; 195
+   01CC C1                  531 	.db #0xc1	; 193
+   01CD C3                  532 	.db #0xc3	; 195
+   01CE C0                  533 	.db #0xc0	; 192
+   01CF C0                  534 	.db #0xc0	; 192
+   01D0                     535 _g_tiles_026:
+   01D0 C3                  536 	.db #0xc3	; 195
+   01D1 C3                  537 	.db #0xc3	; 195
+   01D2 C3                  538 	.db #0xc3	; 195
+   01D3 C3                  539 	.db #0xc3	; 195
+   01D4 C3                  540 	.db #0xc3	; 195
+   01D5 C3                  541 	.db #0xc3	; 195
+   01D6 C0                  542 	.db #0xc0	; 192
+   01D7 C0                  543 	.db #0xc0	; 192
+   01D8                     544 _g_tiles_027:
+   01D8 C3                  545 	.db #0xc3	; 195
+   01D9 C2                  546 	.db #0xc2	; 194
+   01DA C3                  547 	.db #0xc3	; 195
+   01DB C2                  548 	.db #0xc2	; 194
+   01DC C3                  549 	.db #0xc3	; 195
+   01DD C2                  550 	.db #0xc2	; 194
+   01DE C0                  551 	.db #0xc0	; 192
+   01DF C0                  552 	.db #0xc0	; 192
+   01E0                     553 _g_tiles_028:
+   01E0 80                  554 	.db #0x80	; 128
+   01E1 08                  555 	.db #0x08	; 8
+   01E2 04                  556 	.db #0x04	; 4
+   01E3 40                  557 	.db #0x40	; 64
+   01E4 84                  558 	.db #0x84	; 132
+   01E5 80                  559 	.db #0x80	; 128
+   01E6 48                  560 	.db #0x48	; 72	'H'
+   01E7 40                  561 	.db #0x40	; 64
+   01E8                     562 _g_tiles_029:
+   01E8 C0                  563 	.db #0xc0	; 192
+   01E9 C0                  564 	.db #0xc0	; 192
+   01EA C0                  565 	.db #0xc0	; 192
+   01EB C0                  566 	.db #0xc0	; 192
+   01EC C0                  567 	.db #0xc0	; 192
+   01ED C0                  568 	.db #0xc0	; 192
+   01EE C0                  569 	.db #0xc0	; 192
+   01EF C0                  570 	.db #0xc0	; 192
+   01F0                     571 _g_tiles_030:
+   01F0 C0                  572 	.db #0xc0	; 192
+   01F1 C0                  573 	.db #0xc0	; 192
+   01F2 C0                  574 	.db #0xc0	; 192
+   01F3 C0                  575 	.db #0xc0	; 192
+   01F4 C0                  576 	.db #0xc0	; 192
+   01F5 C0                  577 	.db #0xc0	; 192
+   01F6 C0                  578 	.db #0xc0	; 192
+   01F7 C0                  579 	.db #0xc0	; 192
+   01F8                     580 _g_tiles_031:
+   01F8 80                  581 	.db #0x80	; 128
+   01F9 80                  582 	.db #0x80	; 128
+   01FA 40                  583 	.db #0x40	; 64
+   01FB 40                  584 	.db #0x40	; 64
+   01FC 80                  585 	.db #0x80	; 128
+   01FD 80                  586 	.db #0x80	; 128
+   01FE 40                  587 	.db #0x40	; 64
+   01FF 40                  588 	.db #0x40	; 64
+   0200                     589 _g_tiles_032:
+   0200 C0                  590 	.db #0xc0	; 192
+   0201 C0                  591 	.db #0xc0	; 192
+   0202 D5                  592 	.db #0xd5	; 213
+   0203 FF                  593 	.db #0xff	; 255
+   0204 D5                  594 	.db #0xd5	; 213
+   0205 FF                  595 	.db #0xff	; 255
+   0206 D5                  596 	.db #0xd5	; 213
+   0207 FF                  597 	.db #0xff	; 255
+   0208                     598 _g_tiles_033:
+   0208 C0                  599 	.db #0xc0	; 192
+   0209 C0                  600 	.db #0xc0	; 192
+   020A FF                  601 	.db #0xff	; 255
+   020B FF                  602 	.db #0xff	; 255
+   020C FF                  603 	.db #0xff	; 255
+   020D FF                  604 	.db #0xff	; 255
+   020E FF                  605 	.db #0xff	; 255
+   020F FF                  606 	.db #0xff	; 255
+   0210                     607 _g_tiles_034:
+   0210 C0                  608 	.db #0xc0	; 192
+   0211 C0                  609 	.db #0xc0	; 192
+   0212 FF                  610 	.db #0xff	; 255
+   0213 EA                  611 	.db #0xea	; 234
+   0214 FF                  612 	.db #0xff	; 255
+   0215 EA                  613 	.db #0xea	; 234
+   0216 FF                  614 	.db #0xff	; 255
+   0217 EA                  615 	.db #0xea	; 234
+   0218                     616 _g_tiles_035:
+   0218 C0                  617 	.db #0xc0	; 192
+   0219 C0                  618 	.db #0xc0	; 192
+   021A 84                  619 	.db #0x84	; 132
+   021B 0C                  620 	.db #0x0c	; 12
+   021C 84                  621 	.db #0x84	; 132
+   021D 0C                  622 	.db #0x0c	; 12
+   021E 84                  623 	.db #0x84	; 132
+   021F 0C                  624 	.db #0x0c	; 12
+   0220                     625 _g_tiles_036:
+   0220 C0                  626 	.db #0xc0	; 192
+   0221 C0                  627 	.db #0xc0	; 192
+   0222 0C                  628 	.db #0x0c	; 12
+   0223 0C                  629 	.db #0x0c	; 12
+   0224 0C                  630 	.db #0x0c	; 12
+   0225 0C                  631 	.db #0x0c	; 12
+   0226 0C                  632 	.db #0x0c	; 12
+   0227 0C                  633 	.db #0x0c	; 12
+   0228                     634 _g_tiles_037:
+   0228 C0                  635 	.db #0xc0	; 192
+   0229 C0                  636 	.db #0xc0	; 192
+   022A 0C                  637 	.db #0x0c	; 12
+   022B 48                  638 	.db #0x48	; 72	'H'
+   022C 0C                  639 	.db #0x0c	; 12
+   022D 48                  640 	.db #0x48	; 72	'H'
+   022E 0C                  641 	.db #0x0c	; 12
+   022F 48                  642 	.db #0x48	; 72	'H'
+   0230                     643 _g_tiles_038:
+   0230 FF                  644 	.db #0xff	; 255
+   0231 FF                  645 	.db #0xff	; 255
+   0232 AB                  646 	.db #0xab	; 171
+   0233 03                  647 	.db #0x03	; 3
+   0234 AB                  648 	.db #0xab	; 171
+   0235 03                  649 	.db #0x03	; 3
+   0236 AB                  650 	.db #0xab	; 171
+   0237 03                  651 	.db #0x03	; 3
+   0238                     652 _g_tiles_039:
+   0238 FF                  653 	.db #0xff	; 255
+   0239 FF                  654 	.db #0xff	; 255
+   023A 03                  655 	.db #0x03	; 3
+   023B 03                  656 	.db #0x03	; 3
+   023C 03                  657 	.db #0x03	; 3
+   023D 03                  658 	.db #0x03	; 3
+   023E 03                  659 	.db #0x03	; 3
+   023F 03                  660 	.db #0x03	; 3
+   0240                     661 _g_tiles_040:
+   0240 FF                  662 	.db #0xff	; 255
+   0241 EA                  663 	.db #0xea	; 234
+   0242 03                  664 	.db #0x03	; 3
+   0243 42                  665 	.db #0x42	; 66	'B'
+   0244 03                  666 	.db #0x03	; 3
+   0245 42                  667 	.db #0x42	; 66	'B'
+   0246 03                  668 	.db #0x03	; 3
+   0247 42                  669 	.db #0x42	; 66	'B'
+   0248                     670 _g_tiles_041:
+   0248 C0                  671 	.db #0xc0	; 192
+   0249 C0                  672 	.db #0xc0	; 192
+   024A C0                  673 	.db #0xc0	; 192
+   024B C0                  674 	.db #0xc0	; 192
+   024C C0                  675 	.db #0xc0	; 192
+   024D C0                  676 	.db #0xc0	; 192
+   024E C0                  677 	.db #0xc0	; 192
+   024F C0                  678 	.db #0xc0	; 192
+   0250                     679 _g_tiles_042:
+   0250 C0                  680 	.db #0xc0	; 192
+   0251 C0                  681 	.db #0xc0	; 192
+   0252 C0                  682 	.db #0xc0	; 192
+   0253 C0                  683 	.db #0xc0	; 192
+   0254 C0                  684 	.db #0xc0	; 192
+   0255 C0                  685 	.db #0xc0	; 192
+   0256 C0                  686 	.db #0xc0	; 192
+   0257 C0                  687 	.db #0xc0	; 192
+   0258                     688 _g_tiles_043:
+   0258 C0                  689 	.db #0xc0	; 192
+   0259 C0                  690 	.db #0xc0	; 192
+   025A C0                  691 	.db #0xc0	; 192
+   025B C0                  692 	.db #0xc0	; 192
+   025C C0                  693 	.db #0xc0	; 192
+   025D C0                  694 	.db #0xc0	; 192
+   025E C0                  695 	.db #0xc0	; 192
+   025F C0                  696 	.db #0xc0	; 192
+   0260                     697 _g_tiles_044:
+   0260 80                  698 	.db #0x80	; 128
+   0261 80                  699 	.db #0x80	; 128
+   0262 40                  700 	.db #0x40	; 64
+   0263 40                  701 	.db #0x40	; 64
+   0264 80                  702 	.db #0x80	; 128
+   0265 80                  703 	.db #0x80	; 128
+   0266 40                  704 	.db #0x40	; 64
+   0267 40                  705 	.db #0x40	; 64
+   0268                     706 _g_tiles_045:
+   0268 C0                  707 	.db #0xc0	; 192
+   0269 C0                  708 	.db #0xc0	; 192
+   026A C0                  709 	.db #0xc0	; 192
+   026B C0                  710 	.db #0xc0	; 192
+   026C C0                  711 	.db #0xc0	; 192
+   026D C0                  712 	.db #0xc0	; 192
+   026E C0                  713 	.db #0xc0	; 192
+   026F C0                  714 	.db #0xc0	; 192
+   0270                     715 _g_tiles_046:
+   0270 C0                  716 	.db #0xc0	; 192
+   0271 C0                  717 	.db #0xc0	; 192
+   0272 C0                  718 	.db #0xc0	; 192
+   0273 C0                  719 	.db #0xc0	; 192
+   0274 C0                  720 	.db #0xc0	; 192
+   0275 C0                  721 	.db #0xc0	; 192
+   0276 C0                  722 	.db #0xc0	; 192
+   0277 C0                  723 	.db #0xc0	; 192
+   0278                     724 _g_tiles_047:
+   0278 80                  725 	.db #0x80	; 128
+   0279 84                  726 	.db #0x84	; 132
+   027A 40                  727 	.db #0x40	; 64
+   027B 48                  728 	.db #0x48	; 72	'H'
+   027C 80                  729 	.db #0x80	; 128
+   027D 08                  730 	.db #0x08	; 8
+   027E 04                  731 	.db #0x04	; 4
+   027F 40                  732 	.db #0x40	; 64
+   0280                     733 _g_tiles_048:
+   0280 D5                  734 	.db #0xd5	; 213
+   0281 FF                  735 	.db #0xff	; 255
+   0282 D5                  736 	.db #0xd5	; 213
+   0283 FF                  737 	.db #0xff	; 255
+   0284 D5                  738 	.db #0xd5	; 213
+   0285 FF                  739 	.db #0xff	; 255
+   0286 C0                  740 	.db #0xc0	; 192
+   0287 C0                  741 	.db #0xc0	; 192
+   0288                     742 _g_tiles_049:
+   0288 FF                  743 	.db #0xff	; 255
+   0289 FF                  744 	.db #0xff	; 255
+   028A FF                  745 	.db #0xff	; 255
+   028B FF                  746 	.db #0xff	; 255
+   028C FF                  747 	.db #0xff	; 255
+   028D FF                  748 	.db #0xff	; 255
+   028E C0                  749 	.db #0xc0	; 192
+   028F C0                  750 	.db #0xc0	; 192
+   0290                     751 _g_tiles_050:
+   0290 FF                  752 	.db #0xff	; 255
+   0291 EA                  753 	.db #0xea	; 234
+   0292 FF                  754 	.db #0xff	; 255
+   0293 EA                  755 	.db #0xea	; 234
+   0294 FF                  756 	.db #0xff	; 255
+   0295 EA                  757 	.db #0xea	; 234
+   0296 C0                  758 	.db #0xc0	; 192
+   0297 C0                  759 	.db #0xc0	; 192
+   0298                     760 _g_tiles_051:
+   0298 84                  761 	.db #0x84	; 132
+   0299 0C                  762 	.db #0x0c	; 12
+   029A 84                  763 	.db #0x84	; 132
+   029B 0C                  764 	.db #0x0c	; 12
+   029C 84                  765 	.db #0x84	; 132
+   029D 0C                  766 	.db #0x0c	; 12
+   029E C0                  767 	.db #0xc0	; 192
+   029F C0                  768 	.db #0xc0	; 192
+   02A0                     769 _g_tiles_052:
+   02A0 0C                  770 	.db #0x0c	; 12
+   02A1 0C                  771 	.db #0x0c	; 12
+   02A2 0C                  772 	.db #0x0c	; 12
+   02A3 0C                  773 	.db #0x0c	; 12
+   02A4 0C                  774 	.db #0x0c	; 12
+   02A5 0C                  775 	.db #0x0c	; 12
+   02A6 C0                  776 	.db #0xc0	; 192
+   02A7 C0                  777 	.db #0xc0	; 192
+   02A8                     778 _g_tiles_053:
+   02A8 0C                  779 	.db #0x0c	; 12
+   02A9 48                  780 	.db #0x48	; 72	'H'
+   02AA 0C                  781 	.db #0x0c	; 12
+   02AB 48                  782 	.db #0x48	; 72	'H'
+   02AC 0C                  783 	.db #0x0c	; 12
+   02AD 48                  784 	.db #0x48	; 72	'H'
+   02AE C0                  785 	.db #0xc0	; 192
+   02AF C0                  786 	.db #0xc0	; 192
+   02B0                     787 _g_tiles_054:
+   02B0 AB                  788 	.db #0xab	; 171
+   02B1 03                  789 	.db #0x03	; 3
+   02B2 AB                  790 	.db #0xab	; 171
+   02B3 03                  791 	.db #0x03	; 3
+   02B4 AB                  792 	.db #0xab	; 171
+   02B5 03                  793 	.db #0x03	; 3
+   02B6 EA                  794 	.db #0xea	; 234
+   02B7 C0                  795 	.db #0xc0	; 192
+   02B8                     796 _g_tiles_055:
+   02B8 03                  797 	.db #0x03	; 3
+   02B9 03                  798 	.db #0x03	; 3
+   02BA 03                  799 	.db #0x03	; 3
+   02BB 03                  800 	.db #0x03	; 3
+   02BC 03                  801 	.db #0x03	; 3
+   02BD 03                  802 	.db #0x03	; 3
+   02BE C0                  803 	.db #0xc0	; 192
+   02BF C0                  804 	.db #0xc0	; 192
+   02C0                     805 _g_tiles_056:
+   02C0 03                  806 	.db #0x03	; 3
+   02C1 42                  807 	.db #0x42	; 66	'B'
+   02C2 03                  808 	.db #0x03	; 3
+   02C3 42                  809 	.db #0x42	; 66	'B'
+   02C4 03                  810 	.db #0x03	; 3
+   02C5 42                  811 	.db #0x42	; 66	'B'
+   02C6 C0                  812 	.db #0xc0	; 192
+   02C7 C0                  813 	.db #0xc0	; 192
+   02C8                     814 _g_tiles_057:
+   02C8 C0                  815 	.db #0xc0	; 192
+   02C9 C0                  816 	.db #0xc0	; 192
+   02CA C0                  817 	.db #0xc0	; 192
+   02CB C0                  818 	.db #0xc0	; 192
+   02CC C0                  819 	.db #0xc0	; 192
+   02CD C0                  820 	.db #0xc0	; 192
+   02CE C0                  821 	.db #0xc0	; 192
+   02CF C0                  822 	.db #0xc0	; 192
+   02D0                     823 _g_tiles_058:
+   02D0 C0                  824 	.db #0xc0	; 192
+   02D1 C0                  825 	.db #0xc0	; 192
+   02D2 C0                  826 	.db #0xc0	; 192
+   02D3 C0                  827 	.db #0xc0	; 192
+   02D4 C0                  828 	.db #0xc0	; 192
+   02D5 C0                  829 	.db #0xc0	; 192
+   02D6 C0                  830 	.db #0xc0	; 192
+   02D7 C0                  831 	.db #0xc0	; 192
+   02D8                     832 _g_tiles_059:
+   02D8 C0                  833 	.db #0xc0	; 192
+   02D9 C0                  834 	.db #0xc0	; 192
+   02DA C0                  835 	.db #0xc0	; 192
+   02DB C0                  836 	.db #0xc0	; 192
+   02DC C0                  837 	.db #0xc0	; 192
+   02DD C0                  838 	.db #0xc0	; 192
+   02DE C0                  839 	.db #0xc0	; 192
+   02DF C0                  840 	.db #0xc0	; 192
+   02E0                     841 _g_tiles_060:
+   02E0 80                  842 	.db #0x80	; 128
+   02E1 84                  843 	.db #0x84	; 132
+   02E2 40                  844 	.db #0x40	; 64
+   02E3 48                  845 	.db #0x48	; 72	'H'
+   02E4 84                  846 	.db #0x84	; 132
+   02E5 80                  847 	.db #0x80	; 128
+   02E6 48                  848 	.db #0x48	; 72	'H'
+   02E7 40                  849 	.db #0x40	; 64
+   02E8                     850 _g_tiles_061:
+   02E8 80                  851 	.db #0x80	; 128
+   02E9 80                  852 	.db #0x80	; 128
+   02EA 40                  853 	.db #0x40	; 64
+   02EB 04                  854 	.db #0x04	; 4
+   02EC 84                  855 	.db #0x84	; 132
+   02ED 08                  856 	.db #0x08	; 8
+   02EE 48                  857 	.db #0x48	; 72	'H'
+   02EF 40                  858 	.db #0x40	; 64
+   02F0                     859 _g_tiles_062:
+   02F0 80                  860 	.db #0x80	; 128
+   02F1 94                  861 	.db #0x94	; 148
+   02F2 48                  862 	.db #0x48	; 72	'H'
+   02F3 40                  863 	.db #0x40	; 64
+   02F4 84                  864 	.db #0x84	; 132
+   02F5 08                  865 	.db #0x08	; 8
+   02F6 40                  866 	.db #0x40	; 64
+   02F7 04                  867 	.db #0x04	; 4
+   02F8                     868 _g_tiles_063:
+   02F8 08                  869 	.db #0x08	; 8
+   02F9 80                  870 	.db #0x80	; 128
+   02FA 40                  871 	.db #0x40	; 64
+   02FB 40                  872 	.db #0x40	; 64
+   02FC 80                  873 	.db #0x80	; 128
+   02FD 80                  874 	.db #0x80	; 128
+   02FE 40                  875 	.db #0x40	; 64
+   02FF 40                  876 	.db #0x40	; 64
+   0300                     877 _g_tiles_064:
+   0300 C0                  878 	.db #0xc0	; 192
+   0301 C0                  879 	.db #0xc0	; 192
+   0302 C0                  880 	.db #0xc0	; 192
+   0303 C0                  881 	.db #0xc0	; 192
+   0304 C0                  882 	.db #0xc0	; 192
+   0305 C0                  883 	.db #0xc0	; 192
+   0306 C0                  884 	.db #0xc0	; 192
+   0307 C0                  885 	.db #0xc0	; 192
+   0308                     886 _g_tiles_065:
+   0308 C0                  887 	.db #0xc0	; 192
+   0309 C0                  888 	.db #0xc0	; 192
+   030A C0                  889 	.db #0xc0	; 192
+   030B C0                  890 	.db #0xc0	; 192
+   030C C0                  891 	.db #0xc0	; 192
+   030D C0                  892 	.db #0xc0	; 192
+   030E C0                  893 	.db #0xc0	; 192
+   030F C0                  894 	.db #0xc0	; 192
+   0310                     895 _g_tiles_066:
+   0310 C0                  896 	.db #0xc0	; 192
+   0311 C0                  897 	.db #0xc0	; 192
+   0312 C0                  898 	.db #0xc0	; 192
+   0313 C0                  899 	.db #0xc0	; 192
+   0314 C0                  900 	.db #0xc0	; 192
+   0315 C0                  901 	.db #0xc0	; 192
+   0316 C0                  902 	.db #0xc0	; 192
+   0317 C0                  903 	.db #0xc0	; 192
+   0318                     904 _g_tiles_067:
+   0318 C0                  905 	.db #0xc0	; 192
+   0319 C0                  906 	.db #0xc0	; 192
+   031A C0                  907 	.db #0xc0	; 192
+   031B C0                  908 	.db #0xc0	; 192
+   031C C0                  909 	.db #0xc0	; 192
+   031D C0                  910 	.db #0xc0	; 192
+   031E C0                  911 	.db #0xc0	; 192
+   031F C0                  912 	.db #0xc0	; 192
+   0320                     913 _g_tiles_068:
+   0320 C0                  914 	.db #0xc0	; 192
+   0321 C0                  915 	.db #0xc0	; 192
+   0322 C0                  916 	.db #0xc0	; 192
+   0323 C0                  917 	.db #0xc0	; 192
+   0324 C0                  918 	.db #0xc0	; 192
+   0325 C0                  919 	.db #0xc0	; 192
+   0326 C0                  920 	.db #0xc0	; 192
+   0327 C0                  921 	.db #0xc0	; 192
+   0328                     922 _g_tiles_069:
+   0328 C0                  923 	.db #0xc0	; 192
+   0329 C0                  924 	.db #0xc0	; 192
+   032A C0                  925 	.db #0xc0	; 192
+   032B C0                  926 	.db #0xc0	; 192
+   032C C0                  927 	.db #0xc0	; 192
+   032D C0                  928 	.db #0xc0	; 192
+   032E C0                  929 	.db #0xc0	; 192
+   032F C0                  930 	.db #0xc0	; 192
+   0330                     931 _g_tiles_070:
+   0330 00                  932 	.db #0x00	; 0
+   0331 00                  933 	.db #0x00	; 0
+   0332 00                  934 	.db #0x00	; 0
+   0333 00                  935 	.db #0x00	; 0
+   0334 00                  936 	.db #0x00	; 0
+   0335 00                  937 	.db #0x00	; 0
+   0336 00                  938 	.db #0x00	; 0
+   0337 14                  939 	.db #0x14	; 20
+   0338                     940 _g_tiles_071:
+   0338 28                  941 	.db #0x28	; 40
+   0339 00                  942 	.db #0x00	; 0
+   033A 14                  943 	.db #0x14	; 20
+   033B 28                  944 	.db #0x28	; 40
+   033C 00                  945 	.db #0x00	; 0
+   033D 14                  946 	.db #0x14	; 20
+   033E 28                  947 	.db #0x28	; 40
+   033F 00                  948 	.db #0x00	; 0
+   0340                     949 _g_tiles_072:
+   0340 00                  950 	.db #0x00	; 0
+   0341 14                  951 	.db #0x14	; 20
+   0342 14                  952 	.db #0x14	; 20
+   0343 28                  953 	.db #0x28	; 40
+   0344 28                  954 	.db #0x28	; 40
+   0345 00                  955 	.db #0x00	; 0
+   0346 00                  956 	.db #0x00	; 0
+   0347 00                  957 	.db #0x00	; 0
+   0348                     958 _g_tiles_073:
+   0348 00                  959 	.db #0x00	; 0
+   0349 14                  960 	.db #0x14	; 20
+   034A 00                  961 	.db #0x00	; 0
+   034B 28                  962 	.db #0x28	; 40
+   034C 14                  963 	.db #0x14	; 20
+   034D 00                  964 	.db #0x00	; 0
+   034E 28                  965 	.db #0x28	; 40
+   034F 00                  966 	.db #0x00	; 0
+   0350                     967 _g_tiles_074:
+   0350 80                  968 	.db #0x80	; 128
+   0351 1C                  969 	.db #0x1c	; 28
+   0352 80                  970 	.db #0x80	; 128
+   0353 1C                  971 	.db #0x1c	; 28
+   0354 80                  972 	.db #0x80	; 128
+   0355 1C                  973 	.db #0x1c	; 28
+   0356 80                  974 	.db #0x80	; 128
+   0357 1C                  975 	.db #0x1c	; 28
+   0358                     976 _g_tiles_075:
+   0358 2C                  977 	.db #0x2c	; 44
+   0359 40                  978 	.db #0x40	; 64
+   035A 2C                  979 	.db #0x2c	; 44
+   035B 40                  980 	.db #0x40	; 64
+   035C 2C                  981 	.db #0x2c	; 44
+   035D 40                  982 	.db #0x40	; 64
+   035E 2C                  983 	.db #0x2c	; 44
+   035F 40                  984 	.db #0x40	; 64
+   0360                     985 _g_tiles_076:
+   0360 C0                  986 	.db #0xc0	; 192
+   0361 C0                  987 	.db #0xc0	; 192
+   0362 C0                  988 	.db #0xc0	; 192
+   0363 C0                  989 	.db #0xc0	; 192
+   0364 C0                  990 	.db #0xc0	; 192
+   0365 C0                  991 	.db #0xc0	; 192
+   0366 C0                  992 	.db #0xc0	; 192
+   0367 C0                  993 	.db #0xc0	; 192
+   0368                     994 _g_tiles_077:
+   0368 C0                  995 	.db #0xc0	; 192
+   0369 C0                  996 	.db #0xc0	; 192
+   036A C0                  997 	.db #0xc0	; 192
+   036B C0                  998 	.db #0xc0	; 192
+   036C C0                  999 	.db #0xc0	; 192
+   036D C0                 1000 	.db #0xc0	; 192
+   036E C0                 1001 	.db #0xc0	; 192
+   036F C0                 1002 	.db #0xc0	; 192
+   0370                    1003 _g_tiles_078:
+   0370 C0                 1004 	.db #0xc0	; 192
+   0371 C0                 1005 	.db #0xc0	; 192
+   0372 C0                 1006 	.db #0xc0	; 192
+   0373 C0                 1007 	.db #0xc0	; 192
+   0374 C0                 1008 	.db #0xc0	; 192
+   0375 C0                 1009 	.db #0xc0	; 192
+   0376 C0                 1010 	.db #0xc0	; 192
+   0377 C0                 1011 	.db #0xc0	; 192
+   0378                    1012 _g_tiles_079:
+   0378 C0                 1013 	.db #0xc0	; 192
+   0379 C0                 1014 	.db #0xc0	; 192
+   037A C0                 1015 	.db #0xc0	; 192
+   037B C0                 1016 	.db #0xc0	; 192
+   037C C0                 1017 	.db #0xc0	; 192
+   037D C0                 1018 	.db #0xc0	; 192
+   037E C0                 1019 	.db #0xc0	; 192
+   037F C0                 1020 	.db #0xc0	; 192
+   0380                    1021 _g_tiles_080:
+   0380 C0                 1022 	.db #0xc0	; 192
+   0381 C0                 1023 	.db #0xc0	; 192
+   0382 C0                 1024 	.db #0xc0	; 192
+   0383 C0                 1025 	.db #0xc0	; 192
+   0384 C0                 1026 	.db #0xc0	; 192
+   0385 C0                 1027 	.db #0xc0	; 192
+   0386 C0                 1028 	.db #0xc0	; 192
+   0387 C0                 1029 	.db #0xc0	; 192
+   0388                    1030 _g_tiles_081:
+   0388 C0                 1031 	.db #0xc0	; 192
+   0389 C0                 1032 	.db #0xc0	; 192
+   038A C0                 1033 	.db #0xc0	; 192
+   038B C0                 1034 	.db #0xc0	; 192
+   038C C0                 1035 	.db #0xc0	; 192
+   038D C0                 1036 	.db #0xc0	; 192
+   038E C0                 1037 	.db #0xc0	; 192
+   038F C0                 1038 	.db #0xc0	; 192
+   0390                    1039 _g_tiles_082:
+   0390 C0                 1040 	.db #0xc0	; 192
+   0391 C0                 1041 	.db #0xc0	; 192
+   0392 C0                 1042 	.db #0xc0	; 192
+   0393 C0                 1043 	.db #0xc0	; 192
+   0394 C0                 1044 	.db #0xc0	; 192
+   0395 C0                 1045 	.db #0xc0	; 192
+   0396 C0                 1046 	.db #0xc0	; 192
+   0397 C0                 1047 	.db #0xc0	; 192
+   0398                    1048 _g_tiles_083:
+   0398 C0                 1049 	.db #0xc0	; 192
+   0399 C0                 1050 	.db #0xc0	; 192
+   039A C0                 1051 	.db #0xc0	; 192
+   039B C0                 1052 	.db #0xc0	; 192
+   039C C0                 1053 	.db #0xc0	; 192
+   039D C0                 1054 	.db #0xc0	; 192
+   039E C0                 1055 	.db #0xc0	; 192
+   039F C0                 1056 	.db #0xc0	; 192
+   03A0                    1057 _g_tiles_084:
+   03A0 C0                 1058 	.db #0xc0	; 192
+   03A1 C0                 1059 	.db #0xc0	; 192
+   03A2 C0                 1060 	.db #0xc0	; 192
+   03A3 C0                 1061 	.db #0xc0	; 192
+   03A4 C0                 1062 	.db #0xc0	; 192
+   03A5 C0                 1063 	.db #0xc0	; 192
+   03A6 C0                 1064 	.db #0xc0	; 192
+   03A7 C0                 1065 	.db #0xc0	; 192
+   03A8                    1066 _g_tiles_085:
+   03A8 C0                 1067 	.db #0xc0	; 192
+   03A9 C0                 1068 	.db #0xc0	; 192
+   03AA C0                 1069 	.db #0xc0	; 192
+   03AB C0                 1070 	.db #0xc0	; 192
+   03AC C0                 1071 	.db #0xc0	; 192
+   03AD C0                 1072 	.db #0xc0	; 192
+   03AE C0                 1073 	.db #0xc0	; 192
+   03AF C0                 1074 	.db #0xc0	; 192
+   03B0                    1075 _g_tiles_086:
+   03B0 00                 1076 	.db #0x00	; 0
+   03B1 28                 1077 	.db #0x28	; 40
+   03B2 14                 1078 	.db #0x14	; 20
+   03B3 00                 1079 	.db #0x00	; 0
+   03B4 14                 1080 	.db #0x14	; 20
+   03B5 00                 1081 	.db #0x00	; 0
+   03B6 28                 1082 	.db #0x28	; 40
+   03B7 00                 1083 	.db #0x00	; 0
+   03B8                    1084 _g_tiles_087:
+   03B8 14                 1085 	.db #0x14	; 20
+   03B9 00                 1086 	.db #0x00	; 0
+   03BA 00                 1087 	.db #0x00	; 0
+   03BB 28                 1088 	.db #0x28	; 40
+   03BC 00                 1089 	.db #0x00	; 0
+   03BD 28                 1090 	.db #0x28	; 40
+   03BE 00                 1091 	.db #0x00	; 0
+   03BF 14                 1092 	.db #0x14	; 20
+   03C0                    1093 _g_tiles_088:
+   03C0 00                 1094 	.db #0x00	; 0
+   03C1 14                 1095 	.db #0x14	; 20
+   03C2 00                 1096 	.db #0x00	; 0
+   03C3 28                 1097 	.db #0x28	; 40
+   03C4 14                 1098 	.db #0x14	; 20
+   03C5 00                 1099 	.db #0x00	; 0
+   03C6 00                 1100 	.db #0x00	; 0
+   03C7 00                 1101 	.db #0x00	; 0
+   03C8                    1102 _g_tiles_089:
+   03C8 00                 1103 	.db #0x00	; 0
+   03C9 00                 1104 	.db #0x00	; 0
+   03CA 00                 1105 	.db #0x00	; 0
+   03CB 00                 1106 	.db #0x00	; 0
+   03CC 00                 1107 	.db #0x00	; 0
+   03CD 00                 1108 	.db #0x00	; 0
+   03CE 00                 1109 	.db #0x00	; 0
+   03CF 00                 1110 	.db #0x00	; 0
+   03D0                    1111 _g_tiles_090:
+   03D0 C0                 1112 	.db #0xc0	; 192
+   03D1 C0                 1113 	.db #0xc0	; 192
+   03D2 C0                 1114 	.db #0xc0	; 192
+   03D3 C0                 1115 	.db #0xc0	; 192
+   03D4 C0                 1116 	.db #0xc0	; 192
+   03D5 C0                 1117 	.db #0xc0	; 192
+   03D6 C0                 1118 	.db #0xc0	; 192
+   03D7 C0                 1119 	.db #0xc0	; 192
+   03D8                    1120 _g_tiles_091:
+   03D8 C0                 1121 	.db #0xc0	; 192
+   03D9 C0                 1122 	.db #0xc0	; 192
+   03DA C0                 1123 	.db #0xc0	; 192
+   03DB C0                 1124 	.db #0xc0	; 192
+   03DC C0                 1125 	.db #0xc0	; 192
+   03DD C0                 1126 	.db #0xc0	; 192
+   03DE C0                 1127 	.db #0xc0	; 192
+   03DF C0                 1128 	.db #0xc0	; 192
+   03E0                    1129 _g_tiles_092:
+   03E0 C0                 1130 	.db #0xc0	; 192
+   03E1 C0                 1131 	.db #0xc0	; 192
+   03E2 C0                 1132 	.db #0xc0	; 192
+   03E3 C0                 1133 	.db #0xc0	; 192
+   03E4 C0                 1134 	.db #0xc0	; 192
+   03E5 C0                 1135 	.db #0xc0	; 192
+   03E6 C0                 1136 	.db #0xc0	; 192
+   03E7 C0                 1137 	.db #0xc0	; 192
+   03E8                    1138 _g_tiles_093:
+   03E8 C0                 1139 	.db #0xc0	; 192
+   03E9 C0                 1140 	.db #0xc0	; 192
+   03EA C0                 1141 	.db #0xc0	; 192
+   03EB C0                 1142 	.db #0xc0	; 192
+   03EC C0                 1143 	.db #0xc0	; 192
+   03ED C0                 1144 	.db #0xc0	; 192
+   03EE C0                 1145 	.db #0xc0	; 192
+   03EF C0                 1146 	.db #0xc0	; 192
+   03F0                    1147 _g_tiles_094:
+   03F0 C0                 1148 	.db #0xc0	; 192
+   03F1 C0                 1149 	.db #0xc0	; 192
+   03F2 C0                 1150 	.db #0xc0	; 192
+   03F3 C0                 1151 	.db #0xc0	; 192
+   03F4 C0                 1152 	.db #0xc0	; 192
+   03F5 C0                 1153 	.db #0xc0	; 192
+   03F6 C0                 1154 	.db #0xc0	; 192
+   03F7 C0                 1155 	.db #0xc0	; 192
+   03F8                    1156 _g_tiles_095:
+   03F8 C0                 1157 	.db #0xc0	; 192
+   03F9 C0                 1158 	.db #0xc0	; 192
+   03FA C0                 1159 	.db #0xc0	; 192
+   03FB C0                 1160 	.db #0xc0	; 192
+   03FC C0                 1161 	.db #0xc0	; 192
+   03FD C0                 1162 	.db #0xc0	; 192
+   03FE C0                 1163 	.db #0xc0	; 192
+   03FF C0                 1164 	.db #0xc0	; 192
+   0400                    1165 _g_tiles_096:
+   0400 C0                 1166 	.db #0xc0	; 192
+   0401 C0                 1167 	.db #0xc0	; 192
+   0402 80                 1168 	.db #0x80	; 128
+   0403 00                 1169 	.db #0x00	; 0
+   0404 80                 1170 	.db #0x80	; 128
+   0405 0C                 1171 	.db #0x0c	; 12
+   0406 80                 1172 	.db #0x80	; 128
+   0407 1C                 1173 	.db #0x1c	; 28
+   0408                    1174 _g_tiles_097:
+   0408 C0                 1175 	.db #0xc0	; 192
+   0409 C0                 1176 	.db #0xc0	; 192
+   040A 00                 1177 	.db #0x00	; 0
+   040B 00                 1178 	.db #0x00	; 0
+   040C 0C                 1179 	.db #0x0c	; 12
+   040D 0C                 1180 	.db #0x0c	; 12
+   040E 3C                 1181 	.db #0x3c	; 60
+   040F 3C                 1182 	.db #0x3c	; 60
+   0410                    1183 _g_tiles_098:
+   0410 C0                 1184 	.db #0xc0	; 192
+   0411 C0                 1185 	.db #0xc0	; 192
+   0412 00                 1186 	.db #0x00	; 0
+   0413 00                 1187 	.db #0x00	; 0
+   0414 0C                 1188 	.db #0x0c	; 12
+   0415 0C                 1189 	.db #0x0c	; 12
+   0416 3C                 1190 	.db #0x3c	; 60
+   0417 3C                 1191 	.db #0x3c	; 60
+   0418                    1192 _g_tiles_099:
+   0418 C0                 1193 	.db #0xc0	; 192
+   0419 C0                 1194 	.db #0xc0	; 192
+   041A C0                 1195 	.db #0xc0	; 192
+   041B C0                 1196 	.db #0xc0	; 192
+   041C C0                 1197 	.db #0xc0	; 192
+   041D C0                 1198 	.db #0xc0	; 192
+   041E C0                 1199 	.db #0xc0	; 192
+   041F C0                 1200 	.db #0xc0	; 192
+   0420                    1201 _g_tiles_100:
+   0420 C0                 1202 	.db #0xc0	; 192
+   0421 C0                 1203 	.db #0xc0	; 192
+   0422 00                 1204 	.db #0x00	; 0
+   0423 00                 1205 	.db #0x00	; 0
+   0424 0C                 1206 	.db #0x0c	; 12
+   0425 0C                 1207 	.db #0x0c	; 12
+   0426 3C                 1208 	.db #0x3c	; 60
+   0427 3C                 1209 	.db #0x3c	; 60
+   0428                    1210 _g_tiles_101:
+   0428 C0                 1211 	.db #0xc0	; 192
+   0429 C0                 1212 	.db #0xc0	; 192
+   042A 00                 1213 	.db #0x00	; 0
+   042B 40                 1214 	.db #0x40	; 64
+   042C 0C                 1215 	.db #0x0c	; 12
+   042D 40                 1216 	.db #0x40	; 64
+   042E 2C                 1217 	.db #0x2c	; 44
+   042F 40                 1218 	.db #0x40	; 64
+   0430                    1219 _g_tiles_102:
+   0430 00                 1220 	.db #0x00	; 0
+   0431 00                 1221 	.db #0x00	; 0
+   0432 00                 1222 	.db #0x00	; 0
+   0433 00                 1223 	.db #0x00	; 0
+   0434 00                 1224 	.db #0x00	; 0
+   0435 00                 1225 	.db #0x00	; 0
+   0436 00                 1226 	.db #0x00	; 0
+   0437 00                 1227 	.db #0x00	; 0
+   0438                    1228 _g_tiles_103:
+   0438 00                 1229 	.db #0x00	; 0
+   0439 00                 1230 	.db #0x00	; 0
+   043A 00                 1231 	.db #0x00	; 0
+   043B 28                 1232 	.db #0x28	; 40
+   043C 14                 1233 	.db #0x14	; 20
+   043D 00                 1234 	.db #0x00	; 0
+   043E 28                 1235 	.db #0x28	; 40
+   043F 00                 1236 	.db #0x00	; 0
+   0440                    1237 _g_tiles_104:
+   0440 28                 1238 	.db #0x28	; 40
+   0441 00                 1239 	.db #0x00	; 0
+   0442 14                 1240 	.db #0x14	; 20
+   0443 00                 1241 	.db #0x00	; 0
+   0444 14                 1242 	.db #0x14	; 20
+   0445 00                 1243 	.db #0x00	; 0
+   0446 00                 1244 	.db #0x00	; 0
+   0447 28                 1245 	.db #0x28	; 40
+   0448                    1246 _g_tiles_105:
+   0448 00                 1247 	.db #0x00	; 0
+   0449 14                 1248 	.db #0x14	; 20
+   044A 00                 1249 	.db #0x00	; 0
+   044B 28                 1250 	.db #0x28	; 40
+   044C 00                 1251 	.db #0x00	; 0
+   044D 28                 1252 	.db #0x28	; 40
+   044E 14                 1253 	.db #0x14	; 20
+   044F 00                 1254 	.db #0x00	; 0
+   0450                    1255 _g_tiles_106:
+   0450 C0                 1256 	.db #0xc0	; 192
+   0451 C0                 1257 	.db #0xc0	; 192
+   0452 C0                 1258 	.db #0xc0	; 192
+   0453 C0                 1259 	.db #0xc0	; 192
+   0454 C0                 1260 	.db #0xc0	; 192
+   0455 C0                 1261 	.db #0xc0	; 192
+   0456 C0                 1262 	.db #0xc0	; 192
+   0457 C0                 1263 	.db #0xc0	; 192
+   0458                    1264 _g_tiles_107:
+   0458 C0                 1265 	.db #0xc0	; 192
+   0459 C0                 1266 	.db #0xc0	; 192
+   045A C0                 1267 	.db #0xc0	; 192
+   045B C0                 1268 	.db #0xc0	; 192
+   045C C0                 1269 	.db #0xc0	; 192
+   045D C0                 1270 	.db #0xc0	; 192
+   045E C0                 1271 	.db #0xc0	; 192
+   045F C0                 1272 	.db #0xc0	; 192
+   0460                    1273 _g_tiles_108:
+   0460 C0                 1274 	.db #0xc0	; 192
+   0461 C0                 1275 	.db #0xc0	; 192
+   0462 C0                 1276 	.db #0xc0	; 192
+   0463 C0                 1277 	.db #0xc0	; 192
+   0464 C0                 1278 	.db #0xc0	; 192
+   0465 C0                 1279 	.db #0xc0	; 192
+   0466 C0                 1280 	.db #0xc0	; 192
+   0467 C0                 1281 	.db #0xc0	; 192
+   0468                    1282 _g_tiles_109:
+   0468 C0                 1283 	.db #0xc0	; 192
+   0469 C0                 1284 	.db #0xc0	; 192
+   046A C0                 1285 	.db #0xc0	; 192
+   046B C0                 1286 	.db #0xc0	; 192
+   046C C0                 1287 	.db #0xc0	; 192
+   046D C0                 1288 	.db #0xc0	; 192
+   046E C0                 1289 	.db #0xc0	; 192
+   046F C0                 1290 	.db #0xc0	; 192
+   0470                    1291 _g_tiles_110:
+   0470 C0                 1292 	.db #0xc0	; 192
+   0471 C0                 1293 	.db #0xc0	; 192
+   0472 C0                 1294 	.db #0xc0	; 192
+   0473 C0                 1295 	.db #0xc0	; 192
+   0474 C0                 1296 	.db #0xc0	; 192
+   0475 C0                 1297 	.db #0xc0	; 192
+   0476 C0                 1298 	.db #0xc0	; 192
+   0477 C0                 1299 	.db #0xc0	; 192
+   0478                    1300 _g_tiles_111:
+   0478 C0                 1301 	.db #0xc0	; 192
+   0479 C0                 1302 	.db #0xc0	; 192
+   047A C0                 1303 	.db #0xc0	; 192
+   047B C0                 1304 	.db #0xc0	; 192
+   047C C0                 1305 	.db #0xc0	; 192
+   047D C0                 1306 	.db #0xc0	; 192
+   047E C0                 1307 	.db #0xc0	; 192
+   047F C0                 1308 	.db #0xc0	; 192
+   0480                    1309 _g_tiles_112:
+   0480 80                 1310 	.db #0x80	; 128
+   0481 1C                 1311 	.db #0x1c	; 28
+   0482 80                 1312 	.db #0x80	; 128
+   0483 1C                 1313 	.db #0x1c	; 28
+   0484 80                 1314 	.db #0x80	; 128
+   0485 1C                 1315 	.db #0x1c	; 28
+   0486 80                 1316 	.db #0x80	; 128
+   0487 1C                 1317 	.db #0x1c	; 28
+   0488                    1318 _g_tiles_113:
+   0488 3C                 1319 	.db #0x3c	; 60
+   0489 3C                 1320 	.db #0x3c	; 60
+   048A 2C                 1321 	.db #0x2c	; 44
+   048B 0C                 1322 	.db #0x0c	; 12
+   048C 2C                 1323 	.db #0x2c	; 44
+   048D 00                 1324 	.db #0x00	; 0
+   048E 2C                 1325 	.db #0x2c	; 44
+   048F 40                 1326 	.db #0x40	; 64
+   0490                    1327 _g_tiles_114:
+   0490 3C                 1328 	.db #0x3c	; 60
+   0491 3C                 1329 	.db #0x3c	; 60
+   0492 0C                 1330 	.db #0x0c	; 12
+   0493 0C                 1331 	.db #0x0c	; 12
+   0494 00                 1332 	.db #0x00	; 0
+   0495 00                 1333 	.db #0x00	; 0
+   0496 C0                 1334 	.db #0xc0	; 192
+   0497 C0                 1335 	.db #0xc0	; 192
+   0498                    1336 _g_tiles_115:
+   0498 C0                 1337 	.db #0xc0	; 192
+   0499 C0                 1338 	.db #0xc0	; 192
+   049A C0                 1339 	.db #0xc0	; 192
+   049B C0                 1340 	.db #0xc0	; 192
+   049C C0                 1341 	.db #0xc0	; 192
+   049D C0                 1342 	.db #0xc0	; 192
+   049E C0                 1343 	.db #0xc0	; 192
+   049F C0                 1344 	.db #0xc0	; 192
+   04A0                    1345 _g_tiles_116:
+   04A0 3C                 1346 	.db #0x3c	; 60
+   04A1 3C                 1347 	.db #0x3c	; 60
+   04A2 0C                 1348 	.db #0x0c	; 12
+   04A3 1C                 1349 	.db #0x1c	; 28
+   04A4 00                 1350 	.db #0x00	; 0
+   04A5 1C                 1351 	.db #0x1c	; 28
+   04A6 80                 1352 	.db #0x80	; 128
+   04A7 1C                 1353 	.db #0x1c	; 28
+   04A8                    1354 _g_tiles_117:
+   04A8 2C                 1355 	.db #0x2c	; 44
+   04A9 40                 1356 	.db #0x40	; 64
+   04AA 2C                 1357 	.db #0x2c	; 44
+   04AB 40                 1358 	.db #0x40	; 64
+   04AC 2C                 1359 	.db #0x2c	; 44
+   04AD 40                 1360 	.db #0x40	; 64
+   04AE 2C                 1361 	.db #0x2c	; 44
+   04AF 40                 1362 	.db #0x40	; 64
+   04B0                    1363 _g_tiles_118:
+   04B0 00                 1364 	.db #0x00	; 0
+   04B1 14                 1365 	.db #0x14	; 20
+   04B2 00                 1366 	.db #0x00	; 0
+   04B3 28                 1367 	.db #0x28	; 40
+   04B4 14                 1368 	.db #0x14	; 20
+   04B5 00                 1369 	.db #0x00	; 0
+   04B6 28                 1370 	.db #0x28	; 40
+   04B7 00                 1371 	.db #0x00	; 0
+   04B8                    1372 _g_tiles_119:
+   04B8 00                 1373 	.db #0x00	; 0
+   04B9 00                 1374 	.db #0x00	; 0
+   04BA 00                 1375 	.db #0x00	; 0
+   04BB 14                 1376 	.db #0x14	; 20
+   04BC 14                 1377 	.db #0x14	; 20
+   04BD 28                 1378 	.db #0x28	; 40
+   04BE 28                 1379 	.db #0x28	; 40
+   04BF 00                 1380 	.db #0x00	; 0
+   04C0                    1381 _g_tiles_120:
+   04C0 00                 1382 	.db #0x00	; 0
+   04C1 14                 1383 	.db #0x14	; 20
+   04C2 28                 1384 	.db #0x28	; 40
+   04C3 00                 1385 	.db #0x00	; 0
+   04C4 14                 1386 	.db #0x14	; 20
+   04C5 28                 1387 	.db #0x28	; 40
+   04C6 00                 1388 	.db #0x00	; 0
+   04C7 14                 1389 	.db #0x14	; 20
+   04C8                    1390 _g_tiles_121:
+   04C8 28                 1391 	.db #0x28	; 40
+   04C9 00                 1392 	.db #0x00	; 0
+   04CA 00                 1393 	.db #0x00	; 0
+   04CB 00                 1394 	.db #0x00	; 0
+   04CC 00                 1395 	.db #0x00	; 0
+   04CD 00                 1396 	.db #0x00	; 0
+   04CE 00                 1397 	.db #0x00	; 0
+   04CF 00                 1398 	.db #0x00	; 0
+   04D0                    1399 _g_tiles_122:
+   04D0 80                 1400 	.db #0x80	; 128
+   04D1 1C                 1401 	.db #0x1c	; 28
+   04D2 80                 1402 	.db #0x80	; 128
+   04D3 0C                 1403 	.db #0x0c	; 12
+   04D4 80                 1404 	.db #0x80	; 128
+   04D5 00                 1405 	.db #0x00	; 0
+   04D6 C0                 1406 	.db #0xc0	; 192
+   04D7 C0                 1407 	.db #0xc0	; 192
+   04D8                    1408 _g_tiles_123:
+   04D8 2C                 1409 	.db #0x2c	; 44
+   04D9 40                 1410 	.db #0x40	; 64
+   04DA 0C                 1411 	.db #0x0c	; 12
+   04DB 40                 1412 	.db #0x40	; 64
+   04DC 00                 1413 	.db #0x00	; 0
+   04DD 40                 1414 	.db #0x40	; 64
+   04DE C0                 1415 	.db #0xc0	; 192
+   04DF C0                 1416 	.db #0xc0	; 192
+   04E0                    1417 _g_tiles_124:
+   04E0 C0                 1418 	.db #0xc0	; 192
+   04E1 C0                 1419 	.db #0xc0	; 192
+   04E2 C0                 1420 	.db #0xc0	; 192
+   04E3 C0                 1421 	.db #0xc0	; 192
+   04E4 C0                 1422 	.db #0xc0	; 192
+   04E5 C0                 1423 	.db #0xc0	; 192
+   04E6 C0                 1424 	.db #0xc0	; 192
+   04E7 C0                 1425 	.db #0xc0	; 192
+   04E8                    1426 _g_tiles_125:
+   04E8 C0                 1427 	.db #0xc0	; 192
+   04E9 C0                 1428 	.db #0xc0	; 192
+   04EA C0                 1429 	.db #0xc0	; 192
+   04EB C0                 1430 	.db #0xc0	; 192
+   04EC C0                 1431 	.db #0xc0	; 192
+   04ED C0                 1432 	.db #0xc0	; 192
+   04EE C0                 1433 	.db #0xc0	; 192
+   04EF C0                 1434 	.db #0xc0	; 192
+   04F0                    1435 _g_tiles_126:
+   04F0 C0                 1436 	.db #0xc0	; 192
+   04F1 C0                 1437 	.db #0xc0	; 192
+   04F2 C0                 1438 	.db #0xc0	; 192
+   04F3 C0                 1439 	.db #0xc0	; 192
+   04F4 C0                 1440 	.db #0xc0	; 192
+   04F5 C0                 1441 	.db #0xc0	; 192
+   04F6 C0                 1442 	.db #0xc0	; 192
+   04F7 C0                 1443 	.db #0xc0	; 192
+   04F8                    1444 _g_tiles_127:
+   04F8 C0                 1445 	.db #0xc0	; 192
+   04F9 C0                 1446 	.db #0xc0	; 192
+   04FA C0                 1447 	.db #0xc0	; 192
+   04FB C0                 1448 	.db #0xc0	; 192
+   04FC C0                 1449 	.db #0xc0	; 192
+   04FD C0                 1450 	.db #0xc0	; 192
+   04FE C0                 1451 	.db #0xc0	; 192
+   04FF C0                 1452 	.db #0xc0	; 192
+                           1453 	.area _INITIALIZER
+                           1454 	.area _CABS (ABS)

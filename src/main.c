@@ -1,15 +1,15 @@
 
 #include <cpctelera.h>
 #include "sprites/g_palette.h"
-#include "entities/bat.h"
-#include "entities/ball.h"
-#include "background/background.h"
+#include "h/bat.h"
+#include "h/balls.h"
+#include "h/background.h"
+#include "h/keys.h"
 
 
 #include <map/tiles.h>   // Tile declarations      (file generated after processing img/tiles.png)
 #include <map/level-01.h> // Court map declarations (file generated after processing img/court.tmx)
 
-#include "sprites/ball.h"
 
 void initializeCpc() {
    
@@ -31,6 +31,8 @@ void main(void) {
 
    initializeBackground();
 
+   auto_initialize();
+   keys_initialize();
    bat_initialize();
    balls_initialize();
 
@@ -49,14 +51,16 @@ void main(void) {
       balls_draw();
       
 
-      // update state for next render (after vsync)
-      cpct_scanKeyboard_f();
+      keys_update();
+      auto_update();
       bat_update();
       balls_update();
 
+#ifdef DELAY_UPDATE
       for (int o = 0; o< 5000; o++) {
          w += 1;
       }
+#endif
    }
 }
 
