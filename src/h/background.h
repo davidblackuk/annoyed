@@ -5,8 +5,8 @@
 
 
 
-extern void initializeBackground();
+extern void background_initialize();
 
-extern void restoreBackground(u8 x, u8 y, u8 width, u8 height);
+extern void background_restore(u8 x, u8 y, u8 width, u8 height);
 
 #endif

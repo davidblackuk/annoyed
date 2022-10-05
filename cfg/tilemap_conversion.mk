@@ -16,5 +16,6 @@
 
 
 
-$(eval $(call TMX2C,assets/level-01.tmx,g_tilemap_l00,src/map))
+$(eval $(call TMX2C,assets/level-01-background.tmx,g_tilemap_l00_background,src/map))
+$(eval $(call TMX2C,assets/level-01-blocks.tmx,g_tilemap_l00_bricks,src/map))
 

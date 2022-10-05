@@ -4,15 +4,12 @@
 #include "h/bat.h"
 #include "h/balls.h"
 #include "h/background.h"
+#include "h/bricks.h"
 #include "h/keys.h"
 
+void initializeCpc()
+{
 
-#include <map/tiles.h>   // Tile declarations      (file generated after processing img/tiles.png)
-#include <map/level-01.h> // Court map declarations (file generated after processing img/court.tmx)
-
-
-void initializeCpc() {
-   
    // disable firmware routines, after this all backbround processing is disabled and so, no going back to basic
    cpct_disableFirmware();
 
@@ -21,22 +18,23 @@ void initializeCpc() {
 
    cpct_setBorder(HW_BRIGHT_YELLOW);
 
-   cpct_setPalette((u8*)g_palette, 16);
+   cpct_setPalette((u8 *)g_palette, 16);
 }
 
-
-void main(void) {
+void main(void)
+{
 
    initializeCpc();
 
-   initializeBackground();
-
+   background_initialize();
+   bricks_initialize();
    auto_initialize();
    keys_initialize();
    bat_initialize();
    balls_initialize();
 
-   while (1) {
+   while (1)
+   {
       int w = 0;
 
       // wait for vsynv before rendering
@@ -49,19 +47,19 @@ void main(void) {
       // draw that which must be drawn
       bat_draw();
       balls_draw();
-      
 
       keys_update();
       auto_update();
       bat_update();
       balls_update();
 
+#define DELAY_UPDATE 1
+
 #ifdef DELAY_UPDATE
-      for (int o = 0; o< 5000; o++) {
+      for (int o = 0; o < 3000; o++)
+      {
          w += 1;
       }
 #endif
    }
 }
-
-

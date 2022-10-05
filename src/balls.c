@@ -1,5 +1,6 @@
 #include <cpctelera.h>
 #include "sprites/ball.h"
+#include "sprites/bat-left.h"
 #include "h/balls_p.h"
 #include "h/bat.h"
 #include "h/background.h"
@@ -65,7 +66,7 @@ void balls_restore_background()
     {
         if (ball->active)
         {
-            restoreBackground(ball->prev_x, balls->prev_y, SP_BALL_W, SP_BALL_H);
+            background_restore(ball->prev_x, balls->prev_y, SP_BALL_W, SP_BALL_H);
         }
         ball++;
     }
@@ -125,8 +126,10 @@ void move_ball_x(Ball *ball)
     {
         u8 new_x = ball->x + ball->dx;
 
+
         if (ball->dx > 0)
         {
+            // ball moving right
             if (new_x >= PLAY_AREA_RIGHT_EDGE - SP_BALL_W)
             {
                 ball->x = PLAY_AREA_RIGHT_EDGE - SP_BALL_W;
@@ -140,6 +143,7 @@ void move_ball_x(Ball *ball)
         else
         {
 
+            // ball moving left
             if (new_x <= PLAY_AREA_LEFT_EDGE)
             {
                 ball->x = PLAY_AREA_LEFT_EDGE;
@@ -189,9 +193,14 @@ void move_ball_x(Ball *ball)
                 check_bat_collision(ball, new_y);
             }
         }
+        ball->y = new_y;
     }
 
     void check_bat_collision(Ball * ball, u8 new_y)
     {
-        ball->y = new_y;
+            if ((ball->x + SP_BALL_W >= batX && ball->x <= batX+batW) && 
+                (ball->y + SP_BALL_H >= batY && ball->y < batY + SP_BAT_LEFT_H))
+            {
+                ball-> dy = - ball->dy;
+            }
     }

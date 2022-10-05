@@ -47,7 +47,7 @@ void bat_update() {
 }
 
 void bat_restore_background() {
-    restoreBackground(oldBatX, batY, batW, BAT_HEIGHT_PIXELS);
+    background_restore(oldBatX, batY, batW, BAT_HEIGHT_PIXELS);
 }
 
 void bat_draw()
