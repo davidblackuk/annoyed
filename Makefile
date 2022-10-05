@@ -9,9 +9,11 @@ include cfg/build_config.mk
 ##
 include $(CPCT_PATH)/cfg/global_main_makefile.mk
 
+kill_old:
+	-killall --quiet -9 RetroVirtualMac
 
-run_sna:$(SNA)
+run_sna:$(SNA) kill_old	
 	cpct_rvm annoyed.sna
 
-run_dsk: $(DSK)
+run_dsk: $(DSK) kill_old
 	cpct_rvm annoyed.dsk

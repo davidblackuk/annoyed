@@ -1,17 +1,15 @@
 
 #include <cpctelera.h>
 #include "sprites/g_palette.h"
-#include "bat/bat.h"
-#include "background/background.h"
+#include "h/bat.h"
+#include "h/balls.h"
+#include "h/background.h"
+#include "h/bricks.h"
+#include "h/keys.h"
 
+void initializeCpc()
+{
 
-#include <map/tiles.h>   // Tile declarations      (file generated after processing img/tiles.png)
-#include <map/level-01.h> // Court map declarations (file generated after processing img/court.tmx)
-
-#include "sprites/ball.h"
-
-void initializeCpc() {
-   
    // disable firmware routines, after this all backbround processing is disabled and so, no going back to basic
    cpct_disableFirmware();
 
@@ -20,33 +18,48 @@ void initializeCpc() {
 
    cpct_setBorder(HW_BRIGHT_YELLOW);
 
-   cpct_setPalette(g_palette, 16);
+   cpct_setPalette((u8 *)g_palette, 16);
 }
 
-
-void main(void) {
+void main(void)
+{
 
    initializeCpc();
 
-   initializeBackground();
-   initializeBat();
+   background_initialize();
+   bricks_initialize();
+   auto_initialize();
+   keys_initialize();
+   bat_initialize();
+   balls_initialize();
 
-   while (1) {
+   while (1)
+   {
+      int w = 0;
 
-
-
+      // wait for vsynv before rendering
       cpct_waitVSYNC();
-      
-      drawBat();
 
-      cpct_scanKeyboard_f();
-      updateBat();
+      // restore the background of moving items
+      bat_restore_background();
+      balls_restore_background();
 
+      // draw that which must be drawn
+      bat_draw();
+      balls_draw();
+
+      keys_update();
+      auto_update();
+      bat_update();
+      balls_update();
+
+#define DELAY_UPDATE 1
+
+#ifdef DELAY_UPDATE
+      for (int o = 0; o < 3000; o++)
       {
-         u8* svmem = cpct_getScreenPtr(CPCT_VMEM_START, 100, 150);
-         cpct_drawSprite(sp_ball, svmem ,SP_BALL_W, SP_BALL_H);
+         w += 1;
       }
+#endif
    }
 }
-
-
