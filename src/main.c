@@ -6,6 +6,11 @@
 #include "h/background.h"
 #include "h/bricks.h"
 #include "h/keys.h"
+#include "h/level.h"
+#include "h/autoplay.h"
+#include "h/menu.h"
+
+void play_scene(Scene *scene);
 
 void initializeCpc()
 {
@@ -13,53 +18,46 @@ void initializeCpc()
    // disable firmware routines, after this all backbround processing is disabled and so, no going back to basic
    cpct_disableFirmware();
 
+   cpct_setBorder(HW_BLACK);
+
+
    // set screen mode 0, 16 colors
    cpct_setVideoMode(0);
 
-   cpct_setBorder(HW_BRIGHT_YELLOW);
-
    cpct_setPalette((u8 *)g_palette, 16);
+
+
 }
 
 void main(void)
 {
 
    initializeCpc();
+   module_level_initialize();
+   module_menu_initialize();
 
-   background_initialize();
-   bricks_initialize();
-   auto_initialize();
-   keys_initialize();
-   bat_initialize();
-   balls_initialize();
+// GAME MODULE?
 
-   while (1)
+
+   play_scene(&scene_menu);   
+   play_scene(&scene_level);   
+
+}
+
+
+void play_scene(Scene *scene) {
+   SceneState state = Continue;
+   scene->initialize(1);
+   
+   do
    {
       int w = 0;
 
       // wait for vsynv before rendering
       cpct_waitVSYNC();
 
-      // restore the background of moving items
-      bat_restore_background();
-      balls_restore_background();
+      scene->draw();
+      state = scene->update();
 
-      // draw that which must be drawn
-      bat_draw();
-      balls_draw();
-
-      keys_update();
-      auto_update();
-      bat_update();
-      balls_update();
-
-#define DELAY_UPDATE 1
-
-#ifdef DELAY_UPDATE
-      for (int o = 0; o < 3000; o++)
-      {
-         w += 1;
-      }
-#endif
-   }
+   } while (state == Continue);
 }

@@ -6,6 +6,13 @@
         "bat-left.h": "c",
         "background.h": "c",
         "level-01.h": "c",
-        "balls.h": "c"
+        "balls.h": "c",
+        "debug.h": "c",
+        "ball.h": "c",
+        "annoyed.h": "c",
+        "keys.h": "c",
+        "cpctelera.h": "c",
+        "allmacros.h": "c",
+        "globals.h": "c"
     }
 }

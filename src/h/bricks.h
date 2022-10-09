@@ -3,7 +3,8 @@
 
 #include <types.h>
 
-
+// how far below the top of the background tile map are the bricks placed
+#define BRICKS_MAP_BACKGROUND_PIXEL_OFFSET_Y 24
 
 extern void bricks_initialize();
 

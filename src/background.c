@@ -10,7 +10,6 @@ u8 *pvmem;
 
 void background_initialize()
 {
-
     // address in video memory to render our tile map.
     pvmem = cpct_getScreenPtr(CPCT_VMEM_START, TILE_MAP_SCREEN_BYTE_OFFSET_X, TILE_MAP_SCREEN_PIXEL_OFFSET_Y);
 
