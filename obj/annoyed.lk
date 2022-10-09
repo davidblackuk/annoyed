@@ -1,0 +1,34 @@
+-mjwx
+-i obj/annoyed.ihx
+-b _CODE = 0x4000
+-b _DATA = 0x0000
+-u
+-k /home/davidb/git/cpctelera/cpctelera/tools/sdcc-3.6.8-r9946/bin/../share/sdcc/lib/z80
+-k /home/davidb/git/cpctelera/cpctelera/tools/sdcc-3.6.8-r9946/share/sdcc/lib/z80
+-l /home/davidb/git/cpctelera/cpctelera/cpctelera.lib
+-l z80
+obj/map/level-02-blocks.rel
+obj/map/level-02-background.rel
+obj/map/level-01-blocks.rel
+obj/map/level-01-background.rel
+obj/map/tiles.rel
+obj/sprites/annoyed.rel
+obj/sprites/ball.rel
+obj/sprites/bat-right.rel
+obj/sprites/bat-mid.rel
+obj/sprites/bat-left.rel
+obj/sprites/g_palette.rel
+obj/autoplay.rel
+obj/background.rel
+obj/balls.rel
+obj/bat.rel
+obj/bricks.rel
+obj/debug.rel
+obj/game.rel
+obj/globals.rel
+obj/keys.rel
+obj/level.rel
+obj/main.rel
+obj/menu.rel
+
+-e

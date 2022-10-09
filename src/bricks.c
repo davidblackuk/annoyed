@@ -5,6 +5,7 @@
 #include "h/bricks.h"
 #include "h/balls.h"
 #include "h/globals.h"
+
 u8 *p_block_v_mem;
 
 //
@@ -14,8 +15,8 @@ u8 *p_block_v_mem;
 //   tile meta data, including the score for the brick position, visibility, type etc. 
 //
 void bricks_initialize() {
-    p_block_v_mem = cpct_getScreenPtr(CPCT_VMEM_START, TILE_MAP_SCREEN_BYTE_OFFSET_X, TILE_MAP_SCREEN_PIXEL_OFFSET_Y + BRICKS_MAP_BACKGROUND_PIXEL_OFFSET_Y);
-    cpct_etm_drawTilemap2x4_f(g_tilemap_l00_blocks_W, g_tilemap_l00_blocks_H, p_block_v_mem, g_tilemap_l00_blocks);
+    p_block_v_mem = cpct_getScreenPtr(CPCT_VMEM_START, TILE_MAP_SCREEN_BYTE_OFFSET_X + 2*TILE_W, TILE_MAP_SCREEN_PIXEL_OFFSET_Y + BRICKS_MAP_BACKGROUND_PIXEL_OFFSET_Y);
+    cpct_etm_drawTilemap2x4_f(g_tilemap_l01_blocks_W, g_tilemap_l01_blocks_H, p_block_v_mem, current_level->blocks_tilemap);
 }
 
 //

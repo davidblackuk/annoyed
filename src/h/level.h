@@ -3,9 +3,10 @@
 
 #include "h/globals.h"
 
-extern void module_level_initialize();
+extern void level_initialize();
+extern void level_draw();
+extern SceneState level_update();
 
 
-extern Scene scene_level;
 
 #endif

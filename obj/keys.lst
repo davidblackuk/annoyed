@@ -1,0 +1,143 @@
+                              1 ;--------------------------------------------------------
+                              2 ; File Created by SDCC : free open source ANSI-C Compiler
+                              3 ; Version 3.6.8 #9946 (Linux)
+                              4 ;--------------------------------------------------------
+                              5 	.module keys
+                              6 	.optsdcc -mz80
+                              7 	
+                              8 ;--------------------------------------------------------
+                              9 ; Public variables in this module
+                             10 ;--------------------------------------------------------
+                             11 	.globl _cpct_isAnyKeyPressed_f
+                             12 	.globl _cpct_isKeyPressed
+                             13 	.globl _cpct_scanKeyboard_f
+                             14 	.globl _key_any_is_pressed
+                             15 	.globl _key_auto_is_pressed
+                             16 	.globl _key_serve_is_pressed
+                             17 	.globl _key_right_is_pressed
+                             18 	.globl _key_left_is_pressed
+                             19 	.globl _keys_initialize
+                             20 	.globl _keys_resetAllKeys
+                             21 	.globl _keys_update
+                             22 ;--------------------------------------------------------
+                             23 ; special function registers
+                             24 ;--------------------------------------------------------
+                             25 ;--------------------------------------------------------
+                             26 ; ram data
+                             27 ;--------------------------------------------------------
+                             28 	.area _DATA
+   0000                      29 _key_left_is_pressed::
+   0000                      30 	.ds 1
+   0001                      31 _key_right_is_pressed::
+   0001                      32 	.ds 1
+   0002                      33 _key_serve_is_pressed::
+   0002                      34 	.ds 1
+   0003                      35 _key_auto_is_pressed::
+   0003                      36 	.ds 1
+   0004                      37 _key_any_is_pressed::
+   0004                      38 	.ds 1
+                             39 ;--------------------------------------------------------
+                             40 ; ram data
+                             41 ;--------------------------------------------------------
+                             42 	.area _INITIALIZED
+                             43 ;--------------------------------------------------------
+                             44 ; absolute external ram data
+                             45 ;--------------------------------------------------------
+                             46 	.area _DABS (ABS)
+                             47 ;--------------------------------------------------------
+                             48 ; global & static initialisations
+                             49 ;--------------------------------------------------------
+                             50 	.area _HOME
+                             51 	.area _GSINIT
+                             52 	.area _GSFINAL
+                             53 	.area _GSINIT
+                             54 ;--------------------------------------------------------
+                             55 ; Home
+                             56 ;--------------------------------------------------------
+                             57 	.area _HOME
+                             58 	.area _HOME
+                             59 ;--------------------------------------------------------
+                             60 ; code
+                             61 ;--------------------------------------------------------
+                             62 	.area _CODE
+                             63 ;src/keys.c:12: void keys_initialize() {
+                             64 ;	---------------------------------
+                             65 ; Function keys_initialize
+                             66 ; ---------------------------------
+   0000                      67 _keys_initialize::
+                             68 ;src/keys.c:13: keys_resetAllKeys();    
+   0000 C3r03r00      [10]   69 	jp  _keys_resetAllKeys
+                             70 ;src/keys.c:16: void  keys_resetAllKeys() {
+                             71 ;	---------------------------------
+                             72 ; Function keys_resetAllKeys
+                             73 ; ---------------------------------
+   0003                      74 _keys_resetAllKeys::
+                             75 ;src/keys.c:17: key_left_is_pressed = key_right_is_pressed = key_serve_is_pressed = 0;
+   0003 21r02r00      [10]   76 	ld	hl,#_key_serve_is_pressed + 0
+   0006 36 00         [10]   77 	ld	(hl), #0x00
+   0008 21r01r00      [10]   78 	ld	hl,#_key_right_is_pressed + 0
+   000B 36 00         [10]   79 	ld	(hl), #0x00
+   000D 21r00r00      [10]   80 	ld	hl,#_key_left_is_pressed + 0
+   0010 36 00         [10]   81 	ld	(hl), #0x00
+                             82 ;src/keys.c:18: key_auto_is_pressed = key_any_is_pressed = 0;
+   0012 21r04r00      [10]   83 	ld	hl,#_key_any_is_pressed + 0
+   0015 36 00         [10]   84 	ld	(hl), #0x00
+   0017 21r03r00      [10]   85 	ld	hl,#_key_auto_is_pressed + 0
+   001A 36 00         [10]   86 	ld	(hl), #0x00
+   001C C9            [10]   87 	ret
+                             88 ;src/keys.c:22: void keys_update() {
+                             89 ;	---------------------------------
+                             90 ; Function keys_update
+                             91 ; ---------------------------------
+   001D                      92 _keys_update::
+                             93 ;src/keys.c:23: cpct_scanKeyboard_f();
+   001D CDr00r00      [17]   94 	call	_cpct_scanKeyboard_f
+                             95 ;src/keys.c:24: key_left_is_pressed = cpct_isKeyPressed(Key_CursorLeft);
+   0020 21 01 01      [10]   96 	ld	hl, #0x0101
+   0023 CDr00r00      [17]   97 	call	_cpct_isKeyPressed
+   0026 FD 21r00r00   [14]   98 	ld	iy, #_key_left_is_pressed
+   002A FD 75 00      [19]   99 	ld	0 (iy), l
+                            100 ;src/keys.c:25: key_left_is_pressed |= cpct_isKeyPressed(Key_A);
+   002D 21 08 20      [10]  101 	ld	hl, #0x2008
+   0030 CDr00r00      [17]  102 	call	_cpct_isKeyPressed
+   0033 7D            [ 4]  103 	ld	a, l
+   0034 FD 21r00r00   [14]  104 	ld	iy, #_key_left_is_pressed
+   0038 FD B6 00      [19]  105 	or	a, 0 (iy)
+   003B FD 77 00      [19]  106 	ld	0 (iy), a
+                            107 ;src/keys.c:27: key_right_is_pressed = cpct_isKeyPressed(Key_CursorRight);
+   003E 21 00 02      [10]  108 	ld	hl, #0x0200
+   0041 CDr00r00      [17]  109 	call	_cpct_isKeyPressed
+   0044 FD 21r01r00   [14]  110 	ld	iy, #_key_right_is_pressed
+   0048 FD 75 00      [19]  111 	ld	0 (iy), l
+                            112 ;src/keys.c:28: key_right_is_pressed |= cpct_isKeyPressed(Key_D);
+   004B 21 07 20      [10]  113 	ld	hl, #0x2007
+   004E CDr00r00      [17]  114 	call	_cpct_isKeyPressed
+   0051 7D            [ 4]  115 	ld	a, l
+   0052 FD 21r01r00   [14]  116 	ld	iy, #_key_right_is_pressed
+   0056 FD B6 00      [19]  117 	or	a, 0 (iy)
+   0059 FD 77 00      [19]  118 	ld	0 (iy), a
+                            119 ;src/keys.c:30: key_serve_is_pressed = cpct_isKeyPressed(Key_CursorUp);
+   005C 21 00 01      [10]  120 	ld	hl, #0x0100
+   005F CDr00r00      [17]  121 	call	_cpct_isKeyPressed
+   0062 FD 21r02r00   [14]  122 	ld	iy, #_key_serve_is_pressed
+   0066 FD 75 00      [19]  123 	ld	0 (iy), l
+                            124 ;src/keys.c:31: key_serve_is_pressed |= cpct_isKeyPressed(Key_W);
+   0069 21 07 08      [10]  125 	ld	hl, #0x0807
+   006C CDr00r00      [17]  126 	call	_cpct_isKeyPressed
+   006F 7D            [ 4]  127 	ld	a, l
+   0070 FD 21r02r00   [14]  128 	ld	iy, #_key_serve_is_pressed
+   0074 FD B6 00      [19]  129 	or	a, 0 (iy)
+   0077 FD 77 00      [19]  130 	ld	0 (iy), a
+                            131 ;src/keys.c:34: key_auto_is_pressed = cpct_isKeyPressed(Key_0);
+   007A 21 04 01      [10]  132 	ld	hl, #0x0104
+   007D CDr00r00      [17]  133 	call	_cpct_isKeyPressed
+   0080 FD 21r03r00   [14]  134 	ld	iy, #_key_auto_is_pressed
+   0084 FD 75 00      [19]  135 	ld	0 (iy), l
+                            136 ;src/keys.c:35: key_any_is_pressed = cpct_isAnyKeyPressed_f();
+   0087 CDr00r00      [17]  137 	call	_cpct_isAnyKeyPressed_f
+   008A FD 21r04r00   [14]  138 	ld	iy, #_key_any_is_pressed
+   008E FD 75 00      [19]  139 	ld	0 (iy), l
+   0091 C9            [10]  140 	ret
+                            141 	.area _CODE
+                            142 	.area _INITIALIZER
+                            143 	.area _CABS (ABS)

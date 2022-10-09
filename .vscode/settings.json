@@ -13,6 +13,7 @@
         "keys.h": "c",
         "cpctelera.h": "c",
         "allmacros.h": "c",
-        "globals.h": "c"
+        "globals.h": "c",
+        "level.h": "c"
     }
 }

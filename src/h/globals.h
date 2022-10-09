@@ -8,7 +8,7 @@
 
 #define NULL 0
 
-#define WinwApe_Brk __asm__(".dw #0xFFED");
+#define WinApe_Brk __asm__(".dw #0xFFED");
 
 // pens from our palette
 #define AN_PEN_BLACK 0
@@ -33,14 +33,14 @@
 
 // tilamap origin relative to screen
 #define TILE_MAP_SCREEN_BYTE_OFFSET_X 8
-#define TILE_MAP_SCREEN_PIXEL_OFFSET_Y 16
+#define TILE_MAP_SCREEN_PIXEL_OFFSET_Y 0
 
 #define TILE_W 2
 #define TILE_H 4
 
 
 #define PLAY_AREA_LEFT_EDGE 6 * TILE_W
-#define PLAY_AREA_RIGHT_EDGE (TILE_MAP_SCREEN_BYTE_OFFSET_X + (g_tilemap_l00_background_W * TILE_W)) - 2*TILE_W
+#define PLAY_AREA_RIGHT_EDGE (TILE_MAP_SCREEN_BYTE_OFFSET_X + (BACKGROUND_TILMAP_W * TILE_W)) - 2*TILE_W
 #define PLAY_AREA_TOP_EDGE TILE_MAP_SCREEN_PIXEL_OFFSET_Y + 8
 
 // this is the you lost a life row
@@ -48,29 +48,44 @@
 
 typedef enum {
      Continue,
-     Complete
+     SceneComplete,
+     LevelCompleteFail,
+     LevelCompleteSuccess
 } SceneState;
 
-
-// a method that accepts a level number as a parameter
-typedef   void (*Initializer)(u8 level);
 
 // a method that requires no parameters
 typedef   void (*Method)();
 
+// a method that returns a scene state and transitions the game state
 typedef   SceneState (*StateMethod)();
 
 
 // A scene is a game element that represents a screen, eg the game, menu, game over scenes ets
 typedef struct
 {
-     Initializer  initialize;
+     Method  initialize;
      Method  draw;
      StateMethod update;
 
 } Scene;
 
+// ---------------------------------------------------------------------
+// Level definition
+// ---------------------------------------------------------------------
 
+#define NUM_LEVELS 2
 
+typedef struct
+{
+    void *background_tilemap;
+    void *blocks_tilemap;
+
+} Level;
+
+extern const Level level_definitions[NUM_LEVELS];
+
+// A pointer to the current level
+extern Level * current_level;
 
 #endif

@@ -6,7 +6,7 @@
 #include "h/background.h"
 #include "h/bricks.h"
 #include "h/keys.h"
-#include "h/level.h"
+#include "h/game.h"
 #include "h/autoplay.h"
 #include "h/menu.h"
 
@@ -33,21 +33,21 @@ void main(void)
 {
 
    initializeCpc();
-   module_level_initialize();
    module_menu_initialize();
+   module_game_initialize();
 
-// GAME MODULE?
 
-
-   play_scene(&scene_menu);   
-   play_scene(&scene_level);   
-
+   while (1) {
+      play_scene(&scene_menu);   
+      play_scene(&scene_game);   
+   }
 }
 
 
 void play_scene(Scene *scene) {
    SceneState state = Continue;
-   scene->initialize(1);
+   
+   scene->initialize();
    
    do
    {

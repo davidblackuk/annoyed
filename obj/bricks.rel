@@ -1,0 +1,41 @@
+XL2
+H 9 areas 8 global symbols
+M bricks
+O -mz80
+S _current_level Ref0000
+S .__.ABS. Def0000
+S _cpct_etm_drawTilemap2x4_f Ref0000
+S _cpct_getScreenPtr Ref0000
+A _CODE size 25 flags 0 addr 0
+S _bricks_restore Def0024
+S _bricks_handle_ball_intersection Def0023
+S _bricks_initialize Def0000
+A _DATA size 2 flags 0 addr 0
+S _p_block_v_mem Def0000
+A _INITIALIZED size 0 flags 0 addr 0
+A _DABS size 0 flags 8 addr 0
+A _HOME size 0 flags 0 addr 0
+A _GSINIT size 0 flags 0 addr 0
+A _GSFINAL size 0 flags 0 addr 0
+A _INITIALIZER size 0 flags 0 addr 0
+A _CABS size 0 flags 8 addr 0
+T 00 00
+R 00 00 01 00
+T 00 00
+R 00 00 01 00
+T 00 00
+R 00 00 00 00
+T 00 00 21 0C 18 E5 21 00 C0 E5 CD 00 00 22 00 00
+R 00 00 00 00 02 0B 03 00 00 0E 01 00
+T 0E 00 2A 00 00 23 23 4E 23 46 2A 00 00 C5 E5 21
+R 00 00 00 00 02 03 00 00 00 0B 01 00
+T 1C 00 1A 1C E5 CD 00 00 C9
+R 00 00 00 00 02 06 02 00
+T 23 00
+R 00 00 00 00
+T 23 00 C9
+R 00 00 00 00
+T 24 00
+R 00 00 00 00
+T 24 00 C9
+R 00 00 00 00

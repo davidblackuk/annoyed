@@ -20,7 +20,7 @@ const u8 fg_pens[4] = {AN_PEN_WHITE, AN_PEN_PASTEL_CYAN, AN_PEN_SKY_BLUE, AN_PEN
 i8 loop_counter;
 i8 current_ink;
 
-void menu_initialize(u8 level)
+void menu_initialize()
 {
     u8 *pvmem = cpct_getScreenPtr(CPCT_VMEM_START, (SCREEN_WIDTH_BYTES - SP_LOGO_W) / 2, 16);
 
@@ -49,7 +49,7 @@ SceneState menu_update()
     keys_update();
     if (cpct_isAnyKeyPressed())
     {
-        return Complete;
+        return SceneComplete;
     }
 
     loop_counter += 1;

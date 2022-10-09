@@ -9,9 +9,9 @@
 #include "h/keys.h"
 #include "h/autoplay.h"
 
-Scene scene_level;
 
-void level_initialize(u8 level)
+
+void level_initialize()
 {
     cpct_clearScreen(AN_PEN_BLACK);
 
@@ -43,12 +43,11 @@ SceneState level_update()
     bat_update();
     balls_update();
 
+    // if there are no active balls left, we're dead
+    if (balls_get_first_active() == NULL) {
+        res = LevelCompleteFail;
+    }
+
     return res;
 }
 
-void module_level_initialize()
-{
-    scene_level.initialize = level_initialize;
-    scene_level.update = level_update;
-    scene_level.draw = level_draw;
-}

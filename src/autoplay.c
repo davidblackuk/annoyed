@@ -3,7 +3,7 @@
 #include "h/bat.h"
 #include "h/balls.h"
 #include "h/keys.h"
-#include "h/globals.h""
+#include "h/globals.h"
 #include "sprites/ball.h"
 #include "h/debug.h"
 u8 is_controling;

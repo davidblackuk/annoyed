@@ -1,0 +1,92 @@
+                              1 ;--------------------------------------------------------
+                              2 ; File Created by SDCC : free open source ANSI-C Compiler
+                              3 ; Version 3.6.8 #9946 (Linux)
+                              4 ;--------------------------------------------------------
+                              5 	.module bricks
+                              6 	.optsdcc -mz80
+                              7 	
+                              8 ;--------------------------------------------------------
+                              9 ; Public variables in this module
+                             10 ;--------------------------------------------------------
+                             11 	.globl _bricks_handle_ball_intersection
+                             12 	.globl _cpct_etm_drawTilemap2x4_f
+                             13 	.globl _cpct_getScreenPtr
+                             14 	.globl _p_block_v_mem
+                             15 	.globl _bricks_initialize
+                             16 	.globl _bricks_restore
+                             17 ;--------------------------------------------------------
+                             18 ; special function registers
+                             19 ;--------------------------------------------------------
+                             20 ;--------------------------------------------------------
+                             21 ; ram data
+                             22 ;--------------------------------------------------------
+                             23 	.area _DATA
+   6D87                      24 _p_block_v_mem::
+   6D87                      25 	.ds 2
+                             26 ;--------------------------------------------------------
+                             27 ; ram data
+                             28 ;--------------------------------------------------------
+                             29 	.area _INITIALIZED
+                             30 ;--------------------------------------------------------
+                             31 ; absolute external ram data
+                             32 ;--------------------------------------------------------
+                             33 	.area _DABS (ABS)
+                             34 ;--------------------------------------------------------
+                             35 ; global & static initialisations
+                             36 ;--------------------------------------------------------
+                             37 	.area _HOME
+                             38 	.area _GSINIT
+                             39 	.area _GSFINAL
+                             40 	.area _GSINIT
+                             41 ;--------------------------------------------------------
+                             42 ; Home
+                             43 ;--------------------------------------------------------
+                             44 	.area _HOME
+                             45 	.area _HOME
+                             46 ;--------------------------------------------------------
+                             47 ; code
+                             48 ;--------------------------------------------------------
+                             49 	.area _CODE
+                             50 ;src/bricks.c:17: void bricks_initialize() {
+                             51 ;	---------------------------------
+                             52 ; Function bricks_initialize
+                             53 ; ---------------------------------
+   6571                      54 _bricks_initialize::
+                             55 ;src/bricks.c:18: p_block_v_mem = cpct_getScreenPtr(CPCT_VMEM_START, TILE_MAP_SCREEN_BYTE_OFFSET_X + 2*TILE_W, TILE_MAP_SCREEN_PIXEL_OFFSET_Y + BRICKS_MAP_BACKGROUND_PIXEL_OFFSET_Y);
+   6571 21 0C 18      [10]   56 	ld	hl, #0x180c
+   6574 E5            [11]   57 	push	hl
+   6575 21 00 C0      [10]   58 	ld	hl, #0xc000
+   6578 E5            [11]   59 	push	hl
+   6579 CD BF 6C      [17]   60 	call	_cpct_getScreenPtr
+   657C 22 87 6D      [16]   61 	ld	(_p_block_v_mem), hl
+                             62 ;src/bricks.c:19: cpct_etm_drawTilemap2x4_f(g_tilemap_l01_blocks_W, g_tilemap_l01_blocks_H, p_block_v_mem, current_level->blocks_tilemap);
+   657F 2A 92 6D      [16]   63 	ld	hl, (_current_level)
+   6582 23            [ 6]   64 	inc	hl
+   6583 23            [ 6]   65 	inc	hl
+   6584 4E            [ 7]   66 	ld	c, (hl)
+   6585 23            [ 6]   67 	inc	hl
+   6586 46            [ 7]   68 	ld	b, (hl)
+   6587 2A 87 6D      [16]   69 	ld	hl, (_p_block_v_mem)
+   658A C5            [11]   70 	push	bc
+   658B E5            [11]   71 	push	hl
+   658C 21 1A 1C      [10]   72 	ld	hl, #0x1c1a
+   658F E5            [11]   73 	push	hl
+   6590 CD D7 6B      [17]   74 	call	_cpct_etm_drawTilemap2x4_f
+   6593 C9            [10]   75 	ret
+                             76 ;src/bricks.c:26: void bricks_handle_ball_intersection(Ball *ball) {
+                             77 ;	---------------------------------
+                             78 ; Function bricks_handle_ball_intersection
+                             79 ; ---------------------------------
+   6594                      80 _bricks_handle_ball_intersection::
+                             81 ;src/bricks.c:28: }
+   6594 C9            [10]   82 	ret
+                             83 ;src/bricks.c:30: void bricks_restore(u8 x, u8 y, u8 width, u8 height) {
+                             84 ;	---------------------------------
+                             85 ; Function bricks_restore
+                             86 ; ---------------------------------
+   6595                      87 _bricks_restore::
+                             88 ;src/bricks.c:32: }
+   6595 C9            [10]   89 	ret
+                             90 	.area _CODE
+                             91 	.area _INITIALIZER
+                             92 	.area _CABS (ABS)
