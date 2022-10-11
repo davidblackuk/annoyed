@@ -4,7 +4,7 @@
 #include <types.h>
 
 
-extern void dbg_displayNumber(int num);
+extern void dbg_displayNumber(u8 char_row, int num);
 
 
 

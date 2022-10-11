@@ -17,3 +17,6 @@ run_sna:$(SNA) kill_old
 
 run_dsk: $(DSK) kill_old
 	cpct_rvm annoyed.dsk
+
+really_clean: clean
+	-rm annoyed.*

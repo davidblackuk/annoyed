@@ -3,16 +3,18 @@
 ## NEW MACROS
 ##
 
-# DEFINE PALETTE
-# 16-colours mode 0 palette used in this example. This values are 
-# firmware color values. You may consult this colour values at 
-# http://lronaldo.github.io/cpctelera/files/video/cpct_setPalette-asm.html
-#  0: Black           1: Blue              2: Bright Blue      3: Red
-#  5: Mauve           6: Bright Red        9: Green           11: Sky Blue
-# 15: Orange         18: Bright Green     19: Sea Green       20: Bright Cyan
-# 21: Lime           22: Pastel Green     24: Bright Yellow   26: Bright White
+# see
+# https://www.cpcwiki.eu/index.php/CPC_Palette
 
-PALETTE=1 0 2 3 6 9 11 12 13 15 16 18 20 24 25 26
+
+# black,  Bright White, Orange, Pastel Cyan, Pastel Green, Bright red, Sky blue, Pastel Magenta, Pastel Yellow, White (grey), Blue, Bright blue, yellow
+# 000000, FFFFFF, FF8000, 80FFF, 80FF80, FF0000, 0080FF, FF80FF, FFFF80, 808080, 000080, 0000FF, 808000
+# 0 26 15 23 22 6 11 17 25 13 1 2 12
+# we have 4 spares at the moment
+
+PALETTE=0 26 15 23 22 6 11 17 25 13 1 2 12 3 4 5
+
+
 
 ## Default values
 #$(eval $(call IMG2SP, SET_MODE        , 0                  ))  { 0, 1, 2 }
@@ -34,6 +36,7 @@ $(eval $(call IMG2SP, CONVERT         , assets/bat-left.png , 0, 0, sp_bat_left)
 $(eval $(call IMG2SP, CONVERT         , assets/bat-mid.png , 0, 0, sp_bat_mid))
 $(eval $(call IMG2SP, CONVERT         , assets/bat-right.png , 0, 0, sp_bat_right))
 $(eval $(call IMG2SP, CONVERT         , assets/ball.png , 0, 0, sp_ball))
+$(eval $(call IMG2SP, CONVERT         , assets/annoyed.png , 0, 0, sp_logo))
 
 # CONVERT TILES:
 #  Converts img/tiles.png into src/map/tiles.c & src/map/tiles.h

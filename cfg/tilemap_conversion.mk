@@ -16,6 +16,8 @@
 
 
 
-$(eval $(call TMX2C,assets/level-01-background.tmx,g_tilemap_l00_background,src/map))
-$(eval $(call TMX2C,assets/level-01-blocks.tmx,g_tilemap_l00_bricks,src/map))
+$(eval $(call TMX2C,assets/level-01-background.tmx,g_tilemap_l01_background,src/map))
+$(eval $(call TMX2C,assets/level-01-blocks.tmx,g_tilemap_l01_blocks,src/map))
 
+$(eval $(call TMX2C,assets/level-02-background.tmx,g_tilemap_l02_background,src/map))
+$(eval $(call TMX2C,assets/level-02-blocks.tmx,g_tilemap_l02_blocks,src/map))
