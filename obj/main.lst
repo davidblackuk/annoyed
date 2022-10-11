@@ -1,0 +1,173 @@
+                              1 ;--------------------------------------------------------
+                              2 ; File Created by SDCC : free open source ANSI-C Compiler
+                              3 ; Version 3.6.8 #9946 (Linux)
+                              4 ;--------------------------------------------------------
+                              5 	.module main
+                              6 	.optsdcc -mz80
+                              7 	
+                              8 ;--------------------------------------------------------
+                              9 ; Public variables in this module
+                             10 ;--------------------------------------------------------
+                             11 	.globl _main
+                             12 	.globl _initializeCpc
+                             13 	.globl _module_menu_initialize
+                             14 	.globl _module_game_initialize
+                             15 	.globl _cpct_setPALColour
+                             16 	.globl _cpct_setPalette
+                             17 	.globl _cpct_waitVSYNC
+                             18 	.globl _cpct_setVideoMode
+                             19 	.globl _cpct_disableFirmware
+                             20 	.globl _play_scene
+                             21 ;--------------------------------------------------------
+                             22 ; special function registers
+                             23 ;--------------------------------------------------------
+                             24 ;--------------------------------------------------------
+                             25 ; ram data
+                             26 ;--------------------------------------------------------
+                             27 	.area _DATA
+                             28 ;--------------------------------------------------------
+                             29 ; ram data
+                             30 ;--------------------------------------------------------
+                             31 	.area _INITIALIZED
+                             32 ;--------------------------------------------------------
+                             33 ; absolute external ram data
+                             34 ;--------------------------------------------------------
+                             35 	.area _DABS (ABS)
+                             36 ;--------------------------------------------------------
+                             37 ; global & static initialisations
+                             38 ;--------------------------------------------------------
+                             39 	.area _HOME
+                             40 	.area _GSINIT
+                             41 	.area _GSFINAL
+                             42 	.area _GSINIT
+                             43 ;--------------------------------------------------------
+                             44 ; Home
+                             45 ;--------------------------------------------------------
+                             46 	.area _HOME
+                             47 	.area _HOME
+                             48 ;--------------------------------------------------------
+                             49 ; code
+                             50 ;--------------------------------------------------------
+                             51 	.area _CODE
+                             52 ;src/main.c:9: void initializeCpc()
+                             53 ;	---------------------------------
+                             54 ; Function initializeCpc
+                             55 ; ---------------------------------
+   0000                      56 _initializeCpc::
+                             57 ;src/main.c:13: cpct_disableFirmware();
+   0000 CDr00r00      [17]   58 	call	_cpct_disableFirmware
+                             59 ;src/main.c:15: cpct_setBorder(HW_BLACK);
+   0003 21 10 14      [10]   60 	ld	hl, #0x1410
+   0006 E5            [11]   61 	push	hl
+   0007 CDr00r00      [17]   62 	call	_cpct_setPALColour
+                             63 ;src/main.c:19: cpct_setVideoMode(0);
+   000A 2E 00         [ 7]   64 	ld	l, #0x00
+   000C CDr00r00      [17]   65 	call	_cpct_setVideoMode
+                             66 ;src/main.c:21: cpct_setPalette((u8 *)g_palette, 16);
+   000F 21 10 00      [10]   67 	ld	hl, #0x0010
+   0012 E5            [11]   68 	push	hl
+   0013 21r00r00      [10]   69 	ld	hl, #_g_palette
+   0016 E5            [11]   70 	push	hl
+   0017 CDr00r00      [17]   71 	call	_cpct_setPalette
+   001A C9            [10]   72 	ret
+                             73 ;src/main.c:26: void main(void)
+                             74 ;	---------------------------------
+                             75 ; Function main
+                             76 ; ---------------------------------
+   001B                      77 _main::
+                             78 ;src/main.c:29: initializeCpc();
+   001B CDr00r00      [17]   79 	call	_initializeCpc
+                             80 ;src/main.c:30: module_menu_initialize();
+   001E CDr00r00      [17]   81 	call	_module_menu_initialize
+                             82 ;src/main.c:31: module_game_initialize();
+   0021 CDr00r00      [17]   83 	call	_module_game_initialize
+                             84 ;src/main.c:34: while (1) {
+   0024                      85 00102$:
+                             86 ;src/main.c:35: play_scene(&scene_menu);   
+   0024 21r00r00      [10]   87 	ld	hl, #_scene_menu
+   0027 E5            [11]   88 	push	hl
+   0028 CDr35r00      [17]   89 	call	_play_scene
+                             90 ;src/main.c:36: play_scene(&scene_game);   
+   002B 21r00r00      [10]   91 	ld	hl, #_scene_game
+   002E E3            [19]   92 	ex	(sp),hl
+   002F CDr35r00      [17]   93 	call	_play_scene
+   0032 F1            [10]   94 	pop	af
+   0033 18 EF         [12]   95 	jr	00102$
+                             96 ;src/main.c:41: void play_scene(Scene *scene) {
+                             97 ;	---------------------------------
+                             98 ; Function play_scene
+                             99 ; ---------------------------------
+   0035                     100 _play_scene::
+   0035 DD E5         [15]  101 	push	ix
+   0037 DD 21 00 00   [14]  102 	ld	ix,#0
+   003B DD 39         [15]  103 	add	ix,sp
+   003D F5            [11]  104 	push	af
+                            105 ;src/main.c:44: scene->initialize();
+   003E DD 4E 04      [19]  106 	ld	c,4 (ix)
+   0041 DD 46 05      [19]  107 	ld	b,5 (ix)
+   0044 69            [ 4]  108 	ld	l, c
+   0045 60            [ 4]  109 	ld	h, b
+   0046 5E            [ 7]  110 	ld	e, (hl)
+   0047 23            [ 6]  111 	inc	hl
+   0048 66            [ 7]  112 	ld	h, (hl)
+   0049 C5            [11]  113 	push	bc
+   004A 6B            [ 4]  114 	ld	l, e
+   004B CDr00r00      [17]  115 	call	___sdcc_call_hl
+   004E C1            [10]  116 	pop	bc
+                            117 ;src/main.c:46: do
+   004F 33            [ 6]  118 	inc	sp
+   0050 33            [ 6]  119 	inc	sp
+   0051 C5            [11]  120 	push	bc
+   0052                     121 00102$:
+                            122 ;src/main.c:51: cpct_waitVSYNC();
+   0052 C5            [11]  123 	push	bc
+   0053 CDr00r00      [17]  124 	call	_cpct_waitVSYNC
+   0056 C1            [10]  125 	pop	bc
+                            126 ;src/main.c:53: scene->draw();
+   0057 E1            [10]  127 	pop	hl
+   0058 E5            [11]  128 	push	hl
+   0059 23            [ 6]  129 	inc	hl
+   005A 23            [ 6]  130 	inc	hl
+   005B 5E            [ 7]  131 	ld	e, (hl)
+   005C 23            [ 6]  132 	inc	hl
+   005D 66            [ 7]  133 	ld	h, (hl)
+   005E C5            [11]  134 	push	bc
+   005F 6B            [ 4]  135 	ld	l, e
+   0060 CDr00r00      [17]  136 	call	___sdcc_call_hl
+   0063 C1            [10]  137 	pop	bc
+                            138 ;src/main.c:54: state = scene->update();
+   0064 69            [ 4]  139 	ld	l, c
+   0065 60            [ 4]  140 	ld	h, b
+   0066 11 04 00      [10]  141 	ld	de, #0x0004
+   0069 19            [11]  142 	add	hl, de
+   006A 5E            [ 7]  143 	ld	e, (hl)
+   006B 23            [ 6]  144 	inc	hl
+   006C 66            [ 7]  145 	ld	h, (hl)
+   006D C5            [11]  146 	push	bc
+   006E 6B            [ 4]  147 	ld	l, e
+   006F CDr00r00      [17]  148 	call	___sdcc_call_hl
+   0072 C1            [10]  149 	pop	bc
+                            150 ;src/main.c:59: for (i16 i=0; i< 2000; i++)
+   0073 11 00 00      [10]  151 	ld	de, #0x0000
+   0076                     152 00106$:
+   0076 7B            [ 4]  153 	ld	a, e
+   0077 D6 D0         [ 7]  154 	sub	a, #0xd0
+   0079 7A            [ 4]  155 	ld	a, d
+   007A 17            [ 4]  156 	rla
+   007B 3F            [ 4]  157 	ccf
+   007C 1F            [ 4]  158 	rra
+   007D DE 87         [ 7]  159 	sbc	a, #0x87
+   007F 30 03         [12]  160 	jr	NC,00103$
+   0081 13            [ 6]  161 	inc	de
+   0082 18 F2         [12]  162 	jr	00106$
+   0084                     163 00103$:
+                            164 ;src/main.c:66: } while (state == Continue);
+   0084 7D            [ 4]  165 	ld	a, l
+   0085 B7            [ 4]  166 	or	a, a
+   0086 28 CA         [12]  167 	jr	Z,00102$
+   0088 DD F9         [10]  168 	ld	sp, ix
+   008A DD E1         [14]  169 	pop	ix
+   008C C9            [10]  170 	ret
+                            171 	.area _CODE
+                            172 	.area _INITIALIZER
+                            173 	.area _CABS (ABS)

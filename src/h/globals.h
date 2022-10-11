@@ -38,6 +38,16 @@
 #define TILE_W 2
 #define TILE_H 4
 
+#define PLAY_AREA_WIDTH 26 * TILE_W
+#define PLAY_AREA_HEIGHT 48 * TILE_H
+
+// world X to screen X
+#define W_2_S_X(X) (X +  (6 * TILE_W))
+
+// world X to screen X
+#define W_2_S_Y(Y) (Y + TILE_H)
+
+
 
 #define PLAY_AREA_LEFT_EDGE 6 * TILE_W
 #define PLAY_AREA_RIGHT_EDGE (TILE_MAP_SCREEN_BYTE_OFFSET_X + (BACKGROUND_TILMAP_W * TILE_W)) - 2*TILE_W

@@ -23,6 +23,34 @@ void background_initialize()
     
 }
 
+void background_restore_world_coords(u8 x, u8 y, u8 width, u8 height) {
+    
+    // add two tiles to the left, and one to the top to kake the border into account
+    u8 tileX = 2 + (x / 2);
+    u8 tileY = 1 + (y / 4);
+    u8 tileW = width / 2;
+    u8 tileH = height / 4;
+
+    if (height % 4 > 0)
+    {
+        tileH++;
+    }
+
+    if (width % 2 > 0)
+    {
+        tileW++;
+    }
+
+    if (x & 1 == 1)
+    {
+        tileW += 1;
+    }
+
+    cpct_etm_drawTileBox2x4(tileX, tileY, tileW, tileH, BACKGROUND_TILMAP_W, pvmem, current_level->background_tilemap);
+ 
+}
+
+
 void background_restore(u8 screenX, u8 screenY, u8 bwidth, u8 pHeight)
 {
 

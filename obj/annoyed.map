@@ -1,0 +1,456 @@
+ASxxxx Linker V03.00 + NoICE + sdld,  page 1.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+.  .ABS.                            00000000    00000000 =           0. bytes (ABS,CON)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+     00000000  .__.ABS.                           cpct_strings
+     00000000  l__CABS                         
+     00000000  l__DABS                         
+     00000000  l__GSFINAL                      
+     00000000  l__GSINIT                       
+     00000000  l__HOME                         
+     00000000  s__CABS                         
+     00000000  s__DABS                         
+     00000004  l__INITIALIZED                  
+     00000004  l__INITIALIZER                  
+     0000030F  l__DATA                         
+     000032BE  l__CODE                         
+     00004000  s__CODE                         
+     000072BE  s__DATA                         
+     000075CD  s__INITIALIZED                  
+     000075D1  s__GSFINAL                      
+     000075D1  s__GSINIT                       
+     000075D1  s__HOME                         
+     000075D1  s__INITIALIZER                  
+
+ASxxxx Linker V03.00 + NoICE + sdld,  page 2.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+_CODE                               00004000    000032BE =       12990. bytes (REL,CON)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+     00004000  _g_tilemap_l02_blocks              level_02_blocks
+     000042D8  _g_tilemap_l02_background          level_02_background
+     000048B4  _g_tilemap_l01_blocks              level_01_blocks
+     00004B8C  _g_tilemap_l01_background          level_01_background
+     00005168  _g_tileset                         tiles
+     00005258  _g_tiles_000                       tiles
+     00005260  _g_tiles_001                       tiles
+     00005268  _g_tiles_002                       tiles
+     00005270  _g_tiles_003                       tiles
+     00005278  _g_tiles_004                       tiles
+     00005280  _g_tiles_005                       tiles
+     00005288  _g_tiles_006                       tiles
+     00005290  _g_tiles_007                       tiles
+     00005298  _g_tiles_008                       tiles
+     000052A0  _g_tiles_009                       tiles
+     000052A8  _g_tiles_010                       tiles
+     000052B0  _g_tiles_011                       tiles
+     000052B8  _g_tiles_012                       tiles
+     000052C0  _g_tiles_013                       tiles
+     000052C8  _g_tiles_014                       tiles
+     000052D0  _g_tiles_015                       tiles
+     000052D8  _g_tiles_016                       tiles
+     000052E0  _g_tiles_017                       tiles
+     000052E8  _g_tiles_018                       tiles
+     000052F0  _g_tiles_019                       tiles
+     000052F8  _g_tiles_020                       tiles
+     00005300  _g_tiles_021                       tiles
+     00005308  _g_tiles_022                       tiles
+     00005310  _g_tiles_023                       tiles
+     00005318  _g_tiles_024                       tiles
+     00005320  _g_tiles_025                       tiles
+     00005328  _g_tiles_026                       tiles
+     00005330  _g_tiles_027                       tiles
+     00005338  _g_tiles_028                       tiles
+     00005340  _g_tiles_029                       tiles
+     00005348  _g_tiles_030                       tiles
+     00005350  _g_tiles_031                       tiles
+     00005358  _g_tiles_032                       tiles
+     00005360  _g_tiles_033                       tiles
+     00005368  _g_tiles_034                       tiles
+     00005370  _g_tiles_035                       tiles
+     00005378  _g_tiles_036                       tiles
+     00005380  _g_tiles_037                       tiles
+     00005388  _g_tiles_038                       tiles
+     00005390  _g_tiles_039                       tiles
+     00005398  _g_tiles_040                       tiles
+     000053A0  _g_tiles_041                       tiles
+     000053A8  _g_tiles_042                       tiles
+     000053B0  _g_tiles_043                       tiles
+     000053B8  _g_tiles_044                       tiles
+ASxxxx Linker V03.00 + NoICE + sdld,  page 3.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+_CODE                               00004000    000032BE =       12990. bytes (REL,CON)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+     000053C0  _g_tiles_045                       tiles
+     000053C8  _g_tiles_046                       tiles
+     000053D0  _g_tiles_047                       tiles
+     000053D8  _g_tiles_048                       tiles
+     000053E0  _g_tiles_049                       tiles
+     000053E8  _g_tiles_050                       tiles
+     000053F0  _g_tiles_051                       tiles
+     000053F8  _g_tiles_052                       tiles
+     00005400  _g_tiles_053                       tiles
+     00005408  _g_tiles_054                       tiles
+     00005410  _g_tiles_055                       tiles
+     00005418  _g_tiles_056                       tiles
+     00005420  _g_tiles_057                       tiles
+     00005428  _g_tiles_058                       tiles
+     00005430  _g_tiles_059                       tiles
+     00005438  _g_tiles_060                       tiles
+     00005440  _g_tiles_061                       tiles
+     00005448  _g_tiles_062                       tiles
+     00005450  _g_tiles_063                       tiles
+     00005458  _g_tiles_064                       tiles
+     00005460  _g_tiles_065                       tiles
+     00005468  _g_tiles_066                       tiles
+     00005470  _g_tiles_067                       tiles
+     00005478  _g_tiles_068                       tiles
+     00005480  _g_tiles_069                       tiles
+     00005488  _g_tiles_070                       tiles
+     00005490  _g_tiles_071                       tiles
+     00005498  _g_tiles_072                       tiles
+     000054A0  _g_tiles_073                       tiles
+     000054A8  _g_tiles_074                       tiles
+     000054B0  _g_tiles_075                       tiles
+     000054B8  _g_tiles_076                       tiles
+     000054C0  _g_tiles_077                       tiles
+     000054C8  _g_tiles_078                       tiles
+     000054D0  _g_tiles_079                       tiles
+     000054D8  _g_tiles_080                       tiles
+     000054E0  _g_tiles_081                       tiles
+     000054E8  _g_tiles_082                       tiles
+     000054F0  _g_tiles_083                       tiles
+     000054F8  _g_tiles_084                       tiles
+     00005500  _g_tiles_085                       tiles
+     00005508  _g_tiles_086                       tiles
+     00005510  _g_tiles_087                       tiles
+     00005518  _g_tiles_088                       tiles
+     00005520  _g_tiles_089                       tiles
+     00005528  _g_tiles_090                       tiles
+     00005530  _g_tiles_091                       tiles
+     00005538  _g_tiles_092                       tiles
+     00005540  _g_tiles_093                       tiles
+     00005548  _g_tiles_094                       tiles
+     00005550  _g_tiles_095                       tiles
+ASxxxx Linker V03.00 + NoICE + sdld,  page 4.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+_CODE                               00004000    000032BE =       12990. bytes (REL,CON)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+     00005558  _g_tiles_096                       tiles
+     00005560  _g_tiles_097                       tiles
+     00005568  _g_tiles_098                       tiles
+     00005570  _g_tiles_099                       tiles
+     00005578  _g_tiles_100                       tiles
+     00005580  _g_tiles_101                       tiles
+     00005588  _g_tiles_102                       tiles
+     00005590  _g_tiles_103                       tiles
+     00005598  _g_tiles_104                       tiles
+     000055A0  _g_tiles_105                       tiles
+     000055A8  _g_tiles_106                       tiles
+     000055B0  _g_tiles_107                       tiles
+     000055B8  _g_tiles_108                       tiles
+     000055C0  _g_tiles_109                       tiles
+     000055C8  _g_tiles_110                       tiles
+     000055D0  _g_tiles_111                       tiles
+     000055D8  _g_tiles_112                       tiles
+     000055E0  _g_tiles_113                       tiles
+     000055E8  _g_tiles_114                       tiles
+     000055F0  _g_tiles_115                       tiles
+     000055F8  _g_tiles_116                       tiles
+     00005600  _g_tiles_117                       tiles
+     00005608  _g_tiles_118                       tiles
+     00005610  _g_tiles_119                       tiles
+     00005618  _sp_logo                           annoyed
+     0000601D  _sp_ball                           ball
+     0000602F  _sp_bat_right                      bat_right
+     0000603F  _sp_bat_mid                        bat_mid
+     0000604F  _sp_bat_left                       bat_left
+     0000605F  _g_palette                         g_palette
+     0000606F  _auto_initialize                   autoplay
+     00006075  _auto_update                       autoplay
+     000060D6  _background_initialize             background
+     000060FD  _background_restore_world_coords   background
+     00006165  _background_restore                background
+     000061F9  _balls_initialize                  balls
+     00006247  _balls_update                      balls
+     00006295  _balls_restore_background          balls
+     000062D9  _balls_draw                        balls
+     00006307  _balls_get_first_active            balls
+     0000633B  _center_ball                       balls
+     0000637E  _update_ball                       balls
+     000063C3  _move_ball_x                       balls
+     00006417  _move_ball_y                       balls
+     00006485  _check_bat_collision               balls
+     0000651C  _bat_initialize                    bat
+     00006531  _bat_update                        bat
+     00006573  _bat_restore_background            bat
+     0000658C  _bat_draw                          bat
+     000065E9  _blocks_initialize                 blocks
+     00006623  _blocks_draw                       blocks
+ASxxxx Linker V03.00 + NoICE + sdld,  page 5.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+_CODE                               00004000    000032BE =       12990. bytes (REL,CON)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+     00006624  _blocks_restore_background         blocks
+     00006625  _blocks_intersect_ball             blocks
+     0000680C  _map_tiles_to_meta                 blocks
+     000069D4  _plant_tile_meta                   blocks
+     00006A19  _dbg_displayNumber                 debug
+     00006A99  _game_initialize                   game
+     00006AB3  _game_draw                         game
+     00006AB6  _game_update                       game
+     00006AC6  _module_game_initialize            game
+     00006AD9  _initialise_level                  game
+     00006AEE  _level_definitions                 globals
+     00006AFA  _keys_initialize                   keys
+     00006AFD  _keys_resetAllKeys                 keys
+     00006B17  _keys_update                       keys
+     00006B8C  _level_initialize                  level
+     00006BAC  _level_draw                        level
+     00006BBE  _level_update                      level
+     00006BF1  _initializeCpc                     main
+     00006C0C  _main                              main
+     00006C26  _play_scene                        main
+     00006C7E  _menu_initialize                   menu
+     00006CD4  _fg_pens                           menu
+     00006D0B  _menu_draw                         menu
+     00006D46  _menu_update                       menu
+     00006D80  _module_menu_initialize            menu
+     00006D93  _menu_print_message                menu
+     00006DC2  _cpct_setPalette                   cpct_video
+     00006DD9  _cpct_isKeyPressed                 cpct_keyboard
+     00006DD9  cpct_isKeyPressed_asm              cpct_keyboard
+     00006DE5  _cpct_scanKeyboard_f               cpct_keyboard
+     00006DE5  cpct_scanKeyboard_f_asm            cpct_keyboard
+     00006E4F  _cpct_setPALColour                 cpct_video
+     00006E5B  _cpct_drawStringM0                 cpct_strings
+     00006E95  cpct_drawCharM0_inner_asm          cpct_strings
+     00006EF5  dc_2pxtableM0                      cpct_strings
+     00006EF9  _cpct_drawSprite                   cpct_sprites
+     00006F9E  _cpct_etm_drawTileBox2x4           cpct_easytilemaps
+     0000702D  _cpct_drawCharM0                   cpct_strings
+     00007050  _cpct_etm_setTileset2x4            cpct_easytilemaps
+     00007050  cpct_etm_setTileset2x4_asm         cpct_easytilemaps
+     00007054  _cpct_keyboardStatusBuffer         cpct_keyboard
+     0000705E  _cpct_etm_drawTileRow2x4           cpct_easytilemaps
+     00007065  cpct_etm_drawTileRow2x4_asm        cpct_easytilemaps
+     00007067  dtr_restore_ptileset               cpct_easytilemaps
+     0000707F  ___sdcc_call_hl                    
+     00007080  _cpct_etm_drawTilemap2x4_f         cpct_easytilemaps
+     000070AC  _cpct_isAnyKeyPressed              cpct_keyboard
+     000070AC  cpct_isAnyKeyPressed_asm           cpct_keyboard
+     000070B9  _cpct_waitVSYNC                    cpct_video
+     000070B9  cpct_waitVSYNC_asm                 cpct_video
+     000070C1  _cpct_setVideoMode                 cpct_video
+ASxxxx Linker V03.00 + NoICE + sdld,  page 6.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+_CODE                               00004000    000032BE =       12990. bytes (REL,CON)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+     000070CF  _cpct_isAnyKeyPressed_f            cpct_keyboard
+     000070CF  cpct_isAnyKeyPressed_f_asm         cpct_keyboard
+     000070EA  _cpct_memset                       cpct_memutils
+     000070F8  _cpct_disableFirmware              cpct_firmware
+     000070F8  _cpct_removeInterruptHandler       cpct_firmware
+     000070F8  cpct_disableFirmware_asm           cpct_firmware
+     000070F8  cpct_removeInterruptHandler_asm    cpct_firmware
+     00007108  _cpct_drawSolidBox                 cpct_sprites
+     000071AF  cpct_drawTileAligned2x4_f_asm      cpct_sprites
+     000071D0  __modschar                         
+     000071DD  __modsint                          
+     000071E9  _cpct_mode_rom_status              cpct_firmware
+     000071EA  _cpct_setDrawCharM0                cpct_strings
+     0000720F  _cpct_getScreenPtr                 cpct_video
+     00007225  __divsint                          
+     0000722E  __divschar                         
+     00007235  __div8                             
+     00007239  __div_signexte                     
+     0000723D  __div16                            
+     00007263  __get_remainder                    
+     0000726D  __divuint                          
+     00007275  __divuchar                         
+     0000727C  __divu8                            
+     0000727F  __divu16                           
+     000072AE  dc_mode0_ct                        cpct_strings
+ASxxxx Linker V03.00 + NoICE + sdld,  page 7.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+_DATA                               000072BE    0000030F =         783. bytes (REL,CON)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+     000072BE  _is_controling                     autoplay
+     000072BF  _pvmem                             background
+     000072C1  _balls                             balls
+     000072D6  _serving                           balls
+     000072D7  _p_block_v_mem                     blocks
+     000072D9  _min_x                             blocks
+     000072DA  _min_y                             blocks
+     000072DB  _max_x                             blocks
+     000072DC  _max_y                             blocks
+     000072DD  _block_meta                        blocks
+     000075B5  _scene_game                        game
+     000075BB  _current_state                     game
+     000075BC  _current_level_num                 game
+     000075BD  _lives_left                        game
+     000075BE  _current_level                     globals
+     000075C0  _key_left_is_pressed               keys
+     000075C1  _key_right_is_pressed              keys
+     000075C2  _key_serve_is_pressed              keys
+     000075C3  _key_auto_is_pressed               keys
+     000075C4  _key_any_is_pressed                keys
+     000075C5  _scene_menu                        menu
+     000075CB  _loop_counter                      menu
+     000075CC  _current_ink                       menu
+
+ASxxxx Linker V03.00 + NoICE + sdld,  page 8.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+_INITIALIZED                        000075CD    00000004 =           4. bytes (REL,CON)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+     000075CD  _batY                              bat
+     000075CE  _batX                              bat
+     000075CF  _oldBatX                           bat
+     000075D0  _batW                              bat
+
+ASxxxx Linker V03.00 + NoICE + sdld,  page 9.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+_INITIALIZER                        000075D1    00000004 =           4. bytes (REL,CON)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+ASxxxx Linker V03.00 + NoICE + sdld,  page 10.
+
+Files Linked                              [ module(s) ]
+
+obj/map/level-02-blocks.rel               [ level_02_blocks ]
+obj/map/level-02-background.rel           [ level_02_background ]
+obj/map/level-01-blocks.rel               [ level_01_blocks ]
+obj/map/level-01-background.rel           [ level_01_background ]
+obj/map/tiles.rel                         [ tiles ]
+obj/sprites/annoyed.rel                   [ annoyed ]
+obj/sprites/ball.rel                      [ ball ]
+obj/sprites/bat-right.rel                 [ bat_right ]
+obj/sprites/bat-mid.rel                   [ bat_mid ]
+obj/sprites/bat-left.rel                  [ bat_left ]
+obj/sprites/g_palette.rel                 [ g_palette ]
+obj/autoplay.rel                          [ autoplay ]
+obj/background.rel                        [ background ]
+obj/balls.rel                             [ balls ]
+obj/bat.rel                               [ bat ]
+obj/blocks.rel                            [ blocks ]
+obj/debug.rel                             [ debug ]
+obj/game.rel                              [ game ]
+obj/globals.rel                           [ globals ]
+obj/keys.rel                              [ keys ]
+obj/level.rel                             [ level ]
+obj/main.rel                              [ main ]
+obj/menu.rel                              [ menu ]
+
+
+Libraries Linked                          [ object file ]
+
+/home/davidb/git/cpctelera/cpctelera/cpctelera.lib
+                                          [ cpct_setPalette_cbindings.rel ]
+/home/davidb/git/cpctelera/cpctelera/cpctelera.lib
+                                          [ cpct_isKeyPressed.rel ]
+/home/davidb/git/cpctelera/cpctelera/cpctelera.lib
+                                          [ cpct_scanKeyboard_f.rel ]
+/home/davidb/git/cpctelera/cpctelera/cpctelera.lib
+                                          [ cpct_setPALColour_cbindings.rel ]
+/home/davidb/git/cpctelera/cpctelera/cpctelera.lib
+                                          [ cpct_drawStringM0_cbindings.rel ]
+/home/davidb/git/cpctelera/cpctelera/cpctelera.lib
+                                          [ cpct_drawCharM0_inner.rel ]
+/home/davidb/git/cpctelera/cpctelera/cpctelera.lib
+                                          [ cpct_drawSprite_cbindings.rel ]
+/home/davidb/git/cpctelera/cpctelera/cpctelera.lib
+                                          [ cpct_etm_drawTileBox2x4_cbinding ]
+/home/davidb/git/cpctelera/cpctelera/cpctelera.lib
+                                          [ cpct_drawCharM0_cbindings.rel ]
+/home/davidb/git/cpctelera/cpctelera/cpctelera.lib
+                                          [ cpct_etm_setTileset2x4.rel ]
+/home/davidb/git/cpctelera/cpctelera/cpctelera.lib
+                                          [ keyboard.rel ]
+/home/davidb/git/cpctelera/cpctelera/cpctelera.lib
+                                          [ cpct_etm_drawTileRow2x4.rel ]
+/home/davidb/git/cpctelera/cpctelera/tools/sdcc-3.6.8-r9946/bin/../share/sdcc/lib/z80/z80.lib
+                                          [ __sdcc_call_hl.rel ]
+/home/davidb/git/cpctelera/cpctelera/cpctelera.lib
+                                          [ cpct_etm_drawTilemap2x4_f_cbindi ]
+/home/davidb/git/cpctelera/cpctelera/cpctelera.lib
+                                          [ cpct_isAnyKeyPressed.rel ]
+/home/davidb/git/cpctelera/cpctelera/cpctelera.lib
+                                          [ cpct_waitVSYNC.rel ]
+/home/davidb/git/cpctelera/cpctelera/cpctelera.lib
+                                          [ cpct_setVideoMode_cbindings.rel ]
+/home/davidb/git/cpctelera/cpctelera/cpctelera.lib
+                                          [ cpct_isAnyKeyPressed_f.rel ]
+/home/davidb/git/cpctelera/cpctelera/cpctelera.lib
+                                          [ cpct_memset_cbinding.rel ]
+/home/davidb/git/cpctelera/cpctelera/cpctelera.lib
+                                          [ cpct_removeInterruptHandler.rel ]
+/home/davidb/git/cpctelera/cpctelera/cpctelera.lib
+                                          [ cpct_drawSolidBox_cbindings.rel ]
+/home/davidb/git/cpctelera/cpctelera/cpctelera.lib
+                                          [ cpct_drawTileAligned2x4_f_asmbin ]
+/home/davidb/git/cpctelera/cpctelera/tools/sdcc-3.6.8-r9946/bin/../share/sdcc/lib/z80/z80.lib
+                                          [ modsigned.rel ]
+/home/davidb/git/cpctelera/cpctelera/cpctelera.lib
+                                          [ cpc_mode_rom_status.rel ]
+/home/davidb/git/cpctelera/cpctelera/cpctelera.lib
+                                          [ cpct_setDrawCharM0_cbindings.rel ]
+/home/davidb/git/cpctelera/cpctelera/cpctelera.lib
+                                          [ cpct_getScreenPtr_cbindings.rel ]
+/home/davidb/git/cpctelera/cpctelera/tools/sdcc-3.6.8-r9946/bin/../share/sdcc/lib/z80/z80.lib
+                                          [ divsigned.rel ]
+/home/davidb/git/cpctelera/cpctelera/tools/sdcc-3.6.8-r9946/bin/../share/sdcc/lib/z80/z80.lib
+                                          [ divunsigned.rel ]
+/home/davidb/git/cpctelera/cpctelera/cpctelera.lib
+                                          [ cpct_dc_mode0_ct.rel ]
+
+ASxxxx Linker V03.00 + NoICE + sdld,  page 11.
+
+User Base Address Definitions
+
+_CODE = 0x4000
+_DATA = 0x0000
+
+

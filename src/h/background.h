@@ -12,4 +12,7 @@ extern void background_initialize();
 
 extern void background_restore(u8 x, u8 y, u8 width, u8 height);
 
+extern void background_restore_world_coords(u8 x, u8 y, u8 width, u8 height);
+
+
 #endif
