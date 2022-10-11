@@ -9,6 +9,7 @@
 ; Public variables in this module
 ;--------------------------------------------------------
 	.globl _dbg_displayNumber
+	.globl _cpct_getScreenPtr
 	.globl _cpct_drawCharM0
 	.globl _cpct_setDrawCharM0
 ;--------------------------------------------------------
@@ -42,7 +43,7 @@
 ; code
 ;--------------------------------------------------------
 	.area _CODE
-;src/debug.c:5: void dbg_displayNumber(int num)
+;src/debug.c:5: void dbg_displayNumber(u8 char_row, int num)
 ;	---------------------------------
 ; Function dbg_displayNumber
 ; ---------------------------------
@@ -50,19 +51,39 @@ _dbg_displayNumber::
 	push	ix
 	ld	ix,#0
 	add	ix,sp
-;src/debug.c:8: cpct_setDrawCharM0(5, 0);
+	push	af
+;src/debug.c:8: u8 *pv = cpct_getScreenPtr(CPCT_VMEM_START,74, char_row * 10);
+	ld	a, 4 (ix)
+	ld	c, a
+	add	a, a
+	add	a, a
+	add	a, c
+	add	a, a
+	ld	b, a
+	push	bc
+	inc	sp
+	ld	a, #0x4a
+	push	af
+	inc	sp
+	ld	hl, #0xc000
+	push	hl
+	call	_cpct_getScreenPtr
+	inc	sp
+	inc	sp
+	push	hl
+;src/debug.c:9: cpct_setDrawCharM0(5, 0);
 	ld	hl, #0x0005
 	push	hl
 	call	_cpct_setDrawCharM0
-;src/debug.c:10: for (i = 0; i < 5; i++)
+;src/debug.c:11: for (i = 0; i < 5; i++)
 	ld	bc, #0x0000
 00102$:
-;src/debug.c:12: u8 digit = '0' + (num % 10);
+;src/debug.c:13: u8 digit = '0' + (num % 10);
 	push	bc
 	ld	hl, #0x000a
 	push	hl
-	ld	l,4 (ix)
-	ld	h,5 (ix)
+	ld	l,5 (ix)
+	ld	h,6 (ix)
 	push	hl
 	call	__modsint
 	pop	af
@@ -71,16 +92,16 @@ _dbg_displayNumber::
 	ld	a, l
 	add	a, #0x30
 	ld	e, a
-;src/debug.c:13: cpct_drawCharM0((void *)(LASTDIGIT_VMEM - 4 * i), digit);
+;src/debug.c:14: cpct_drawCharM0((void *)(pv - 4 * i), digit);
 	ld	d, #0x00
 	ld	l, c
 	ld	h, b
 	add	hl, hl
 	add	hl, hl
-	ld	a, #0x4b
+	ld	a, -2 (ix)
 	sub	a, l
 	ld	l, a
-	ld	a, #0xc0
+	ld	a, -1 (ix)
 	sbc	a, h
 	ld	h, a
 	push	bc
@@ -89,16 +110,16 @@ _dbg_displayNumber::
 	call	_cpct_drawCharM0
 	ld	hl, #0x000a
 	push	hl
-	ld	l,4 (ix)
-	ld	h,5 (ix)
+	ld	l,5 (ix)
+	ld	h,6 (ix)
 	push	hl
 	call	__divsint
 	pop	af
 	pop	af
 	pop	bc
-	ld	4 (ix), l
-	ld	5 (ix), h
-;src/debug.c:10: for (i = 0; i < 5; i++)
+	ld	5 (ix), l
+	ld	6 (ix), h
+;src/debug.c:11: for (i = 0; i < 5; i++)
 	inc	bc
 	ld	a, c
 	sub	a, #0x05
@@ -108,6 +129,7 @@ _dbg_displayNumber::
 	rra
 	sbc	a, #0x80
 	jr	C,00102$
+	ld	sp, ix
 	pop	ix
 	ret
 	.area _CODE

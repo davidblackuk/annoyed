@@ -78,8 +78,10 @@ typedef struct
 
 typedef struct
 {
-    void *background_tilemap;
-    void *blocks_tilemap;
+    u8 *background_tilemap;
+    u8 *blocks_tilemap;
+    u8 steel_score;
+    u8 steel_hits_to_destroy;
 
 } Level;
 

@@ -14,6 +14,9 @@
         "cpctelera.h": "c",
         "allmacros.h": "c",
         "globals.h": "c",
-        "level.h": "c"
+        "level.h": "c",
+        "blocks.h": "c",
+        "autoplay.h": "c",
+        "level-01-blocks.h": "c"
     }
 }

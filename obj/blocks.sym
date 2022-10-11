@@ -7,22 +7,31 @@ Symbol Table
     .__.ABS.                                                    =  0000 G
     .__.CPU.                                                    =  0000 L
     .__.H$L.                                                    =  0000 L
-  0 _bricks_handle_ball_intersection                               0023 GR
-  0 _bricks_initialize                                             0000 GR
-  0 _bricks_restore                                                0024 GR
+  1 _block_meta                                                    0006 GR
+  0 _blocks_draw                                                   003A GR
+  0 _blocks_initialize                                             0000 GR
+  0 _blocks_intersect_ball                                         003C GR
+  0 _blocks_restore_background                                     003B GR
+    _cpct_drawSolidBox                                             **** GX
     _cpct_etm_drawTilemap2x4_f                                     **** GX
     _cpct_getScreenPtr                                             **** GX
     _current_level                                                 **** GX
+    _dbg_displayNumber                                             **** GX
+  0 _map_tiles_to_meta                                             0223 GR
+  1 _max_x                                                         0004 GR
+  1 _max_y                                                         0005 GR
+  1 _min_x                                                         0002 GR
+  1 _min_y                                                         0003 GR
   1 _p_block_v_mem                                                 0000 GR
-
+  0 _plant_tile_meta                                               03EB GR
 
 ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 2.
 Hexadecimal [16-Bits]
 
 Area Table
 
-   0 _CODE                                      size   25   flags    0
-   1 _DATA                                      size    2   flags    0
+   0 _CODE                                      size  430   flags    0
+   1 _DATA                                      size  2DE   flags    0
    2 _INITIALIZED                               size    0   flags    0
    3 _DABS                                      size    0   flags    8
    4 _HOME                                      size    0   flags    0

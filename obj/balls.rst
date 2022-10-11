@@ -9,656 +9,669 @@
                               9 ; Public variables in this module
                              10 ;--------------------------------------------------------
                              11 	.globl _background_restore
-                             12 	.globl _cpct_getScreenPtr
-                             13 	.globl _cpct_drawSprite
-                             14 	.globl _serving
-                             15 	.globl _balls
-                             16 	.globl _balls_initialize
-                             17 	.globl _balls_update
-                             18 	.globl _balls_restore_background
-                             19 	.globl _balls_draw
-                             20 	.globl _balls_get_first_active
-                             21 	.globl _center_ball
-                             22 	.globl _update_ball
-                             23 	.globl _move_ball_x
-                             24 	.globl _move_ball_y
-                             25 	.globl _check_bat_collision
-                             26 ;--------------------------------------------------------
-                             27 ; special function registers
-                             28 ;--------------------------------------------------------
+                             12 	.globl _blocks_intersect_ball
+                             13 	.globl _cpct_getScreenPtr
+                             14 	.globl _cpct_drawSprite
+                             15 	.globl _serving
+                             16 	.globl _balls
+                             17 	.globl _balls_initialize
+                             18 	.globl _balls_update
+                             19 	.globl _balls_restore_background
+                             20 	.globl _balls_draw
+                             21 	.globl _balls_get_first_active
+                             22 	.globl _center_ball
+                             23 	.globl _update_ball
+                             24 	.globl _move_ball_x
+                             25 	.globl _move_ball_y
+                             26 	.globl _check_bat_collision
+                             27 ;--------------------------------------------------------
+                             28 ; special function registers
                              29 ;--------------------------------------------------------
-                             30 ; ram data
-                             31 ;--------------------------------------------------------
-                             32 	.area _DATA
-   6D71                      33 _balls::
-   6D71                      34 	.ds 21
-   6D86                      35 _serving::
-   6D86                      36 	.ds 1
-                             37 ;--------------------------------------------------------
-                             38 ; ram data
-                             39 ;--------------------------------------------------------
-                             40 	.area _INITIALIZED
-                             41 ;--------------------------------------------------------
-                             42 ; absolute external ram data
-                             43 ;--------------------------------------------------------
-                             44 	.area _DABS (ABS)
-                             45 ;--------------------------------------------------------
-                             46 ; global & static initialisations
-                             47 ;--------------------------------------------------------
-                             48 	.area _HOME
-                             49 	.area _GSINIT
-                             50 	.area _GSFINAL
-                             51 	.area _GSINIT
-                             52 ;--------------------------------------------------------
-                             53 ; Home
-                             54 ;--------------------------------------------------------
-                             55 	.area _HOME
+                             30 ;--------------------------------------------------------
+                             31 ; ram data
+                             32 ;--------------------------------------------------------
+                             33 	.area _DATA
+   7259                      34 _balls::
+   7259                      35 	.ds 21
+   726E                      36 _serving::
+   726E                      37 	.ds 1
+                             38 ;--------------------------------------------------------
+                             39 ; ram data
+                             40 ;--------------------------------------------------------
+                             41 	.area _INITIALIZED
+                             42 ;--------------------------------------------------------
+                             43 ; absolute external ram data
+                             44 ;--------------------------------------------------------
+                             45 	.area _DABS (ABS)
+                             46 ;--------------------------------------------------------
+                             47 ; global & static initialisations
+                             48 ;--------------------------------------------------------
+                             49 	.area _HOME
+                             50 	.area _GSINIT
+                             51 	.area _GSFINAL
+                             52 	.area _GSINIT
+                             53 ;--------------------------------------------------------
+                             54 ; Home
+                             55 ;--------------------------------------------------------
                              56 	.area _HOME
-                             57 ;--------------------------------------------------------
-                             58 ; code
-                             59 ;--------------------------------------------------------
-                             60 	.area _CODE
-                             61 ;src/balls.c:15: void balls_initialize()
-                             62 ;	---------------------------------
-                             63 ; Function balls_initialize
-                             64 ; ---------------------------------
-   618F                      65 _balls_initialize::
-                             66 ;src/balls.c:18: serving = 1;
-   618F 21 86 6D      [10]   67 	ld	hl,#_serving + 0
-   6192 36 01         [10]   68 	ld	(hl), #0x01
-                             69 ;src/balls.c:21: for (u8 i = 0; i < MAX_BALLS; i++)
-   6194 0E 00         [ 7]   70 	ld	c, #0x00
-   6196                      71 00103$:
-   6196 79            [ 4]   72 	ld	a, c
-   6197 D6 03         [ 7]   73 	sub	a, #0x03
-   6199 30 37         [12]   74 	jr	NC,00101$
-                             75 ;src/balls.c:23: balls[i].active = 0;
-   619B 06 00         [ 7]   76 	ld	b,#0x00
-   619D 69            [ 4]   77 	ld	l, c
-   619E 60            [ 4]   78 	ld	h, b
-   619F 29            [11]   79 	add	hl, hl
-   61A0 09            [11]   80 	add	hl, bc
-   61A1 29            [11]   81 	add	hl, hl
-   61A2 09            [11]   82 	add	hl, bc
-   61A3 EB            [ 4]   83 	ex	de,hl
-   61A4 21 71 6D      [10]   84 	ld	hl, #_balls
-   61A7 19            [11]   85 	add	hl,de
-   61A8 EB            [ 4]   86 	ex	de,hl
-   61A9 AF            [ 4]   87 	xor	a, a
-   61AA 12            [ 7]   88 	ld	(de), a
-                             89 ;src/balls.c:24: balls[i].x = TILE_MAP_SCREEN_BYTE_OFFSET_X;
-   61AB 6B            [ 4]   90 	ld	l, e
-   61AC 62            [ 4]   91 	ld	h, d
-   61AD 23            [ 6]   92 	inc	hl
-   61AE 36 08         [10]   93 	ld	(hl), #0x08
-                             94 ;src/balls.c:25: balls[i].y = TILE_MAP_SCREEN_PIXEL_OFFSET_Y;
-   61B0 6B            [ 4]   95 	ld	l, e
-   61B1 62            [ 4]   96 	ld	h, d
-   61B2 23            [ 6]   97 	inc	hl
-   61B3 23            [ 6]   98 	inc	hl
-   61B4 36 00         [10]   99 	ld	(hl), #0x00
-                            100 ;src/balls.c:26: balls[i].prev_x = TILE_MAP_SCREEN_BYTE_OFFSET_X;
-   61B6 6B            [ 4]  101 	ld	l, e
-   61B7 62            [ 4]  102 	ld	h, d
-   61B8 23            [ 6]  103 	inc	hl
-   61B9 23            [ 6]  104 	inc	hl
-   61BA 23            [ 6]  105 	inc	hl
-   61BB 36 08         [10]  106 	ld	(hl), #0x08
-                            107 ;src/balls.c:27: balls[i].prev_y = TILE_MAP_SCREEN_PIXEL_OFFSET_Y;
-   61BD 21 04 00      [10]  108 	ld	hl, #0x0004
-   61C0 19            [11]  109 	add	hl, de
-   61C1 36 00         [10]  110 	ld	(hl), #0x00
-                            111 ;src/balls.c:28: balls[i].dx = 1;
-   61C3 21 05 00      [10]  112 	ld	hl, #0x0005
-   61C6 19            [11]  113 	add	hl, de
-   61C7 36 01         [10]  114 	ld	(hl), #0x01
-                            115 ;src/balls.c:29: balls[i].dy = 0;
-   61C9 21 06 00      [10]  116 	ld	hl, #0x0006
-   61CC 19            [11]  117 	add	hl, de
-   61CD 36 00         [10]  118 	ld	(hl), #0x00
-                            119 ;src/balls.c:21: for (u8 i = 0; i < MAX_BALLS; i++)
-   61CF 0C            [ 4]  120 	inc	c
-   61D0 18 C4         [12]  121 	jr	00103$
-   61D2                     122 00101$:
-                            123 ;src/balls.c:31: balls[0].active = 1;
-   61D2 21 71 6D      [10]  124 	ld	hl, #_balls
-   61D5 36 01         [10]  125 	ld	(hl), #0x01
-                            126 ;src/balls.c:34: center_ball(balls);
-   61D7 E5            [11]  127 	push	hl
-   61D8 CD D1 62      [17]  128 	call	_center_ball
-   61DB F1            [10]  129 	pop	af
-   61DC C9            [10]  130 	ret
-                            131 ;src/balls.c:37: void balls_update()
-                            132 ;	---------------------------------
-                            133 ; Function balls_update
-                            134 ; ---------------------------------
-   61DD                     135 _balls_update::
-                            136 ;src/balls.c:39: Ball *ball = balls;
-   61DD 01 71 6D      [10]  137 	ld	bc, #_balls+0
-                            138 ;src/balls.c:40: if (serving)
-   61E0 3A 86 6D      [13]  139 	ld	a,(#_serving + 0)
-   61E3 B7            [ 4]  140 	or	a, a
-   61E4 28 2D         [12]  141 	jr	Z,00115$
-                            142 ;src/balls.c:42: center_ball(ball);
-   61E6 C5            [11]  143 	push	bc
-   61E7 C5            [11]  144 	push	bc
-   61E8 CD D1 62      [17]  145 	call	_center_ball
-   61EB F1            [10]  146 	pop	af
-   61EC C1            [10]  147 	pop	bc
-                            148 ;src/balls.c:43: if (key_serve_is_pressed)
-   61ED 3A 96 6D      [13]  149 	ld	a,(#_key_serve_is_pressed + 0)
-   61F0 B7            [ 4]  150 	or	a, a
-   61F1 C8            [11]  151 	ret	Z
-                            152 ;src/balls.c:45: serving = 0;
-   61F2 21 86 6D      [10]  153 	ld	hl,#_serving + 0
-   61F5 36 00         [10]  154 	ld	(hl), #0x00
-                            155 ;src/balls.c:46: ball->dx = 1; // 45 degrees right
-   61F7 21 76 6D      [10]  156 	ld	hl, #(_balls + 0x0005)
-   61FA 36 01         [10]  157 	ld	(hl), #0x01
-                            158 ;src/balls.c:47: ball->dy = -2;
-   61FC 21 77 6D      [10]  159 	ld	hl, #(_balls + 0x0006)
-   61FF 36 FE         [10]  160 	ld	(hl), #0xfe
-                            161 ;src/balls.c:48: ball->prev_x = ball->x;
-   6201 69            [ 4]  162 	ld	l, c
-   6202 60            [ 4]  163 	ld	h, b
-   6203 23            [ 6]  164 	inc	hl
-   6204 5E            [ 7]  165 	ld	e, (hl)
-   6205 21 74 6D      [10]  166 	ld	hl, #(_balls + 0x0003)
-   6208 73            [ 7]  167 	ld	(hl), e
-                            168 ;src/balls.c:49: ball->prev_y = ball->y;
-   6209 69            [ 4]  169 	ld	l, c
-   620A 60            [ 4]  170 	ld	h, b
-   620B 23            [ 6]  171 	inc	hl
-   620C 23            [ 6]  172 	inc	hl
-   620D 4E            [ 7]  173 	ld	c, (hl)
-   620E 21 75 6D      [10]  174 	ld	hl, #(_balls + 0x0004)
-   6211 71            [ 7]  175 	ld	(hl), c
-   6212 C9            [10]  176 	ret
-                            177 ;src/balls.c:54: for (u8 i = 0; i < MAX_BALLS; i++)
-   6213                     178 00115$:
-   6213 1E 00         [ 7]  179 	ld	e, #0x00
-   6215                     180 00108$:
-   6215 7B            [ 4]  181 	ld	a, e
-   6216 D6 03         [ 7]  182 	sub	a, #0x03
-   6218 D0            [11]  183 	ret	NC
-                            184 ;src/balls.c:56: update_ball(ball);
-   6219 C5            [11]  185 	push	bc
-   621A D5            [11]  186 	push	de
-   621B C5            [11]  187 	push	bc
-   621C CD 14 63      [17]  188 	call	_update_ball
-   621F F1            [10]  189 	pop	af
-   6220 D1            [10]  190 	pop	de
-   6221 C1            [10]  191 	pop	bc
-                            192 ;src/balls.c:57: ball++;
-   6222 21 07 00      [10]  193 	ld	hl, #0x0007
-   6225 09            [11]  194 	add	hl,bc
-   6226 4D            [ 4]  195 	ld	c, l
-   6227 44            [ 4]  196 	ld	b, h
-                            197 ;src/balls.c:54: for (u8 i = 0; i < MAX_BALLS; i++)
-   6228 1C            [ 4]  198 	inc	e
-   6229 18 EA         [12]  199 	jr	00108$
-                            200 ;src/balls.c:62: void balls_restore_background()
-                            201 ;	---------------------------------
-                            202 ; Function balls_restore_background
-                            203 ; ---------------------------------
-   622B                     204 _balls_restore_background::
-   622B DD E5         [15]  205 	push	ix
-   622D DD 21 00 00   [14]  206 	ld	ix,#0
-   6231 DD 39         [15]  207 	add	ix,sp
-   6233 3B            [ 6]  208 	dec	sp
-                            209 ;src/balls.c:64: Ball *ball = balls;
-   6234 01 71 6D      [10]  210 	ld	bc, #_balls
-                            211 ;src/balls.c:65: for (u8 i = 0; i < MAX_BALLS; i++)
-   6237 DD 36 FF 00   [19]  212 	ld	-1 (ix), #0x00
-   623B                     213 00105$:
-   623B DD 7E FF      [19]  214 	ld	a, -1 (ix)
-   623E D6 03         [ 7]  215 	sub	a, #0x03
-   6240 30 29         [12]  216 	jr	NC,00107$
-                            217 ;src/balls.c:67: if (ball->active)
-   6242 0A            [ 7]  218 	ld	a, (bc)
-   6243 B7            [ 4]  219 	or	a, a
-   6244 28 1A         [12]  220 	jr	Z,00102$
-                            221 ;src/balls.c:69: background_restore(ball->prev_x, balls->prev_y, SP_BALL_W, SP_BALL_H);
-   6246 21 75 6D      [10]  222 	ld	hl, #_balls + 4
-   6249 5E            [ 7]  223 	ld	e, (hl)
-   624A 69            [ 4]  224 	ld	l, c
-   624B 60            [ 4]  225 	ld	h, b
-   624C 23            [ 6]  226 	inc	hl
-   624D 23            [ 6]  227 	inc	hl
-   624E 23            [ 6]  228 	inc	hl
-   624F 56            [ 7]  229 	ld	d, (hl)
-   6250 C5            [11]  230 	push	bc
-   6251 21 03 06      [10]  231 	ld	hl, #0x0603
-   6254 E5            [11]  232 	push	hl
-   6255 7B            [ 4]  233 	ld	a, e
-   6256 F5            [11]  234 	push	af
-   6257 33            [ 6]  235 	inc	sp
-   6258 D5            [11]  236 	push	de
-   6259 33            [ 6]  237 	inc	sp
-   625A CD FD 60      [17]  238 	call	_background_restore
-   625D F1            [10]  239 	pop	af
-   625E F1            [10]  240 	pop	af
-   625F C1            [10]  241 	pop	bc
-   6260                     242 00102$:
-                            243 ;src/balls.c:71: ball++;
-   6260 21 07 00      [10]  244 	ld	hl, #0x0007
-   6263 09            [11]  245 	add	hl,bc
-   6264 4D            [ 4]  246 	ld	c, l
-   6265 44            [ 4]  247 	ld	b, h
-                            248 ;src/balls.c:65: for (u8 i = 0; i < MAX_BALLS; i++)
-   6266 DD 34 FF      [23]  249 	inc	-1 (ix)
-   6269 18 D0         [12]  250 	jr	00105$
-   626B                     251 00107$:
-   626B 33            [ 6]  252 	inc	sp
-   626C DD E1         [14]  253 	pop	ix
-   626E C9            [10]  254 	ret
-                            255 ;src/balls.c:75: void balls_draw()
-                            256 ;	---------------------------------
-                            257 ; Function balls_draw
-                            258 ; ---------------------------------
-   626F                     259 _balls_draw::
-                            260 ;src/balls.c:79: for (u8 i = 0; i < MAX_BALLS; i++)
-   626F 0E 00         [ 7]  261 	ld	c, #0x00
-   6271                     262 00105$:
-   6271 79            [ 4]  263 	ld	a, c
-   6272 D6 03         [ 7]  264 	sub	a, #0x03
-   6274 D0            [11]  265 	ret	NC
-                            266 ;src/balls.c:81: if (balls->active)
-   6275 3A 71 6D      [13]  267 	ld	a, (#_balls + 0)
-   6278 B7            [ 4]  268 	or	a, a
-   6279 28 1F         [12]  269 	jr	Z,00106$
-                            270 ;src/balls.c:83: svmem = cpct_getScreenPtr(CPCT_VMEM_START, balls->x, balls->y);
-   627B 21 73 6D      [10]  271 	ld	hl, #_balls + 2
-   627E 46            [ 7]  272 	ld	b, (hl)
-   627F 21 72 6D      [10]  273 	ld	hl, #_balls + 1
-   6282 56            [ 7]  274 	ld	d, (hl)
-   6283 C5            [11]  275 	push	bc
-   6284 4A            [ 4]  276 	ld	c, d
-   6285 C5            [11]  277 	push	bc
-   6286 21 00 C0      [10]  278 	ld	hl, #0xc000
-   6289 E5            [11]  279 	push	hl
-   628A CD BF 6C      [17]  280 	call	_cpct_getScreenPtr
-   628D 11 03 06      [10]  281 	ld	de, #0x0603
-   6290 D5            [11]  282 	push	de
-   6291 E5            [11]  283 	push	hl
-   6292 21 1D 60      [10]  284 	ld	hl, #_sp_ball
-   6295 E5            [11]  285 	push	hl
-   6296 CD 50 6A      [17]  286 	call	_cpct_drawSprite
-   6299 C1            [10]  287 	pop	bc
-   629A                     288 00106$:
-                            289 ;src/balls.c:79: for (u8 i = 0; i < MAX_BALLS; i++)
-   629A 0C            [ 4]  290 	inc	c
-   629B 18 D4         [12]  291 	jr	00105$
-                            292 ;src/balls.c:89: Ball *balls_get_first_active()
-                            293 ;	---------------------------------
-                            294 ; Function balls_get_first_active
-                            295 ; ---------------------------------
-   629D                     296 _balls_get_first_active::
-   629D DD E5         [15]  297 	push	ix
-   629F DD 21 00 00   [14]  298 	ld	ix,#0
-   62A3 DD 39         [15]  299 	add	ix,sp
-   62A5 F5            [11]  300 	push	af
-                            301 ;src/balls.c:91: Ball *ball = balls;
-   62A6 DD 36 FE 71   [19]  302 	ld	-2 (ix), #<(_balls)
-   62AA DD 36 FF 6D   [19]  303 	ld	-1 (ix), #>(_balls)
-                            304 ;src/balls.c:92: for (u8 i = 0; i < MAX_BALLS; i++)
-   62AE E1            [10]  305 	pop	hl
-   62AF E5            [11]  306 	push	hl
-   62B0 0E 00         [ 7]  307 	ld	c, #0x00
-   62B2                     308 00105$:
-   62B2 79            [ 4]  309 	ld	a, c
-   62B3 D6 03         [ 7]  310 	sub	a, #0x03
-   62B5 30 12         [12]  311 	jr	NC,00103$
-                            312 ;src/balls.c:94: if (ball->active)
-   62B7 7E            [ 7]  313 	ld	a, (hl)
-   62B8 B7            [ 4]  314 	or	a, a
-   62B9 28 04         [12]  315 	jr	Z,00102$
-                            316 ;src/balls.c:96: return ball;
-   62BB E1            [10]  317 	pop	hl
-   62BC E5            [11]  318 	push	hl
-   62BD 18 0D         [12]  319 	jr	00107$
-   62BF                     320 00102$:
-                            321 ;src/balls.c:98: ball++;
-   62BF 11 07 00      [10]  322 	ld	de, #0x0007
-   62C2 19            [11]  323 	add	hl, de
-   62C3 33            [ 6]  324 	inc	sp
-   62C4 33            [ 6]  325 	inc	sp
-   62C5 E5            [11]  326 	push	hl
-                            327 ;src/balls.c:92: for (u8 i = 0; i < MAX_BALLS; i++)
-   62C6 0C            [ 4]  328 	inc	c
-   62C7 18 E9         [12]  329 	jr	00105$
-   62C9                     330 00103$:
-                            331 ;src/balls.c:100: return NULL;
-   62C9 21 00 00      [10]  332 	ld	hl, #0x0000
-   62CC                     333 00107$:
-   62CC DD F9         [10]  334 	ld	sp, ix
-   62CE DD E1         [14]  335 	pop	ix
-   62D0 C9            [10]  336 	ret
-                            337 ;src/balls.c:106: void center_ball(Ball *ball)
-                            338 ;	---------------------------------
-                            339 ; Function center_ball
-                            340 ; ---------------------------------
-   62D1                     341 _center_ball::
-   62D1 DD E5         [15]  342 	push	ix
-   62D3 DD 21 00 00   [14]  343 	ld	ix,#0
-   62D7 DD 39         [15]  344 	add	ix,sp
-                            345 ;src/balls.c:108: ball->prev_x = ball->x;
-   62D9 DD 4E 04      [19]  346 	ld	c,4 (ix)
-   62DC DD 46 05      [19]  347 	ld	b,5 (ix)
-   62DF C5            [11]  348 	push	bc
-   62E0 FD E1         [14]  349 	pop	iy
-   62E2 FD 23         [10]  350 	inc	iy
+                             57 	.area _HOME
+                             58 ;--------------------------------------------------------
+                             59 ; code
+                             60 ;--------------------------------------------------------
+                             61 	.area _CODE
+                             62 ;src/balls.c:16: void balls_initialize()
+                             63 ;	---------------------------------
+                             64 ; Function balls_initialize
+                             65 ; ---------------------------------
+   6191                      66 _balls_initialize::
+                             67 ;src/balls.c:19: serving = 1;
+   6191 21 6E 72      [10]   68 	ld	hl,#_serving + 0
+   6194 36 01         [10]   69 	ld	(hl), #0x01
+                             70 ;src/balls.c:22: for (u8 i = 0; i < MAX_BALLS; i++)
+   6196 0E 00         [ 7]   71 	ld	c, #0x00
+   6198                      72 00103$:
+   6198 79            [ 4]   73 	ld	a, c
+   6199 D6 03         [ 7]   74 	sub	a, #0x03
+   619B 30 37         [12]   75 	jr	NC,00101$
+                             76 ;src/balls.c:24: balls[i].active = 0;
+   619D 06 00         [ 7]   77 	ld	b,#0x00
+   619F 69            [ 4]   78 	ld	l, c
+   61A0 60            [ 4]   79 	ld	h, b
+   61A1 29            [11]   80 	add	hl, hl
+   61A2 09            [11]   81 	add	hl, bc
+   61A3 29            [11]   82 	add	hl, hl
+   61A4 09            [11]   83 	add	hl, bc
+   61A5 EB            [ 4]   84 	ex	de,hl
+   61A6 21 59 72      [10]   85 	ld	hl, #_balls
+   61A9 19            [11]   86 	add	hl,de
+   61AA EB            [ 4]   87 	ex	de,hl
+   61AB AF            [ 4]   88 	xor	a, a
+   61AC 12            [ 7]   89 	ld	(de), a
+                             90 ;src/balls.c:25: balls[i].x = TILE_MAP_SCREEN_BYTE_OFFSET_X;
+   61AD 6B            [ 4]   91 	ld	l, e
+   61AE 62            [ 4]   92 	ld	h, d
+   61AF 23            [ 6]   93 	inc	hl
+   61B0 36 08         [10]   94 	ld	(hl), #0x08
+                             95 ;src/balls.c:26: balls[i].y = TILE_MAP_SCREEN_PIXEL_OFFSET_Y;
+   61B2 6B            [ 4]   96 	ld	l, e
+   61B3 62            [ 4]   97 	ld	h, d
+   61B4 23            [ 6]   98 	inc	hl
+   61B5 23            [ 6]   99 	inc	hl
+   61B6 36 00         [10]  100 	ld	(hl), #0x00
+                            101 ;src/balls.c:27: balls[i].prev_x = TILE_MAP_SCREEN_BYTE_OFFSET_X;
+   61B8 6B            [ 4]  102 	ld	l, e
+   61B9 62            [ 4]  103 	ld	h, d
+   61BA 23            [ 6]  104 	inc	hl
+   61BB 23            [ 6]  105 	inc	hl
+   61BC 23            [ 6]  106 	inc	hl
+   61BD 36 08         [10]  107 	ld	(hl), #0x08
+                            108 ;src/balls.c:28: balls[i].prev_y = TILE_MAP_SCREEN_PIXEL_OFFSET_Y;
+   61BF 21 04 00      [10]  109 	ld	hl, #0x0004
+   61C2 19            [11]  110 	add	hl, de
+   61C3 36 00         [10]  111 	ld	(hl), #0x00
+                            112 ;src/balls.c:29: balls[i].dx = 1;
+   61C5 21 05 00      [10]  113 	ld	hl, #0x0005
+   61C8 19            [11]  114 	add	hl, de
+   61C9 36 01         [10]  115 	ld	(hl), #0x01
+                            116 ;src/balls.c:30: balls[i].dy = 0;
+   61CB 21 06 00      [10]  117 	ld	hl, #0x0006
+   61CE 19            [11]  118 	add	hl, de
+   61CF 36 00         [10]  119 	ld	(hl), #0x00
+                            120 ;src/balls.c:22: for (u8 i = 0; i < MAX_BALLS; i++)
+   61D1 0C            [ 4]  121 	inc	c
+   61D2 18 C4         [12]  122 	jr	00103$
+   61D4                     123 00101$:
+                            124 ;src/balls.c:32: balls[0].active = 1;
+   61D4 21 59 72      [10]  125 	ld	hl, #_balls
+   61D7 36 01         [10]  126 	ld	(hl), #0x01
+                            127 ;src/balls.c:35: center_ball(balls);
+   61D9 E5            [11]  128 	push	hl
+   61DA CD D3 62      [17]  129 	call	_center_ball
+   61DD F1            [10]  130 	pop	af
+   61DE C9            [10]  131 	ret
+                            132 ;src/balls.c:38: void balls_update()
+                            133 ;	---------------------------------
+                            134 ; Function balls_update
+                            135 ; ---------------------------------
+   61DF                     136 _balls_update::
+                            137 ;src/balls.c:40: Ball *ball = balls;
+   61DF 01 59 72      [10]  138 	ld	bc, #_balls+0
+                            139 ;src/balls.c:41: if (serving)
+   61E2 3A 6E 72      [13]  140 	ld	a,(#_serving + 0)
+   61E5 B7            [ 4]  141 	or	a, a
+   61E6 28 2D         [12]  142 	jr	Z,00115$
+                            143 ;src/balls.c:43: center_ball(ball);
+   61E8 C5            [11]  144 	push	bc
+   61E9 C5            [11]  145 	push	bc
+   61EA CD D3 62      [17]  146 	call	_center_ball
+   61ED F1            [10]  147 	pop	af
+   61EE C1            [10]  148 	pop	bc
+                            149 ;src/balls.c:44: if (key_serve_is_pressed)
+   61EF 3A 5A 75      [13]  150 	ld	a,(#_key_serve_is_pressed + 0)
+   61F2 B7            [ 4]  151 	or	a, a
+   61F3 C8            [11]  152 	ret	Z
+                            153 ;src/balls.c:46: serving = 0;
+   61F4 21 6E 72      [10]  154 	ld	hl,#_serving + 0
+   61F7 36 00         [10]  155 	ld	(hl), #0x00
+                            156 ;src/balls.c:47: ball->dx = 1; // 45 degrees right
+   61F9 21 5E 72      [10]  157 	ld	hl, #(_balls + 0x0005)
+   61FC 36 01         [10]  158 	ld	(hl), #0x01
+                            159 ;src/balls.c:48: ball->dy = -2;
+   61FE 21 5F 72      [10]  160 	ld	hl, #(_balls + 0x0006)
+   6201 36 FE         [10]  161 	ld	(hl), #0xfe
+                            162 ;src/balls.c:49: ball->prev_x = ball->x;
+   6203 69            [ 4]  163 	ld	l, c
+   6204 60            [ 4]  164 	ld	h, b
+   6205 23            [ 6]  165 	inc	hl
+   6206 5E            [ 7]  166 	ld	e, (hl)
+   6207 21 5C 72      [10]  167 	ld	hl, #(_balls + 0x0003)
+   620A 73            [ 7]  168 	ld	(hl), e
+                            169 ;src/balls.c:50: ball->prev_y = ball->y;
+   620B 69            [ 4]  170 	ld	l, c
+   620C 60            [ 4]  171 	ld	h, b
+   620D 23            [ 6]  172 	inc	hl
+   620E 23            [ 6]  173 	inc	hl
+   620F 4E            [ 7]  174 	ld	c, (hl)
+   6210 21 5D 72      [10]  175 	ld	hl, #(_balls + 0x0004)
+   6213 71            [ 7]  176 	ld	(hl), c
+   6214 C9            [10]  177 	ret
+                            178 ;src/balls.c:55: for (u8 i = 0; i < MAX_BALLS; i++)
+   6215                     179 00115$:
+   6215 1E 00         [ 7]  180 	ld	e, #0x00
+   6217                     181 00108$:
+   6217 7B            [ 4]  182 	ld	a, e
+   6218 D6 03         [ 7]  183 	sub	a, #0x03
+   621A D0            [11]  184 	ret	NC
+                            185 ;src/balls.c:57: update_ball(ball);
+   621B C5            [11]  186 	push	bc
+   621C D5            [11]  187 	push	de
+   621D C5            [11]  188 	push	bc
+   621E CD 16 63      [17]  189 	call	_update_ball
+   6221 F1            [10]  190 	pop	af
+   6222 D1            [10]  191 	pop	de
+   6223 C1            [10]  192 	pop	bc
+                            193 ;src/balls.c:58: ball++;
+   6224 21 07 00      [10]  194 	ld	hl, #0x0007
+   6227 09            [11]  195 	add	hl,bc
+   6228 4D            [ 4]  196 	ld	c, l
+   6229 44            [ 4]  197 	ld	b, h
+                            198 ;src/balls.c:55: for (u8 i = 0; i < MAX_BALLS; i++)
+   622A 1C            [ 4]  199 	inc	e
+   622B 18 EA         [12]  200 	jr	00108$
+                            201 ;src/balls.c:63: void balls_restore_background()
+                            202 ;	---------------------------------
+                            203 ; Function balls_restore_background
+                            204 ; ---------------------------------
+   622D                     205 _balls_restore_background::
+   622D DD E5         [15]  206 	push	ix
+   622F DD 21 00 00   [14]  207 	ld	ix,#0
+   6233 DD 39         [15]  208 	add	ix,sp
+   6235 3B            [ 6]  209 	dec	sp
+                            210 ;src/balls.c:65: Ball *ball = balls;
+   6236 01 59 72      [10]  211 	ld	bc, #_balls
+                            212 ;src/balls.c:66: for (u8 i = 0; i < MAX_BALLS; i++)
+   6239 DD 36 FF 00   [19]  213 	ld	-1 (ix), #0x00
+   623D                     214 00105$:
+   623D DD 7E FF      [19]  215 	ld	a, -1 (ix)
+   6240 D6 03         [ 7]  216 	sub	a, #0x03
+   6242 30 29         [12]  217 	jr	NC,00107$
+                            218 ;src/balls.c:68: if (ball->active)
+   6244 0A            [ 7]  219 	ld	a, (bc)
+   6245 B7            [ 4]  220 	or	a, a
+   6246 28 1A         [12]  221 	jr	Z,00102$
+                            222 ;src/balls.c:70: background_restore(ball->prev_x, balls->prev_y, SP_BALL_W, SP_BALL_H);
+   6248 21 5D 72      [10]  223 	ld	hl, #_balls + 4
+   624B 5E            [ 7]  224 	ld	e, (hl)
+   624C 69            [ 4]  225 	ld	l, c
+   624D 60            [ 4]  226 	ld	h, b
+   624E 23            [ 6]  227 	inc	hl
+   624F 23            [ 6]  228 	inc	hl
+   6250 23            [ 6]  229 	inc	hl
+   6251 56            [ 7]  230 	ld	d, (hl)
+   6252 C5            [11]  231 	push	bc
+   6253 21 03 06      [10]  232 	ld	hl, #0x0603
+   6256 E5            [11]  233 	push	hl
+   6257 7B            [ 4]  234 	ld	a, e
+   6258 F5            [11]  235 	push	af
+   6259 33            [ 6]  236 	inc	sp
+   625A D5            [11]  237 	push	de
+   625B 33            [ 6]  238 	inc	sp
+   625C CD FD 60      [17]  239 	call	_background_restore
+   625F F1            [10]  240 	pop	af
+   6260 F1            [10]  241 	pop	af
+   6261 C1            [10]  242 	pop	bc
+   6262                     243 00102$:
+                            244 ;src/balls.c:72: ball++;
+   6262 21 07 00      [10]  245 	ld	hl, #0x0007
+   6265 09            [11]  246 	add	hl,bc
+   6266 4D            [ 4]  247 	ld	c, l
+   6267 44            [ 4]  248 	ld	b, h
+                            249 ;src/balls.c:66: for (u8 i = 0; i < MAX_BALLS; i++)
+   6268 DD 34 FF      [23]  250 	inc	-1 (ix)
+   626B 18 D0         [12]  251 	jr	00105$
+   626D                     252 00107$:
+   626D 33            [ 6]  253 	inc	sp
+   626E DD E1         [14]  254 	pop	ix
+   6270 C9            [10]  255 	ret
+                            256 ;src/balls.c:76: void balls_draw()
+                            257 ;	---------------------------------
+                            258 ; Function balls_draw
+                            259 ; ---------------------------------
+   6271                     260 _balls_draw::
+                            261 ;src/balls.c:80: for (u8 i = 0; i < MAX_BALLS; i++)
+   6271 0E 00         [ 7]  262 	ld	c, #0x00
+   6273                     263 00105$:
+   6273 79            [ 4]  264 	ld	a, c
+   6274 D6 03         [ 7]  265 	sub	a, #0x03
+   6276 D0            [11]  266 	ret	NC
+                            267 ;src/balls.c:82: if (balls->active)
+   6277 3A 59 72      [13]  268 	ld	a, (#_balls + 0)
+   627A B7            [ 4]  269 	or	a, a
+   627B 28 1F         [12]  270 	jr	Z,00106$
+                            271 ;src/balls.c:84: svmem = cpct_getScreenPtr(CPCT_VMEM_START, balls->x, balls->y);
+   627D 21 5B 72      [10]  272 	ld	hl, #_balls + 2
+   6280 46            [ 7]  273 	ld	b, (hl)
+   6281 21 5A 72      [10]  274 	ld	hl, #_balls + 1
+   6284 56            [ 7]  275 	ld	d, (hl)
+   6285 C5            [11]  276 	push	bc
+   6286 4A            [ 4]  277 	ld	c, d
+   6287 C5            [11]  278 	push	bc
+   6288 21 00 C0      [10]  279 	ld	hl, #0xc000
+   628B E5            [11]  280 	push	hl
+   628C CD A7 71      [17]  281 	call	_cpct_getScreenPtr
+   628F 11 03 06      [10]  282 	ld	de, #0x0603
+   6292 D5            [11]  283 	push	de
+   6293 E5            [11]  284 	push	hl
+   6294 21 1D 60      [10]  285 	ld	hl, #_sp_ball
+   6297 E5            [11]  286 	push	hl
+   6298 CD 91 6E      [17]  287 	call	_cpct_drawSprite
+   629B C1            [10]  288 	pop	bc
+   629C                     289 00106$:
+                            290 ;src/balls.c:80: for (u8 i = 0; i < MAX_BALLS; i++)
+   629C 0C            [ 4]  291 	inc	c
+   629D 18 D4         [12]  292 	jr	00105$
+                            293 ;src/balls.c:90: Ball *balls_get_first_active()
+                            294 ;	---------------------------------
+                            295 ; Function balls_get_first_active
+                            296 ; ---------------------------------
+   629F                     297 _balls_get_first_active::
+   629F DD E5         [15]  298 	push	ix
+   62A1 DD 21 00 00   [14]  299 	ld	ix,#0
+   62A5 DD 39         [15]  300 	add	ix,sp
+   62A7 F5            [11]  301 	push	af
+                            302 ;src/balls.c:92: Ball *ball = balls;
+   62A8 DD 36 FE 59   [19]  303 	ld	-2 (ix), #<(_balls)
+   62AC DD 36 FF 72   [19]  304 	ld	-1 (ix), #>(_balls)
+                            305 ;src/balls.c:93: for (u8 i = 0; i < MAX_BALLS; i++)
+   62B0 E1            [10]  306 	pop	hl
+   62B1 E5            [11]  307 	push	hl
+   62B2 0E 00         [ 7]  308 	ld	c, #0x00
+   62B4                     309 00105$:
+   62B4 79            [ 4]  310 	ld	a, c
+   62B5 D6 03         [ 7]  311 	sub	a, #0x03
+   62B7 30 12         [12]  312 	jr	NC,00103$
+                            313 ;src/balls.c:95: if (ball->active)
+   62B9 7E            [ 7]  314 	ld	a, (hl)
+   62BA B7            [ 4]  315 	or	a, a
+   62BB 28 04         [12]  316 	jr	Z,00102$
+                            317 ;src/balls.c:97: return ball;
+   62BD E1            [10]  318 	pop	hl
+   62BE E5            [11]  319 	push	hl
+   62BF 18 0D         [12]  320 	jr	00107$
+   62C1                     321 00102$:
+                            322 ;src/balls.c:99: ball++;
+   62C1 11 07 00      [10]  323 	ld	de, #0x0007
+   62C4 19            [11]  324 	add	hl, de
+   62C5 33            [ 6]  325 	inc	sp
+   62C6 33            [ 6]  326 	inc	sp
+   62C7 E5            [11]  327 	push	hl
+                            328 ;src/balls.c:93: for (u8 i = 0; i < MAX_BALLS; i++)
+   62C8 0C            [ 4]  329 	inc	c
+   62C9 18 E9         [12]  330 	jr	00105$
+   62CB                     331 00103$:
+                            332 ;src/balls.c:101: return NULL;
+   62CB 21 00 00      [10]  333 	ld	hl, #0x0000
+   62CE                     334 00107$:
+   62CE DD F9         [10]  335 	ld	sp, ix
+   62D0 DD E1         [14]  336 	pop	ix
+   62D2 C9            [10]  337 	ret
+                            338 ;src/balls.c:107: void center_ball(Ball *ball)
+                            339 ;	---------------------------------
+                            340 ; Function center_ball
+                            341 ; ---------------------------------
+   62D3                     342 _center_ball::
+   62D3 DD E5         [15]  343 	push	ix
+   62D5 DD 21 00 00   [14]  344 	ld	ix,#0
+   62D9 DD 39         [15]  345 	add	ix,sp
+                            346 ;src/balls.c:109: ball->prev_x = ball->x;
+   62DB DD 4E 04      [19]  347 	ld	c,4 (ix)
+   62DE DD 46 05      [19]  348 	ld	b,5 (ix)
+   62E1 C5            [11]  349 	push	bc
+   62E2 FD E1         [14]  350 	pop	iy
    62E4 FD 23         [10]  351 	inc	iy
    62E6 FD 23         [10]  352 	inc	iy
-   62E8 59            [ 4]  353 	ld	e, c
-   62E9 50            [ 4]  354 	ld	d, b
-   62EA 13            [ 6]  355 	inc	de
-   62EB 1A            [ 7]  356 	ld	a, (de)
-   62EC FD 77 00      [19]  357 	ld	0 (iy), a
-                            358 ;src/balls.c:109: ball->prev_y = ball->y;
-   62EF FD 21 04 00   [14]  359 	ld	iy, #0x0004
-   62F3 FD 09         [15]  360 	add	iy, bc
-   62F5 03            [ 6]  361 	inc	bc
-   62F6 03            [ 6]  362 	inc	bc
-   62F7 0A            [ 7]  363 	ld	a, (bc)
-   62F8 FD 77 00      [19]  364 	ld	0 (iy), a
-                            365 ;src/balls.c:110: ball->x = batX + (batW / 4);
-   62FB FD 21 A4 6D   [14]  366 	ld	iy, #_batW
-   62FF FD 6E 00      [19]  367 	ld	l, 0 (iy)
-   6302 CB 3D         [ 8]  368 	srl	l
+   62E8 FD 23         [10]  353 	inc	iy
+   62EA 59            [ 4]  354 	ld	e, c
+   62EB 50            [ 4]  355 	ld	d, b
+   62EC 13            [ 6]  356 	inc	de
+   62ED 1A            [ 7]  357 	ld	a, (de)
+   62EE FD 77 00      [19]  358 	ld	0 (iy), a
+                            359 ;src/balls.c:110: ball->prev_y = ball->y;
+   62F1 FD 21 04 00   [14]  360 	ld	iy, #0x0004
+   62F5 FD 09         [15]  361 	add	iy, bc
+   62F7 03            [ 6]  362 	inc	bc
+   62F8 03            [ 6]  363 	inc	bc
+   62F9 0A            [ 7]  364 	ld	a, (bc)
+   62FA FD 77 00      [19]  365 	ld	0 (iy), a
+                            366 ;src/balls.c:111: ball->x = batX + (batW / 4);
+   62FD FD 21 68 75   [14]  367 	ld	iy, #_batW
+   6301 FD 6E 00      [19]  368 	ld	l, 0 (iy)
    6304 CB 3D         [ 8]  369 	srl	l
-   6306 3A A2 6D      [13]  370 	ld	a,(#_batX + 0)
-   6309 85            [ 4]  371 	add	a, l
-   630A 12            [ 7]  372 	ld	(de), a
-                            373 ;src/balls.c:111: ball->y = batY - SP_BALL_H;
-   630B 3A A1 6D      [13]  374 	ld	a,(#_batY + 0)
-   630E C6 FA         [ 7]  375 	add	a, #0xfa
-   6310 02            [ 7]  376 	ld	(bc), a
-   6311 DD E1         [14]  377 	pop	ix
-   6313 C9            [10]  378 	ret
-                            379 ;src/balls.c:114: void update_ball(Ball *ball)
-                            380 ;	---------------------------------
-                            381 ; Function update_ball
-                            382 ; ---------------------------------
-   6314                     383 _update_ball::
-   6314 DD E5         [15]  384 	push	ix
-   6316 DD 21 00 00   [14]  385 	ld	ix,#0
-   631A DD 39         [15]  386 	add	ix,sp
-                            387 ;src/balls.c:116: ball->prev_x = ball->x;
-   631C DD 4E 04      [19]  388 	ld	c,4 (ix)
-   631F DD 46 05      [19]  389 	ld	b,5 (ix)
-   6322 59            [ 4]  390 	ld	e, c
-   6323 50            [ 4]  391 	ld	d, b
-   6324 13            [ 6]  392 	inc	de
-   6325 13            [ 6]  393 	inc	de
-   6326 13            [ 6]  394 	inc	de
-   6327 69            [ 4]  395 	ld	l, c
-   6328 60            [ 4]  396 	ld	h, b
-   6329 23            [ 6]  397 	inc	hl
-   632A 7E            [ 7]  398 	ld	a, (hl)
-   632B 12            [ 7]  399 	ld	(de), a
-                            400 ;src/balls.c:117: ball->prev_y = ball->y;
-   632C 21 04 00      [10]  401 	ld	hl, #0x0004
-   632F 09            [11]  402 	add	hl,bc
-   6330 EB            [ 4]  403 	ex	de,hl
-   6331 69            [ 4]  404 	ld	l, c
-   6332 60            [ 4]  405 	ld	h, b
-   6333 23            [ 6]  406 	inc	hl
-   6334 23            [ 6]  407 	inc	hl
-   6335 7E            [ 7]  408 	ld	a, (hl)
-   6336 12            [ 7]  409 	ld	(de), a
-                            410 ;src/balls.c:118: move_ball_x(ball);
-   6337 C5            [11]  411 	push	bc
-   6338 CD 4A 63      [17]  412 	call	_move_ball_x
-   633B F1            [10]  413 	pop	af
-                            414 ;src/balls.c:119: move_ball_y(ball);
-   633C DD 6E 04      [19]  415 	ld	l,4 (ix)
-   633F DD 66 05      [19]  416 	ld	h,5 (ix)
-   6342 E5            [11]  417 	push	hl
-   6343 CD 9F 63      [17]  418 	call	_move_ball_y
-   6346 F1            [10]  419 	pop	af
-   6347 DD E1         [14]  420 	pop	ix
-   6349 C9            [10]  421 	ret
-                            422 ;src/balls.c:123: void move_ball_x(Ball *ball)
-                            423 ;	---------------------------------
-                            424 ; Function move_ball_x
-                            425 ; ---------------------------------
-   634A                     426 _move_ball_x::
-   634A DD E5         [15]  427 	push	ix
-   634C DD 21 00 00   [14]  428 	ld	ix,#0
-   6350 DD 39         [15]  429 	add	ix,sp
-                            430 ;src/balls.c:125: if (ball->active)
-   6352 DD 5E 04      [19]  431 	ld	e,4 (ix)
-   6355 DD 56 05      [19]  432 	ld	d,5 (ix)
-   6358 1A            [ 7]  433 	ld	a, (de)
-   6359 B7            [ 4]  434 	or	a, a
-   635A 28 40         [12]  435 	jr	Z,00112$
-                            436 ;src/balls.c:127: u8 new_x = ball->x + ball->dx;
-   635C D5            [11]  437 	push	de
-   635D FD E1         [14]  438 	pop	iy
-   635F FD 23         [10]  439 	inc	iy
-   6361 FD 4E 00      [19]  440 	ld	c, 0 (iy)
-   6364 21 05 00      [10]  441 	ld	hl, #0x0005
-   6367 19            [11]  442 	add	hl, de
-   6368 5E            [ 7]  443 	ld	e, (hl)
-   6369 79            [ 4]  444 	ld	a, c
-   636A 83            [ 4]  445 	add	a, e
-   636B 4F            [ 4]  446 	ld	c, a
-                            447 ;src/balls.c:130: if (ball->dx > 0)
-   636C AF            [ 4]  448 	xor	a, a
-   636D 93            [ 4]  449 	sub	a, e
-   636E E2 73 63      [10]  450 	jp	PO, 00130$
-   6371 EE 80         [ 7]  451 	xor	a, #0x80
-   6373                     452 00130$:
-   6373 F2 8A 63      [10]  453 	jp	P, 00108$
-                            454 ;src/balls.c:133: if (new_x >= PLAY_AREA_RIGHT_EDGE - SP_BALL_W)
-   6376 79            [ 4]  455 	ld	a, c
-   6377 D6 3D         [ 7]  456 	sub	a, #0x3d
-   6379 38 0A         [12]  457 	jr	C,00102$
-                            458 ;src/balls.c:135: ball->x = PLAY_AREA_RIGHT_EDGE - SP_BALL_W;
-   637B FD 36 00 3D   [19]  459 	ld	0 (iy), #0x3d
-                            460 ;src/balls.c:136: ball->dx = -ball->dx;
-   637F 4E            [ 7]  461 	ld	c, (hl)
-   6380 AF            [ 4]  462 	xor	a, a
-   6381 91            [ 4]  463 	sub	a, c
-   6382 77            [ 7]  464 	ld	(hl), a
-   6383 18 17         [12]  465 	jr	00112$
-   6385                     466 00102$:
-                            467 ;src/balls.c:140: ball->x = new_x;
-   6385 FD 71 00      [19]  468 	ld	0 (iy), c
-   6388 18 12         [12]  469 	jr	00112$
-   638A                     470 00108$:
-                            471 ;src/balls.c:147: if (new_x <= PLAY_AREA_LEFT_EDGE)
-   638A 3E 0C         [ 7]  472 	ld	a, #0x0c
-   638C 91            [ 4]  473 	sub	a, c
-   638D 38 0A         [12]  474 	jr	C,00105$
-                            475 ;src/balls.c:149: ball->x = PLAY_AREA_LEFT_EDGE;
-   638F FD 36 00 0C   [19]  476 	ld	0 (iy), #0x0c
-                            477 ;src/balls.c:150: ball->dx = -ball->dx;
-   6393 4E            [ 7]  478 	ld	c, (hl)
-   6394 AF            [ 4]  479 	xor	a, a
-   6395 91            [ 4]  480 	sub	a, c
-   6396 77            [ 7]  481 	ld	(hl), a
-   6397 18 03         [12]  482 	jr	00112$
-   6399                     483 00105$:
-                            484 ;src/balls.c:154: ball->x = new_x;
-   6399 FD 71 00      [19]  485 	ld	0 (iy), c
-   639C                     486 00112$:
-   639C DD E1         [14]  487 	pop	ix
-   639E C9            [10]  488 	ret
-                            489 ;src/balls.c:162: void move_ball_y(Ball * ball)
-                            490 ;	---------------------------------
-                            491 ; Function move_ball_y
-                            492 ; ---------------------------------
-   639F                     493 _move_ball_y::
-   639F DD E5         [15]  494 	push	ix
-   63A1 DD 21 00 00   [14]  495 	ld	ix,#0
-   63A5 DD 39         [15]  496 	add	ix,sp
-   63A7 F5            [11]  497 	push	af
-                            498 ;src/balls.c:165: u8 new_y = ball->y + ball->dy;
-   63A8 DD 4E 04      [19]  499 	ld	c,4 (ix)
-   63AB DD 46 05      [19]  500 	ld	b,5 (ix)
-   63AE 59            [ 4]  501 	ld	e, c
-   63AF 50            [ 4]  502 	ld	d, b
-   63B0 13            [ 6]  503 	inc	de
-   63B1 13            [ 6]  504 	inc	de
-   63B2 1A            [ 7]  505 	ld	a, (de)
-   63B3 DD 77 FF      [19]  506 	ld	-1 (ix), a
-   63B6 FD 21 06 00   [14]  507 	ld	iy, #0x0006
-   63BA FD 09         [15]  508 	add	iy, bc
-   63BC FD 6E 00      [19]  509 	ld	l, 0 (iy)
-   63BF DD 7E FF      [19]  510 	ld	a, -1 (ix)
-   63C2 85            [ 4]  511 	add	a, l
-   63C3 DD 77 FE      [19]  512 	ld	-2 (ix), a
-                            513 ;src/balls.c:168: if (ball->dy < 0)
-   63C6 CB 7D         [ 8]  514 	bit	7, l
-   63C8 28 1A         [12]  515 	jr	Z,00108$
-                            516 ;src/balls.c:170: if (new_y <= PLAY_AREA_TOP_EDGE)
-   63CA 3E 08         [ 7]  517 	ld	a, #0x08
-   63CC DD 96 FE      [19]  518 	sub	a, -2 (ix)
-   63CF 38 0D         [12]  519 	jr	C,00102$
-                            520 ;src/balls.c:172: ball->y = PLAY_AREA_TOP_EDGE;
-   63D1 3E 08         [ 7]  521 	ld	a, #0x08
-   63D3 12            [ 7]  522 	ld	(de), a
-                            523 ;src/balls.c:173: ball->dy = -ball->dy;
-   63D4 FD 4E 00      [19]  524 	ld	c, 0 (iy)
-   63D7 AF            [ 4]  525 	xor	a, a
-   63D8 91            [ 4]  526 	sub	a, c
-   63D9 FD 77 00      [19]  527 	ld	0 (iy), a
-   63DC 18 26         [12]  528 	jr	00109$
-   63DE                     529 00102$:
-                            530 ;src/balls.c:177: ball->y = new_y;
-   63DE DD 7E FE      [19]  531 	ld	a, -2 (ix)
-   63E1 12            [ 7]  532 	ld	(de), a
-   63E2 18 20         [12]  533 	jr	00109$
-   63E4                     534 00108$:
-                            535 ;src/balls.c:184: if (new_y >= YOUR_DEAD_PIXEL_ROW)
-   63E4 DD 7E FE      [19]  536 	ld	a, -2 (ix)
-   63E7 D6 C2         [ 7]  537 	sub	a, #0xc2
-   63E9 38 0C         [12]  538 	jr	C,00105$
-                            539 ;src/balls.c:187: ball->active = 0;
-   63EB AF            [ 4]  540 	xor	a, a
-   63EC 02            [ 7]  541 	ld	(bc), a
-                            542 ;src/balls.c:188: ball->dy = -ball->dy;
-   63ED FD 4E 00      [19]  543 	ld	c, 0 (iy)
-   63F0 AF            [ 4]  544 	xor	a, a
-   63F1 91            [ 4]  545 	sub	a, c
-   63F2 FD 77 00      [19]  546 	ld	0 (iy), a
-   63F5 18 0D         [12]  547 	jr	00109$
-   63F7                     548 00105$:
-                            549 ;src/balls.c:193: check_bat_collision(ball, new_y);
-   63F7 D5            [11]  550 	push	de
-   63F8 DD 7E FE      [19]  551 	ld	a, -2 (ix)
-   63FB F5            [11]  552 	push	af
-   63FC 33            [ 6]  553 	inc	sp
-   63FD C5            [11]  554 	push	bc
-   63FE CD 0D 64      [17]  555 	call	_check_bat_collision
-   6401 F1            [10]  556 	pop	af
-   6402 33            [ 6]  557 	inc	sp
-   6403 D1            [10]  558 	pop	de
-   6404                     559 00109$:
-                            560 ;src/balls.c:196: ball->y = new_y;
-   6404 DD 7E FE      [19]  561 	ld	a, -2 (ix)
-   6407 12            [ 7]  562 	ld	(de), a
-   6408 DD F9         [10]  563 	ld	sp, ix
-   640A DD E1         [14]  564 	pop	ix
-   640C C9            [10]  565 	ret
-                            566 ;src/balls.c:199: void check_bat_collision(Ball * ball, u8 new_y)
-                            567 ;	---------------------------------
-                            568 ; Function check_bat_collision
-                            569 ; ---------------------------------
-   640D                     570 _check_bat_collision::
-   640D DD E5         [15]  571 	push	ix
-   640F DD 21 00 00   [14]  572 	ld	ix,#0
-   6413 DD 39         [15]  573 	add	ix,sp
-   6415 F5            [11]  574 	push	af
-   6416 F5            [11]  575 	push	af
-                            576 ;src/balls.c:201: if ((ball->x + SP_BALL_W >= batX && ball->x <= batX+batW) && 
-   6417 DD 7E 04      [19]  577 	ld	a, 4 (ix)
-   641A DD 77 FE      [19]  578 	ld	-2 (ix), a
-   641D DD 7E 05      [19]  579 	ld	a, 5 (ix)
-   6420 DD 77 FF      [19]  580 	ld	-1 (ix), a
-   6423 C1            [10]  581 	pop	bc
-   6424 E1            [10]  582 	pop	hl
-   6425 E5            [11]  583 	push	hl
-   6426 C5            [11]  584 	push	bc
-   6427 23            [ 6]  585 	inc	hl
-   6428 4E            [ 7]  586 	ld	c, (hl)
-   6429 06 00         [ 7]  587 	ld	b, #0x00
-   642B 21 03 00      [10]  588 	ld	hl, #0x0003
-   642E 09            [11]  589 	add	hl,bc
-   642F E3            [19]  590 	ex	(sp), hl
-   6430 21 A2 6D      [10]  591 	ld	hl,#_batX + 0
-   6433 5E            [ 7]  592 	ld	e, (hl)
-   6434 16 00         [ 7]  593 	ld	d, #0x00
-   6436 DD 7E FC      [19]  594 	ld	a, -4 (ix)
-   6439 93            [ 4]  595 	sub	a, e
-   643A DD 7E FD      [19]  596 	ld	a, -3 (ix)
-   643D 9A            [ 4]  597 	sbc	a, d
-   643E E2 43 64      [10]  598 	jp	PO, 00124$
-   6441 EE 80         [ 7]  599 	xor	a, #0x80
-   6443                     600 00124$:
-   6443 FA 9F 64      [10]  601 	jp	M, 00106$
-   6446 FD 21 A4 6D   [14]  602 	ld	iy, #_batW
-   644A FD 6E 00      [19]  603 	ld	l, 0 (iy)
-   644D 26 00         [ 7]  604 	ld	h, #0x00
-   644F 19            [11]  605 	add	hl, de
-   6450 7D            [ 4]  606 	ld	a, l
-   6451 91            [ 4]  607 	sub	a, c
-   6452 7C            [ 4]  608 	ld	a, h
-   6453 98            [ 4]  609 	sbc	a, b
-   6454 E2 59 64      [10]  610 	jp	PO, 00125$
-   6457 EE 80         [ 7]  611 	xor	a, #0x80
-   6459                     612 00125$:
-   6459 FA 9F 64      [10]  613 	jp	M, 00106$
-                            614 ;src/balls.c:202: (ball->y + SP_BALL_H >= batY && ball->y < batY + SP_BAT_LEFT_H))
-   645C C1            [10]  615 	pop	bc
-   645D E1            [10]  616 	pop	hl
-   645E E5            [11]  617 	push	hl
-   645F C5            [11]  618 	push	bc
-   6460 23            [ 6]  619 	inc	hl
-   6461 23            [ 6]  620 	inc	hl
-   6462 4E            [ 7]  621 	ld	c, (hl)
-   6463 06 00         [ 7]  622 	ld	b, #0x00
-   6465 21 06 00      [10]  623 	ld	hl, #0x0006
-   6468 09            [11]  624 	add	hl,bc
-   6469 EB            [ 4]  625 	ex	de,hl
-   646A FD 21 A1 6D   [14]  626 	ld	iy, #_batY
-   646E FD 6E 00      [19]  627 	ld	l, 0 (iy)
-   6471 26 00         [ 7]  628 	ld	h, #0x00
-   6473 7B            [ 4]  629 	ld	a, e
-   6474 95            [ 4]  630 	sub	a, l
-   6475 7A            [ 4]  631 	ld	a, d
-   6476 9C            [ 4]  632 	sbc	a, h
-   6477 E2 7C 64      [10]  633 	jp	PO, 00126$
-   647A EE 80         [ 7]  634 	xor	a, #0x80
-   647C                     635 00126$:
-   647C FA 9F 64      [10]  636 	jp	M, 00106$
-   647F 11 08 00      [10]  637 	ld	de, #0x0008
-   6482 19            [11]  638 	add	hl, de
-   6483 79            [ 4]  639 	ld	a, c
-   6484 95            [ 4]  640 	sub	a, l
-   6485 78            [ 4]  641 	ld	a, b
-   6486 9C            [ 4]  642 	sbc	a, h
-   6487 E2 8C 64      [10]  643 	jp	PO, 00127$
-   648A EE 80         [ 7]  644 	xor	a, #0x80
-   648C                     645 00127$:
-   648C F2 9F 64      [10]  646 	jp	P, 00106$
-                            647 ;src/balls.c:204: ball-> dy = - ball->dy;
-   648F DD 7E FE      [19]  648 	ld	a, -2 (ix)
-   6492 C6 06         [ 7]  649 	add	a, #0x06
-   6494 6F            [ 4]  650 	ld	l, a
-   6495 DD 7E FF      [19]  651 	ld	a, -1 (ix)
-   6498 CE 00         [ 7]  652 	adc	a, #0x00
-   649A 67            [ 4]  653 	ld	h, a
-   649B 4E            [ 7]  654 	ld	c, (hl)
-   649C AF            [ 4]  655 	xor	a, a
-   649D 91            [ 4]  656 	sub	a, c
-   649E 77            [ 7]  657 	ld	(hl), a
-   649F                     658 00106$:
-   649F DD F9         [10]  659 	ld	sp, ix
-   64A1 DD E1         [14]  660 	pop	ix
-   64A3 C9            [10]  661 	ret
-                            662 	.area _CODE
-                            663 	.area _INITIALIZER
-                            664 	.area _CABS (ABS)
+   6306 CB 3D         [ 8]  370 	srl	l
+   6308 3A 66 75      [13]  371 	ld	a,(#_batX + 0)
+   630B 85            [ 4]  372 	add	a, l
+   630C 12            [ 7]  373 	ld	(de), a
+                            374 ;src/balls.c:112: ball->y = batY - SP_BALL_H;
+   630D 3A 65 75      [13]  375 	ld	a,(#_batY + 0)
+   6310 C6 FA         [ 7]  376 	add	a, #0xfa
+   6312 02            [ 7]  377 	ld	(bc), a
+   6313 DD E1         [14]  378 	pop	ix
+   6315 C9            [10]  379 	ret
+                            380 ;src/balls.c:115: void update_ball(Ball *ball)
+                            381 ;	---------------------------------
+                            382 ; Function update_ball
+                            383 ; ---------------------------------
+   6316                     384 _update_ball::
+   6316 DD E5         [15]  385 	push	ix
+   6318 DD 21 00 00   [14]  386 	ld	ix,#0
+   631C DD 39         [15]  387 	add	ix,sp
+                            388 ;src/balls.c:117: ball->prev_x = ball->x;
+   631E DD 4E 04      [19]  389 	ld	c,4 (ix)
+   6321 DD 46 05      [19]  390 	ld	b,5 (ix)
+   6324 59            [ 4]  391 	ld	e, c
+   6325 50            [ 4]  392 	ld	d, b
+   6326 13            [ 6]  393 	inc	de
+   6327 13            [ 6]  394 	inc	de
+   6328 13            [ 6]  395 	inc	de
+   6329 69            [ 4]  396 	ld	l, c
+   632A 60            [ 4]  397 	ld	h, b
+   632B 23            [ 6]  398 	inc	hl
+   632C 7E            [ 7]  399 	ld	a, (hl)
+   632D 12            [ 7]  400 	ld	(de), a
+                            401 ;src/balls.c:118: ball->prev_y = ball->y;
+   632E 21 04 00      [10]  402 	ld	hl, #0x0004
+   6331 09            [11]  403 	add	hl,bc
+   6332 EB            [ 4]  404 	ex	de,hl
+   6333 69            [ 4]  405 	ld	l, c
+   6334 60            [ 4]  406 	ld	h, b
+   6335 23            [ 6]  407 	inc	hl
+   6336 23            [ 6]  408 	inc	hl
+   6337 7E            [ 7]  409 	ld	a, (hl)
+   6338 12            [ 7]  410 	ld	(de), a
+                            411 ;src/balls.c:120: if (ball->active)
+   6339 0A            [ 7]  412 	ld	a, (bc)
+   633A B7            [ 4]  413 	or	a, a
+   633B 28 1B         [12]  414 	jr	Z,00103$
+                            415 ;src/balls.c:122: blocks_intersect_ball(ball);
+   633D C5            [11]  416 	push	bc
+   633E CD BD 65      [17]  417 	call	_blocks_intersect_ball
+   6341 F1            [10]  418 	pop	af
+                            419 ;src/balls.c:124: move_ball_x(ball);
+   6342 DD 6E 04      [19]  420 	ld	l,4 (ix)
+   6345 DD 66 05      [19]  421 	ld	h,5 (ix)
+   6348 E5            [11]  422 	push	hl
+   6349 CD 5B 63      [17]  423 	call	_move_ball_x
+   634C F1            [10]  424 	pop	af
+                            425 ;src/balls.c:125: move_ball_y(ball);
+   634D DD 6E 04      [19]  426 	ld	l,4 (ix)
+   6350 DD 66 05      [19]  427 	ld	h,5 (ix)
+   6353 E5            [11]  428 	push	hl
+   6354 CD AF 63      [17]  429 	call	_move_ball_y
+   6357 F1            [10]  430 	pop	af
+   6358                     431 00103$:
+   6358 DD E1         [14]  432 	pop	ix
+   635A C9            [10]  433 	ret
+                            434 ;src/balls.c:129: void move_ball_x(Ball *ball)
+                            435 ;	---------------------------------
+                            436 ; Function move_ball_x
+                            437 ; ---------------------------------
+   635B                     438 _move_ball_x::
+   635B DD E5         [15]  439 	push	ix
+   635D DD 21 00 00   [14]  440 	ld	ix,#0
+   6361 DD 39         [15]  441 	add	ix,sp
+                            442 ;src/balls.c:131: u8 new_x = ball->x + ball->dx;
+   6363 DD 5E 04      [19]  443 	ld	e,4 (ix)
+   6366 DD 56 05      [19]  444 	ld	d,5 (ix)
+   6369 D5            [11]  445 	push	de
+   636A FD E1         [14]  446 	pop	iy
+   636C FD 23         [10]  447 	inc	iy
+   636E FD 46 00      [19]  448 	ld	b, 0 (iy)
+   6371 13            [ 6]  449 	inc	de
+   6372 13            [ 6]  450 	inc	de
+   6373 13            [ 6]  451 	inc	de
+   6374 13            [ 6]  452 	inc	de
+   6375 13            [ 6]  453 	inc	de
+   6376 1A            [ 7]  454 	ld	a, (de)
+   6377 4F            [ 4]  455 	ld	c, a
+   6378 68            [ 4]  456 	ld	l, b
+   6379 09            [11]  457 	add	hl, bc
+                            458 ;src/balls.c:133: if (ball->dx > 0)
+   637A AF            [ 4]  459 	xor	a, a
+   637B 91            [ 4]  460 	sub	a, c
+   637C E2 81 63      [10]  461 	jp	PO, 00124$
+   637F EE 80         [ 7]  462 	xor	a, #0x80
+   6381                     463 00124$:
+   6381 F2 99 63      [10]  464 	jp	P, 00108$
+                            465 ;src/balls.c:136: if (new_x >= PLAY_AREA_RIGHT_EDGE - SP_BALL_W)
+   6384 7D            [ 4]  466 	ld	a, l
+   6385 D6 3D         [ 7]  467 	sub	a, #0x3d
+   6387 38 0B         [12]  468 	jr	C,00102$
+                            469 ;src/balls.c:138: ball->x = PLAY_AREA_RIGHT_EDGE - SP_BALL_W;
+   6389 FD 36 00 3D   [19]  470 	ld	0 (iy), #0x3d
+                            471 ;src/balls.c:139: ball->dx = -ball->dx;
+   638D 1A            [ 7]  472 	ld	a, (de)
+   638E 4F            [ 4]  473 	ld	c, a
+   638F AF            [ 4]  474 	xor	a, a
+   6390 91            [ 4]  475 	sub	a, c
+   6391 12            [ 7]  476 	ld	(de), a
+   6392 18 18         [12]  477 	jr	00110$
+   6394                     478 00102$:
+                            479 ;src/balls.c:143: ball->x = new_x;
+   6394 FD 75 00      [19]  480 	ld	0 (iy), l
+   6397 18 13         [12]  481 	jr	00110$
+   6399                     482 00108$:
+                            483 ;src/balls.c:150: if (new_x <= PLAY_AREA_LEFT_EDGE)
+   6399 3E 0C         [ 7]  484 	ld	a, #0x0c
+   639B 95            [ 4]  485 	sub	a, l
+   639C 38 0B         [12]  486 	jr	C,00105$
+                            487 ;src/balls.c:152: ball->x = PLAY_AREA_LEFT_EDGE;
+   639E FD 36 00 0C   [19]  488 	ld	0 (iy), #0x0c
+                            489 ;src/balls.c:153: ball->dx = -ball->dx;
+   63A2 1A            [ 7]  490 	ld	a, (de)
+   63A3 4F            [ 4]  491 	ld	c, a
+   63A4 AF            [ 4]  492 	xor	a, a
+   63A5 91            [ 4]  493 	sub	a, c
+   63A6 12            [ 7]  494 	ld	(de), a
+   63A7 18 03         [12]  495 	jr	00110$
+   63A9                     496 00105$:
+                            497 ;src/balls.c:157: ball->x = new_x;
+   63A9 FD 75 00      [19]  498 	ld	0 (iy), l
+   63AC                     499 00110$:
+   63AC DD E1         [14]  500 	pop	ix
+   63AE C9            [10]  501 	ret
+                            502 ;src/balls.c:164: void move_ball_y(Ball *ball)
+                            503 ;	---------------------------------
+                            504 ; Function move_ball_y
+                            505 ; ---------------------------------
+   63AF                     506 _move_ball_y::
+   63AF DD E5         [15]  507 	push	ix
+   63B1 DD 21 00 00   [14]  508 	ld	ix,#0
+   63B5 DD 39         [15]  509 	add	ix,sp
+   63B7 F5            [11]  510 	push	af
+                            511 ;src/balls.c:167: u8 new_y = ball->y + ball->dy;
+   63B8 DD 4E 04      [19]  512 	ld	c,4 (ix)
+   63BB DD 46 05      [19]  513 	ld	b,5 (ix)
+   63BE 59            [ 4]  514 	ld	e, c
+   63BF 50            [ 4]  515 	ld	d, b
+   63C0 13            [ 6]  516 	inc	de
+   63C1 13            [ 6]  517 	inc	de
+   63C2 1A            [ 7]  518 	ld	a, (de)
+   63C3 DD 77 FF      [19]  519 	ld	-1 (ix), a
+   63C6 FD 21 06 00   [14]  520 	ld	iy, #0x0006
+   63CA FD 09         [15]  521 	add	iy, bc
+   63CC FD 6E 00      [19]  522 	ld	l, 0 (iy)
+   63CF DD 7E FF      [19]  523 	ld	a, -1 (ix)
+   63D2 85            [ 4]  524 	add	a, l
+   63D3 DD 77 FE      [19]  525 	ld	-2 (ix), a
+                            526 ;src/balls.c:170: if (ball->dy < 0)
+   63D6 CB 7D         [ 8]  527 	bit	7, l
+   63D8 28 1A         [12]  528 	jr	Z,00108$
+                            529 ;src/balls.c:172: if (new_y <= PLAY_AREA_TOP_EDGE)
+   63DA 3E 08         [ 7]  530 	ld	a, #0x08
+   63DC DD 96 FE      [19]  531 	sub	a, -2 (ix)
+   63DF 38 0D         [12]  532 	jr	C,00102$
+                            533 ;src/balls.c:174: ball->y = PLAY_AREA_TOP_EDGE;
+   63E1 3E 08         [ 7]  534 	ld	a, #0x08
+   63E3 12            [ 7]  535 	ld	(de), a
+                            536 ;src/balls.c:175: ball->dy = -ball->dy;
+   63E4 FD 4E 00      [19]  537 	ld	c, 0 (iy)
+   63E7 AF            [ 4]  538 	xor	a, a
+   63E8 91            [ 4]  539 	sub	a, c
+   63E9 FD 77 00      [19]  540 	ld	0 (iy), a
+   63EC 18 26         [12]  541 	jr	00109$
+   63EE                     542 00102$:
+                            543 ;src/balls.c:179: ball->y = new_y;
+   63EE DD 7E FE      [19]  544 	ld	a, -2 (ix)
+   63F1 12            [ 7]  545 	ld	(de), a
+   63F2 18 20         [12]  546 	jr	00109$
+   63F4                     547 00108$:
+                            548 ;src/balls.c:186: if (new_y >= YOUR_DEAD_PIXEL_ROW)
+   63F4 DD 7E FE      [19]  549 	ld	a, -2 (ix)
+   63F7 D6 C2         [ 7]  550 	sub	a, #0xc2
+   63F9 38 0C         [12]  551 	jr	C,00105$
+                            552 ;src/balls.c:189: ball->active = 0;
+   63FB AF            [ 4]  553 	xor	a, a
+   63FC 02            [ 7]  554 	ld	(bc), a
+                            555 ;src/balls.c:190: ball->dy = -ball->dy;
+   63FD FD 4E 00      [19]  556 	ld	c, 0 (iy)
+   6400 AF            [ 4]  557 	xor	a, a
+   6401 91            [ 4]  558 	sub	a, c
+   6402 FD 77 00      [19]  559 	ld	0 (iy), a
+   6405 18 0D         [12]  560 	jr	00109$
+   6407                     561 00105$:
+                            562 ;src/balls.c:195: check_bat_collision(ball, new_y);
+   6407 D5            [11]  563 	push	de
+   6408 DD 7E FE      [19]  564 	ld	a, -2 (ix)
+   640B F5            [11]  565 	push	af
+   640C 33            [ 6]  566 	inc	sp
+   640D C5            [11]  567 	push	bc
+   640E CD 1D 64      [17]  568 	call	_check_bat_collision
+   6411 F1            [10]  569 	pop	af
+   6412 33            [ 6]  570 	inc	sp
+   6413 D1            [10]  571 	pop	de
+   6414                     572 00109$:
+                            573 ;src/balls.c:198: ball->y = new_y;
+   6414 DD 7E FE      [19]  574 	ld	a, -2 (ix)
+   6417 12            [ 7]  575 	ld	(de), a
+   6418 DD F9         [10]  576 	ld	sp, ix
+   641A DD E1         [14]  577 	pop	ix
+   641C C9            [10]  578 	ret
+                            579 ;src/balls.c:201: void check_bat_collision(Ball *ball, u8 new_y)
+                            580 ;	---------------------------------
+                            581 ; Function check_bat_collision
+                            582 ; ---------------------------------
+   641D                     583 _check_bat_collision::
+   641D DD E5         [15]  584 	push	ix
+   641F DD 21 00 00   [14]  585 	ld	ix,#0
+   6423 DD 39         [15]  586 	add	ix,sp
+   6425 F5            [11]  587 	push	af
+   6426 F5            [11]  588 	push	af
+                            589 ;src/balls.c:203: if ((ball->x + SP_BALL_W >= batX && ball->x <= batX + batW) &&
+   6427 DD 7E 04      [19]  590 	ld	a, 4 (ix)
+   642A DD 77 FE      [19]  591 	ld	-2 (ix), a
+   642D DD 7E 05      [19]  592 	ld	a, 5 (ix)
+   6430 DD 77 FF      [19]  593 	ld	-1 (ix), a
+   6433 C1            [10]  594 	pop	bc
+   6434 E1            [10]  595 	pop	hl
+   6435 E5            [11]  596 	push	hl
+   6436 C5            [11]  597 	push	bc
+   6437 23            [ 6]  598 	inc	hl
+   6438 4E            [ 7]  599 	ld	c, (hl)
+   6439 06 00         [ 7]  600 	ld	b, #0x00
+   643B 21 03 00      [10]  601 	ld	hl, #0x0003
+   643E 09            [11]  602 	add	hl,bc
+   643F E3            [19]  603 	ex	(sp), hl
+   6440 21 66 75      [10]  604 	ld	hl,#_batX + 0
+   6443 5E            [ 7]  605 	ld	e, (hl)
+   6444 16 00         [ 7]  606 	ld	d, #0x00
+   6446 DD 7E FC      [19]  607 	ld	a, -4 (ix)
+   6449 93            [ 4]  608 	sub	a, e
+   644A DD 7E FD      [19]  609 	ld	a, -3 (ix)
+   644D 9A            [ 4]  610 	sbc	a, d
+   644E E2 53 64      [10]  611 	jp	PO, 00124$
+   6451 EE 80         [ 7]  612 	xor	a, #0x80
+   6453                     613 00124$:
+   6453 FA AF 64      [10]  614 	jp	M, 00106$
+   6456 FD 21 68 75   [14]  615 	ld	iy, #_batW
+   645A FD 6E 00      [19]  616 	ld	l, 0 (iy)
+   645D 26 00         [ 7]  617 	ld	h, #0x00
+   645F 19            [11]  618 	add	hl, de
+   6460 7D            [ 4]  619 	ld	a, l
+   6461 91            [ 4]  620 	sub	a, c
+   6462 7C            [ 4]  621 	ld	a, h
+   6463 98            [ 4]  622 	sbc	a, b
+   6464 E2 69 64      [10]  623 	jp	PO, 00125$
+   6467 EE 80         [ 7]  624 	xor	a, #0x80
+   6469                     625 00125$:
+   6469 FA AF 64      [10]  626 	jp	M, 00106$
+                            627 ;src/balls.c:204: (ball->y + SP_BALL_H >= batY && ball->y < batY + SP_BAT_LEFT_H))
+   646C C1            [10]  628 	pop	bc
+   646D E1            [10]  629 	pop	hl
+   646E E5            [11]  630 	push	hl
+   646F C5            [11]  631 	push	bc
+   6470 23            [ 6]  632 	inc	hl
+   6471 23            [ 6]  633 	inc	hl
+   6472 4E            [ 7]  634 	ld	c, (hl)
+   6473 06 00         [ 7]  635 	ld	b, #0x00
+   6475 21 06 00      [10]  636 	ld	hl, #0x0006
+   6478 09            [11]  637 	add	hl,bc
+   6479 EB            [ 4]  638 	ex	de,hl
+   647A FD 21 65 75   [14]  639 	ld	iy, #_batY
+   647E FD 6E 00      [19]  640 	ld	l, 0 (iy)
+   6481 26 00         [ 7]  641 	ld	h, #0x00
+   6483 7B            [ 4]  642 	ld	a, e
+   6484 95            [ 4]  643 	sub	a, l
+   6485 7A            [ 4]  644 	ld	a, d
+   6486 9C            [ 4]  645 	sbc	a, h
+   6487 E2 8C 64      [10]  646 	jp	PO, 00126$
+   648A EE 80         [ 7]  647 	xor	a, #0x80
+   648C                     648 00126$:
+   648C FA AF 64      [10]  649 	jp	M, 00106$
+   648F 11 08 00      [10]  650 	ld	de, #0x0008
+   6492 19            [11]  651 	add	hl, de
+   6493 79            [ 4]  652 	ld	a, c
+   6494 95            [ 4]  653 	sub	a, l
+   6495 78            [ 4]  654 	ld	a, b
+   6496 9C            [ 4]  655 	sbc	a, h
+   6497 E2 9C 64      [10]  656 	jp	PO, 00127$
+   649A EE 80         [ 7]  657 	xor	a, #0x80
+   649C                     658 00127$:
+   649C F2 AF 64      [10]  659 	jp	P, 00106$
+                            660 ;src/balls.c:206: ball->dy = -ball->dy;
+   649F DD 7E FE      [19]  661 	ld	a, -2 (ix)
+   64A2 C6 06         [ 7]  662 	add	a, #0x06
+   64A4 6F            [ 4]  663 	ld	l, a
+   64A5 DD 7E FF      [19]  664 	ld	a, -1 (ix)
+   64A8 CE 00         [ 7]  665 	adc	a, #0x00
+   64AA 67            [ 4]  666 	ld	h, a
+   64AB 4E            [ 7]  667 	ld	c, (hl)
+   64AC AF            [ 4]  668 	xor	a, a
+   64AD 91            [ 4]  669 	sub	a, c
+   64AE 77            [ 7]  670 	ld	(hl), a
+   64AF                     671 00106$:
+   64AF DD F9         [10]  672 	ld	sp, ix
+   64B1 DD E1         [14]  673 	pop	ix
+   64B3 C9            [10]  674 	ret
+                            675 	.area _CODE
+                            676 	.area _INITIALIZER
+                            677 	.area _CABS (ABS)

@@ -101,30 +101,30 @@ _background_restore::
 	ld	hl, #0xfff9
 	add	hl, bc
 00109$:
-	ld	c, l
 	sra	h
-	rr	c
+	rr	l
+	ld	-3 (ix), l
 ;src/background.c:31: u8 tileY = (screenY - TILE_MAP_SCREEN_PIXEL_OFFSET_Y) / 4;
-	ld	l, 5 (ix)
-	ld	h, #0x00
-	ld	b, l
-	ld	d, h
-	bit	7, h
+	ld	c, 5 (ix)
+	ld	b, #0x00
+	ld	e, c
+	ld	l, b
+	bit	7, b
 	jr	Z,00110$
-	inc	hl
-	inc	hl
-	inc	hl
-	ld	b, l
-	ld	d, h
+	inc	bc
+	inc	bc
+	inc	bc
+	ld	e, c
+	ld	l, b
 00110$:
-	ld	e, b
-	sra	d
+	sra	l
 	rr	e
-	sra	d
+	sra	l
 	rr	e
+	ld	-4 (ix), e
 ;src/background.c:32: u8 tileW = bwidth / 2;
-	ld	b, 6 (ix)
-	srl	b
+	ld	e, 6 (ix)
+	srl	e
 ;src/background.c:33: u8 tileH = pHeight / 4;
 	ld	d, 7 (ix)
 	srl	d
@@ -140,39 +140,37 @@ _background_restore::
 	bit	0, 6 (ix)
 	jr	Z,00104$
 ;src/background.c:42: tileW++;
-	inc	b
+	inc	e
 00104$:
 ;src/background.c:45: if (screenX & 1 == 1)
 	bit	0, 4 (ix)
 	jr	Z,00106$
 ;src/background.c:47: tileW += 1;
-	inc	b
+	inc	e
 00106$:
 ;src/background.c:50: cpct_etm_drawTileBox2x4(tileX, tileY, tileW, tileH, BACKGROUND_TILMAP_W, pvmem, current_level->background_tilemap);
 	ld	hl, (_current_level)
-	ld	a, (hl)
-	ld	-4 (ix), a
+	ld	c, (hl)
 	inc	hl
-	ld	a, (hl)
-	ld	-3 (ix), a
+	ld	b, (hl)
+	ld	-2 (ix), c
+	ld	-1 (ix), b
 	ld	hl, (_pvmem)
-	ld	-2 (ix), l
-	ld	-1 (ix), h
-	pop	hl
-	push	hl
-	push	hl
-	ld	l,-2 (ix)
-	ld	h,-1 (ix)
+	ld	c,-2 (ix)
+	ld	b,-1 (ix)
+	push	bc
 	push	hl
 	ld	a, #0x1e
 	push	af
 	inc	sp
 	push	de
 	inc	sp
-	push	bc
+	ld	d, e
+	ld	e, -4 (ix)
+	push	de
+	ld	a, -3 (ix)
+	push	af
 	inc	sp
-	ld	b, e
-	push	bc
 	call	_cpct_etm_drawTileBox2x4
 	ld	sp, ix
 	pop	ix

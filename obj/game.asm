@@ -65,9 +65,9 @@ _lives_left::
 ; Function game_initialize
 ; ---------------------------------
 _game_initialize::
-;src/game.c:18: current_level_num = 0;
+;src/game.c:18: current_level_num = 1;
 	ld	hl,#_current_level_num + 0
-	ld	(hl), #0x00
+	ld	(hl), #0x01
 ;src/game.c:19: lives_left = 3;
 	ld	hl,#_lives_left + 0
 	ld	(hl), #0x03
@@ -130,10 +130,12 @@ _module_game_initialize::
 _initialise_level::
 ;src/game.c:66: current_level = level_definitions + current_level_num;
 	ld	bc, #_level_definitions+0
-	ld	iy, #_current_level_num
-	ld	l, 0 (iy)
-	ld	h, #0x00
+	ld	de, (_current_level_num)
+	ld	d, #0x00
+	ld	l, e
+	ld	h, d
 	add	hl, hl
+	add	hl, de
 	add	hl, hl
 	add	hl, bc
 	ld	(_current_level), hl

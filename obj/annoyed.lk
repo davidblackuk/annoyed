@@ -22,7 +22,7 @@ obj/autoplay.rel
 obj/background.rel
 obj/balls.rel
 obj/bat.rel
-obj/bricks.rel
+obj/blocks.rel
 obj/debug.rel
 obj/game.rel
 obj/globals.rel

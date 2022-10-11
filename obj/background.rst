@@ -22,8 +22,8 @@
                              22 ; ram data
                              23 ;--------------------------------------------------------
                              24 	.area _DATA
-   6D6F                      25 _pvmem::
-   6D6F                      26 	.ds 2
+   7257                      25 _pvmem::
+   7257                      26 	.ds 2
                              27 ;--------------------------------------------------------
                              28 ; ram data
                              29 ;--------------------------------------------------------
@@ -58,22 +58,22 @@
    60D9 E5            [11]   58 	push	hl
    60DA 21 00 C0      [10]   59 	ld	hl, #0xc000
    60DD E5            [11]   60 	push	hl
-   60DE CD BF 6C      [17]   61 	call	_cpct_getScreenPtr
-   60E1 22 6F 6D      [16]   62 	ld	(_pvmem), hl
+   60DE CD A7 71      [17]   61 	call	_cpct_getScreenPtr
+   60E1 22 57 72      [16]   62 	ld	(_pvmem), hl
                              63 ;src/background.c:18: cpct_etm_setTileset2x4(g_tileset);
    60E4 21 68 51      [10]   64 	ld	hl, #_g_tileset
-   60E7 CD A7 6B      [17]   65 	call	_cpct_etm_setTileset2x4
+   60E7 CD E8 6F      [17]   65 	call	_cpct_etm_setTileset2x4
                              66 ;src/background.c:21: cpct_etm_drawTilemap2x4_f(BACKGROUND_TILMAP_W, BACKGROUND_TILMAP_H, pvmem, current_level->background_tilemap);
-   60EA 2A 92 6D      [16]   67 	ld	hl, (_current_level)
+   60EA 2A 56 75      [16]   67 	ld	hl, (_current_level)
    60ED 4E            [ 7]   68 	ld	c, (hl)
    60EE 23            [ 6]   69 	inc	hl
    60EF 46            [ 7]   70 	ld	b, (hl)
-   60F0 2A 6F 6D      [16]   71 	ld	hl, (_pvmem)
+   60F0 2A 57 72      [16]   71 	ld	hl, (_pvmem)
    60F3 C5            [11]   72 	push	bc
    60F4 E5            [11]   73 	push	hl
    60F5 21 1E 32      [10]   74 	ld	hl, #0x321e
    60F8 E5            [11]   75 	push	hl
-   60F9 CD D7 6B      [17]   76 	call	_cpct_etm_drawTilemap2x4_f
+   60F9 CD 18 70      [17]   76 	call	_cpct_etm_drawTilemap2x4_f
    60FC C9            [10]   77 	ret
                              78 ;src/background.c:26: void background_restore(u8 screenX, u8 screenY, u8 bwidth, u8 pHeight)
                              79 ;	---------------------------------
@@ -101,82 +101,80 @@
    611A 21 F9 FF      [10]  101 	ld	hl, #0xfff9
    611D 09            [11]  102 	add	hl, bc
    611E                     103 00109$:
-   611E 4D            [ 4]  104 	ld	c, l
-   611F CB 2C         [ 8]  105 	sra	h
-   6121 CB 19         [ 8]  106 	rr	c
+   611E CB 2C         [ 8]  104 	sra	h
+   6120 CB 1D         [ 8]  105 	rr	l
+   6122 DD 75 FD      [19]  106 	ld	-3 (ix), l
                             107 ;src/background.c:31: u8 tileY = (screenY - TILE_MAP_SCREEN_PIXEL_OFFSET_Y) / 4;
-   6123 DD 6E 05      [19]  108 	ld	l, 5 (ix)
-   6126 26 00         [ 7]  109 	ld	h, #0x00
-   6128 45            [ 4]  110 	ld	b, l
-   6129 54            [ 4]  111 	ld	d, h
-   612A CB 7C         [ 8]  112 	bit	7, h
-   612C 28 05         [12]  113 	jr	Z,00110$
-   612E 23            [ 6]  114 	inc	hl
-   612F 23            [ 6]  115 	inc	hl
-   6130 23            [ 6]  116 	inc	hl
-   6131 45            [ 4]  117 	ld	b, l
-   6132 54            [ 4]  118 	ld	d, h
-   6133                     119 00110$:
-   6133 58            [ 4]  120 	ld	e, b
-   6134 CB 2A         [ 8]  121 	sra	d
-   6136 CB 1B         [ 8]  122 	rr	e
-   6138 CB 2A         [ 8]  123 	sra	d
-   613A CB 1B         [ 8]  124 	rr	e
+   6125 DD 4E 05      [19]  108 	ld	c, 5 (ix)
+   6128 06 00         [ 7]  109 	ld	b, #0x00
+   612A 59            [ 4]  110 	ld	e, c
+   612B 68            [ 4]  111 	ld	l, b
+   612C CB 78         [ 8]  112 	bit	7, b
+   612E 28 05         [12]  113 	jr	Z,00110$
+   6130 03            [ 6]  114 	inc	bc
+   6131 03            [ 6]  115 	inc	bc
+   6132 03            [ 6]  116 	inc	bc
+   6133 59            [ 4]  117 	ld	e, c
+   6134 68            [ 4]  118 	ld	l, b
+   6135                     119 00110$:
+   6135 CB 2D         [ 8]  120 	sra	l
+   6137 CB 1B         [ 8]  121 	rr	e
+   6139 CB 2D         [ 8]  122 	sra	l
+   613B CB 1B         [ 8]  123 	rr	e
+   613D DD 73 FC      [19]  124 	ld	-4 (ix), e
                             125 ;src/background.c:32: u8 tileW = bwidth / 2;
-   613C DD 46 06      [19]  126 	ld	b, 6 (ix)
-   613F CB 38         [ 8]  127 	srl	b
+   6140 DD 5E 06      [19]  126 	ld	e, 6 (ix)
+   6143 CB 3B         [ 8]  127 	srl	e
                             128 ;src/background.c:33: u8 tileH = pHeight / 4;
-   6141 DD 56 07      [19]  129 	ld	d, 7 (ix)
-   6144 CB 3A         [ 8]  130 	srl	d
-   6146 CB 3A         [ 8]  131 	srl	d
+   6145 DD 56 07      [19]  129 	ld	d, 7 (ix)
+   6148 CB 3A         [ 8]  130 	srl	d
+   614A CB 3A         [ 8]  131 	srl	d
                             132 ;src/background.c:35: if (pHeight % 4 > 0)
-   6148 DD 7E 07      [19]  133 	ld	a, 7 (ix)
-   614B E6 03         [ 7]  134 	and	a, #0x03
-   614D 28 01         [12]  135 	jr	Z,00102$
+   614C DD 7E 07      [19]  133 	ld	a, 7 (ix)
+   614F E6 03         [ 7]  134 	and	a, #0x03
+   6151 28 01         [12]  135 	jr	Z,00102$
                             136 ;src/background.c:37: tileH++;
-   614F 14            [ 4]  137 	inc	d
-   6150                     138 00102$:
+   6153 14            [ 4]  137 	inc	d
+   6154                     138 00102$:
                             139 ;src/background.c:40: if (bwidth % 2 > 0)
-   6150 DD CB 06 46   [20]  140 	bit	0, 6 (ix)
-   6154 28 01         [12]  141 	jr	Z,00104$
+   6154 DD CB 06 46   [20]  140 	bit	0, 6 (ix)
+   6158 28 01         [12]  141 	jr	Z,00104$
                             142 ;src/background.c:42: tileW++;
-   6156 04            [ 4]  143 	inc	b
-   6157                     144 00104$:
+   615A 1C            [ 4]  143 	inc	e
+   615B                     144 00104$:
                             145 ;src/background.c:45: if (screenX & 1 == 1)
-   6157 DD CB 04 46   [20]  146 	bit	0, 4 (ix)
-   615B 28 01         [12]  147 	jr	Z,00106$
+   615B DD CB 04 46   [20]  146 	bit	0, 4 (ix)
+   615F 28 01         [12]  147 	jr	Z,00106$
                             148 ;src/background.c:47: tileW += 1;
-   615D 04            [ 4]  149 	inc	b
-   615E                     150 00106$:
+   6161 1C            [ 4]  149 	inc	e
+   6162                     150 00106$:
                             151 ;src/background.c:50: cpct_etm_drawTileBox2x4(tileX, tileY, tileW, tileH, BACKGROUND_TILMAP_W, pvmem, current_level->background_tilemap);
-   615E 2A 92 6D      [16]  152 	ld	hl, (_current_level)
-   6161 7E            [ 7]  153 	ld	a, (hl)
-   6162 DD 77 FC      [19]  154 	ld	-4 (ix), a
-   6165 23            [ 6]  155 	inc	hl
-   6166 7E            [ 7]  156 	ld	a, (hl)
-   6167 DD 77 FD      [19]  157 	ld	-3 (ix), a
-   616A 2A 6F 6D      [16]  158 	ld	hl, (_pvmem)
-   616D DD 75 FE      [19]  159 	ld	-2 (ix), l
-   6170 DD 74 FF      [19]  160 	ld	-1 (ix), h
-   6173 E1            [10]  161 	pop	hl
-   6174 E5            [11]  162 	push	hl
-   6175 E5            [11]  163 	push	hl
-   6176 DD 6E FE      [19]  164 	ld	l,-2 (ix)
-   6179 DD 66 FF      [19]  165 	ld	h,-1 (ix)
-   617C E5            [11]  166 	push	hl
-   617D 3E 1E         [ 7]  167 	ld	a, #0x1e
-   617F F5            [11]  168 	push	af
-   6180 33            [ 6]  169 	inc	sp
-   6181 D5            [11]  170 	push	de
-   6182 33            [ 6]  171 	inc	sp
-   6183 C5            [11]  172 	push	bc
-   6184 33            [ 6]  173 	inc	sp
-   6185 43            [ 4]  174 	ld	b, e
-   6186 C5            [11]  175 	push	bc
-   6187 CD F5 6A      [17]  176 	call	_cpct_etm_drawTileBox2x4
-   618A DD F9         [10]  177 	ld	sp, ix
-   618C DD E1         [14]  178 	pop	ix
-   618E C9            [10]  179 	ret
-                            180 	.area _CODE
-                            181 	.area _INITIALIZER
-                            182 	.area _CABS (ABS)
+   6162 2A 56 75      [16]  152 	ld	hl, (_current_level)
+   6165 4E            [ 7]  153 	ld	c, (hl)
+   6166 23            [ 6]  154 	inc	hl
+   6167 46            [ 7]  155 	ld	b, (hl)
+   6168 DD 71 FE      [19]  156 	ld	-2 (ix), c
+   616B DD 70 FF      [19]  157 	ld	-1 (ix), b
+   616E 2A 57 72      [16]  158 	ld	hl, (_pvmem)
+   6171 DD 4E FE      [19]  159 	ld	c,-2 (ix)
+   6174 DD 46 FF      [19]  160 	ld	b,-1 (ix)
+   6177 C5            [11]  161 	push	bc
+   6178 E5            [11]  162 	push	hl
+   6179 3E 1E         [ 7]  163 	ld	a, #0x1e
+   617B F5            [11]  164 	push	af
+   617C 33            [ 6]  165 	inc	sp
+   617D D5            [11]  166 	push	de
+   617E 33            [ 6]  167 	inc	sp
+   617F 53            [ 4]  168 	ld	d, e
+   6180 DD 5E FC      [19]  169 	ld	e, -4 (ix)
+   6183 D5            [11]  170 	push	de
+   6184 DD 7E FD      [19]  171 	ld	a, -3 (ix)
+   6187 F5            [11]  172 	push	af
+   6188 33            [ 6]  173 	inc	sp
+   6189 CD 36 6F      [17]  174 	call	_cpct_etm_drawTileBox2x4
+   618C DD F9         [10]  175 	ld	sp, ix
+   618E DD E1         [14]  176 	pop	ix
+   6190 C9            [10]  177 	ret
+                            178 	.area _CODE
+                            179 	.area _INITIALIZER
+                            180 	.area _CABS (ABS)

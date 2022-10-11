@@ -17,8 +17,8 @@
                              17 ; ram data
                              18 ;--------------------------------------------------------
                              19 	.area _DATA
-   6D92                      20 _current_level::
-   6D92                      21 	.ds 2
+   7556                      20 _current_level::
+   7556                      21 	.ds 2
                              22 ;--------------------------------------------------------
                              23 ; ram data
                              24 ;--------------------------------------------------------
@@ -44,10 +44,14 @@
                              44 ;--------------------------------------------------------
                              45 	.area _CODE
                              46 	.area _CODE
-   664D                      47 _level_definitions:
-   664D 8C 4B                48 	.dw _g_tilemap_l01_background
-   664F B4 48                49 	.dw _g_tilemap_l01_blocks
-   6651 D8 42                50 	.dw _g_tilemap_l02_background
-   6653 00 40                51 	.dw _g_tilemap_l02_blocks
-                             52 	.area _INITIALIZER
-                             53 	.area _CABS (ABS)
+   6A86                      47 _level_definitions:
+   6A86 8C 4B                48 	.dw _g_tilemap_l01_background
+   6A88 B4 48                49 	.dw _g_tilemap_l01_blocks
+   6A8A 32                   50 	.db #0x32	; 50	'2'
+   6A8B 02                   51 	.db #0x02	; 2
+   6A8C D8 42                52 	.dw _g_tilemap_l02_background
+   6A8E 00 40                53 	.dw _g_tilemap_l02_blocks
+   6A90 64                   54 	.db #0x64	; 100	'd'
+   6A91 02                   55 	.db #0x02	; 2
+                             56 	.area _INITIALIZER
+                             57 	.area _CABS (ABS)

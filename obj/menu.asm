@@ -152,15 +152,11 @@ _menu_draw::
 	ld	c, l
 	ld	b, h
 ;src/menu.c:43: cpct_setDrawCharM0(fg_pens[current_ink], 0);
-	ld	de, #_fg_pens+0
-	ld	iy, #_current_ink
-	ld	l, 0 (iy)
-	ld	a, 0 (iy)
-	rla
-	sbc	a, a
-	ld	h, a
-	add	hl, de
-	ld	d, (hl)
+	ld	iy, #_fg_pens
+	ld	de, (_current_ink)
+	ld	d, #0x00
+	add	iy, de
+	ld	d, 0 (iy)
 	push	bc
 	xor	a, a
 	push	af
@@ -197,20 +193,13 @@ _menu_update::
 ;src/menu.c:56: if (loop_counter > COLOR_CYCLE_FREQ)
 	ld	a, #0x0a
 	sub	a, 0 (iy)
-	jp	PO, 00115$
-	xor	a, #0x80
-00115$:
-	jp	P, 00104$
+	jr	NC,00104$
 ;src/menu.c:58: loop_counter = 0;
-	ld	hl,#_loop_counter + 0
-	ld	(hl), #0x00
+	ld	0 (iy), #0x00
 ;src/menu.c:59: current_ink = (current_ink + 1) % 4;
-	ld	iy, #_current_ink
-	ld	c, 0 (iy)
-	ld	a, 0 (iy)
-	rla
-	sbc	a, a
-	ld	b, a
+	ld	hl,#_current_ink + 0
+	ld	c, (hl)
+	ld	b, #0x00
 	inc	bc
 	ld	hl, #0x0004
 	push	hl

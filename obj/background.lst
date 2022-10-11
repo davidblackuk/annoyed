@@ -101,82 +101,80 @@
    0044 21 F9 FF      [10]  101 	ld	hl, #0xfff9
    0047 09            [11]  102 	add	hl, bc
    0048                     103 00109$:
-   0048 4D            [ 4]  104 	ld	c, l
-   0049 CB 2C         [ 8]  105 	sra	h
-   004B CB 19         [ 8]  106 	rr	c
+   0048 CB 2C         [ 8]  104 	sra	h
+   004A CB 1D         [ 8]  105 	rr	l
+   004C DD 75 FD      [19]  106 	ld	-3 (ix), l
                             107 ;src/background.c:31: u8 tileY = (screenY - TILE_MAP_SCREEN_PIXEL_OFFSET_Y) / 4;
-   004D DD 6E 05      [19]  108 	ld	l, 5 (ix)
-   0050 26 00         [ 7]  109 	ld	h, #0x00
-   0052 45            [ 4]  110 	ld	b, l
-   0053 54            [ 4]  111 	ld	d, h
-   0054 CB 7C         [ 8]  112 	bit	7, h
-   0056 28 05         [12]  113 	jr	Z,00110$
-   0058 23            [ 6]  114 	inc	hl
-   0059 23            [ 6]  115 	inc	hl
-   005A 23            [ 6]  116 	inc	hl
-   005B 45            [ 4]  117 	ld	b, l
-   005C 54            [ 4]  118 	ld	d, h
-   005D                     119 00110$:
-   005D 58            [ 4]  120 	ld	e, b
-   005E CB 2A         [ 8]  121 	sra	d
-   0060 CB 1B         [ 8]  122 	rr	e
-   0062 CB 2A         [ 8]  123 	sra	d
-   0064 CB 1B         [ 8]  124 	rr	e
+   004F DD 4E 05      [19]  108 	ld	c, 5 (ix)
+   0052 06 00         [ 7]  109 	ld	b, #0x00
+   0054 59            [ 4]  110 	ld	e, c
+   0055 68            [ 4]  111 	ld	l, b
+   0056 CB 78         [ 8]  112 	bit	7, b
+   0058 28 05         [12]  113 	jr	Z,00110$
+   005A 03            [ 6]  114 	inc	bc
+   005B 03            [ 6]  115 	inc	bc
+   005C 03            [ 6]  116 	inc	bc
+   005D 59            [ 4]  117 	ld	e, c
+   005E 68            [ 4]  118 	ld	l, b
+   005F                     119 00110$:
+   005F CB 2D         [ 8]  120 	sra	l
+   0061 CB 1B         [ 8]  121 	rr	e
+   0063 CB 2D         [ 8]  122 	sra	l
+   0065 CB 1B         [ 8]  123 	rr	e
+   0067 DD 73 FC      [19]  124 	ld	-4 (ix), e
                             125 ;src/background.c:32: u8 tileW = bwidth / 2;
-   0066 DD 46 06      [19]  126 	ld	b, 6 (ix)
-   0069 CB 38         [ 8]  127 	srl	b
+   006A DD 5E 06      [19]  126 	ld	e, 6 (ix)
+   006D CB 3B         [ 8]  127 	srl	e
                             128 ;src/background.c:33: u8 tileH = pHeight / 4;
-   006B DD 56 07      [19]  129 	ld	d, 7 (ix)
-   006E CB 3A         [ 8]  130 	srl	d
-   0070 CB 3A         [ 8]  131 	srl	d
+   006F DD 56 07      [19]  129 	ld	d, 7 (ix)
+   0072 CB 3A         [ 8]  130 	srl	d
+   0074 CB 3A         [ 8]  131 	srl	d
                             132 ;src/background.c:35: if (pHeight % 4 > 0)
-   0072 DD 7E 07      [19]  133 	ld	a, 7 (ix)
-   0075 E6 03         [ 7]  134 	and	a, #0x03
-   0077 28 01         [12]  135 	jr	Z,00102$
+   0076 DD 7E 07      [19]  133 	ld	a, 7 (ix)
+   0079 E6 03         [ 7]  134 	and	a, #0x03
+   007B 28 01         [12]  135 	jr	Z,00102$
                             136 ;src/background.c:37: tileH++;
-   0079 14            [ 4]  137 	inc	d
-   007A                     138 00102$:
+   007D 14            [ 4]  137 	inc	d
+   007E                     138 00102$:
                             139 ;src/background.c:40: if (bwidth % 2 > 0)
-   007A DD CB 06 46   [20]  140 	bit	0, 6 (ix)
-   007E 28 01         [12]  141 	jr	Z,00104$
+   007E DD CB 06 46   [20]  140 	bit	0, 6 (ix)
+   0082 28 01         [12]  141 	jr	Z,00104$
                             142 ;src/background.c:42: tileW++;
-   0080 04            [ 4]  143 	inc	b
-   0081                     144 00104$:
+   0084 1C            [ 4]  143 	inc	e
+   0085                     144 00104$:
                             145 ;src/background.c:45: if (screenX & 1 == 1)
-   0081 DD CB 04 46   [20]  146 	bit	0, 4 (ix)
-   0085 28 01         [12]  147 	jr	Z,00106$
+   0085 DD CB 04 46   [20]  146 	bit	0, 4 (ix)
+   0089 28 01         [12]  147 	jr	Z,00106$
                             148 ;src/background.c:47: tileW += 1;
-   0087 04            [ 4]  149 	inc	b
-   0088                     150 00106$:
+   008B 1C            [ 4]  149 	inc	e
+   008C                     150 00106$:
                             151 ;src/background.c:50: cpct_etm_drawTileBox2x4(tileX, tileY, tileW, tileH, BACKGROUND_TILMAP_W, pvmem, current_level->background_tilemap);
-   0088 2Ar00r00      [16]  152 	ld	hl, (_current_level)
-   008B 7E            [ 7]  153 	ld	a, (hl)
-   008C DD 77 FC      [19]  154 	ld	-4 (ix), a
-   008F 23            [ 6]  155 	inc	hl
-   0090 7E            [ 7]  156 	ld	a, (hl)
-   0091 DD 77 FD      [19]  157 	ld	-3 (ix), a
-   0094 2Ar00r00      [16]  158 	ld	hl, (_pvmem)
-   0097 DD 75 FE      [19]  159 	ld	-2 (ix), l
-   009A DD 74 FF      [19]  160 	ld	-1 (ix), h
-   009D E1            [10]  161 	pop	hl
-   009E E5            [11]  162 	push	hl
-   009F E5            [11]  163 	push	hl
-   00A0 DD 6E FE      [19]  164 	ld	l,-2 (ix)
-   00A3 DD 66 FF      [19]  165 	ld	h,-1 (ix)
-   00A6 E5            [11]  166 	push	hl
-   00A7 3E 1E         [ 7]  167 	ld	a, #0x1e
-   00A9 F5            [11]  168 	push	af
-   00AA 33            [ 6]  169 	inc	sp
-   00AB D5            [11]  170 	push	de
-   00AC 33            [ 6]  171 	inc	sp
-   00AD C5            [11]  172 	push	bc
-   00AE 33            [ 6]  173 	inc	sp
-   00AF 43            [ 4]  174 	ld	b, e
-   00B0 C5            [11]  175 	push	bc
-   00B1 CDr00r00      [17]  176 	call	_cpct_etm_drawTileBox2x4
-   00B4 DD F9         [10]  177 	ld	sp, ix
-   00B6 DD E1         [14]  178 	pop	ix
-   00B8 C9            [10]  179 	ret
-                            180 	.area _CODE
-                            181 	.area _INITIALIZER
-                            182 	.area _CABS (ABS)
+   008C 2Ar00r00      [16]  152 	ld	hl, (_current_level)
+   008F 4E            [ 7]  153 	ld	c, (hl)
+   0090 23            [ 6]  154 	inc	hl
+   0091 46            [ 7]  155 	ld	b, (hl)
+   0092 DD 71 FE      [19]  156 	ld	-2 (ix), c
+   0095 DD 70 FF      [19]  157 	ld	-1 (ix), b
+   0098 2Ar00r00      [16]  158 	ld	hl, (_pvmem)
+   009B DD 4E FE      [19]  159 	ld	c,-2 (ix)
+   009E DD 46 FF      [19]  160 	ld	b,-1 (ix)
+   00A1 C5            [11]  161 	push	bc
+   00A2 E5            [11]  162 	push	hl
+   00A3 3E 1E         [ 7]  163 	ld	a, #0x1e
+   00A5 F5            [11]  164 	push	af
+   00A6 33            [ 6]  165 	inc	sp
+   00A7 D5            [11]  166 	push	de
+   00A8 33            [ 6]  167 	inc	sp
+   00A9 53            [ 4]  168 	ld	d, e
+   00AA DD 5E FC      [19]  169 	ld	e, -4 (ix)
+   00AD D5            [11]  170 	push	de
+   00AE DD 7E FD      [19]  171 	ld	a, -3 (ix)
+   00B1 F5            [11]  172 	push	af
+   00B2 33            [ 6]  173 	inc	sp
+   00B3 CDr00r00      [17]  174 	call	_cpct_etm_drawTileBox2x4
+   00B6 DD F9         [10]  175 	ld	sp, ix
+   00B8 DD E1         [14]  176 	pop	ix
+   00BA C9            [10]  177 	ret
+                            178 	.area _CODE
+                            179 	.area _INITIALIZER
+                            180 	.area _CABS (ABS)

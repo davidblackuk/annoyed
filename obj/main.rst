@@ -49,116 +49,125 @@
                              49 ; code
                              50 ;--------------------------------------------------------
                              51 	.area _CODE
-                             52 ;src/main.c:15: void initializeCpc()
+                             52 ;src/main.c:9: void initializeCpc()
                              53 ;	---------------------------------
                              54 ; Function initializeCpc
                              55 ; ---------------------------------
-   6746                      56 _initializeCpc::
-                             57 ;src/main.c:19: cpct_disableFirmware();
-   6746 CD 4F 6C      [17]   58 	call	_cpct_disableFirmware
-                             59 ;src/main.c:21: cpct_setBorder(HW_BLACK);
-   6749 21 10 14      [10]   60 	ld	hl, #0x1410
-   674C E5            [11]   61 	push	hl
-   674D CD A6 69      [17]   62 	call	_cpct_setPALColour
-                             63 ;src/main.c:25: cpct_setVideoMode(0);
-   6750 2E 00         [ 7]   64 	ld	l, #0x00
-   6752 CD 18 6C      [17]   65 	call	_cpct_setVideoMode
-                             66 ;src/main.c:27: cpct_setPalette((u8 *)g_palette, 16);
-   6755 21 10 00      [10]   67 	ld	hl, #0x0010
-   6758 E5            [11]   68 	push	hl
-   6759 21 5F 60      [10]   69 	ld	hl, #_g_palette
-   675C E5            [11]   70 	push	hl
-   675D CD 19 69      [17]   71 	call	_cpct_setPalette
-   6760 C9            [10]   72 	ret
-                             73 ;src/main.c:32: void main(void)
+   6B89                      56 _initializeCpc::
+                             57 ;src/main.c:13: cpct_disableFirmware();
+   6B89 CD 90 70      [17]   58 	call	_cpct_disableFirmware
+                             59 ;src/main.c:15: cpct_setBorder(HW_BLACK);
+   6B8C 21 10 14      [10]   60 	ld	hl, #0x1410
+   6B8F E5            [11]   61 	push	hl
+   6B90 CD E7 6D      [17]   62 	call	_cpct_setPALColour
+                             63 ;src/main.c:19: cpct_setVideoMode(0);
+   6B93 2E 00         [ 7]   64 	ld	l, #0x00
+   6B95 CD 59 70      [17]   65 	call	_cpct_setVideoMode
+                             66 ;src/main.c:21: cpct_setPalette((u8 *)g_palette, 16);
+   6B98 21 10 00      [10]   67 	ld	hl, #0x0010
+   6B9B E5            [11]   68 	push	hl
+   6B9C 21 5F 60      [10]   69 	ld	hl, #_g_palette
+   6B9F E5            [11]   70 	push	hl
+   6BA0 CD 5A 6D      [17]   71 	call	_cpct_setPalette
+   6BA3 C9            [10]   72 	ret
+                             73 ;src/main.c:26: void main(void)
                              74 ;	---------------------------------
                              75 ; Function main
                              76 ; ---------------------------------
-   6761                      77 _main::
-                             78 ;src/main.c:35: initializeCpc();
-   6761 CD 46 67      [17]   79 	call	_initializeCpc
-                             80 ;src/main.c:36: module_menu_initialize();
-   6764 CD D7 68      [17]   81 	call	_module_menu_initialize
-                             82 ;src/main.c:37: module_game_initialize();
-   6767 CD 25 66      [17]   83 	call	_module_game_initialize
-                             84 ;src/main.c:40: while (1) {
-   676A                      85 00102$:
-                             86 ;src/main.c:41: play_scene(&scene_menu);   
-   676A 21 99 6D      [10]   87 	ld	hl, #_scene_menu
-   676D E5            [11]   88 	push	hl
-   676E CD 7B 67      [17]   89 	call	_play_scene
-                             90 ;src/main.c:42: play_scene(&scene_game);   
-   6771 21 89 6D      [10]   91 	ld	hl, #_scene_game
-   6774 E3            [19]   92 	ex	(sp),hl
-   6775 CD 7B 67      [17]   93 	call	_play_scene
-   6778 F1            [10]   94 	pop	af
-   6779 18 EF         [12]   95 	jr	00102$
-                             96 ;src/main.c:47: void play_scene(Scene *scene) {
+   6BA4                      77 _main::
+                             78 ;src/main.c:29: initializeCpc();
+   6BA4 CD 89 6B      [17]   79 	call	_initializeCpc
+                             80 ;src/main.c:30: module_menu_initialize();
+   6BA7 CD 18 6D      [17]   81 	call	_module_menu_initialize
+                             82 ;src/main.c:31: module_game_initialize();
+   6BAA CD 5E 6A      [17]   83 	call	_module_game_initialize
+                             84 ;src/main.c:34: while (1) {
+   6BAD                      85 00102$:
+                             86 ;src/main.c:35: play_scene(&scene_menu);   
+   6BAD 21 5D 75      [10]   87 	ld	hl, #_scene_menu
+   6BB0 E5            [11]   88 	push	hl
+   6BB1 CD BE 6B      [17]   89 	call	_play_scene
+                             90 ;src/main.c:36: play_scene(&scene_game);   
+   6BB4 21 4D 75      [10]   91 	ld	hl, #_scene_game
+   6BB7 E3            [19]   92 	ex	(sp),hl
+   6BB8 CD BE 6B      [17]   93 	call	_play_scene
+   6BBB F1            [10]   94 	pop	af
+   6BBC 18 EF         [12]   95 	jr	00102$
+                             96 ;src/main.c:41: void play_scene(Scene *scene) {
                              97 ;	---------------------------------
                              98 ; Function play_scene
                              99 ; ---------------------------------
-   677B                     100 _play_scene::
-   677B DD E5         [15]  101 	push	ix
-   677D DD 21 00 00   [14]  102 	ld	ix,#0
-   6781 DD 39         [15]  103 	add	ix,sp
-                            104 ;src/main.c:50: scene->initialize();
-   6783 DD 5E 04      [19]  105 	ld	e,4 (ix)
-   6786 DD 56 05      [19]  106 	ld	d,5 (ix)
-   6789 6B            [ 4]  107 	ld	l, e
-   678A 62            [ 4]  108 	ld	h, d
-   678B 4E            [ 7]  109 	ld	c, (hl)
-   678C 23            [ 6]  110 	inc	hl
-   678D 66            [ 7]  111 	ld	h, (hl)
-   678E D5            [11]  112 	push	de
-   678F 69            [ 4]  113 	ld	l, c
-   6790 CD D6 6B      [17]  114 	call	___sdcc_call_hl
-   6793 D1            [10]  115 	pop	de
-                            116 ;src/main.c:52: do
-   6794 4B            [ 4]  117 	ld	c, e
-   6795 42            [ 4]  118 	ld	b, d
-   6796                     119 00101$:
-                            120 ;src/main.c:57: cpct_waitVSYNC();
-   6796 C5            [11]  121 	push	bc
-   6797 D5            [11]  122 	push	de
-   6798 CD 10 6C      [17]  123 	call	_cpct_waitVSYNC
-   679B D1            [10]  124 	pop	de
-   679C C1            [10]  125 	pop	bc
-                            126 ;src/main.c:59: scene->draw();
-   679D 69            [ 4]  127 	ld	l, c
-   679E 60            [ 4]  128 	ld	h, b
-   679F 23            [ 6]  129 	inc	hl
-   67A0 23            [ 6]  130 	inc	hl
-   67A1 7E            [ 7]  131 	ld	a, (hl)
-   67A2 23            [ 6]  132 	inc	hl
-   67A3 66            [ 7]  133 	ld	h, (hl)
-   67A4 6F            [ 4]  134 	ld	l, a
-   67A5 C5            [11]  135 	push	bc
-   67A6 D5            [11]  136 	push	de
-   67A7 CD D6 6B      [17]  137 	call	___sdcc_call_hl
-   67AA D1            [10]  138 	pop	de
-   67AB C1            [10]  139 	pop	bc
-                            140 ;src/main.c:60: state = scene->update();
-   67AC 6B            [ 4]  141 	ld	l, e
-   67AD 62            [ 4]  142 	ld	h, d
-   67AE 23            [ 6]  143 	inc	hl
-   67AF 23            [ 6]  144 	inc	hl
-   67B0 23            [ 6]  145 	inc	hl
-   67B1 23            [ 6]  146 	inc	hl
-   67B2 7E            [ 7]  147 	ld	a, (hl)
-   67B3 23            [ 6]  148 	inc	hl
-   67B4 66            [ 7]  149 	ld	h, (hl)
-   67B5 6F            [ 4]  150 	ld	l, a
-   67B6 C5            [11]  151 	push	bc
-   67B7 D5            [11]  152 	push	de
-   67B8 CD D6 6B      [17]  153 	call	___sdcc_call_hl
-   67BB D1            [10]  154 	pop	de
-   67BC C1            [10]  155 	pop	bc
-                            156 ;src/main.c:62: } while (state == Continue);
-   67BD 7D            [ 4]  157 	ld	a, l
-   67BE B7            [ 4]  158 	or	a, a
-   67BF 28 D5         [12]  159 	jr	Z,00101$
-   67C1 DD E1         [14]  160 	pop	ix
-   67C3 C9            [10]  161 	ret
-                            162 	.area _CODE
-                            163 	.area _INITIALIZER
-                            164 	.area _CABS (ABS)
+   6BBE                     100 _play_scene::
+   6BBE DD E5         [15]  101 	push	ix
+   6BC0 DD 21 00 00   [14]  102 	ld	ix,#0
+   6BC4 DD 39         [15]  103 	add	ix,sp
+   6BC6 F5            [11]  104 	push	af
+                            105 ;src/main.c:44: scene->initialize();
+   6BC7 DD 4E 04      [19]  106 	ld	c,4 (ix)
+   6BCA DD 46 05      [19]  107 	ld	b,5 (ix)
+   6BCD 69            [ 4]  108 	ld	l, c
+   6BCE 60            [ 4]  109 	ld	h, b
+   6BCF 5E            [ 7]  110 	ld	e, (hl)
+   6BD0 23            [ 6]  111 	inc	hl
+   6BD1 66            [ 7]  112 	ld	h, (hl)
+   6BD2 C5            [11]  113 	push	bc
+   6BD3 6B            [ 4]  114 	ld	l, e
+   6BD4 CD 17 70      [17]  115 	call	___sdcc_call_hl
+   6BD7 C1            [10]  116 	pop	bc
+                            117 ;src/main.c:46: do
+   6BD8 33            [ 6]  118 	inc	sp
+   6BD9 33            [ 6]  119 	inc	sp
+   6BDA C5            [11]  120 	push	bc
+   6BDB                     121 00102$:
+                            122 ;src/main.c:51: cpct_waitVSYNC();
+   6BDB C5            [11]  123 	push	bc
+   6BDC CD 51 70      [17]  124 	call	_cpct_waitVSYNC
+   6BDF C1            [10]  125 	pop	bc
+                            126 ;src/main.c:53: scene->draw();
+   6BE0 E1            [10]  127 	pop	hl
+   6BE1 E5            [11]  128 	push	hl
+   6BE2 23            [ 6]  129 	inc	hl
+   6BE3 23            [ 6]  130 	inc	hl
+   6BE4 5E            [ 7]  131 	ld	e, (hl)
+   6BE5 23            [ 6]  132 	inc	hl
+   6BE6 66            [ 7]  133 	ld	h, (hl)
+   6BE7 C5            [11]  134 	push	bc
+   6BE8 6B            [ 4]  135 	ld	l, e
+   6BE9 CD 17 70      [17]  136 	call	___sdcc_call_hl
+   6BEC C1            [10]  137 	pop	bc
+                            138 ;src/main.c:54: state = scene->update();
+   6BED 69            [ 4]  139 	ld	l, c
+   6BEE 60            [ 4]  140 	ld	h, b
+   6BEF 11 04 00      [10]  141 	ld	de, #0x0004
+   6BF2 19            [11]  142 	add	hl, de
+   6BF3 5E            [ 7]  143 	ld	e, (hl)
+   6BF4 23            [ 6]  144 	inc	hl
+   6BF5 66            [ 7]  145 	ld	h, (hl)
+   6BF6 C5            [11]  146 	push	bc
+   6BF7 6B            [ 4]  147 	ld	l, e
+   6BF8 CD 17 70      [17]  148 	call	___sdcc_call_hl
+   6BFB C1            [10]  149 	pop	bc
+                            150 ;src/main.c:59: for (i16 i=0; i< 7000; i++)
+   6BFC 11 00 00      [10]  151 	ld	de, #0x0000
+   6BFF                     152 00106$:
+   6BFF 7B            [ 4]  153 	ld	a, e
+   6C00 D6 58         [ 7]  154 	sub	a, #0x58
+   6C02 7A            [ 4]  155 	ld	a, d
+   6C03 17            [ 4]  156 	rla
+   6C04 3F            [ 4]  157 	ccf
+   6C05 1F            [ 4]  158 	rra
+   6C06 DE 9B         [ 7]  159 	sbc	a, #0x9b
+   6C08 30 03         [12]  160 	jr	NC,00103$
+   6C0A 13            [ 6]  161 	inc	de
+   6C0B 18 F2         [12]  162 	jr	00106$
+   6C0D                     163 00103$:
+                            164 ;src/main.c:66: } while (state == Continue);
+   6C0D 7D            [ 4]  165 	ld	a, l
+   6C0E B7            [ 4]  166 	or	a, a
+   6C0F 28 CA         [12]  167 	jr	Z,00102$
+   6C11 DD F9         [10]  168 	ld	sp, ix
+   6C13 DD E1         [14]  169 	pop	ix
+   6C15 C9            [10]  170 	ret
+                            171 	.area _CODE
+                            172 	.area _INITIALIZER
+                            173 	.area _CABS (ABS)

@@ -94,7 +94,7 @@
    0029 3E 04         [ 7]   94 	ld	a, #0x04
    002B F5            [11]   95 	push	af
    002C 33            [ 6]   96 	inc	sp
-   002D CDr26r01      [17]   97 	call	_menu_print_message
+   002D CDr15r01      [17]   97 	call	_menu_print_message
    0030 F1            [10]   98 	pop	af
                              99 ;src/menu.c:35: menu_print_message(4, 105, AN_PEN_PASTEL_MAGENTA, "\xf3 or d: move right");
    0031 33            [ 6]  100 	inc	sp
@@ -105,7 +105,7 @@
    003A 3E 04         [ 7]  105 	ld	a, #0x04
    003C F5            [11]  106 	push	af
    003D 33            [ 6]  107 	inc	sp
-   003E CDr26r01      [17]  108 	call	_menu_print_message
+   003E CDr15r01      [17]  108 	call	_menu_print_message
    0041 F1            [10]  109 	pop	af
                             110 ;src/menu.c:36: menu_print_message(4, 120, AN_PEN_PASTEL_YELLOW, "\xf0 or w: serve");
    0042 33            [ 6]  111 	inc	sp
@@ -116,7 +116,7 @@
    004B 3E 04         [ 7]  116 	ld	a, #0x04
    004D F5            [11]  117 	push	af
    004E 33            [ 6]  118 	inc	sp
-   004F CDr26r01      [17]  119 	call	_menu_print_message
+   004F CDr15r01      [17]  119 	call	_menu_print_message
    0052 F1            [10]  120 	pop	af
    0053 F1            [10]  121 	pop	af
    0054 33            [ 6]  122 	inc	sp
@@ -157,133 +157,122 @@
    0098 4D            [ 4]  152 	ld	c, l
    0099 44            [ 4]  153 	ld	b, h
                             154 ;src/menu.c:43: cpct_setDrawCharM0(fg_pens[current_ink], 0);
-   009A 11r56r00      [10]  155 	ld	de, #_fg_pens+0
-   009D FD 21r07r00   [14]  156 	ld	iy, #_current_ink
-   00A1 FD 6E 00      [19]  157 	ld	l, 0 (iy)
-   00A4 FD 7E 00      [19]  158 	ld	a, 0 (iy)
-   00A7 17            [ 4]  159 	rla
-   00A8 9F            [ 4]  160 	sbc	a, a
-   00A9 67            [ 4]  161 	ld	h, a
-   00AA 19            [11]  162 	add	hl, de
-   00AB 56            [ 7]  163 	ld	d, (hl)
-   00AC C5            [11]  164 	push	bc
-   00AD AF            [ 4]  165 	xor	a, a
-   00AE F5            [11]  166 	push	af
-   00AF 33            [ 6]  167 	inc	sp
-   00B0 D5            [11]  168 	push	de
-   00B1 33            [ 6]  169 	inc	sp
-   00B2 CDr00r00      [17]  170 	call	_cpct_setDrawCharM0
-   00B5 21rBDr00      [10]  171 	ld	hl, #___str_3
-   00B8 E5            [11]  172 	push	hl
-   00B9 CDr00r00      [17]  173 	call	_cpct_drawStringM0
-   00BC C9            [10]  174 	ret
-   00BD                     175 ___str_3:
-   00BD 50 72 65 73 73 20   176 	.ascii "Press any key"
+   009A FD 21r56r00   [14]  155 	ld	iy, #_fg_pens
+   009E ED 5Br07r00   [20]  156 	ld	de, (_current_ink)
+   00A2 16 00         [ 7]  157 	ld	d, #0x00
+   00A4 FD 19         [15]  158 	add	iy, de
+   00A6 FD 56 00      [19]  159 	ld	d, 0 (iy)
+   00A9 C5            [11]  160 	push	bc
+   00AA AF            [ 4]  161 	xor	a, a
+   00AB F5            [11]  162 	push	af
+   00AC 33            [ 6]  163 	inc	sp
+   00AD D5            [11]  164 	push	de
+   00AE 33            [ 6]  165 	inc	sp
+   00AF CDr00r00      [17]  166 	call	_cpct_setDrawCharM0
+   00B2 21rBAr00      [10]  167 	ld	hl, #___str_3
+   00B5 E5            [11]  168 	push	hl
+   00B6 CDr00r00      [17]  169 	call	_cpct_drawStringM0
+   00B9 C9            [10]  170 	ret
+   00BA                     171 ___str_3:
+   00BA 50 72 65 73 73 20   172 	.ascii "Press any key"
         61 6E 79 20 6B 65
         79
-   00CA 00                  177 	.db 0x00
-                            178 ;src/menu.c:47: SceneState menu_update()
-                            179 ;	---------------------------------
-                            180 ; Function menu_update
-                            181 ; ---------------------------------
-   00CB                     182 _menu_update::
-                            183 ;src/menu.c:49: keys_update();
-   00CB CDr00r00      [17]  184 	call	_keys_update
-                            185 ;src/menu.c:50: if (cpct_isAnyKeyPressed())
-   00CE CDr00r00      [17]  186 	call	_cpct_isAnyKeyPressed
-   00D1 7D            [ 4]  187 	ld	a, l
-   00D2 B7            [ 4]  188 	or	a, a
-   00D3 28 03         [12]  189 	jr	Z,00102$
-                            190 ;src/menu.c:52: return SceneComplete;
-   00D5 2E 01         [ 7]  191 	ld	l, #0x01
-   00D7 C9            [10]  192 	ret
-   00D8                     193 00102$:
-                            194 ;src/menu.c:55: loop_counter += 1;
-   00D8 FD 21r06r00   [14]  195 	ld	iy, #_loop_counter
-   00DC FD 34 00      [23]  196 	inc	0 (iy)
-                            197 ;src/menu.c:56: if (loop_counter > COLOR_CYCLE_FREQ)
-   00DF 3E 0A         [ 7]  198 	ld	a, #0x0a
-   00E1 FD 96 00      [19]  199 	sub	a, 0 (iy)
-   00E4 E2rE9r00      [10]  200 	jp	PO, 00115$
-   00E7 EE 80         [ 7]  201 	xor	a, #0x80
-   00E9                     202 00115$:
-   00E9 F2r10r01      [10]  203 	jp	P, 00104$
-                            204 ;src/menu.c:58: loop_counter = 0;
-   00EC 21r06r00      [10]  205 	ld	hl,#_loop_counter + 0
-   00EF 36 00         [10]  206 	ld	(hl), #0x00
-                            207 ;src/menu.c:59: current_ink = (current_ink + 1) % 4;
-   00F1 FD 21r07r00   [14]  208 	ld	iy, #_current_ink
-   00F5 FD 4E 00      [19]  209 	ld	c, 0 (iy)
-   00F8 FD 7E 00      [19]  210 	ld	a, 0 (iy)
-   00FB 17            [ 4]  211 	rla
-   00FC 9F            [ 4]  212 	sbc	a, a
-   00FD 47            [ 4]  213 	ld	b, a
-   00FE 03            [ 6]  214 	inc	bc
-   00FF 21 04 00      [10]  215 	ld	hl, #0x0004
-   0102 E5            [11]  216 	push	hl
-   0103 C5            [11]  217 	push	bc
-   0104 CDr00r00      [17]  218 	call	__modsint
-   0107 F1            [10]  219 	pop	af
-   0108 F1            [10]  220 	pop	af
-   0109 FD 21r07r00   [14]  221 	ld	iy, #_current_ink
-   010D FD 75 00      [19]  222 	ld	0 (iy), l
-   0110                     223 00104$:
-                            224 ;src/menu.c:62: return Continue;
-   0110 2E 00         [ 7]  225 	ld	l, #0x00
-   0112 C9            [10]  226 	ret
-                            227 ;src/menu.c:65: void module_menu_initialize()
-                            228 ;	---------------------------------
-                            229 ; Function module_menu_initialize
-                            230 ; ---------------------------------
-   0113                     231 _module_menu_initialize::
-                            232 ;src/menu.c:67: scene_menu.initialize = menu_initialize;
-   0113 21r00r00      [10]  233 	ld	hl, #_menu_initialize
-   0116 22r00r00      [16]  234 	ld	(_scene_menu), hl
-                            235 ;src/menu.c:68: scene_menu.update = menu_update;
-   0119 21rCBr00      [10]  236 	ld	hl, #_menu_update
-   011C 22r04r00      [16]  237 	ld	((_scene_menu + 0x0004)), hl
-                            238 ;src/menu.c:69: scene_menu.draw = menu_draw;
-   011F 21r8Dr00      [10]  239 	ld	hl, #_menu_draw
-   0122 22r02r00      [16]  240 	ld	((_scene_menu + 0x0002)), hl
-   0125 C9            [10]  241 	ret
-                            242 ;src/menu.c:72: void menu_print_message(u8 x, u8 y, u8 fg, char *message)
-                            243 ;	---------------------------------
-                            244 ; Function menu_print_message
-                            245 ; ---------------------------------
-   0126                     246 _menu_print_message::
-                            247 ;src/menu.c:74: u8 *pvmem = cpct_getScreenPtr(CPCT_VMEM_START, x, y);
-   0126 21 03 00      [10]  248 	ld	hl, #3+0
-   0129 39            [11]  249 	add	hl, sp
-   012A 7E            [ 7]  250 	ld	a, (hl)
-   012B F5            [11]  251 	push	af
-   012C 33            [ 6]  252 	inc	sp
-   012D 21 03 00      [10]  253 	ld	hl, #3+0
-   0130 39            [11]  254 	add	hl, sp
-   0131 7E            [ 7]  255 	ld	a, (hl)
-   0132 F5            [11]  256 	push	af
-   0133 33            [ 6]  257 	inc	sp
-   0134 21 00 C0      [10]  258 	ld	hl, #0xc000
-   0137 E5            [11]  259 	push	hl
-   0138 CDr00r00      [17]  260 	call	_cpct_getScreenPtr
-                            261 ;src/menu.c:75: cpct_setDrawCharM0(fg, AN_PEN_BLACK);
-   013B E5            [11]  262 	push	hl
-   013C AF            [ 4]  263 	xor	a, a
-   013D F5            [11]  264 	push	af
-   013E 33            [ 6]  265 	inc	sp
-   013F 21 07 00      [10]  266 	ld	hl, #7+0
-   0142 39            [11]  267 	add	hl, sp
-   0143 7E            [ 7]  268 	ld	a, (hl)
-   0144 F5            [11]  269 	push	af
-   0145 33            [ 6]  270 	inc	sp
-   0146 CDr00r00      [17]  271 	call	_cpct_setDrawCharM0
-   0149 21 07 00      [10]  272 	ld	hl, #7
-   014C 39            [11]  273 	add	hl, sp
-   014D 4E            [ 7]  274 	ld	c, (hl)
-   014E 23            [ 6]  275 	inc	hl
-   014F 46            [ 7]  276 	ld	b, (hl)
-   0150 C5            [11]  277 	push	bc
-   0151 CDr00r00      [17]  278 	call	_cpct_drawStringM0
-   0154 C9            [10]  279 	ret
-                            280 	.area _CODE
-                            281 	.area _INITIALIZER
-                            282 	.area _CABS (ABS)
+   00C7 00                  173 	.db 0x00
+                            174 ;src/menu.c:47: SceneState menu_update()
+                            175 ;	---------------------------------
+                            176 ; Function menu_update
+                            177 ; ---------------------------------
+   00C8                     178 _menu_update::
+                            179 ;src/menu.c:49: keys_update();
+   00C8 CDr00r00      [17]  180 	call	_keys_update
+                            181 ;src/menu.c:50: if (cpct_isAnyKeyPressed())
+   00CB CDr00r00      [17]  182 	call	_cpct_isAnyKeyPressed
+   00CE 7D            [ 4]  183 	ld	a, l
+   00CF B7            [ 4]  184 	or	a, a
+   00D0 28 03         [12]  185 	jr	Z,00102$
+                            186 ;src/menu.c:52: return SceneComplete;
+   00D2 2E 01         [ 7]  187 	ld	l, #0x01
+   00D4 C9            [10]  188 	ret
+   00D5                     189 00102$:
+                            190 ;src/menu.c:55: loop_counter += 1;
+   00D5 FD 21r06r00   [14]  191 	ld	iy, #_loop_counter
+   00D9 FD 34 00      [23]  192 	inc	0 (iy)
+                            193 ;src/menu.c:56: if (loop_counter > COLOR_CYCLE_FREQ)
+   00DC 3E 0A         [ 7]  194 	ld	a, #0x0a
+   00DE FD 96 00      [19]  195 	sub	a, 0 (iy)
+   00E1 30 1C         [12]  196 	jr	NC,00104$
+                            197 ;src/menu.c:58: loop_counter = 0;
+   00E3 FD 36 00 00   [19]  198 	ld	0 (iy), #0x00
+                            199 ;src/menu.c:59: current_ink = (current_ink + 1) % 4;
+   00E7 21r07r00      [10]  200 	ld	hl,#_current_ink + 0
+   00EA 4E            [ 7]  201 	ld	c, (hl)
+   00EB 06 00         [ 7]  202 	ld	b, #0x00
+   00ED 03            [ 6]  203 	inc	bc
+   00EE 21 04 00      [10]  204 	ld	hl, #0x0004
+   00F1 E5            [11]  205 	push	hl
+   00F2 C5            [11]  206 	push	bc
+   00F3 CDr00r00      [17]  207 	call	__modsint
+   00F6 F1            [10]  208 	pop	af
+   00F7 F1            [10]  209 	pop	af
+   00F8 FD 21r07r00   [14]  210 	ld	iy, #_current_ink
+   00FC FD 75 00      [19]  211 	ld	0 (iy), l
+   00FF                     212 00104$:
+                            213 ;src/menu.c:62: return Continue;
+   00FF 2E 00         [ 7]  214 	ld	l, #0x00
+   0101 C9            [10]  215 	ret
+                            216 ;src/menu.c:65: void module_menu_initialize()
+                            217 ;	---------------------------------
+                            218 ; Function module_menu_initialize
+                            219 ; ---------------------------------
+   0102                     220 _module_menu_initialize::
+                            221 ;src/menu.c:67: scene_menu.initialize = menu_initialize;
+   0102 21r00r00      [10]  222 	ld	hl, #_menu_initialize
+   0105 22r00r00      [16]  223 	ld	(_scene_menu), hl
+                            224 ;src/menu.c:68: scene_menu.update = menu_update;
+   0108 21rC8r00      [10]  225 	ld	hl, #_menu_update
+   010B 22r04r00      [16]  226 	ld	((_scene_menu + 0x0004)), hl
+                            227 ;src/menu.c:69: scene_menu.draw = menu_draw;
+   010E 21r8Dr00      [10]  228 	ld	hl, #_menu_draw
+   0111 22r02r00      [16]  229 	ld	((_scene_menu + 0x0002)), hl
+   0114 C9            [10]  230 	ret
+                            231 ;src/menu.c:72: void menu_print_message(u8 x, u8 y, u8 fg, char *message)
+                            232 ;	---------------------------------
+                            233 ; Function menu_print_message
+                            234 ; ---------------------------------
+   0115                     235 _menu_print_message::
+                            236 ;src/menu.c:74: u8 *pvmem = cpct_getScreenPtr(CPCT_VMEM_START, x, y);
+   0115 21 03 00      [10]  237 	ld	hl, #3+0
+   0118 39            [11]  238 	add	hl, sp
+   0119 7E            [ 7]  239 	ld	a, (hl)
+   011A F5            [11]  240 	push	af
+   011B 33            [ 6]  241 	inc	sp
+   011C 21 03 00      [10]  242 	ld	hl, #3+0
+   011F 39            [11]  243 	add	hl, sp
+   0120 7E            [ 7]  244 	ld	a, (hl)
+   0121 F5            [11]  245 	push	af
+   0122 33            [ 6]  246 	inc	sp
+   0123 21 00 C0      [10]  247 	ld	hl, #0xc000
+   0126 E5            [11]  248 	push	hl
+   0127 CDr00r00      [17]  249 	call	_cpct_getScreenPtr
+                            250 ;src/menu.c:75: cpct_setDrawCharM0(fg, AN_PEN_BLACK);
+   012A E5            [11]  251 	push	hl
+   012B AF            [ 4]  252 	xor	a, a
+   012C F5            [11]  253 	push	af
+   012D 33            [ 6]  254 	inc	sp
+   012E 21 07 00      [10]  255 	ld	hl, #7+0
+   0131 39            [11]  256 	add	hl, sp
+   0132 7E            [ 7]  257 	ld	a, (hl)
+   0133 F5            [11]  258 	push	af
+   0134 33            [ 6]  259 	inc	sp
+   0135 CDr00r00      [17]  260 	call	_cpct_setDrawCharM0
+   0138 21 07 00      [10]  261 	ld	hl, #7
+   013B 39            [11]  262 	add	hl, sp
+   013C 4E            [ 7]  263 	ld	c, (hl)
+   013D 23            [ 6]  264 	inc	hl
+   013E 46            [ 7]  265 	ld	b, (hl)
+   013F C5            [11]  266 	push	bc
+   0140 CDr00r00      [17]  267 	call	_cpct_drawStringM0
+   0143 C9            [10]  268 	ret
+                            269 	.area _CODE
+                            270 	.area _INITIALIZER
+                            271 	.area _CABS (ABS)

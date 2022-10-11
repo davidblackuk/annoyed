@@ -47,7 +47,11 @@
    0000                      47 _level_definitions:
    0000r00r00                48 	.dw _g_tilemap_l01_background
    0002r00r00                49 	.dw _g_tilemap_l01_blocks
-   0004r00r00                50 	.dw _g_tilemap_l02_background
-   0006r00r00                51 	.dw _g_tilemap_l02_blocks
-                             52 	.area _INITIALIZER
-                             53 	.area _CABS (ABS)
+   0004 32                   50 	.db #0x32	; 50	'2'
+   0005 02                   51 	.db #0x02	; 2
+   0006r00r00                52 	.dw _g_tilemap_l02_background
+   0008r00r00                53 	.dw _g_tilemap_l02_blocks
+   000A 64                   54 	.db #0x64	; 100	'd'
+   000B 02                   55 	.db #0x02	; 2
+                             56 	.area _INITIALIZER
+                             57 	.area _CABS (ABS)

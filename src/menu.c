@@ -17,8 +17,8 @@ Scene scene_menu;
 
 const u8 fg_pens[4] = {AN_PEN_WHITE, AN_PEN_PASTEL_CYAN, AN_PEN_SKY_BLUE, AN_PEN_PASTEL_MAGENTA};
 
-i8 loop_counter;
-i8 current_ink;
+u8 loop_counter;
+u8 current_ink;
 
 void menu_initialize()
 {

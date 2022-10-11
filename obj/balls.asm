@@ -9,6 +9,7 @@
 ; Public variables in this module
 ;--------------------------------------------------------
 	.globl _background_restore
+	.globl _blocks_intersect_ball
 	.globl _cpct_getScreenPtr
 	.globl _cpct_drawSprite
 	.globl _serving
@@ -58,21 +59,21 @@ _serving::
 ; code
 ;--------------------------------------------------------
 	.area _CODE
-;src/balls.c:15: void balls_initialize()
+;src/balls.c:16: void balls_initialize()
 ;	---------------------------------
 ; Function balls_initialize
 ; ---------------------------------
 _balls_initialize::
-;src/balls.c:18: serving = 1;
+;src/balls.c:19: serving = 1;
 	ld	hl,#_serving + 0
 	ld	(hl), #0x01
-;src/balls.c:21: for (u8 i = 0; i < MAX_BALLS; i++)
+;src/balls.c:22: for (u8 i = 0; i < MAX_BALLS; i++)
 	ld	c, #0x00
 00103$:
 	ld	a, c
 	sub	a, #0x03
 	jr	NC,00101$
-;src/balls.c:23: balls[i].active = 0;
+;src/balls.c:24: balls[i].active = 0;
 	ld	b,#0x00
 	ld	l, c
 	ld	h, b
@@ -86,86 +87,86 @@ _balls_initialize::
 	ex	de,hl
 	xor	a, a
 	ld	(de), a
-;src/balls.c:24: balls[i].x = TILE_MAP_SCREEN_BYTE_OFFSET_X;
+;src/balls.c:25: balls[i].x = TILE_MAP_SCREEN_BYTE_OFFSET_X;
 	ld	l, e
 	ld	h, d
 	inc	hl
 	ld	(hl), #0x08
-;src/balls.c:25: balls[i].y = TILE_MAP_SCREEN_PIXEL_OFFSET_Y;
+;src/balls.c:26: balls[i].y = TILE_MAP_SCREEN_PIXEL_OFFSET_Y;
 	ld	l, e
 	ld	h, d
 	inc	hl
 	inc	hl
 	ld	(hl), #0x00
-;src/balls.c:26: balls[i].prev_x = TILE_MAP_SCREEN_BYTE_OFFSET_X;
+;src/balls.c:27: balls[i].prev_x = TILE_MAP_SCREEN_BYTE_OFFSET_X;
 	ld	l, e
 	ld	h, d
 	inc	hl
 	inc	hl
 	inc	hl
 	ld	(hl), #0x08
-;src/balls.c:27: balls[i].prev_y = TILE_MAP_SCREEN_PIXEL_OFFSET_Y;
+;src/balls.c:28: balls[i].prev_y = TILE_MAP_SCREEN_PIXEL_OFFSET_Y;
 	ld	hl, #0x0004
 	add	hl, de
 	ld	(hl), #0x00
-;src/balls.c:28: balls[i].dx = 1;
+;src/balls.c:29: balls[i].dx = 1;
 	ld	hl, #0x0005
 	add	hl, de
 	ld	(hl), #0x01
-;src/balls.c:29: balls[i].dy = 0;
+;src/balls.c:30: balls[i].dy = 0;
 	ld	hl, #0x0006
 	add	hl, de
 	ld	(hl), #0x00
-;src/balls.c:21: for (u8 i = 0; i < MAX_BALLS; i++)
+;src/balls.c:22: for (u8 i = 0; i < MAX_BALLS; i++)
 	inc	c
 	jr	00103$
 00101$:
-;src/balls.c:31: balls[0].active = 1;
+;src/balls.c:32: balls[0].active = 1;
 	ld	hl, #_balls
 	ld	(hl), #0x01
-;src/balls.c:34: center_ball(balls);
+;src/balls.c:35: center_ball(balls);
 	push	hl
 	call	_center_ball
 	pop	af
 	ret
-;src/balls.c:37: void balls_update()
+;src/balls.c:38: void balls_update()
 ;	---------------------------------
 ; Function balls_update
 ; ---------------------------------
 _balls_update::
-;src/balls.c:39: Ball *ball = balls;
+;src/balls.c:40: Ball *ball = balls;
 	ld	bc, #_balls+0
-;src/balls.c:40: if (serving)
+;src/balls.c:41: if (serving)
 	ld	a,(#_serving + 0)
 	or	a, a
 	jr	Z,00115$
-;src/balls.c:42: center_ball(ball);
+;src/balls.c:43: center_ball(ball);
 	push	bc
 	push	bc
 	call	_center_ball
 	pop	af
 	pop	bc
-;src/balls.c:43: if (key_serve_is_pressed)
+;src/balls.c:44: if (key_serve_is_pressed)
 	ld	a,(#_key_serve_is_pressed + 0)
 	or	a, a
 	ret	Z
-;src/balls.c:45: serving = 0;
+;src/balls.c:46: serving = 0;
 	ld	hl,#_serving + 0
 	ld	(hl), #0x00
-;src/balls.c:46: ball->dx = 1; // 45 degrees right
+;src/balls.c:47: ball->dx = 1; // 45 degrees right
 	ld	hl, #(_balls + 0x0005)
 	ld	(hl), #0x01
-;src/balls.c:47: ball->dy = -2;
+;src/balls.c:48: ball->dy = -2;
 	ld	hl, #(_balls + 0x0006)
 	ld	(hl), #0xfe
-;src/balls.c:48: ball->prev_x = ball->x;
+;src/balls.c:49: ball->prev_x = ball->x;
 	ld	l, c
 	ld	h, b
 	inc	hl
 	ld	e, (hl)
 	ld	hl, #(_balls + 0x0003)
 	ld	(hl), e
-;src/balls.c:49: ball->prev_y = ball->y;
+;src/balls.c:50: ball->prev_y = ball->y;
 	ld	l, c
 	ld	h, b
 	inc	hl
@@ -174,14 +175,14 @@ _balls_update::
 	ld	hl, #(_balls + 0x0004)
 	ld	(hl), c
 	ret
-;src/balls.c:54: for (u8 i = 0; i < MAX_BALLS; i++)
+;src/balls.c:55: for (u8 i = 0; i < MAX_BALLS; i++)
 00115$:
 	ld	e, #0x00
 00108$:
 	ld	a, e
 	sub	a, #0x03
 	ret	NC
-;src/balls.c:56: update_ball(ball);
+;src/balls.c:57: update_ball(ball);
 	push	bc
 	push	de
 	push	bc
@@ -189,15 +190,15 @@ _balls_update::
 	pop	af
 	pop	de
 	pop	bc
-;src/balls.c:57: ball++;
+;src/balls.c:58: ball++;
 	ld	hl, #0x0007
 	add	hl,bc
 	ld	c, l
 	ld	b, h
-;src/balls.c:54: for (u8 i = 0; i < MAX_BALLS; i++)
+;src/balls.c:55: for (u8 i = 0; i < MAX_BALLS; i++)
 	inc	e
 	jr	00108$
-;src/balls.c:62: void balls_restore_background()
+;src/balls.c:63: void balls_restore_background()
 ;	---------------------------------
 ; Function balls_restore_background
 ; ---------------------------------
@@ -206,19 +207,19 @@ _balls_restore_background::
 	ld	ix,#0
 	add	ix,sp
 	dec	sp
-;src/balls.c:64: Ball *ball = balls;
+;src/balls.c:65: Ball *ball = balls;
 	ld	bc, #_balls
-;src/balls.c:65: for (u8 i = 0; i < MAX_BALLS; i++)
+;src/balls.c:66: for (u8 i = 0; i < MAX_BALLS; i++)
 	ld	-1 (ix), #0x00
 00105$:
 	ld	a, -1 (ix)
 	sub	a, #0x03
 	jr	NC,00107$
-;src/balls.c:67: if (ball->active)
+;src/balls.c:68: if (ball->active)
 	ld	a, (bc)
 	or	a, a
 	jr	Z,00102$
-;src/balls.c:69: background_restore(ball->prev_x, balls->prev_y, SP_BALL_W, SP_BALL_H);
+;src/balls.c:70: background_restore(ball->prev_x, balls->prev_y, SP_BALL_W, SP_BALL_H);
 	ld	hl, #_balls + 4
 	ld	e, (hl)
 	ld	l, c
@@ -240,34 +241,34 @@ _balls_restore_background::
 	pop	af
 	pop	bc
 00102$:
-;src/balls.c:71: ball++;
+;src/balls.c:72: ball++;
 	ld	hl, #0x0007
 	add	hl,bc
 	ld	c, l
 	ld	b, h
-;src/balls.c:65: for (u8 i = 0; i < MAX_BALLS; i++)
+;src/balls.c:66: for (u8 i = 0; i < MAX_BALLS; i++)
 	inc	-1 (ix)
 	jr	00105$
 00107$:
 	inc	sp
 	pop	ix
 	ret
-;src/balls.c:75: void balls_draw()
+;src/balls.c:76: void balls_draw()
 ;	---------------------------------
 ; Function balls_draw
 ; ---------------------------------
 _balls_draw::
-;src/balls.c:79: for (u8 i = 0; i < MAX_BALLS; i++)
+;src/balls.c:80: for (u8 i = 0; i < MAX_BALLS; i++)
 	ld	c, #0x00
 00105$:
 	ld	a, c
 	sub	a, #0x03
 	ret	NC
-;src/balls.c:81: if (balls->active)
+;src/balls.c:82: if (balls->active)
 	ld	a, (#_balls + 0)
 	or	a, a
 	jr	Z,00106$
-;src/balls.c:83: svmem = cpct_getScreenPtr(CPCT_VMEM_START, balls->x, balls->y);
+;src/balls.c:84: svmem = cpct_getScreenPtr(CPCT_VMEM_START, balls->x, balls->y);
 	ld	hl, #_balls + 2
 	ld	b, (hl)
 	ld	hl, #_balls + 1
@@ -286,10 +287,10 @@ _balls_draw::
 	call	_cpct_drawSprite
 	pop	bc
 00106$:
-;src/balls.c:79: for (u8 i = 0; i < MAX_BALLS; i++)
+;src/balls.c:80: for (u8 i = 0; i < MAX_BALLS; i++)
 	inc	c
 	jr	00105$
-;src/balls.c:89: Ball *balls_get_first_active()
+;src/balls.c:90: Ball *balls_get_first_active()
 ;	---------------------------------
 ; Function balls_get_first_active
 ; ---------------------------------
@@ -298,10 +299,10 @@ _balls_get_first_active::
 	ld	ix,#0
 	add	ix,sp
 	push	af
-;src/balls.c:91: Ball *ball = balls;
+;src/balls.c:92: Ball *ball = balls;
 	ld	-2 (ix), #<(_balls)
 	ld	-1 (ix), #>(_balls)
-;src/balls.c:92: for (u8 i = 0; i < MAX_BALLS; i++)
+;src/balls.c:93: for (u8 i = 0; i < MAX_BALLS; i++)
 	pop	hl
 	push	hl
 	ld	c, #0x00
@@ -309,32 +310,32 @@ _balls_get_first_active::
 	ld	a, c
 	sub	a, #0x03
 	jr	NC,00103$
-;src/balls.c:94: if (ball->active)
+;src/balls.c:95: if (ball->active)
 	ld	a, (hl)
 	or	a, a
 	jr	Z,00102$
-;src/balls.c:96: return ball;
+;src/balls.c:97: return ball;
 	pop	hl
 	push	hl
 	jr	00107$
 00102$:
-;src/balls.c:98: ball++;
+;src/balls.c:99: ball++;
 	ld	de, #0x0007
 	add	hl, de
 	inc	sp
 	inc	sp
 	push	hl
-;src/balls.c:92: for (u8 i = 0; i < MAX_BALLS; i++)
+;src/balls.c:93: for (u8 i = 0; i < MAX_BALLS; i++)
 	inc	c
 	jr	00105$
 00103$:
-;src/balls.c:100: return NULL;
+;src/balls.c:101: return NULL;
 	ld	hl, #0x0000
 00107$:
 	ld	sp, ix
 	pop	ix
 	ret
-;src/balls.c:106: void center_ball(Ball *ball)
+;src/balls.c:107: void center_ball(Ball *ball)
 ;	---------------------------------
 ; Function center_ball
 ; ---------------------------------
@@ -342,7 +343,7 @@ _center_ball::
 	push	ix
 	ld	ix,#0
 	add	ix,sp
-;src/balls.c:108: ball->prev_x = ball->x;
+;src/balls.c:109: ball->prev_x = ball->x;
 	ld	c,4 (ix)
 	ld	b,5 (ix)
 	push	bc
@@ -355,14 +356,14 @@ _center_ball::
 	inc	de
 	ld	a, (de)
 	ld	0 (iy), a
-;src/balls.c:109: ball->prev_y = ball->y;
+;src/balls.c:110: ball->prev_y = ball->y;
 	ld	iy, #0x0004
 	add	iy, bc
 	inc	bc
 	inc	bc
 	ld	a, (bc)
 	ld	0 (iy), a
-;src/balls.c:110: ball->x = batX + (batW / 4);
+;src/balls.c:111: ball->x = batX + (batW / 4);
 	ld	iy, #_batW
 	ld	l, 0 (iy)
 	srl	l
@@ -370,13 +371,13 @@ _center_ball::
 	ld	a,(#_batX + 0)
 	add	a, l
 	ld	(de), a
-;src/balls.c:111: ball->y = batY - SP_BALL_H;
+;src/balls.c:112: ball->y = batY - SP_BALL_H;
 	ld	a,(#_batY + 0)
 	add	a, #0xfa
 	ld	(bc), a
 	pop	ix
 	ret
-;src/balls.c:114: void update_ball(Ball *ball)
+;src/balls.c:115: void update_ball(Ball *ball)
 ;	---------------------------------
 ; Function update_ball
 ; ---------------------------------
@@ -384,7 +385,7 @@ _update_ball::
 	push	ix
 	ld	ix,#0
 	add	ix,sp
-;src/balls.c:116: ball->prev_x = ball->x;
+;src/balls.c:117: ball->prev_x = ball->x;
 	ld	c,4 (ix)
 	ld	b,5 (ix)
 	ld	e, c
@@ -397,7 +398,7 @@ _update_ball::
 	inc	hl
 	ld	a, (hl)
 	ld	(de), a
-;src/balls.c:117: ball->prev_y = ball->y;
+;src/balls.c:118: ball->prev_y = ball->y;
 	ld	hl, #0x0004
 	add	hl,bc
 	ex	de,hl
@@ -407,19 +408,30 @@ _update_ball::
 	inc	hl
 	ld	a, (hl)
 	ld	(de), a
-;src/balls.c:118: move_ball_x(ball);
+;src/balls.c:120: if (ball->active)
+	ld	a, (bc)
+	or	a, a
+	jr	Z,00103$
+;src/balls.c:122: blocks_intersect_ball(ball);
 	push	bc
+	call	_blocks_intersect_ball
+	pop	af
+;src/balls.c:124: move_ball_x(ball);
+	ld	l,4 (ix)
+	ld	h,5 (ix)
+	push	hl
 	call	_move_ball_x
 	pop	af
-;src/balls.c:119: move_ball_y(ball);
+;src/balls.c:125: move_ball_y(ball);
 	ld	l,4 (ix)
 	ld	h,5 (ix)
 	push	hl
 	call	_move_ball_y
 	pop	af
+00103$:
 	pop	ix
 	ret
-;src/balls.c:123: void move_ball_x(Ball *ball)
+;src/balls.c:129: void move_ball_x(Ball *ball)
 ;	---------------------------------
 ; Function move_ball_x
 ; ---------------------------------
@@ -427,66 +439,67 @@ _move_ball_x::
 	push	ix
 	ld	ix,#0
 	add	ix,sp
-;src/balls.c:125: if (ball->active)
+;src/balls.c:131: u8 new_x = ball->x + ball->dx;
 	ld	e,4 (ix)
 	ld	d,5 (ix)
-	ld	a, (de)
-	or	a, a
-	jr	Z,00112$
-;src/balls.c:127: u8 new_x = ball->x + ball->dx;
 	push	de
 	pop	iy
 	inc	iy
-	ld	c, 0 (iy)
-	ld	hl, #0x0005
-	add	hl, de
-	ld	e, (hl)
-	ld	a, c
-	add	a, e
+	ld	b, 0 (iy)
+	inc	de
+	inc	de
+	inc	de
+	inc	de
+	inc	de
+	ld	a, (de)
 	ld	c, a
-;src/balls.c:130: if (ball->dx > 0)
+	ld	l, b
+	add	hl, bc
+;src/balls.c:133: if (ball->dx > 0)
 	xor	a, a
-	sub	a, e
-	jp	PO, 00130$
+	sub	a, c
+	jp	PO, 00124$
 	xor	a, #0x80
-00130$:
+00124$:
 	jp	P, 00108$
-;src/balls.c:133: if (new_x >= PLAY_AREA_RIGHT_EDGE - SP_BALL_W)
-	ld	a, c
+;src/balls.c:136: if (new_x >= PLAY_AREA_RIGHT_EDGE - SP_BALL_W)
+	ld	a, l
 	sub	a, #0x3d
 	jr	C,00102$
-;src/balls.c:135: ball->x = PLAY_AREA_RIGHT_EDGE - SP_BALL_W;
+;src/balls.c:138: ball->x = PLAY_AREA_RIGHT_EDGE - SP_BALL_W;
 	ld	0 (iy), #0x3d
-;src/balls.c:136: ball->dx = -ball->dx;
-	ld	c, (hl)
+;src/balls.c:139: ball->dx = -ball->dx;
+	ld	a, (de)
+	ld	c, a
 	xor	a, a
 	sub	a, c
-	ld	(hl), a
-	jr	00112$
+	ld	(de), a
+	jr	00110$
 00102$:
-;src/balls.c:140: ball->x = new_x;
-	ld	0 (iy), c
-	jr	00112$
+;src/balls.c:143: ball->x = new_x;
+	ld	0 (iy), l
+	jr	00110$
 00108$:
-;src/balls.c:147: if (new_x <= PLAY_AREA_LEFT_EDGE)
+;src/balls.c:150: if (new_x <= PLAY_AREA_LEFT_EDGE)
 	ld	a, #0x0c
-	sub	a, c
+	sub	a, l
 	jr	C,00105$
-;src/balls.c:149: ball->x = PLAY_AREA_LEFT_EDGE;
+;src/balls.c:152: ball->x = PLAY_AREA_LEFT_EDGE;
 	ld	0 (iy), #0x0c
-;src/balls.c:150: ball->dx = -ball->dx;
-	ld	c, (hl)
+;src/balls.c:153: ball->dx = -ball->dx;
+	ld	a, (de)
+	ld	c, a
 	xor	a, a
 	sub	a, c
-	ld	(hl), a
-	jr	00112$
+	ld	(de), a
+	jr	00110$
 00105$:
-;src/balls.c:154: ball->x = new_x;
-	ld	0 (iy), c
-00112$:
+;src/balls.c:157: ball->x = new_x;
+	ld	0 (iy), l
+00110$:
 	pop	ix
 	ret
-;src/balls.c:162: void move_ball_y(Ball * ball)
+;src/balls.c:164: void move_ball_y(Ball *ball)
 ;	---------------------------------
 ; Function move_ball_y
 ; ---------------------------------
@@ -495,7 +508,7 @@ _move_ball_y::
 	ld	ix,#0
 	add	ix,sp
 	push	af
-;src/balls.c:165: u8 new_y = ball->y + ball->dy;
+;src/balls.c:167: u8 new_y = ball->y + ball->dy;
 	ld	c,4 (ix)
 	ld	b,5 (ix)
 	ld	e, c
@@ -510,43 +523,43 @@ _move_ball_y::
 	ld	a, -1 (ix)
 	add	a, l
 	ld	-2 (ix), a
-;src/balls.c:168: if (ball->dy < 0)
+;src/balls.c:170: if (ball->dy < 0)
 	bit	7, l
 	jr	Z,00108$
-;src/balls.c:170: if (new_y <= PLAY_AREA_TOP_EDGE)
+;src/balls.c:172: if (new_y <= PLAY_AREA_TOP_EDGE)
 	ld	a, #0x08
 	sub	a, -2 (ix)
 	jr	C,00102$
-;src/balls.c:172: ball->y = PLAY_AREA_TOP_EDGE;
+;src/balls.c:174: ball->y = PLAY_AREA_TOP_EDGE;
 	ld	a, #0x08
 	ld	(de), a
-;src/balls.c:173: ball->dy = -ball->dy;
+;src/balls.c:175: ball->dy = -ball->dy;
 	ld	c, 0 (iy)
 	xor	a, a
 	sub	a, c
 	ld	0 (iy), a
 	jr	00109$
 00102$:
-;src/balls.c:177: ball->y = new_y;
+;src/balls.c:179: ball->y = new_y;
 	ld	a, -2 (ix)
 	ld	(de), a
 	jr	00109$
 00108$:
-;src/balls.c:184: if (new_y >= YOUR_DEAD_PIXEL_ROW)
+;src/balls.c:186: if (new_y >= YOUR_DEAD_PIXEL_ROW)
 	ld	a, -2 (ix)
 	sub	a, #0xc2
 	jr	C,00105$
-;src/balls.c:187: ball->active = 0;
+;src/balls.c:189: ball->active = 0;
 	xor	a, a
 	ld	(bc), a
-;src/balls.c:188: ball->dy = -ball->dy;
+;src/balls.c:190: ball->dy = -ball->dy;
 	ld	c, 0 (iy)
 	xor	a, a
 	sub	a, c
 	ld	0 (iy), a
 	jr	00109$
 00105$:
-;src/balls.c:193: check_bat_collision(ball, new_y);
+;src/balls.c:195: check_bat_collision(ball, new_y);
 	push	de
 	ld	a, -2 (ix)
 	push	af
@@ -557,13 +570,13 @@ _move_ball_y::
 	inc	sp
 	pop	de
 00109$:
-;src/balls.c:196: ball->y = new_y;
+;src/balls.c:198: ball->y = new_y;
 	ld	a, -2 (ix)
 	ld	(de), a
 	ld	sp, ix
 	pop	ix
 	ret
-;src/balls.c:199: void check_bat_collision(Ball * ball, u8 new_y)
+;src/balls.c:201: void check_bat_collision(Ball *ball, u8 new_y)
 ;	---------------------------------
 ; Function check_bat_collision
 ; ---------------------------------
@@ -573,7 +586,7 @@ _check_bat_collision::
 	add	ix,sp
 	push	af
 	push	af
-;src/balls.c:201: if ((ball->x + SP_BALL_W >= batX && ball->x <= batX+batW) && 
+;src/balls.c:203: if ((ball->x + SP_BALL_W >= batX && ball->x <= batX + batW) &&
 	ld	a, 4 (ix)
 	ld	-2 (ix), a
 	ld	a, 5 (ix)
@@ -611,7 +624,7 @@ _check_bat_collision::
 	xor	a, #0x80
 00125$:
 	jp	M, 00106$
-;src/balls.c:202: (ball->y + SP_BALL_H >= batY && ball->y < batY + SP_BAT_LEFT_H))
+;src/balls.c:204: (ball->y + SP_BALL_H >= batY && ball->y < batY + SP_BAT_LEFT_H))
 	pop	bc
 	pop	hl
 	push	hl
@@ -644,7 +657,7 @@ _check_bat_collision::
 	xor	a, #0x80
 00127$:
 	jp	P, 00106$
-;src/balls.c:204: ball-> dy = - ball->dy;
+;src/balls.c:206: ball->dy = -ball->dy;
 	ld	a, -2 (ix)
 	add	a, #0x06
 	ld	l, a

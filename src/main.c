@@ -1,13 +1,7 @@
 
 #include <cpctelera.h>
 #include "sprites/g_palette.h"
-#include "h/bat.h"
-#include "h/balls.h"
-#include "h/background.h"
-#include "h/bricks.h"
-#include "h/keys.h"
 #include "h/game.h"
-#include "h/autoplay.h"
 #include "h/menu.h"
 
 void play_scene(Scene *scene);
@@ -58,6 +52,16 @@ void play_scene(Scene *scene) {
 
       scene->draw();
       state = scene->update();
+
+
+   {
+      i16 q = 0;
+      for (i16 i=0; i< 7000; i++)
+      {
+         q = q + 1;
+      }
+   }
+
 
    } while (state == Continue);
 }

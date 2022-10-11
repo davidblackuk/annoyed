@@ -17,22 +17,22 @@ Area                                    Addr        Size        Decimal Bytes (A
      00000000  s__DABS                         
      00000004  l__INITIALIZED                  
      00000004  l__INITIALIZER                  
-     00000033  l__DATA                         
-     00002D6E  l__CODE                         
+     0000030F  l__DATA                         
+     00003256  l__CODE                         
      00004000  s__CODE                         
-     00006D6E  s__DATA                         
-     00006DA1  s__INITIALIZED                  
-     00006DA5  s__GSFINAL                      
-     00006DA5  s__GSINIT                       
-     00006DA5  s__HOME                         
-     00006DA5  s__INITIALIZER                  
+     00007256  s__DATA                         
+     00007565  s__INITIALIZED                  
+     00007569  s__GSFINAL                      
+     00007569  s__GSINIT                       
+     00007569  s__HOME                         
+     00007569  s__INITIALIZER                  
 
 ASxxxx Linker V03.00 + NoICE + sdld,  page 2.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-_CODE                               00004000    00002D6E =       11630. bytes (REL,CON)
+_CODE                               00004000    00003256 =       12886. bytes (REL,CON)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
@@ -91,7 +91,7 @@ Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-_CODE                               00004000    00002D6E =       11630. bytes (REL,CON)
+_CODE                               00004000    00003256 =       12886. bytes (REL,CON)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
@@ -151,7 +151,7 @@ Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-_CODE                               00004000    00002D6E =       11630. bytes (REL,CON)
+_CODE                               00004000    00003256 =       12886. bytes (REL,CON)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
@@ -189,160 +189,170 @@ _CODE                               00004000    00002D6E =       11630. bytes (R
      00006075  _auto_update                       autoplay
      000060D6  _background_initialize             background
      000060FD  _background_restore                background
-     0000618F  _balls_initialize                  balls
-     000061DD  _balls_update                      balls
-     0000622B  _balls_restore_background          balls
-     0000626F  _balls_draw                        balls
-     0000629D  _balls_get_first_active            balls
-     000062D1  _center_ball                       balls
-     00006314  _update_ball                       balls
-     0000634A  _move_ball_x                       balls
-     0000639F  _move_ball_y                       balls
-     0000640D  _check_bat_collision               balls
-     000064A4  _bat_initialize                    bat
-     000064B9  _bat_update                        bat
-     00006500  _bat_restore_background            bat
-     00006519  _bat_draw                          bat
-     00006571  _bricks_initialize                 bricks
-     00006594  _bricks_handle_ball_intersection   bricks
-     00006595  _bricks_restore                    bricks
+     00006191  _balls_initialize                  balls
+     000061DF  _balls_update                      balls
+     0000622D  _balls_restore_background          balls
+     00006271  _balls_draw                        balls
+     0000629F  _balls_get_first_active            balls
+     000062D3  _center_ball                       balls
+     00006316  _update_ball                       balls
+     0000635B  _move_ball_x                       balls
+     000063AF  _move_ball_y                       balls
+     0000641D  _check_bat_collision               balls
+     000064B4  _bat_initialize                    bat
+     000064C9  _bat_update                        bat
+     00006510  _bat_restore_background            bat
+     00006529  _bat_draw                          bat
+     00006581  _blocks_initialize                 blocks
+     000065BB  _blocks_draw                       blocks
+     000065BC  _blocks_restore_background         blocks
 ASxxxx Linker V03.00 + NoICE + sdld,  page 5.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-_CODE                               00004000    00002D6E =       11630. bytes (REL,CON)
+_CODE                               00004000    00003256 =       12886. bytes (REL,CON)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-     00006596  _dbg_displayNumber                 debug
-     000065F8  _game_initialize                   game
-     00006612  _game_draw                         game
-     00006615  _game_update                       game
-     00006625  _module_game_initialize            game
-     00006638  _initialise_level                  game
-     0000664D  _level_definitions                 globals
-     00006655  _keys_initialize                   keys
-     00006658  _keys_resetAllKeys                 keys
-     00006672  _keys_update                       keys
-     000066E7  _level_initialize                  level
-     00006707  _level_draw                        level
-     00006713  _level_update                      level
-     00006746  _initializeCpc                     main
-     00006761  _main                              main
-     0000677B  _play_scene                        main
-     000067C4  _menu_initialize                   menu
-     0000681A  _fg_pens                           menu
-     00006851  _menu_draw                         menu
-     0000688F  _menu_update                       menu
-     000068D7  _module_menu_initialize            menu
-     000068EA  _menu_print_message                menu
-     00006919  _cpct_setPalette                   cpct_video
-     00006930  _cpct_isKeyPressed                 cpct_keyboard
-     00006930  cpct_isKeyPressed_asm              cpct_keyboard
-     0000693C  _cpct_scanKeyboard_f               cpct_keyboard
-     0000693C  cpct_scanKeyboard_f_asm            cpct_keyboard
-     000069A6  _cpct_setPALColour                 cpct_video
-     000069B2  _cpct_drawStringM0                 cpct_strings
-     000069EC  cpct_drawCharM0_inner_asm          cpct_strings
-     00006A4C  dc_2pxtableM0                      cpct_strings
-     00006A50  _cpct_drawSprite                   cpct_sprites
-     00006AF5  _cpct_etm_drawTileBox2x4           cpct_easytilemaps
-     00006B84  _cpct_drawCharM0                   cpct_strings
-     00006BA7  _cpct_etm_setTileset2x4            cpct_easytilemaps
-     00006BA7  cpct_etm_setTileset2x4_asm         cpct_easytilemaps
-     00006BAB  _cpct_keyboardStatusBuffer         cpct_keyboard
-     00006BB5  _cpct_etm_drawTileRow2x4           cpct_easytilemaps
-     00006BBC  cpct_etm_drawTileRow2x4_asm        cpct_easytilemaps
-     00006BBE  dtr_restore_ptileset               cpct_easytilemaps
-     00006BD6  ___sdcc_call_hl                    
-     00006BD7  _cpct_etm_drawTilemap2x4_f         cpct_easytilemaps
-     00006C03  _cpct_isAnyKeyPressed              cpct_keyboard
-     00006C03  cpct_isAnyKeyPressed_asm           cpct_keyboard
-     00006C10  _cpct_waitVSYNC                    cpct_video
-     00006C10  cpct_waitVSYNC_asm                 cpct_video
-     00006C18  _cpct_setVideoMode                 cpct_video
-     00006C26  _cpct_isAnyKeyPressed_f            cpct_keyboard
-     00006C26  cpct_isAnyKeyPressed_f_asm         cpct_keyboard
-     00006C41  _cpct_memset                       cpct_memutils
-     00006C4F  _cpct_disableFirmware              cpct_firmware
+     000065BD  _blocks_intersect_ball             blocks
+     000067A4  _map_tiles_to_meta                 blocks
+     0000696C  _plant_tile_meta                   blocks
+     000069B1  _dbg_displayNumber                 debug
+     00006A31  _game_initialize                   game
+     00006A4B  _game_draw                         game
+     00006A4E  _game_update                       game
+     00006A5E  _module_game_initialize            game
+     00006A71  _initialise_level                  game
+     00006A86  _level_definitions                 globals
+     00006A92  _keys_initialize                   keys
+     00006A95  _keys_resetAllKeys                 keys
+     00006AAF  _keys_update                       keys
+     00006B24  _level_initialize                  level
+     00006B44  _level_draw                        level
+     00006B56  _level_update                      level
+     00006B89  _initializeCpc                     main
+     00006BA4  _main                              main
+     00006BBE  _play_scene                        main
+     00006C16  _menu_initialize                   menu
+     00006C6C  _fg_pens                           menu
+     00006CA3  _menu_draw                         menu
+     00006CDE  _menu_update                       menu
+     00006D18  _module_menu_initialize            menu
+     00006D2B  _menu_print_message                menu
+     00006D5A  _cpct_setPalette                   cpct_video
+     00006D71  _cpct_isKeyPressed                 cpct_keyboard
+     00006D71  cpct_isKeyPressed_asm              cpct_keyboard
+     00006D7D  _cpct_scanKeyboard_f               cpct_keyboard
+     00006D7D  cpct_scanKeyboard_f_asm            cpct_keyboard
+     00006DE7  _cpct_setPALColour                 cpct_video
+     00006DF3  _cpct_drawStringM0                 cpct_strings
+     00006E2D  cpct_drawCharM0_inner_asm          cpct_strings
+     00006E8D  dc_2pxtableM0                      cpct_strings
+     00006E91  _cpct_drawSprite                   cpct_sprites
+     00006F36  _cpct_etm_drawTileBox2x4           cpct_easytilemaps
+     00006FC5  _cpct_drawCharM0                   cpct_strings
+     00006FE8  _cpct_etm_setTileset2x4            cpct_easytilemaps
+     00006FE8  cpct_etm_setTileset2x4_asm         cpct_easytilemaps
+     00006FEC  _cpct_keyboardStatusBuffer         cpct_keyboard
+     00006FF6  _cpct_etm_drawTileRow2x4           cpct_easytilemaps
+     00006FFD  cpct_etm_drawTileRow2x4_asm        cpct_easytilemaps
+     00006FFF  dtr_restore_ptileset               cpct_easytilemaps
+     00007017  ___sdcc_call_hl                    
+     00007018  _cpct_etm_drawTilemap2x4_f         cpct_easytilemaps
+     00007044  _cpct_isAnyKeyPressed              cpct_keyboard
+     00007044  cpct_isAnyKeyPressed_asm           cpct_keyboard
+     00007051  _cpct_waitVSYNC                    cpct_video
+     00007051  cpct_waitVSYNC_asm                 cpct_video
+     00007059  _cpct_setVideoMode                 cpct_video
+     00007067  _cpct_isAnyKeyPressed_f            cpct_keyboard
 ASxxxx Linker V03.00 + NoICE + sdld,  page 6.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-_CODE                               00004000    00002D6E =       11630. bytes (REL,CON)
+_CODE                               00004000    00003256 =       12886. bytes (REL,CON)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-     00006C4F  _cpct_removeInterruptHandler       cpct_firmware
-     00006C4F  cpct_disableFirmware_asm           cpct_firmware
-     00006C4F  cpct_removeInterruptHandler_asm    cpct_firmware
-     00006C5F  cpct_drawTileAligned2x4_f_asm      cpct_sprites
-     00006C80  __modschar                         
-     00006C8D  __modsint                          
-     00006C99  _cpct_mode_rom_status              cpct_firmware
-     00006C9A  _cpct_setDrawCharM0                cpct_strings
-     00006CBF  _cpct_getScreenPtr                 cpct_video
-     00006CD5  __divsint                          
-     00006CDE  __divschar                         
-     00006CE5  __div8                             
-     00006CE9  __div_signexte                     
-     00006CED  __div16                            
-     00006D13  __get_remainder                    
-     00006D1D  __divuint                          
-     00006D25  __divuchar                         
-     00006D2C  __divu8                            
-     00006D2F  __divu16                           
-     00006D5E  dc_mode0_ct                        cpct_strings
+     00007067  cpct_isAnyKeyPressed_f_asm         cpct_keyboard
+     00007082  _cpct_memset                       cpct_memutils
+     00007090  _cpct_disableFirmware              cpct_firmware
+     00007090  _cpct_removeInterruptHandler       cpct_firmware
+     00007090  cpct_disableFirmware_asm           cpct_firmware
+     00007090  cpct_removeInterruptHandler_asm    cpct_firmware
+     000070A0  _cpct_drawSolidBox                 cpct_sprites
+     00007147  cpct_drawTileAligned2x4_f_asm      cpct_sprites
+     00007168  __modschar                         
+     00007175  __modsint                          
+     00007181  _cpct_mode_rom_status              cpct_firmware
+     00007182  _cpct_setDrawCharM0                cpct_strings
+     000071A7  _cpct_getScreenPtr                 cpct_video
+     000071BD  __divsint                          
+     000071C6  __divschar                         
+     000071CD  __div8                             
+     000071D1  __div_signexte                     
+     000071D5  __div16                            
+     000071FB  __get_remainder                    
+     00007205  __divuint                          
+     0000720D  __divuchar                         
+     00007214  __divu8                            
+     00007217  __divu16                           
+     00007246  dc_mode0_ct                        cpct_strings
 
 ASxxxx Linker V03.00 + NoICE + sdld,  page 7.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-_DATA                               00006D6E    00000033 =          51. bytes (REL,CON)
+_DATA                               00007256    0000030F =         783. bytes (REL,CON)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-     00006D6E  _is_controling                     autoplay
-     00006D6F  _pvmem                             background
-     00006D71  _balls                             balls
-     00006D86  _serving                           balls
-     00006D87  _p_block_v_mem                     bricks
-     00006D89  _scene_game                        game
-     00006D8F  _current_state                     game
-     00006D90  _current_level_num                 game
-     00006D91  _lives_left                        game
-     00006D92  _current_level                     globals
-     00006D94  _key_left_is_pressed               keys
-     00006D95  _key_right_is_pressed              keys
-     00006D96  _key_serve_is_pressed              keys
-     00006D97  _key_auto_is_pressed               keys
-     00006D98  _key_any_is_pressed                keys
-     00006D99  _scene_menu                        menu
-     00006D9F  _loop_counter                      menu
-     00006DA0  _current_ink                       menu
+     00007256  _is_controling                     autoplay
+     00007257  _pvmem                             background
+     00007259  _balls                             balls
+     0000726E  _serving                           balls
+     0000726F  _p_block_v_mem                     blocks
+     00007271  _min_x                             blocks
+     00007272  _min_y                             blocks
+     00007273  _max_x                             blocks
+     00007274  _max_y                             blocks
+     00007275  _block_meta                        blocks
+     0000754D  _scene_game                        game
+     00007553  _current_state                     game
+     00007554  _current_level_num                 game
+     00007555  _lives_left                        game
+     00007556  _current_level                     globals
+     00007558  _key_left_is_pressed               keys
+     00007559  _key_right_is_pressed              keys
+     0000755A  _key_serve_is_pressed              keys
+     0000755B  _key_auto_is_pressed               keys
+     0000755C  _key_any_is_pressed                keys
+     0000755D  _scene_menu                        menu
+     00007563  _loop_counter                      menu
+     00007564  _current_ink                       menu
+
 ASxxxx Linker V03.00 + NoICE + sdld,  page 8.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-_INITIALIZED                        00006DA1    00000004 =           4. bytes (REL,CON)
+_INITIALIZED                        00007565    00000004 =           4. bytes (REL,CON)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-     00006DA1  _batY                              bat
-     00006DA2  _batX                              bat
-     00006DA3  _oldBatX                           bat
-     00006DA4  _batW                              bat
+     00007565  _batY                              bat
+     00007566  _batX                              bat
+     00007567  _oldBatX                           bat
+     00007568  _batW                              bat
 
 ASxxxx Linker V03.00 + NoICE + sdld,  page 9.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-_INITIALIZER                        00006DA5    00000004 =           4. bytes (REL,CON)
+_INITIALIZER                        00007569    00000004 =           4. bytes (REL,CON)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
@@ -365,7 +375,7 @@ obj/autoplay.rel                          [ autoplay ]
 obj/background.rel                        [ background ]
 obj/balls.rel                             [ balls ]
 obj/bat.rel                               [ bat ]
-obj/bricks.rel                            [ bricks ]
+obj/blocks.rel                            [ blocks ]
 obj/debug.rel                             [ debug ]
 obj/game.rel                              [ game ]
 obj/globals.rel                           [ globals ]
@@ -417,6 +427,8 @@ Libraries Linked                          [ object file ]
                                           [ cpct_memset_cbinding.rel ]
 /home/davidb/git/cpctelera/cpctelera/cpctelera.lib
                                           [ cpct_removeInterruptHandler.rel ]
+/home/davidb/git/cpctelera/cpctelera/cpctelera.lib
+                                          [ cpct_drawSolidBox_cbindings.rel ]
 /home/davidb/git/cpctelera/cpctelera/cpctelera.lib
                                           [ cpct_drawTileAligned2x4_f_asmbin ]
 /home/davidb/git/cpctelera/cpctelera/tools/sdcc-3.6.8-r9946/bin/../share/sdcc/lib/z80/z80.lib

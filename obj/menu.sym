@@ -10,7 +10,7 @@ Symbol Table
   0 ___str_0                                                       005A R
   0 ___str_1                                                       006C R
   0 ___str_2                                                       007F R
-  0 ___str_3                                                       00BD R
+  0 ___str_3                                                       00BA R
     __modsint                                                      **** GX
     _cpct_drawSprite                                               **** GX
     _cpct_drawStringM0                                             **** GX
@@ -24,9 +24,9 @@ Symbol Table
   1 _loop_counter                                                  0006 GR
   0 _menu_draw                                                     008D GR
   0 _menu_initialize                                               0000 GR
-  0 _menu_print_message                                            0126 GR
-  0 _menu_update                                                   00CB GR
-  0 _module_menu_initialize                                        0113 GR
+  0 _menu_print_message                                            0115 GR
+  0 _menu_update                                                   00C8 GR
+  0 _module_menu_initialize                                        0102 GR
   1 _scene_menu                                                    0000 GR
     _sp_logo                                                       **** GX
 
@@ -36,7 +36,7 @@ Hexadecimal [16-Bits]
 
 Area Table
 
-   0 _CODE                                      size  155   flags    0
+   0 _CODE                                      size  144   flags    0
    1 _DATA                                      size    8   flags    0
    2 _INITIALIZED                               size    0   flags    0
    3 _DABS                                      size    0   flags    8

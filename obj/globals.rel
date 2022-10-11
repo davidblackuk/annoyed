@@ -7,7 +7,7 @@ S _g_tilemap_l02_blocks Ref0000
 S .__.ABS. Def0000
 S _g_tilemap_l01_background Ref0000
 S _g_tilemap_l02_background Ref0000
-A _CODE size 8 flags 0 addr 0
+A _CODE size C flags 0 addr 0
 S _level_definitions Def0000
 A _DATA size 2 flags 0 addr 0
 S _current_level Def0000
@@ -24,7 +24,7 @@ T 00 00
 R 00 00 01 00
 T 00 00
 R 00 00 00 00
-T 00 00 00 00 00 00 00 00
-R 00 00 00 00 02 02 03 00 02 04 00 00 02 06 04 00
-T 06 00 00 00
+T 00 00 00 00 00 00 32 02 00 00
+R 00 00 00 00 02 02 03 00 02 04 00 00 02 08 04 00
+T 08 00 00 00 64 02
 R 00 00 00 00 02 02 01 00

@@ -17,23 +17,25 @@ Symbol Table
     _batW                                                          **** GX
     _batX                                                          **** GX
     _batY                                                          **** GX
+    _blocks_intersect_ball                                         **** GX
   0 _center_ball                                                   0142 GR
-  0 _check_bat_collision                                           027E GR
+  0 _check_bat_collision                                           028C GR
     _cpct_drawSprite                                               **** GX
     _cpct_getScreenPtr                                             **** GX
     _key_serve_is_pressed                                          **** GX
-  0 _move_ball_x                                                   01BB GR
-  0 _move_ball_y                                                   0210 GR
+  0 _move_ball_x                                                   01CA GR
+  0 _move_ball_y                                                   021E GR
   1 _serving                                                       0015 GR
     _sp_ball                                                       **** GX
   0 _update_ball                                                   0185 GR
+
 
 ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 2.
 Hexadecimal [16-Bits]
 
 Area Table
 
-   0 _CODE                                      size  315   flags    0
+   0 _CODE                                      size  323   flags    0
    1 _DATA                                      size   16   flags    0
    2 _INITIALIZED                               size    0   flags    0
    3 _DABS                                      size    0   flags    8

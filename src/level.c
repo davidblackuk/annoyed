@@ -5,7 +5,7 @@
 #include "h/bat.h"
 #include "h/balls.h"
 #include "h/background.h"
-#include "h/bricks.h"
+#include "h/blocks.h"
 #include "h/keys.h"
 #include "h/autoplay.h"
 
@@ -16,7 +16,7 @@ void level_initialize()
     cpct_clearScreen(AN_PEN_BLACK);
 
     background_initialize();
-    bricks_initialize();
+    blocks_initialize();
     auto_initialize();
 
     keys_initialize();
@@ -29,8 +29,10 @@ void level_draw()
     // restore the background of moving items
     bat_restore_background();
     balls_restore_background();
+    blocks_restore_background();
 
     // draw that which must be drawn
+    blocks_draw();
     bat_draw();
     balls_draw();
 }

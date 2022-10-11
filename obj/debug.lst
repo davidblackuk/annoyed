@@ -9,107 +9,129 @@
                               9 ; Public variables in this module
                              10 ;--------------------------------------------------------
                              11 	.globl _dbg_displayNumber
-                             12 	.globl _cpct_drawCharM0
-                             13 	.globl _cpct_setDrawCharM0
-                             14 ;--------------------------------------------------------
-                             15 ; special function registers
-                             16 ;--------------------------------------------------------
+                             12 	.globl _cpct_getScreenPtr
+                             13 	.globl _cpct_drawCharM0
+                             14 	.globl _cpct_setDrawCharM0
+                             15 ;--------------------------------------------------------
+                             16 ; special function registers
                              17 ;--------------------------------------------------------
-                             18 ; ram data
-                             19 ;--------------------------------------------------------
-                             20 	.area _DATA
-                             21 ;--------------------------------------------------------
-                             22 ; ram data
-                             23 ;--------------------------------------------------------
-                             24 	.area _INITIALIZED
-                             25 ;--------------------------------------------------------
-                             26 ; absolute external ram data
-                             27 ;--------------------------------------------------------
-                             28 	.area _DABS (ABS)
-                             29 ;--------------------------------------------------------
-                             30 ; global & static initialisations
-                             31 ;--------------------------------------------------------
-                             32 	.area _HOME
-                             33 	.area _GSINIT
-                             34 	.area _GSFINAL
-                             35 	.area _GSINIT
-                             36 ;--------------------------------------------------------
-                             37 ; Home
-                             38 ;--------------------------------------------------------
-                             39 	.area _HOME
+                             18 ;--------------------------------------------------------
+                             19 ; ram data
+                             20 ;--------------------------------------------------------
+                             21 	.area _DATA
+                             22 ;--------------------------------------------------------
+                             23 ; ram data
+                             24 ;--------------------------------------------------------
+                             25 	.area _INITIALIZED
+                             26 ;--------------------------------------------------------
+                             27 ; absolute external ram data
+                             28 ;--------------------------------------------------------
+                             29 	.area _DABS (ABS)
+                             30 ;--------------------------------------------------------
+                             31 ; global & static initialisations
+                             32 ;--------------------------------------------------------
+                             33 	.area _HOME
+                             34 	.area _GSINIT
+                             35 	.area _GSFINAL
+                             36 	.area _GSINIT
+                             37 ;--------------------------------------------------------
+                             38 ; Home
+                             39 ;--------------------------------------------------------
                              40 	.area _HOME
-                             41 ;--------------------------------------------------------
-                             42 ; code
-                             43 ;--------------------------------------------------------
-                             44 	.area _CODE
-                             45 ;src/debug.c:5: void dbg_displayNumber(int num)
-                             46 ;	---------------------------------
-                             47 ; Function dbg_displayNumber
-                             48 ; ---------------------------------
-   0000                      49 _dbg_displayNumber::
-   0000 DD E5         [15]   50 	push	ix
-   0002 DD 21 00 00   [14]   51 	ld	ix,#0
-   0006 DD 39         [15]   52 	add	ix,sp
-                             53 ;src/debug.c:8: cpct_setDrawCharM0(5, 0);
-   0008 21 05 00      [10]   54 	ld	hl, #0x0005
-   000B E5            [11]   55 	push	hl
-   000C CDr00r00      [17]   56 	call	_cpct_setDrawCharM0
-                             57 ;src/debug.c:10: for (i = 0; i < 5; i++)
-   000F 01 00 00      [10]   58 	ld	bc, #0x0000
-   0012                      59 00102$:
-                             60 ;src/debug.c:12: u8 digit = '0' + (num % 10);
-   0012 C5            [11]   61 	push	bc
-   0013 21 0A 00      [10]   62 	ld	hl, #0x000a
-   0016 E5            [11]   63 	push	hl
-   0017 DD 6E 04      [19]   64 	ld	l,4 (ix)
-   001A DD 66 05      [19]   65 	ld	h,5 (ix)
-   001D E5            [11]   66 	push	hl
-   001E CDr00r00      [17]   67 	call	__modsint
-   0021 F1            [10]   68 	pop	af
-   0022 F1            [10]   69 	pop	af
-   0023 C1            [10]   70 	pop	bc
-   0024 7D            [ 4]   71 	ld	a, l
-   0025 C6 30         [ 7]   72 	add	a, #0x30
-   0027 5F            [ 4]   73 	ld	e, a
-                             74 ;src/debug.c:13: cpct_drawCharM0((void *)(LASTDIGIT_VMEM - 4 * i), digit);
-   0028 16 00         [ 7]   75 	ld	d, #0x00
-   002A 69            [ 4]   76 	ld	l, c
-   002B 60            [ 4]   77 	ld	h, b
-   002C 29            [11]   78 	add	hl, hl
-   002D 29            [11]   79 	add	hl, hl
-   002E 3E 4B         [ 7]   80 	ld	a, #0x4b
-   0030 95            [ 4]   81 	sub	a, l
-   0031 6F            [ 4]   82 	ld	l, a
-   0032 3E C0         [ 7]   83 	ld	a, #0xc0
-   0034 9C            [ 4]   84 	sbc	a, h
-   0035 67            [ 4]   85 	ld	h, a
-   0036 C5            [11]   86 	push	bc
-   0037 D5            [11]   87 	push	de
-   0038 E5            [11]   88 	push	hl
-   0039 CDr00r00      [17]   89 	call	_cpct_drawCharM0
-   003C 21 0A 00      [10]   90 	ld	hl, #0x000a
-   003F E5            [11]   91 	push	hl
-   0040 DD 6E 04      [19]   92 	ld	l,4 (ix)
-   0043 DD 66 05      [19]   93 	ld	h,5 (ix)
-   0046 E5            [11]   94 	push	hl
-   0047 CDr00r00      [17]   95 	call	__divsint
-   004A F1            [10]   96 	pop	af
-   004B F1            [10]   97 	pop	af
-   004C C1            [10]   98 	pop	bc
-   004D DD 75 04      [19]   99 	ld	4 (ix), l
-   0050 DD 74 05      [19]  100 	ld	5 (ix), h
-                            101 ;src/debug.c:10: for (i = 0; i < 5; i++)
-   0053 03            [ 6]  102 	inc	bc
-   0054 79            [ 4]  103 	ld	a, c
-   0055 D6 05         [ 7]  104 	sub	a, #0x05
-   0057 78            [ 4]  105 	ld	a, b
-   0058 17            [ 4]  106 	rla
-   0059 3F            [ 4]  107 	ccf
-   005A 1F            [ 4]  108 	rra
-   005B DE 80         [ 7]  109 	sbc	a, #0x80
-   005D 38 B3         [12]  110 	jr	C,00102$
-   005F DD E1         [14]  111 	pop	ix
-   0061 C9            [10]  112 	ret
-                            113 	.area _CODE
-                            114 	.area _INITIALIZER
-                            115 	.area _CABS (ABS)
+                             41 	.area _HOME
+                             42 ;--------------------------------------------------------
+                             43 ; code
+                             44 ;--------------------------------------------------------
+                             45 	.area _CODE
+                             46 ;src/debug.c:5: void dbg_displayNumber(u8 char_row, int num)
+                             47 ;	---------------------------------
+                             48 ; Function dbg_displayNumber
+                             49 ; ---------------------------------
+   0000                      50 _dbg_displayNumber::
+   0000 DD E5         [15]   51 	push	ix
+   0002 DD 21 00 00   [14]   52 	ld	ix,#0
+   0006 DD 39         [15]   53 	add	ix,sp
+   0008 F5            [11]   54 	push	af
+                             55 ;src/debug.c:8: u8 *pv = cpct_getScreenPtr(CPCT_VMEM_START,74, char_row * 10);
+   0009 DD 7E 04      [19]   56 	ld	a, 4 (ix)
+   000C 4F            [ 4]   57 	ld	c, a
+   000D 87            [ 4]   58 	add	a, a
+   000E 87            [ 4]   59 	add	a, a
+   000F 81            [ 4]   60 	add	a, c
+   0010 87            [ 4]   61 	add	a, a
+   0011 47            [ 4]   62 	ld	b, a
+   0012 C5            [11]   63 	push	bc
+   0013 33            [ 6]   64 	inc	sp
+   0014 3E 4A         [ 7]   65 	ld	a, #0x4a
+   0016 F5            [11]   66 	push	af
+   0017 33            [ 6]   67 	inc	sp
+   0018 21 00 C0      [10]   68 	ld	hl, #0xc000
+   001B E5            [11]   69 	push	hl
+   001C CDr00r00      [17]   70 	call	_cpct_getScreenPtr
+   001F 33            [ 6]   71 	inc	sp
+   0020 33            [ 6]   72 	inc	sp
+   0021 E5            [11]   73 	push	hl
+                             74 ;src/debug.c:9: cpct_setDrawCharM0(5, 0);
+   0022 21 05 00      [10]   75 	ld	hl, #0x0005
+   0025 E5            [11]   76 	push	hl
+   0026 CDr00r00      [17]   77 	call	_cpct_setDrawCharM0
+                             78 ;src/debug.c:11: for (i = 0; i < 5; i++)
+   0029 01 00 00      [10]   79 	ld	bc, #0x0000
+   002C                      80 00102$:
+                             81 ;src/debug.c:13: u8 digit = '0' + (num % 10);
+   002C C5            [11]   82 	push	bc
+   002D 21 0A 00      [10]   83 	ld	hl, #0x000a
+   0030 E5            [11]   84 	push	hl
+   0031 DD 6E 05      [19]   85 	ld	l,5 (ix)
+   0034 DD 66 06      [19]   86 	ld	h,6 (ix)
+   0037 E5            [11]   87 	push	hl
+   0038 CDr00r00      [17]   88 	call	__modsint
+   003B F1            [10]   89 	pop	af
+   003C F1            [10]   90 	pop	af
+   003D C1            [10]   91 	pop	bc
+   003E 7D            [ 4]   92 	ld	a, l
+   003F C6 30         [ 7]   93 	add	a, #0x30
+   0041 5F            [ 4]   94 	ld	e, a
+                             95 ;src/debug.c:14: cpct_drawCharM0((void *)(pv - 4 * i), digit);
+   0042 16 00         [ 7]   96 	ld	d, #0x00
+   0044 69            [ 4]   97 	ld	l, c
+   0045 60            [ 4]   98 	ld	h, b
+   0046 29            [11]   99 	add	hl, hl
+   0047 29            [11]  100 	add	hl, hl
+   0048 DD 7E FE      [19]  101 	ld	a, -2 (ix)
+   004B 95            [ 4]  102 	sub	a, l
+   004C 6F            [ 4]  103 	ld	l, a
+   004D DD 7E FF      [19]  104 	ld	a, -1 (ix)
+   0050 9C            [ 4]  105 	sbc	a, h
+   0051 67            [ 4]  106 	ld	h, a
+   0052 C5            [11]  107 	push	bc
+   0053 D5            [11]  108 	push	de
+   0054 E5            [11]  109 	push	hl
+   0055 CDr00r00      [17]  110 	call	_cpct_drawCharM0
+   0058 21 0A 00      [10]  111 	ld	hl, #0x000a
+   005B E5            [11]  112 	push	hl
+   005C DD 6E 05      [19]  113 	ld	l,5 (ix)
+   005F DD 66 06      [19]  114 	ld	h,6 (ix)
+   0062 E5            [11]  115 	push	hl
+   0063 CDr00r00      [17]  116 	call	__divsint
+   0066 F1            [10]  117 	pop	af
+   0067 F1            [10]  118 	pop	af
+   0068 C1            [10]  119 	pop	bc
+   0069 DD 75 05      [19]  120 	ld	5 (ix), l
+   006C DD 74 06      [19]  121 	ld	6 (ix), h
+                            122 ;src/debug.c:11: for (i = 0; i < 5; i++)
+   006F 03            [ 6]  123 	inc	bc
+   0070 79            [ 4]  124 	ld	a, c
+   0071 D6 05         [ 7]  125 	sub	a, #0x05
+   0073 78            [ 4]  126 	ld	a, b
+   0074 17            [ 4]  127 	rla
+   0075 3F            [ 4]  128 	ccf
+   0076 1F            [ 4]  129 	rra
+   0077 DE 80         [ 7]  130 	sbc	a, #0x80
+   0079 38 B1         [12]  131 	jr	C,00102$
+   007B DD F9         [10]  132 	ld	sp, ix
+   007D DD E1         [14]  133 	pop	ix
+   007F C9            [10]  134 	ret
+                            135 	.area _CODE
+                            136 	.area _INITIALIZER
+                            137 	.area _CABS (ABS)

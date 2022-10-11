@@ -12,7 +12,9 @@
 	.globl _auto_initialize
 	.globl _keys_update
 	.globl _keys_initialize
-	.globl _bricks_initialize
+	.globl _blocks_restore_background
+	.globl _blocks_draw
+	.globl _blocks_initialize
 	.globl _background_initialize
 	.globl _balls_get_first_active
 	.globl _balls_draw
@@ -74,8 +76,8 @@ _level_initialize::
 	call	_cpct_memset
 ;src/level.c:18: background_initialize();
 	call	_background_initialize
-;src/level.c:19: bricks_initialize();
-	call	_bricks_initialize
+;src/level.c:19: blocks_initialize();
+	call	_blocks_initialize
 ;src/level.c:20: auto_initialize();
 	call	_auto_initialize
 ;src/level.c:22: keys_initialize();
@@ -94,39 +96,43 @@ _level_draw::
 	call	_bat_restore_background
 ;src/level.c:31: balls_restore_background();
 	call	_balls_restore_background
-;src/level.c:34: bat_draw();
+;src/level.c:32: blocks_restore_background();
+	call	_blocks_restore_background
+;src/level.c:35: blocks_draw();
+	call	_blocks_draw
+;src/level.c:36: bat_draw();
 	call	_bat_draw
-;src/level.c:35: balls_draw();
+;src/level.c:37: balls_draw();
 	jp  _balls_draw
-;src/level.c:38: SceneState level_update()
+;src/level.c:40: SceneState level_update()
 ;	---------------------------------
 ; Function level_update
 ; ---------------------------------
 _level_update::
 	dec	sp
-;src/level.c:40: SceneState res = Continue;
+;src/level.c:42: SceneState res = Continue;
 	ld	iy, #0
 	add	iy, sp
 	ld	0 (iy), #0x00
-;src/level.c:41: keys_update();
+;src/level.c:43: keys_update();
 	call	_keys_update
-;src/level.c:42: auto_update();
+;src/level.c:44: auto_update();
 	call	_auto_update
-;src/level.c:43: bat_update();
+;src/level.c:45: bat_update();
 	call	_bat_update
-;src/level.c:44: balls_update();
+;src/level.c:46: balls_update();
 	call	_balls_update
-;src/level.c:47: if (balls_get_first_active() == NULL) {
+;src/level.c:49: if (balls_get_first_active() == NULL) {
 	call	_balls_get_first_active
 	ld	a, h
 	or	a,l
 	jr	NZ,00102$
-;src/level.c:48: res = LevelCompleteFail;
+;src/level.c:50: res = LevelCompleteFail;
 	ld	iy, #0
 	add	iy, sp
 	ld	0 (iy), #0x02
 00102$:
-;src/level.c:51: return res;
+;src/level.c:53: return res;
 	ld	iy, #0
 	add	iy, sp
 	ld	l, 0 (iy)

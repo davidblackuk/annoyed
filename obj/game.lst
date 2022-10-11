@@ -65,9 +65,9 @@
                              65 ; Function game_initialize
                              66 ; ---------------------------------
    0000                      67 _game_initialize::
-                             68 ;src/game.c:18: current_level_num = 0;
+                             68 ;src/game.c:18: current_level_num = 1;
    0000 21r07r00      [10]   69 	ld	hl,#_current_level_num + 0
-   0003 36 00         [10]   70 	ld	(hl), #0x00
+   0003 36 01         [10]   70 	ld	(hl), #0x01
                              71 ;src/game.c:19: lives_left = 3;
    0005 21r08r00      [10]   72 	ld	hl,#_lives_left + 0
    0008 36 03         [10]   73 	ld	(hl), #0x03
@@ -130,15 +130,17 @@
    0040                     130 _initialise_level::
                             131 ;src/game.c:66: current_level = level_definitions + current_level_num;
    0040 01r00r00      [10]  132 	ld	bc, #_level_definitions+0
-   0043 FD 21r07r00   [14]  133 	ld	iy, #_current_level_num
-   0047 FD 6E 00      [19]  134 	ld	l, 0 (iy)
-   004A 26 00         [ 7]  135 	ld	h, #0x00
-   004C 29            [11]  136 	add	hl, hl
-   004D 29            [11]  137 	add	hl, hl
-   004E 09            [11]  138 	add	hl, bc
-   004F 22r00r00      [16]  139 	ld	(_current_level), hl
-                            140 ;src/game.c:67: level_initialize();
-   0052 C3r00r00      [10]  141 	jp  _level_initialize
-                            142 	.area _CODE
-                            143 	.area _INITIALIZER
-                            144 	.area _CABS (ABS)
+   0043 ED 5Br07r00   [20]  133 	ld	de, (_current_level_num)
+   0047 16 00         [ 7]  134 	ld	d, #0x00
+   0049 6B            [ 4]  135 	ld	l, e
+   004A 62            [ 4]  136 	ld	h, d
+   004B 29            [11]  137 	add	hl, hl
+   004C 19            [11]  138 	add	hl, de
+   004D 29            [11]  139 	add	hl, hl
+   004E 09            [11]  140 	add	hl, bc
+   004F 22r00r00      [16]  141 	ld	(_current_level), hl
+                            142 ;src/game.c:67: level_initialize();
+   0052 C3r00r00      [10]  143 	jp  _level_initialize
+                            144 	.area _CODE
+                            145 	.area _INITIALIZER
+                            146 	.area _CABS (ABS)
