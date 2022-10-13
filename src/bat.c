@@ -71,3 +71,21 @@ void bat_draw()
 
 
 }
+
+
+
+BounceHits bat_bounce_ball(Ball * ball, i16 at_x, i16 at_y) 
+{
+    BounceHits bounces = BOUNCE_NONE;
+ 
+
+
+    if (ball->dy > 0 &&
+        (ball->x + BALL_WIDTH > batX && ball->x < batX + batW) &&
+        (ball->y + BALL_HEIGHT > batY && ball->y < batY + SP_BAT_LEFT_H))
+    {
+        bounces |= BOUNCE_Y;        
+    }
+
+    return bounces;
+}

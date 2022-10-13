@@ -9,8 +9,6 @@
 #include "h/keys.h"
 #include "h/autoplay.h"
 
-
-
 void level_initialize()
 {
     cpct_clearScreen(AN_PEN_BLACK);
@@ -39,17 +37,23 @@ void level_draw()
 
 SceneState level_update()
 {
+
     SceneState res = Continue;
-    keys_update();
+
+    do
+    {
+        keys_update();
+    } while (key_pause_is_pressed);
+
     auto_update();
     bat_update();
     balls_update();
 
     // if there are no active balls left, we're dead
-    if (balls_get_first_active() == NULL) {
+    if (balls_get_first_active() == NULL)
+    {
         res = LevelCompleteFail;
     }
 
     return res;
 }
-

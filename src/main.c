@@ -56,7 +56,7 @@ void play_scene(Scene *scene) {
 
    {
       i16 q = 0;
-      for (i16 i=0; i< 2000; i++)
+      for (i16 i=0; i< 5000; i++)
       {
          q = q + 1;
       }

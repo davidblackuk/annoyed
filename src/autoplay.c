@@ -13,7 +13,7 @@ void auto_initialize() {
 }
 
 void auto_update() {
-
+    u8 mid_bat_x;
    
     if (key_auto_is_pressed) {
         is_controling = is_controling ? 0 : 1;
@@ -23,13 +23,13 @@ void auto_update() {
         Ball* ball = balls_get_first_active();
 
         keys_resetAllKeys();
-
         if (ball != NULL) {
+            mid_bat_x = batX + (batW / 2);
             if (serving) {
                 key_serve_is_pressed = 1;
-            } else if (batX < (ball->x + (SP_BALL_W / 2))) {
+            } else if (mid_bat_x < ball->x ) {
                 key_right_is_pressed = 1;
-            } else if (batX > (ball->x + (SP_BALL_W / 2))) {
+            } else if (mid_bat_x > ball->x ) {
                 key_left_is_pressed = 1;
             }
         }

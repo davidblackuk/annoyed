@@ -6,14 +6,15 @@
 #include "map/level-01-blocks.h"
 #include "balls.h"
 
-// how far below the top of the background tile map are the bricks placed
-#define BRICKS_MAP_BACKGROUND_PIXEL_OFFSET_Y 24
+
 
 // there always the same dimension fo pick it up from level 1
 #define BLOCKS_MAP_W g_tilemap_l01_blocks_W
 #define BLOCKS_MAP_H g_tilemap_l01_blocks_H
 
-
+// how far below the top of the background tile map are the bricks placed
+#define BRICKS_MAP_PIXEL_TOP_SCR 24
+#define BRICKS_MAP_PIXEL_BOTTOM_SCR (BRICKS_MAP_PIXEL_TOP_SCR + (g_tilemap_l01_blocks_H * TILE_H))
 
 extern void blocks_initialize();
 
@@ -22,7 +23,7 @@ extern void blocks_draw();
 extern void blocks_restore_background();
 
 
-extern void blocks_intersect_ball(Ball *ball);
+extern BounceHits blocks_bounce_ball(Ball * ball, i16 at_x, i16 at_y);
 
 
 #define WHITE_BLOCK 0
@@ -55,6 +56,9 @@ typedef struct {
     u8 type;
     u8 score;
     u8 remaining_hits;
+
+    u8 block_tile_x;
+    u8 block_tile_y;
 } BlockMeta;
 
 
