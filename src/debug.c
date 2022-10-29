@@ -1,12 +1,22 @@
 
 #include <cpctelera.h>
-
-
-void dbg_displayNumber(u8 char_row, int num)
+#include "h/globals.h"
+void dbg_displayNumber(u8 char_row, i16 num)
 {
-    int i;
+    i16 i;
+    u8 negative  = 0;
     u8 *pv = cpct_getScreenPtr(CPCT_VMEM_START,74, char_row * 10);
-    cpct_setDrawCharM0(5, 0);
+    
+    if (num < 0){
+        negative = 1;
+        num = -num;
+
+        cpct_setDrawCharM0(AN_PEN_BRIGHT_RED, AN_PEN_ORANGE);
+    } else {
+        cpct_setDrawCharM0(AN_PEN_SKY_BLUE, AN_PEN_BLUE);
+    }
+
+    
     
     for (i = 0; i < 5; i++)
     {
@@ -14,4 +24,8 @@ void dbg_displayNumber(u8 char_row, int num)
         cpct_drawCharM0((void *)(pv - 4 * i), digit);
         num /= 10;
     }
+    if (negative){
+        cpct_drawCharM0((void *)(pv - 20), '-');
+    }
+
 }

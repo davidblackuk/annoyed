@@ -7,20 +7,19 @@
 #include "h/globals.h"
 #include "sprites/ball.h"
 #include "h/debug.h"
-u8 *p_block_v_mem;
-
-u8 min_x;
-u8 min_y;
-u8 max_x;
-u8 max_y;
+#include "h/background.h"
 
 BlockMeta block_meta[BLOCKS_MAP_W / 2][BLOCKS_MAP_H / 2];
 
 // -----------------------------------------------------
 // Private function declarations
 // -----------------------------------------------------
-void map_tiles_to_meta();
+void map_blocks_to_meta();
+void draw_current_blocks();
+
 void plant_tile_meta(u8 map_x, u8 map_y, u8 tile_type, u8 score, u8 hits_to_destroy);
+BlockMeta *get_metaData_at(i16 wx, i16 wy);
+BounceHits get_block_bounces(Ball *ball, i16 wx, i16 wy);
 
 //
 //  Draw the tile map for the blocks layer over the background. this is a one off initialization.
@@ -28,87 +27,129 @@ void plant_tile_meta(u8 map_x, u8 map_y, u8 tile_type, u8 score, u8 hits_to_dest
 //  We take the tile map definition and use this to initialize a further map that convers tile numbers into
 //   tile meta data, including the score for the brick position, visibility, type etc.
 //
-void blocks_initialize()
+void blocks_initialize(u8 is_restart)
 {
-    p_block_v_mem = cpct_getScreenPtr(CPCT_VMEM_START, TILE_MAP_SCREEN_BYTE_OFFSET_X + 2 * TILE_W, TILE_MAP_SCREEN_PIXEL_OFFSET_Y + BRICKS_MAP_BACKGROUND_PIXEL_OFFSET_Y);
-    cpct_etm_drawTilemap2x4_f(g_tilemap_l01_blocks_W, g_tilemap_l01_blocks_H, p_block_v_mem, current_level->blocks_tilemap);
+    if (!is_restart)
+    {
+        // create a structure defining what blocks are on the screen
+        map_blocks_to_meta();
+    }
 
-    // create a structure defining whats blocks are on the screen
-    map_tiles_to_meta();
-
-    min_x = 0xFF;
-    min_y = 0xFF;
-    max_x = 0x00;
-    max_y = 0x00;
+    // render the block map tile by tile to the screen so that levels can be continued
+    // after a life is lost, with a partial board
+    draw_current_blocks();
 }
 
 void blocks_draw()
 {
-    //    p_block_v_mem = cpct_getScreenPtr(CPCT_VMEM_START, TILE_MAP_SCREEN_BYTE_OFFSET_X + 2 * TILE_W, TILE_MAP_SCREEN_PIXEL_OFFSET_Y + BRICKS_MAP_BACKGROUND_PIXEL_OFFSET_Y);
-    //     cpct_etm_drawTilemap2x4_f(g_tilemap_l01_blocks_W, g_tilemap_l01_blocks_H, p_block_v_mem, current_level->blocks_tilemap);
 }
 
 void blocks_restore_background()
 {
 }
 
-void blocks_intersect_ball(Ball *ball)
+BounceHits blocks_bounce_ball(Ball *ball, i16 at_x, i16 at_y)
 {
 
-    // test the big bounding box first to avoid wasting cycles
-    if ((ball->y + SP_BALL_H < TILE_MAP_SCREEN_PIXEL_OFFSET_Y + BRICKS_MAP_BACKGROUND_PIXEL_OFFSET_Y) ||
-        (ball->y > TILE_MAP_SCREEN_PIXEL_OFFSET_Y + BRICKS_MAP_BACKGROUND_PIXEL_OFFSET_Y + (BLOCKS_MAP_H * TILE_H)))
+    BounceHits bounces = BOUNCE_NONE;
+
+    // are we above or below the tilemap for blocks, if so no collision
+    // is possible
+    if (W_2_S_Y(at_y) < BRICKS_MAP_PIXEL_TOP_SCR ||
+        W_2_S_Y(at_y) > BRICKS_MAP_PIXEL_BOTTOM_SCR)
     {
-        return;
+        return BOUNCE_NONE;
     }
 
+    bounces |= get_block_bounces(ball, at_x, at_y);
+    bounces |= get_block_bounces(ball, at_x + 3, at_y);
+    bounces |= get_block_bounces(ball, at_x, at_y + 6);
+    bounces |= get_block_bounces(ball, at_x + 3, at_y + 6);
+
+    return bounces;
+}
+
+BounceHits get_block_bounces(Ball *ball, i16 wx, i16 wy)
+{
+    BounceHits bounces = BOUNCE_NONE;
+    BlockMeta *meta;
+
+    meta = get_metaData_at(wx, wy);
+    if (meta)
     {
-        u8 ball_center_x = ball->x + (SP_BALL_W / 2);
-        u8 ball_center_y = ball->y + (SP_BALL_W / 2);
+        meta->is_active = 0;
 
-        u8 tx = (ball_center_x - (TILE_MAP_SCREEN_BYTE_OFFSET_X + 2)) / 4;
-        u8 ty = (ball_center_y - (TILE_MAP_SCREEN_PIXEL_OFFSET_Y + BRICKS_MAP_BACKGROUND_PIXEL_OFFSET_Y)) / 8;
+        background_debug_box_wc((meta->block_tile_x) * TILE_W,
+                                (meta->block_tile_y * TILE_H) + 24, BALL_WIDTH, BALL_HEIGHT);
 
-        u8 rx = (ball->x - (TILE_MAP_SCREEN_BYTE_OFFSET_X + 2)) % 4;
-        u8 ry = (ball->y - (TILE_MAP_SCREEN_PIXEL_OFFSET_Y + BRICKS_MAP_BACKGROUND_PIXEL_OFFSET_Y)) % 8;
-
-    u8* pvmem = cpct_getScreenPtr(CPCT_VMEM_START, tx*2  + (TILE_MAP_SCREEN_BYTE_OFFSET_X + 2 * TILE_W), (ty*4) + (TILE_MAP_SCREEN_PIXEL_OFFSET_Y + BRICKS_MAP_BACKGROUND_PIXEL_OFFSET_Y));
-    cpct_drawSolidBox(pvmem, 255, 2,4);
-
-        dbg_displayNumber(0, tx);
-        dbg_displayNumber(1, ty);
-
-        if (tx < min_x)
-            min_x = tx;
-        if (tx > max_x)
-            max_x = tx;
-        if (ty < min_y)
-            min_y = ty;
-        if (ty > max_y)
-            max_y = ty;
-
-        dbg_displayNumber(3, min_x);
-        dbg_displayNumber(4, max_x);
-
-        dbg_displayNumber(6, min_y);
-        dbg_displayNumber(7, max_y);
-
-        if (block_meta[tx][ty].is_active)
-        {
-            ball->dy = -ball->dy;
-            block_meta[tx][ty].is_active = 0;
-        }
+        // background_restore_world_coords((meta->block_tile_x) * TILE_W,
+        //   (meta->block_tile_y * TILE_H)+24, BALL_WIDTH, BALL_HEIGHT);
     }
+
+    return bounces;
+}
+
+BlockMeta *get_metaData_at(i16 wx, i16 wy)
+{
+    BlockMeta *meta;
+    i16 tx, ty;
+    i16 mx, my;
+
+    // tile map x is the world x/2 for 2/4 tiles, the blocks map is the
+    // same width as the play area and located at x = 0, so no adjustment.
+    tx = (wx / 2);
+
+    // tile map y is the world y/4 for 2/4 tiles, it is also offset
+    // down the screen 6 tiles,so we need to adjust for that
+    ty = ((wy) / 4) - 4;
+
+    // blocks are 2x2 tiles so we divide out to get the index of the tile
+    // in the meta data array
+    mx = tx / 2;
+    my = ty / 2;
+
+    // we test wy + 6 and wx + 3, these can be outside the map when the
+    // ball is in the bottom or right most tiles
+    if ((mx >= BLOCKS_MAP_W / 2) || (my >= BLOCKS_MAP_H / 2))
+    {
+        return BOUNCE_NONE;
+    }
+
+    meta = &block_meta[mx][my];
+    if (meta->is_active)
+    {
+        return meta;
+    }
+    return NULL;
 }
 
 // -----------------------------------------------------
 // Private function implementations
 // -----------------------------------------------------
 
+void draw_current_blocks()
+{
+    u8 *pvmem = cpct_getScreenPtr(CPCT_VMEM_START, W_2_S_X(0),
+                                  BRICKS_MAP_PIXEL_TOP_SCR);
+    for (u8 y = 0; y < BLOCKS_MAP_H / 2; y++)
+    {
+        for (u8 x = 0; x < BLOCKS_MAP_W / 2; x++)
+        {
+            BlockMeta *meta = &block_meta[x][y];
+
+            if (meta->is_active)
+            {
+                cpct_etm_drawTileBox2x4(x * 2, y * 2, 2, 2, BLOCKS_MAP_W, pvmem,
+                                        current_level->blocks_tilemap);
+            }
+        }
+    }
+}
+
 //
 // extract from the tilemap the block definitions
 //
-void map_tiles_to_meta()
+void map_blocks_to_meta()
 {
 
     // we only need check the tile index of the top left tile of each potential block
@@ -116,7 +157,7 @@ void map_tiles_to_meta()
     {
         for (u8 x = 0; x < BLOCKS_MAP_W; x += 2)
         {
-            u8 tile = current_level->blocks_tilemap[y * BLOCKS_MAP_W + x];
+            u8 tile = current_level->blocks_tilemap[(y * BLOCKS_MAP_W) + x];
             switch (tile)
             {
             case WHITE_BLOCK:
@@ -167,4 +208,6 @@ void plant_tile_meta(u8 map_x, u8 map_y, u8 tile_type, u8 score, u8 hits_to_dest
     block_meta[map_x / 2][map_y / 2].score = score;
     block_meta[map_x / 2][map_y / 2].remaining_hits = hits_to_destroy;
     block_meta[map_x / 2][map_y / 2].type = tile_type;
+    block_meta[map_x / 2][map_y / 2].block_tile_x = map_x;
+    block_meta[map_x / 2][map_y / 2].block_tile_y = map_y;
 }

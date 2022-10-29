@@ -4,6 +4,8 @@
 #include "h/game.h"
 #include "h/level.h"
 
+#include "map/debug-background.h"
+
 #include <map/level-01-background.h>
 #include <map/level-01-blocks.h>
 #include <map/level-02-background.h>

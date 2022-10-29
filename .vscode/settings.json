@@ -17,6 +17,8 @@
         "level.h": "c",
         "blocks.h": "c",
         "autoplay.h": "c",
-        "level-01-blocks.h": "c"
+        "level-01-blocks.h": "c",
+        "balls_p.h": "c",
+        "game.h": "c"
     }
 }

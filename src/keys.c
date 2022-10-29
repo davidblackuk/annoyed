@@ -8,6 +8,7 @@ u8 key_right_is_pressed;
 u8 key_serve_is_pressed;
 u8 key_auto_is_pressed;
 u8 key_any_is_pressed;
+u8 key_pause_is_pressed;
 
 void keys_initialize() {
     keys_resetAllKeys();    
@@ -32,6 +33,7 @@ void keys_update() {
 
 
     key_auto_is_pressed = cpct_isKeyPressed(Key_0);
+    key_pause_is_pressed = cpct_isKeyPressed(Key_1);
     key_any_is_pressed = cpct_isAnyKeyPressed_f();
 
 }

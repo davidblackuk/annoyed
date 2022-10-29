@@ -13,6 +13,7 @@ void initializeCpc()
    cpct_disableFirmware();
 
    cpct_setBorder(HW_BLACK);
+   cpct_setBorder(HW_WHITE);
 
 
    // set screen mode 0, 16 colors
@@ -56,7 +57,8 @@ void play_scene(Scene *scene) {
 
    {
       i16 q = 0;
-      for (i16 i=0; i< 7000; i++)
+      i16 t = 5;
+      for (i16 i=0; i< t; i++)
       {
          q = q + 1;
       }
