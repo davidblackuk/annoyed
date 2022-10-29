@@ -15,6 +15,7 @@
 #$(eval $(call TMX2DATA, CONVERT, tmxfile, array )) 
 
 
+$(eval $(call TMX2C,assets/debug-background.tmx,g_tilemap_debug_background,src/map))
 
 $(eval $(call TMX2C,assets/level-01-background.tmx,g_tilemap_l01_background,src/map))
 $(eval $(call TMX2C,assets/level-01-blocks.tmx,g_tilemap_l01_blocks,src/map))

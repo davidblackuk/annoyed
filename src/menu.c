@@ -23,7 +23,8 @@ u8 current_ink;
 void menu_initialize()
 {
     u8 *pvmem = cpct_getScreenPtr(CPCT_VMEM_START, (SCREEN_WIDTH_BYTES - SP_LOGO_W) / 2, 16);
-
+    cpct_clearScreen(AN_PEN_BLACK);
+    
     keys_initialize();
 
     loop_counter = 0;

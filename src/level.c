@@ -9,18 +9,19 @@
 #include "h/keys.h"
 #include "h/autoplay.h"
 
+void level_initialize_internal(u8 is_restart);
+
+/// @brief initialize the level from scratch
 void level_initialize()
 {
-    cpct_clearScreen(AN_PEN_BLACK);
-
-    background_initialize();
-    blocks_initialize();
-    auto_initialize();
-
-    keys_initialize();
-    bat_initialize();
-    balls_initialize();
+    level_initialize_internal(FALSE);
 }
+
+/// @brief initialize the level but keep any blocks that were previously removed
+void level_continue_from_death() {
+    level_initialize_internal(TRUE);
+}
+
 
 void level_draw()
 {
@@ -57,3 +58,24 @@ SceneState level_update()
 
     return res;
 }
+
+
+// -----------------------------------------------
+// private method implementations
+// -----------------------------------------------
+
+void level_initialize_internal(u8 is_restart)
+{
+    cpct_clearScreen(AN_PEN_BLACK);
+
+    background_initialize();
+    blocks_initialize(is_restart);
+    auto_initialize();
+
+    keys_initialize();
+    bat_initialize();
+    balls_initialize();
+
+}
+
+

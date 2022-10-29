@@ -37,6 +37,7 @@ $(eval $(call IMG2SP, CONVERT         , assets/bat-mid.png , 0, 0, sp_bat_mid))
 $(eval $(call IMG2SP, CONVERT         , assets/bat-right.png , 0, 0, sp_bat_right))
 $(eval $(call IMG2SP, CONVERT         , assets/ball.png , 0, 0, sp_ball))
 $(eval $(call IMG2SP, CONVERT         , assets/annoyed.png , 0, 0, sp_logo))
+$(eval $(call IMG2SP, CONVERT         , assets/life-marker.png , 0, 0, sp_life))
 
 # CONVERT TILES:
 #  Converts img/tiles.png into src/map/tiles.c & src/map/tiles.h

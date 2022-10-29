@@ -10,27 +10,23 @@ SceneState current_state;
 
 u8 current_level_num;
 u8 lives_left;
+i16 score;
 
 void initialise_level();
 
 void game_initialize()
 {
     current_level_num = 1;
-    lives_left = 3;
+    lives_left = INITIAL_LIVES;
     current_state = Continue;
     initialise_level();    
-
-    cpct_setBorder(HW_LIME);
 }
 
 void game_draw()
 {
     level_draw();
 
-    // score draw
-    // lives draw
-
-    // if state == life lost) draw something?
+    hud_draw();
 
 }
 
@@ -39,12 +35,18 @@ SceneState game_update()
     SceneState res = Continue;
 
     res = level_update();
+    hud_update();
     // score update
     // lives update
     if (res == LevelCompleteSuccess) {
 
     } else if (res == LevelCompleteFail) {
-        initialise_level();
+        lives_left -= 1;
+        if (lives_left == 0) {
+            return GameOver;
+        }
+        level_continue_from_death();
+        hud_continue_from_death();
         res = Continue;
     }
 
@@ -60,9 +62,7 @@ void module_game_initialize()
 }
 
 void initialise_level() {
-
-
-
     current_level = level_definitions + current_level_num;
     level_initialize();
+    hud_initialize();
 }

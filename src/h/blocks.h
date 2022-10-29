@@ -12,11 +12,18 @@
 #define BLOCKS_MAP_W g_tilemap_l01_blocks_W
 #define BLOCKS_MAP_H g_tilemap_l01_blocks_H
 
+#define BLOCK_HEIGHT 8
+#define BLOCK_WIDTH  4
+
+
 // how far below the top of the background tile map are the bricks placed
 #define BRICKS_MAP_PIXEL_TOP_SCR 24
 #define BRICKS_MAP_PIXEL_BOTTOM_SCR (BRICKS_MAP_PIXEL_TOP_SCR + (g_tilemap_l01_blocks_H * TILE_H))
 
-extern void blocks_initialize();
+/// @brief Initialize the blocks for the level
+/// @param is_restart is this a restart? if so we keep the block states from the current run, 
+///         otherwise we initialize the blocks from the level definition
+extern void blocks_initialize(u8 is_restart);
 
 extern void blocks_draw();
 
