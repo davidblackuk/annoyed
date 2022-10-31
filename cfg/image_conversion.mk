@@ -8,11 +8,11 @@
 
 
 # black,  Bright White, Orange, Pastel Cyan, Pastel Green, Bright red, Sky blue, Pastel Magenta, Pastel Yellow, White (grey), Blue, Bright blue, yellow
-# 000000, FFFFFF, FF8000, 80FFF, 80FF80, FF0000, 0080FF, FF80FF, FFFF80, 808080, 000080, 0000FF, 808000
-# 0 26 15 23 22 6 11 17 25 13 1 2 12
-# we have 4 spares at the moment
-
-PALETTE=0 26 15 23 22 6 11 17 25 13 1 2 12 3 4 5
+# 000000, FFFFFF, FF8000, 80FFF, 80FF80, FF0000, 0080FF, FF80FF, FFFF80, 808080, 000080, 0000FF, 808000, ?????, ?????, FF0080
+# 0 26 15 23 22 6 11 17 25 13 1 2 12 ?? ?? 7
+# we have 3 spares at the moment
+# last one is the one we use for transparence #FF0080
+PALETTE=0 26 15 23 22 6 11 17 25 13 1 2 12 3 4 7
 
 
 

@@ -1,0 +1,48 @@
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 1.
+Hexadecimal [16-Bits]
+
+Symbol Table
+
+    .__.$$$.                                                    =  2710 L
+    .__.ABS.                                                    =  0000 G
+    .__.CPU.                                                    =  0000 L
+    .__.H$L.                                                    =  0000 L
+  1 _all_balls                                                     0000 GR
+    _background_bounce_ball                                        **** GX
+    _background_restore_world_coords                               **** GX
+  0 _balls_draw                                                    009E GR
+  0 _balls_get_first_active                                        00F7 GR
+  0 _balls_initialize                                              0000 GR
+  0 _balls_restore_background                                      0044 GR
+  0 _balls_update                                                  0011 GR
+    _batW                                                          **** GX
+    _batX                                                          **** GX
+    _batY                                                          **** GX
+    _bat_bounce_ball                                               **** GX
+    _blocks_bounce_ball                                            **** GX
+  0 _center_ball                                                   017C GR
+    _cpct_drawSpriteMaskedAlignedTable                             **** GX
+    _cpct_getScreenPtr                                             **** GX
+    _g_masktable                                                   **** GX
+  0 _handle_serve                                                  01E8 GR
+  0 _initialize_balls                                              012B GR
+    _key_serve_is_pressed                                          **** GX
+  1 _serving                                                       0027 GR
+    _sp_ball                                                       **** GX
+  0 _update_ball                                                   0234 GR
+
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 2.
+Hexadecimal [16-Bits]
+
+Area Table
+
+   0 _CODE                                      size  373   flags    0
+   1 _DATA                                      size   28   flags    0
+   2 _INITIALIZED                               size    0   flags    0
+   3 _DABS                                      size    0   flags    8
+   4 _HOME                                      size    0   flags    0
+   5 _GSINIT                                    size    0   flags    0
+   6 _GSFINAL                                   size    0   flags    0
+   7 _INITIALIZER                               size    0   flags    0
+   8 _CABS                                      size    0   flags    8
+

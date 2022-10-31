@@ -1,0 +1,181 @@
+                              1 ;--------------------------------------------------------
+                              2 ; File Created by SDCC : free open source ANSI-C Compiler
+                              3 ; Version 3.6.8 #9946 (Linux)
+                              4 ;--------------------------------------------------------
+                              5 	.module level
+                              6 	.optsdcc -mz80
+                              7 	
+                              8 ;--------------------------------------------------------
+                              9 ; Public variables in this module
+                             10 ;--------------------------------------------------------
+                             11 	.globl _auto_update
+                             12 	.globl _auto_initialize
+                             13 	.globl _keys_update
+                             14 	.globl _keys_initialize
+                             15 	.globl _blocks_restore_background
+                             16 	.globl _blocks_draw
+                             17 	.globl _blocks_initialize
+                             18 	.globl _background_initialize
+                             19 	.globl _bat_draw
+                             20 	.globl _bat_restore_background
+                             21 	.globl _bat_update
+                             22 	.globl _bat_initialize
+                             23 	.globl _balls_get_first_active
+                             24 	.globl _balls_draw
+                             25 	.globl _balls_restore_background
+                             26 	.globl _balls_update
+                             27 	.globl _balls_initialize
+                             28 	.globl _cpct_memset
+                             29 	.globl _level_initialize
+                             30 	.globl _level_continue_from_death
+                             31 	.globl _level_draw
+                             32 	.globl _level_update
+                             33 	.globl _level_initialize_internal
+                             34 ;--------------------------------------------------------
+                             35 ; special function registers
+                             36 ;--------------------------------------------------------
+                             37 ;--------------------------------------------------------
+                             38 ; ram data
+                             39 ;--------------------------------------------------------
+                             40 	.area _DATA
+                             41 ;--------------------------------------------------------
+                             42 ; ram data
+                             43 ;--------------------------------------------------------
+                             44 	.area _INITIALIZED
+                             45 ;--------------------------------------------------------
+                             46 ; absolute external ram data
+                             47 ;--------------------------------------------------------
+                             48 	.area _DABS (ABS)
+                             49 ;--------------------------------------------------------
+                             50 ; global & static initialisations
+                             51 ;--------------------------------------------------------
+                             52 	.area _HOME
+                             53 	.area _GSINIT
+                             54 	.area _GSFINAL
+                             55 	.area _GSINIT
+                             56 ;--------------------------------------------------------
+                             57 ; Home
+                             58 ;--------------------------------------------------------
+                             59 	.area _HOME
+                             60 	.area _HOME
+                             61 ;--------------------------------------------------------
+                             62 ; code
+                             63 ;--------------------------------------------------------
+                             64 	.area _CODE
+                             65 ;src/level.c:15: void level_initialize()
+                             66 ;	---------------------------------
+                             67 ; Function level_initialize
+                             68 ; ---------------------------------
+   0000                      69 _level_initialize::
+                             70 ;src/level.c:17: level_initialize_internal(FALSE);
+   0000 AF            [ 4]   71 	xor	a, a
+   0001 F5            [11]   72 	push	af
+   0002 33            [ 6]   73 	inc	sp
+   0003 CDr5Cr00      [17]   74 	call	_level_initialize_internal
+   0006 33            [ 6]   75 	inc	sp
+   0007 C9            [10]   76 	ret
+                             77 ;src/level.c:21: void level_continue_from_death() {
+                             78 ;	---------------------------------
+                             79 ; Function level_continue_from_death
+                             80 ; ---------------------------------
+   0008                      81 _level_continue_from_death::
+                             82 ;src/level.c:22: level_initialize_internal(TRUE);
+   0008 3E 01         [ 7]   83 	ld	a, #0x01
+   000A F5            [11]   84 	push	af
+   000B 33            [ 6]   85 	inc	sp
+   000C CDr5Cr00      [17]   86 	call	_level_initialize_internal
+   000F 33            [ 6]   87 	inc	sp
+   0010 C9            [10]   88 	ret
+                             89 ;src/level.c:26: void level_draw()
+                             90 ;	---------------------------------
+                             91 ; Function level_draw
+                             92 ; ---------------------------------
+   0011                      93 _level_draw::
+                             94 ;src/level.c:29: bat_restore_background();
+   0011 CDr00r00      [17]   95 	call	_bat_restore_background
+                             96 ;src/level.c:30: balls_restore_background();
+   0014 CDr00r00      [17]   97 	call	_balls_restore_background
+                             98 ;src/level.c:31: blocks_restore_background();
+   0017 CDr00r00      [17]   99 	call	_blocks_restore_background
+                            100 ;src/level.c:34: blocks_draw();
+   001A CDr00r00      [17]  101 	call	_blocks_draw
+                            102 ;src/level.c:35: bat_draw();
+   001D CDr00r00      [17]  103 	call	_bat_draw
+                            104 ;src/level.c:36: balls_draw();
+   0020 C3r00r00      [10]  105 	jp  _balls_draw
+                            106 ;src/level.c:39: SceneState level_update()
+                            107 ;	---------------------------------
+                            108 ; Function level_update
+                            109 ; ---------------------------------
+   0023                     110 _level_update::
+   0023 3B            [ 6]  111 	dec	sp
+                            112 ;src/level.c:42: SceneState res = Continue;
+   0024 FD 21 00 00   [14]  113 	ld	iy, #0
+   0028 FD 39         [15]  114 	add	iy, sp
+   002A FD 36 00 00   [19]  115 	ld	0 (iy), #0x00
+                            116 ;src/level.c:44: do
+   002E                     117 00101$:
+                            118 ;src/level.c:46: keys_update();
+   002E CDr00r00      [17]  119 	call	_keys_update
+                            120 ;src/level.c:47: } while (key_pause_is_pressed);
+   0031 3Ar00r00      [13]  121 	ld	a,(#_key_pause_is_pressed + 0)
+   0034 B7            [ 4]  122 	or	a, a
+   0035 20 F7         [12]  123 	jr	NZ,00101$
+                            124 ;src/level.c:49: auto_update();
+   0037 CDr00r00      [17]  125 	call	_auto_update
+                            126 ;src/level.c:50: bat_update();
+   003A CDr00r00      [17]  127 	call	_bat_update
+                            128 ;src/level.c:51: balls_update();
+   003D CDr00r00      [17]  129 	call	_balls_update
+                            130 ;src/level.c:54: if (balls_get_first_active() == NULL)
+   0040 CDr00r00      [17]  131 	call	_balls_get_first_active
+   0043 7C            [ 4]  132 	ld	a, h
+   0044 B5            [ 4]  133 	or	a,l
+   0045 20 0A         [12]  134 	jr	NZ,00105$
+                            135 ;src/level.c:56: res = LevelCompleteFail;
+   0047 FD 21 00 00   [14]  136 	ld	iy, #0
+   004B FD 39         [15]  137 	add	iy, sp
+   004D FD 36 00 02   [19]  138 	ld	0 (iy), #0x02
+   0051                     139 00105$:
+                            140 ;src/level.c:59: return res;
+   0051 FD 21 00 00   [14]  141 	ld	iy, #0
+   0055 FD 39         [15]  142 	add	iy, sp
+   0057 FD 6E 00      [19]  143 	ld	l, 0 (iy)
+   005A 33            [ 6]  144 	inc	sp
+   005B C9            [10]  145 	ret
+                            146 ;src/level.c:67: void level_initialize_internal(u8 is_restart)
+                            147 ;	---------------------------------
+                            148 ; Function level_initialize_internal
+                            149 ; ---------------------------------
+   005C                     150 _level_initialize_internal::
+                            151 ;src/level.c:69: cpct_clearScreen(AN_PEN_BLACK);
+   005C 21 00 40      [10]  152 	ld	hl, #0x4000
+   005F E5            [11]  153 	push	hl
+   0060 AF            [ 4]  154 	xor	a, a
+   0061 F5            [11]  155 	push	af
+   0062 33            [ 6]  156 	inc	sp
+   0063 26 C0         [ 7]  157 	ld	h, #0xc0
+   0065 E5            [11]  158 	push	hl
+   0066 CDr00r00      [17]  159 	call	_cpct_memset
+                            160 ;src/level.c:71: background_initialize();
+   0069 CDr00r00      [17]  161 	call	_background_initialize
+                            162 ;src/level.c:72: blocks_initialize(is_restart);
+   006C 21 02 00      [10]  163 	ld	hl, #2+0
+   006F 39            [11]  164 	add	hl, sp
+   0070 7E            [ 7]  165 	ld	a, (hl)
+   0071 F5            [11]  166 	push	af
+   0072 33            [ 6]  167 	inc	sp
+   0073 CDr00r00      [17]  168 	call	_blocks_initialize
+   0076 33            [ 6]  169 	inc	sp
+                            170 ;src/level.c:73: auto_initialize();
+   0077 CDr00r00      [17]  171 	call	_auto_initialize
+                            172 ;src/level.c:75: keys_initialize();
+   007A CDr00r00      [17]  173 	call	_keys_initialize
+                            174 ;src/level.c:76: bat_initialize();
+   007D CDr00r00      [17]  175 	call	_bat_initialize
+                            176 ;src/level.c:77: balls_initialize();
+   0080 CDr00r00      [17]  177 	call	_balls_initialize
+   0083 C9            [10]  178 	ret
+                            179 	.area _CODE
+                            180 	.area _INITIALIZER
+                            181 	.area _CABS (ABS)

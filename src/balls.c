@@ -83,7 +83,10 @@ void balls_draw()
         if (ball->active)
         {
             svmem = cpct_getScreenPtr(CPCT_VMEM_START, W_2_S_X(ball->x), W_2_S_Y(ball->y));
-            cpct_drawSprite(sp_ball, svmem, SP_BALL_W, SP_BALL_H);
+ 
+             cpct_drawSpriteMaskedAlignedTable(sp_ball, svmem, SP_BALL_W, 
+                                         SP_BALL_H, g_masktable);
+
             ball++;
         }
     }

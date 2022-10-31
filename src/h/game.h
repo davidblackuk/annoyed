@@ -5,7 +5,7 @@
 #include "h/level.h"
 #include "h/hud.h"
 
-#define INITIAL_LIVES 4
+#define INITIAL_LIVES 6
 
 extern void module_game_initialize();
 

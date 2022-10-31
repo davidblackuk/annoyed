@@ -64,10 +64,14 @@ void bat_draw()
 
     svmem = cpct_getScreenPtr(CPCT_VMEM_START, W_2_S_X(batX), W_2_S_Y(batY));
 
-    cpct_drawSprite(sp_bat_left, svmem, SP_BAT_LEFT_W, SP_BAT_LEFT_H);
+    cpct_drawSpriteMaskedAlignedTable(sp_bat_left, svmem, SP_BAT_LEFT_W, 
+                                SP_BAT_LEFT_H, g_masktable);
+
     cpct_drawSprite(sp_bat_mid, svmem + BAT_SEGMENT_WIDTH_BYTES, SP_BAT_MID_W, SP_BAT_MID_H);
     cpct_drawSprite(sp_bat_mid, svmem + 2*BAT_SEGMENT_WIDTH_BYTES, SP_BAT_MID_W, SP_BAT_MID_H);
-    cpct_drawSprite(sp_bat_right, svmem + 3*BAT_SEGMENT_WIDTH_BYTES, SP_BAT_RIGHT_W, SP_BAT_RIGHT_H);
+
+    cpct_drawSpriteMaskedAlignedTable(sp_bat_right, svmem + 3*BAT_SEGMENT_WIDTH_BYTES, SP_BAT_RIGHT_W, 
+                                SP_BAT_RIGHT_H, g_masktable);
 
 
 }

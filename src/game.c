@@ -16,7 +16,7 @@ void initialise_level();
 
 void game_initialize()
 {
-    current_level_num = 1;
+    current_level_num = 0;
     lives_left = INITIAL_LIVES;
     current_state = Continue;
     initialise_level();    

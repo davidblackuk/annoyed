@@ -6,6 +6,11 @@
 
 void play_scene(Scene *scene);
 
+// Transparent mask table for color 15, mode 0
+cpctm_createTransparentMaskTable(g_masktable, 0x0100, M0, 4);
+
+
+
 void initializeCpc()
 {
 
@@ -19,7 +24,7 @@ void initializeCpc()
    // set screen mode 0, 16 colors
    cpct_setVideoMode(0);
 
-   cpct_setPalette((u8 *)g_palette, 16);
+   cpct_setPalette((u8 *)g_palette, 15);
 
 
 }

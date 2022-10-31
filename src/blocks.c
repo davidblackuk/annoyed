@@ -9,23 +9,31 @@
 #include "h/debug.h"
 #include "h/background.h"
 
-BlockMeta block_meta[BLOCKS_MAP_W / 2][BLOCKS_MAP_H / 2];
+// ---------------------------------------------------------------------------
+// Module private declarations
+// ---------------------------------------------------------------------------
 
-// -----------------------------------------------------
-// Private function declarations
-// -----------------------------------------------------
 void map_blocks_to_meta();
 void draw_current_blocks();
 
 void plant_tile_meta(u8 map_x, u8 map_y, u8 tile_type, u8 score, u8 hits_to_destroy);
 BlockMeta *get_metaData_at(i16 wx, i16 wy);
-BounceHits get_block_bounces(Ball *ball, i16 wx, i16 wy);
+BounceHits is_ball_colliding_with_block(Ball *ball, i16 wx, i16 wy, BounceHits bounceType);
+
+BlockMeta block_meta[BLOCKS_MAP_W / 2][BLOCKS_MAP_H / 2];
+
+
+// ---------------------------------------------------------------------------
+// Module public methods
+// ---------------------------------------------------------------------------
 
 //
-//  Draw the tile map for the blocks layer over the background. this is a one off initialization.
+// Draw the tile map for the blocks layer over the background. this is a one 
+// off initialization.
 //
-//  We take the tile map definition and use this to initialize a further map that convers tile numbers into
-//   tile meta data, including the score for the brick position, visibility, type etc.
+// We take the tile map definition and use this to initialize a further map 
+// that converts tile numbers into tile meta data, including the score for 
+// the brick position, visibility, type etc.
 //
 void blocks_initialize(u8 is_restart)
 {
@@ -35,8 +43,8 @@ void blocks_initialize(u8 is_restart)
         map_blocks_to_meta();
     }
 
-    // render the block map tile by tile to the screen so that levels can be continued
-    // after a life is lost, with a partial board
+    // render the block map tile by tile to the screen so that levels can be 
+    // continued after a life is lost, with a partial board
     draw_current_blocks();
 }
 
@@ -61,15 +69,40 @@ BounceHits blocks_bounce_ball(Ball *ball, i16 at_x, i16 at_y)
         return BOUNCE_NONE;
     }
 
-    bounces |= get_block_bounces(ball, at_x, at_y);
-    bounces |= get_block_bounces(ball, at_x + 3, at_y);
-    bounces |= get_block_bounces(ball, at_x, at_y + 6);
-    bounces |= get_block_bounces(ball, at_x + 3, at_y + 6);
+    if (ball->dy < 0)
+    {
+        // going up
+        bounces |= is_ball_colliding_with_block(ball, at_x, at_y, BOUNCE_Y);
+        bounces |= is_ball_colliding_with_block(ball, at_x + 3, at_y, BOUNCE_Y);
+    }
+    else
+    {
+        // going down
+        bounces |= is_ball_colliding_with_block(ball, at_x, at_y + 6, BOUNCE_Y);
+        bounces |= is_ball_colliding_with_block(ball, at_x + 3, at_y + 6, BOUNCE_Y);
+    }
+
+    if (ball->dx < 0)
+    {
+        // going left
+        bounces |= is_ball_colliding_with_block(ball, at_x, at_y, BOUNCE_X);
+        bounces |= is_ball_colliding_with_block(ball, at_x, at_y + 6, BOUNCE_X);
+    }
+    else
+    {
+        // going right
+        bounces |= is_ball_colliding_with_block(ball, at_x + 3, at_y, BOUNCE_X);
+        bounces |= is_ball_colliding_with_block(ball, at_x + 3, at_y + 6, BOUNCE_X);
+    }
 
     return bounces;
 }
 
-BounceHits get_block_bounces(Ball *ball, i16 wx, i16 wy)
+// ---------------------------------------------------------------------------
+// Module private methods
+// ---------------------------------------------------------------------------
+
+BounceHits is_ball_colliding_with_block(Ball *ball, i16 wx, i16 wy, BounceHits bounceType)
 {
     BounceHits bounces = BOUNCE_NONE;
     BlockMeta *meta;
@@ -80,10 +113,13 @@ BounceHits get_block_bounces(Ball *ball, i16 wx, i16 wy)
         meta->is_active = 0;
 
         background_debug_box_wc((meta->block_tile_x) * TILE_W,
-                                (meta->block_tile_y * TILE_H) + 24, BALL_WIDTH, BALL_HEIGHT);
+                                (meta->block_tile_y * TILE_H) + 24, 
+                                BALL_WIDTH, BALL_HEIGHT);
 
         // background_restore_world_coords((meta->block_tile_x) * TILE_W,
         //   (meta->block_tile_y * TILE_H)+24, BALL_WIDTH, BALL_HEIGHT);
+
+        bounces = bounceType;
     }
 
     return bounces;
@@ -122,10 +158,6 @@ BlockMeta *get_metaData_at(i16 wx, i16 wy)
     }
     return NULL;
 }
-
-// -----------------------------------------------------
-// Private function implementations
-// -----------------------------------------------------
 
 void draw_current_blocks()
 {
@@ -185,7 +217,9 @@ void map_blocks_to_meta()
                 plant_tile_meta(x, y, YELLOW_BLOCK, YELLOW_SCORE, SINGLE_HIT_TO_REMOVE);
                 break;
             case STEEL_BLOCK:
-                plant_tile_meta(x, y, STEEL_BLOCK, current_level->steel_hits_to_destroy, current_level->steel_score);
+                plant_tile_meta(x, y, STEEL_BLOCK, 
+                    current_level->steel_hits_to_destroy, 
+                    current_level->steel_score);
                 break;
             case GOLD_BLOCK:
                 plant_tile_meta(x, y, GOLD_BLOCK, 0, INDESTRUCTABLE);
