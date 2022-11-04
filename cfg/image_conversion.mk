@@ -7,12 +7,12 @@
 # https://www.cpcwiki.eu/index.php/CPC_Palette
 
 
-# black,  Bright White, Orange, Pastel Cyan, Pastel Green, Bright red, Sky blue, Pastel Magenta, Pastel Yellow, White (grey), Blue, Bright blue, yellow
-# 000000, FFFFFF, FF8000, 80FFF, 80FF80, FF0000, 0080FF, FF80FF, FFFF80, 808080, 000080, 0000FF, 808000, ?????, ?????, FF0080
-# 0 26 15 23 22 6 11 17 25 13 1 2 12 ?? ?? 7
-# we have 3 spares at the moment
-# last one is the one we use for transparence #FF0080
-PALETTE=0 26 15 23 22 6 11 17 25 13 1 2 12 3 4 7
+# black,  Bright White, Orange, Pastel Cyan, Pastel Green, Bright red, Sky blue, Pastel Magenta, Pastel Yellow, White (grey), Blue, Bright blue, yellow, red, Pastel Blue , ???
+# 000000, FFFFFF, FF8000, 80FFF, 80FF80, FF0000, 0080FF, FF80FF, FFFF80, 808080, 000080, 0000FF, 808000, 800000 8080ff FF0080
+# 0 26 15 23 22 6 11 17 25 13 1 2 12 ?? ?? ??
+# we have NO spares at the moment
+# we use 008080 for transparent (dull green pallete no. 11)
+PALETTE=0 26 15 23 22 6 11 17 25 13 1 2 12 3 14 7
 
 
 
@@ -32,12 +32,26 @@ $(eval $(call IMG2SP, SET_FOLDER      , src/sprites               ))
 $(eval $(call IMG2SP, SET_PALETTE_FW  , $(PALETTE)         ))
 $(eval $(call IMG2SP, CONVERT_PALETTE , $(PALETTE), g_palette ))
 
-$(eval $(call IMG2SP, CONVERT         , assets/bat-left.png , 0, 0, sp_bat_left))
 $(eval $(call IMG2SP, CONVERT         , assets/bat-mid.png , 0, 0, sp_bat_mid))
-$(eval $(call IMG2SP, CONVERT         , assets/bat-right.png , 0, 0, sp_bat_right))
-$(eval $(call IMG2SP, CONVERT         , assets/ball.png , 0, 0, sp_ball))
 $(eval $(call IMG2SP, CONVERT         , assets/annoyed.png , 0, 0, sp_logo))
 $(eval $(call IMG2SP, CONVERT         , assets/life-marker.png , 0, 0, sp_life))
+
+$(eval $(call IMG2SP, CONVERT         , assets/score.png , 0, 0, sp_score))
+$(eval $(call IMG2SP, CONVERT         , assets/level.png , 0, 0, sp_level))
+$(eval $(call IMG2SP, CONVERT         , assets/hi.png , 0, 0, sp_high))
+
+$(eval $(call IMG2SP, CONVERT         , assets/digit_0.png , 0, 0, sp_zero))
+$(eval $(call IMG2SP, CONVERT         , assets/digit_1.png , 0, 0, sp_one))
+$(eval $(call IMG2SP, CONVERT         , assets/digit_2.png , 0, 0, sp_two))
+$(eval $(call IMG2SP, CONVERT         , assets/digit_3.png , 0, 0, sp_three))
+$(eval $(call IMG2SP, CONVERT         , assets/digit_4.png , 0, 0, sp_four))
+$(eval $(call IMG2SP, CONVERT         , assets/digit_5.png , 0, 0, sp_five))
+$(eval $(call IMG2SP, CONVERT         , assets/digit_6.png , 0, 0, sp_six))
+$(eval $(call IMG2SP, CONVERT         , assets/digit_7.png , 0, 0, sp_seven))
+$(eval $(call IMG2SP, CONVERT         , assets/digit_8.png , 0, 0, sp_eight))
+$(eval $(call IMG2SP, CONVERT         , assets/digit_9.png , 0, 0, sp_nine))
+
+
 
 # CONVERT TILES:
 #  Converts img/tiles.png into src/map/tiles.c & src/map/tiles.h

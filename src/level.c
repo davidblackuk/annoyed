@@ -54,6 +54,9 @@ SceneState level_update()
     if (balls_get_first_active() == NULL)
     {
         res = LevelCompleteFail;
+    } 
+    if (blocks_remaining == 0) {
+        res = LevelCompleteSuccess;
     }
 
     return res;

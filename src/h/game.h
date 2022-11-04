@@ -5,13 +5,14 @@
 #include "h/level.h"
 #include "h/hud.h"
 
-#define INITIAL_LIVES 6
+#define INITIAL_LIVES 4
 
 extern void module_game_initialize();
 
 extern u8 current_level_num;
 extern u8 lives_left;
-extern i16 score;
+extern u16 current_score;
+extern u16 high_score;
 
 extern Scene scene_game;
 

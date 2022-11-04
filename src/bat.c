@@ -5,9 +5,8 @@
 #include "h/bat.h"
 #include "h/background.h"
 #include "h/globals.h"
-#include "sprites/bat-left.h"
 #include "sprites/bat-mid.h"
-#include "sprites/bat-right.h"
+#include "h/masked-sprites.h"
 #include <map/tiles.h>   // Tile declarations      (file generated after processing img/tiles.png)
 
 ///
@@ -64,14 +63,15 @@ void bat_draw()
 
     svmem = cpct_getScreenPtr(CPCT_VMEM_START, W_2_S_X(batX), W_2_S_Y(batY));
 
-    cpct_drawSpriteMaskedAlignedTable(sp_bat_left, svmem, SP_BAT_LEFT_W, 
-                                SP_BAT_LEFT_H, g_masktable);
+
+    cpct_drawSpriteMasked(sp_masked_bat_left, svmem, SP_BAT_SEG_W, SP_BAT_SEG_H);
 
     cpct_drawSprite(sp_bat_mid, svmem + BAT_SEGMENT_WIDTH_BYTES, SP_BAT_MID_W, SP_BAT_MID_H);
     cpct_drawSprite(sp_bat_mid, svmem + 2*BAT_SEGMENT_WIDTH_BYTES, SP_BAT_MID_W, SP_BAT_MID_H);
 
-    cpct_drawSpriteMaskedAlignedTable(sp_bat_right, svmem + 3*BAT_SEGMENT_WIDTH_BYTES, SP_BAT_RIGHT_W, 
-                                SP_BAT_RIGHT_H, g_masktable);
+    cpct_drawSpriteMasked(sp_masked_bat_right, svmem+ 3*BAT_SEGMENT_WIDTH_BYTES, SP_BAT_SEG_W, SP_BAT_SEG_H);
+
+
 
 
 }
@@ -86,7 +86,7 @@ BounceHits bat_bounce_ball(Ball * ball, i16 at_x, i16 at_y)
 
     if (ball->dy > 0 &&
         (ball->x + BALL_WIDTH > batX && ball->x < batX + batW) &&
-        (ball->y + BALL_HEIGHT > batY && ball->y < batY + SP_BAT_LEFT_H))
+        (ball->y + BALL_HEIGHT > batY && ball->y < batY + SP_BAT_SEG_H))
     {
         bounces |= BOUNCE_Y;        
     }

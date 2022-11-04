@@ -19,6 +19,10 @@
         "autoplay.h": "c",
         "level-01-blocks.h": "c",
         "balls_p.h": "c",
-        "game.h": "c"
+        "game.h": "c",
+        "life-marker.h": "c",
+        "tiles.h": "c",
+        "bat-mid.h": "c",
+        "masked-sprites.h": "c"
     }
 }

@@ -1,13 +1,12 @@
 #include <cpctelera.h>
-#include "sprites/ball.h"
-#include "sprites/bat-left.h"
+#include "h/masked-sprites.h"
 #include "h/bat.h"
 #include "h/blocks.h"
 #include "h/background.h"
 #include "h/debug.h"
 #include "h/globals.h"
 #include "h/keys.h"
-#include "h/debug.h"
+
 
 // -----------------------------------------------------------------
 // Module private members
@@ -84,8 +83,7 @@ void balls_draw()
         {
             svmem = cpct_getScreenPtr(CPCT_VMEM_START, W_2_S_X(ball->x), W_2_S_Y(ball->y));
  
-             cpct_drawSpriteMaskedAlignedTable(sp_ball, svmem, SP_BALL_W, 
-                                         SP_BALL_H, g_masktable);
+            cpct_drawSpriteMasked(sp_masked_ball, svmem, SP_BALL_W, SP_BALL_H);
 
             ball++;
         }

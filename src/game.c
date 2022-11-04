@@ -10,13 +10,15 @@ SceneState current_state;
 
 u8 current_level_num;
 u8 lives_left;
-i16 score;
+u16 current_score;
+u16 high_score;
 
 void initialise_level();
 
 void game_initialize()
 {
     current_level_num = 0;
+    current_score = 0;
     lives_left = INITIAL_LIVES;
     current_state = Continue;
     initialise_level();    
@@ -39,6 +41,12 @@ SceneState game_update()
     // score update
     // lives update
     if (res == LevelCompleteSuccess) {
+        current_level_num += 1;
+        if (current_level_num >= NUM_LEVELS) {
+            return GameOver;
+        }
+        initialise_level();
+        res = Continue;
 
     } else if (res == LevelCompleteFail) {
         lives_left -= 1;

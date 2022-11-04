@@ -29,9 +29,9 @@ extern void blocks_draw();
 
 extern void blocks_restore_background();
 
-
 extern BounceHits blocks_bounce_ball(Ball * ball, i16 at_x, i16 at_y);
 
+extern u16 blocks_remaining;
 
 #define WHITE_BLOCK 0
 #define ORANGE_BLOCK 2
@@ -44,14 +44,17 @@ extern BounceHits blocks_bounce_ball(Ball * ball, i16 at_x, i16 at_y);
 #define STEEL_BLOCK 16
 #define GOLD_BLOCK 18
 
-#define WHITE_SCORE 50
-#define ORANGE_SCORE 60
-#define CYAN_SCORE 70
-#define GREEN_SCORE 80
-#define RED_SCORE 90
-#define BLUE_SCORE 100
-#define MAGENTA_SCORE 110
-#define YELLOW_SCORE 120
+
+// these scores are divided by 10 as the ui sticks a zero onto the 
+// scores display so we can look like the score goes to 655350
+#define WHITE_SCORE 5
+#define ORANGE_SCORE 6
+#define CYAN_SCORE 7
+#define GREEN_SCORE 8
+#define RED_SCORE 9
+#define BLUE_SCORE 10
+#define MAGENTA_SCORE 11
+#define YELLOW_SCORE 12
 #define GOLD_SCORE 0
 
 

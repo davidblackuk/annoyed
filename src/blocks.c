@@ -5,7 +5,6 @@
 #include "h/blocks.h"
 #include "h/balls.h"
 #include "h/globals.h"
-#include "sprites/ball.h"
 #include "h/debug.h"
 #include "h/background.h"
 
@@ -22,6 +21,7 @@ BounceHits is_ball_colliding_with_block(Ball *ball, i16 wx, i16 wy, BounceHits b
 
 BlockMeta block_meta[BLOCKS_MAP_W / 2][BLOCKS_MAP_H / 2];
 
+u16 blocks_remaining;
 
 // ---------------------------------------------------------------------------
 // Module public methods
@@ -110,7 +110,16 @@ BounceHits is_ball_colliding_with_block(Ball *ball, i16 wx, i16 wy, BounceHits b
     meta = get_metaData_at(wx, wy);
     if (meta)
     {
-        meta->is_active = 0;
+        if (meta->remaining_hits != INDESTRUCTABLE) {
+            if (meta->remaining_hits > 1) {
+                meta->remaining_hits -= 1;
+            } else {
+                meta->remaining_hits = 0;
+                meta->is_active = 0;
+                blocks_remaining -= 1;
+            }
+        }
+
 
         background_debug_box_wc((meta->block_tile_x) * TILE_W,
                                 (meta->block_tile_y * TILE_H) + 24, 
@@ -183,7 +192,7 @@ void draw_current_blocks()
 //
 void map_blocks_to_meta()
 {
-
+    blocks_remaining = 0;
     // we only need check the tile index of the top left tile of each potential block
     for (u8 y = 0; y < BLOCKS_MAP_H; y += 2)
     {
@@ -218,8 +227,8 @@ void map_blocks_to_meta()
                 break;
             case STEEL_BLOCK:
                 plant_tile_meta(x, y, STEEL_BLOCK, 
-                    current_level->steel_hits_to_destroy, 
-                    current_level->steel_score);
+                    current_level->steel_score, 
+                    current_level->steel_hits_to_destroy);
                 break;
             case GOLD_BLOCK:
                 plant_tile_meta(x, y, GOLD_BLOCK, 0, INDESTRUCTABLE);
@@ -238,6 +247,10 @@ void map_blocks_to_meta()
 
 void plant_tile_meta(u8 map_x, u8 map_y, u8 tile_type, u8 score, u8 hits_to_destroy)
 {
+    if (hits_to_destroy != INDESTRUCTABLE) {
+        blocks_remaining += 1;
+    }
+
     block_meta[map_x / 2][map_y / 2].is_active = 1;
     block_meta[map_x / 2][map_y / 2].score = score;
     block_meta[map_x / 2][map_y / 2].remaining_hits = hits_to_destroy;

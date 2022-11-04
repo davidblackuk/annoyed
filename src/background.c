@@ -96,7 +96,4 @@ void background_debug_box_wc(i16 wx, i16 wy, u8 width, u8 height) {
 
     cpct_drawSolidBox(pvm, 255, tileW * TILE_W , tileH + TILE_H );
 
-
-    dbg_displayNumber(1, tileX);
-    dbg_displayNumber(2, tileY);
 }
