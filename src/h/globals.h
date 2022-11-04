@@ -12,8 +12,7 @@
 #define TRUE 1
 #define FALSE 0
 
-// our mask table which we need to declare once only
-extern const u8 g_masktable[256];
+
 
 #define WinApe_Brk __asm__(".dw #0xFFED");
 

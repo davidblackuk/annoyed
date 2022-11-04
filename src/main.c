@@ -6,10 +6,6 @@
 
 void play_scene(Scene *scene);
 
-// Transparent mask table for color 15, mode 0
-cpctm_createTransparentMaskTable(g_masktable, 0x9000, M0, 11);
-
-
 
 void initializeCpc()
 {
