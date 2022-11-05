@@ -23,6 +23,8 @@
         "life-marker.h": "c",
         "tiles.h": "c",
         "bat-mid.h": "c",
-        "masked-sprites.h": "c"
+        "masked-sprites.h": "c",
+        "font.h": "c",
+        "text.h": "c"
     }
 }

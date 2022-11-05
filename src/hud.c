@@ -1,22 +1,14 @@
 
 #include "h/globals.h"
-#include "sprites/digit_0.h"
-#include "sprites/digit_1.h"
-#include "sprites/digit_2.h"
-#include "sprites/digit_3.h"
-#include "sprites/digit_4.h"
-#include "sprites/digit_5.h"
-#include "sprites/digit_6.h"
-#include "sprites/digit_7.h"
-#include "sprites/digit_8.h"
-#include "sprites/digit_9.h"
 #include "sprites/score.h"
 #include "sprites/level.h"
 #include "sprites/hi.h"
+#include "sprites/font.h"
 
 #include "sprites/life-marker.h"
 #include "h/game.h"
 #include "cpctelera.h"
+#include "h/globals.h"
 
 // ---------------------------------------------------------------------------
 // Module private declarations
@@ -39,16 +31,16 @@ const u8 *digits[10];
 
 void hud_initialize()
 {
-    digits[0] = sp_zero; 
-    digits[1] = sp_one; 
-    digits[2] = sp_two; 
-    digits[3] = sp_three; 
-    digits[4] = sp_four; 
-    digits[5] = sp_five; 
-    digits[6] = sp_six; 
-    digits[7] = sp_seven; 
-    digits[8] = sp_eight; 
-    digits[9] = sp_nine; 
+    digits[0] = sp_font_00; 
+    digits[1] = sp_font_01; 
+    digits[2] = sp_font_02; 
+    digits[3] = sp_font_03; 
+    digits[4] = sp_font_04; 
+    digits[5] = sp_font_05; 
+    digits[6] = sp_font_06; 
+    digits[7] = sp_font_07; 
+    digits[8] = sp_font_08; 
+    digits[9] = sp_font_09; 
     
     hud_initialize_internal(FALSE);
 }
@@ -126,14 +118,14 @@ void hud_draw_score_with_added_last_zero(u16 score, u8 row)
 
 
     // draw the post fix constant zero
-    cpct_drawSprite(sp_zero, svmem, SP_ZERO_W, SP_ZERO_H);
+    cpct_drawSprite(sp_font_00, svmem, SP_FONT_CHAR_W, SP_FONT_CHAR_H);
 
 
     for (i = 0; i < 5; i++)
     {
         u8 digit =  (score % 10);
         //cpct_drawCharM0((void *)(pv - 4 * i), digit);
-        cpct_drawSprite(digits[digit], (svmem - (2 * (i+1))), SP_ZERO_W, SP_ZERO_H);
+        cpct_drawSprite(digits[digit], (svmem - (2 * (i+1))), SP_FONT_CHAR_W, SP_FONT_CHAR_H);
         score /= 10;
     }
 }
@@ -147,10 +139,10 @@ void hud_draw_lives(u8 row)
 
 
     u8 digit =  (num % 10);
-    cpct_drawSprite(digits[digit], svmem , SP_ZERO_W, SP_ZERO_H);
+    cpct_drawSprite(digits[digit], svmem , SP_FONT_CHAR_W, SP_FONT_CHAR_H);
 
     digit =  ((num / 10) % 10);
-    cpct_drawSprite(digits[digit], svmem - 2 , SP_ZERO_W, SP_ZERO_H);
+    cpct_drawSprite(digits[digit], svmem - 2 , SP_FONT_CHAR_W, SP_FONT_CHAR_H);
 
 }
 

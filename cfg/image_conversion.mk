@@ -40,16 +40,8 @@ $(eval $(call IMG2SP, CONVERT         , assets/score.png , 0, 0, sp_score))
 $(eval $(call IMG2SP, CONVERT         , assets/level.png , 0, 0, sp_level))
 $(eval $(call IMG2SP, CONVERT         , assets/hi.png , 0, 0, sp_high))
 
-$(eval $(call IMG2SP, CONVERT         , assets/digit_0.png , 0, 0, sp_zero))
-$(eval $(call IMG2SP, CONVERT         , assets/digit_1.png , 0, 0, sp_one))
-$(eval $(call IMG2SP, CONVERT         , assets/digit_2.png , 0, 0, sp_two))
-$(eval $(call IMG2SP, CONVERT         , assets/digit_3.png , 0, 0, sp_three))
-$(eval $(call IMG2SP, CONVERT         , assets/digit_4.png , 0, 0, sp_four))
-$(eval $(call IMG2SP, CONVERT         , assets/digit_5.png , 0, 0, sp_five))
-$(eval $(call IMG2SP, CONVERT         , assets/digit_6.png , 0, 0, sp_six))
-$(eval $(call IMG2SP, CONVERT         , assets/digit_7.png , 0, 0, sp_seven))
-$(eval $(call IMG2SP, CONVERT         , assets/digit_8.png , 0, 0, sp_eight))
-$(eval $(call IMG2SP, CONVERT         , assets/digit_9.png , 0, 0, sp_nine))
+
+$(eval $(call IMG2SP, CONVERT         , assets/font.png , 4, 8, sp_font))
 
 
 

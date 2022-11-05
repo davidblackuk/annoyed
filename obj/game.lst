@@ -1,0 +1,193 @@
+                              1 ;--------------------------------------------------------
+                              2 ; File Created by SDCC : free open source ANSI-C Compiler
+                              3 ; Version 3.6.8 #9946 (Linux)
+                              4 ;--------------------------------------------------------
+                              5 	.module game
+                              6 	.optsdcc -mz80
+                              7 	
+                              8 ;--------------------------------------------------------
+                              9 ; Public variables in this module
+                             10 ;--------------------------------------------------------
+                             11 	.globl _game_update
+                             12 	.globl _game_draw
+                             13 	.globl _game_initialize
+                             14 	.globl _hud_draw
+                             15 	.globl _hud_update
+                             16 	.globl _hud_continue_from_death
+                             17 	.globl _hud_initialize
+                             18 	.globl _level_update
+                             19 	.globl _level_draw
+                             20 	.globl _level_continue_from_death
+                             21 	.globl _level_initialize
+                             22 	.globl _high_score
+                             23 	.globl _current_score
+                             24 	.globl _lives_left
+                             25 	.globl _current_level_num
+                             26 	.globl _current_state
+                             27 	.globl _scene_game
+                             28 	.globl _module_game_initialize
+                             29 	.globl _initialise_level
+                             30 ;--------------------------------------------------------
+                             31 ; special function registers
+                             32 ;--------------------------------------------------------
+                             33 ;--------------------------------------------------------
+                             34 ; ram data
+                             35 ;--------------------------------------------------------
+                             36 	.area _DATA
+   0000                      37 _scene_game::
+   0000                      38 	.ds 6
+   0006                      39 _current_state::
+   0006                      40 	.ds 1
+   0007                      41 _current_level_num::
+   0007                      42 	.ds 1
+   0008                      43 _lives_left::
+   0008                      44 	.ds 1
+   0009                      45 _current_score::
+   0009                      46 	.ds 2
+   000B                      47 _high_score::
+   000B                      48 	.ds 2
+                             49 ;--------------------------------------------------------
+                             50 ; ram data
+                             51 ;--------------------------------------------------------
+                             52 	.area _INITIALIZED
+                             53 ;--------------------------------------------------------
+                             54 ; absolute external ram data
+                             55 ;--------------------------------------------------------
+                             56 	.area _DABS (ABS)
+                             57 ;--------------------------------------------------------
+                             58 ; global & static initialisations
+                             59 ;--------------------------------------------------------
+                             60 	.area _HOME
+                             61 	.area _GSINIT
+                             62 	.area _GSFINAL
+                             63 	.area _GSINIT
+                             64 ;--------------------------------------------------------
+                             65 ; Home
+                             66 ;--------------------------------------------------------
+                             67 	.area _HOME
+                             68 	.area _HOME
+                             69 ;--------------------------------------------------------
+                             70 ; code
+                             71 ;--------------------------------------------------------
+                             72 	.area _CODE
+                             73 ;src/game.c:18: void game_initialize()
+                             74 ;	---------------------------------
+                             75 ; Function game_initialize
+                             76 ; ---------------------------------
+   0000                      77 _game_initialize::
+                             78 ;src/game.c:20: current_level_num = 0;
+   0000 21r07r00      [10]   79 	ld	hl,#_current_level_num + 0
+   0003 36 00         [10]   80 	ld	(hl), #0x00
+                             81 ;src/game.c:21: current_score = 0;
+   0005 21 00 00      [10]   82 	ld	hl, #0x0000
+   0008 22r09r00      [16]   83 	ld	(_current_score), hl
+                             84 ;src/game.c:22: lives_left = INITIAL_LIVES;
+   000B 21r08r00      [10]   85 	ld	hl,#_lives_left + 0
+   000E 36 04         [10]   86 	ld	(hl), #0x04
+                             87 ;src/game.c:23: current_state = Continue;
+   0010 21r06r00      [10]   88 	ld	hl,#_current_state + 0
+   0013 36 00         [10]   89 	ld	(hl), #0x00
+                             90 ;src/game.c:24: initialise_level();    
+   0015 C3r72r00      [10]   91 	jp  _initialise_level
+                             92 ;src/game.c:27: void game_draw()
+                             93 ;	---------------------------------
+                             94 ; Function game_draw
+                             95 ; ---------------------------------
+   0018                      96 _game_draw::
+                             97 ;src/game.c:29: level_draw();
+   0018 CDr00r00      [17]   98 	call	_level_draw
+                             99 ;src/game.c:31: hud_draw();
+   001B C3r00r00      [10]  100 	jp  _hud_draw
+                            101 ;src/game.c:35: SceneState game_update()
+                            102 ;	---------------------------------
+                            103 ; Function game_update
+                            104 ; ---------------------------------
+   001E                     105 _game_update::
+                            106 ;src/game.c:39: res = level_update();
+   001E CDr00r00      [17]  107 	call	_level_update
+                            108 ;src/game.c:40: hud_update();
+   0021 E5            [11]  109 	push	hl
+   0022 CDr00r00      [17]  110 	call	_hud_update
+   0025 E1            [10]  111 	pop	hl
+                            112 ;src/game.c:43: if (res == LevelCompleteSuccess) {
+   0026 7D            [ 4]  113 	ld	a, l
+   0027 D6 03         [ 7]  114 	sub	a, #0x03
+   0029 20 17         [12]  115 	jr	NZ,00108$
+                            116 ;src/game.c:44: current_level_num += 1;
+   002B FD 21r07r00   [14]  117 	ld	iy, #_current_level_num
+   002F FD 34 00      [23]  118 	inc	0 (iy)
+                            119 ;src/game.c:45: if (current_level_num >= NUM_LEVELS) {
+   0032 FD 7E 00      [19]  120 	ld	a, 0 (iy)
+   0035 D6 02         [ 7]  121 	sub	a, #0x02
+   0037 38 03         [12]  122 	jr	C,00102$
+                            123 ;src/game.c:46: return GameOver;
+   0039 2E 04         [ 7]  124 	ld	l, #0x04
+   003B C9            [10]  125 	ret
+   003C                     126 00102$:
+                            127 ;src/game.c:48: initialise_level();
+   003C CDr72r00      [17]  128 	call	_initialise_level
+                            129 ;src/game.c:49: res = Continue;
+   003F 2E 00         [ 7]  130 	ld	l, #0x00
+   0041 C9            [10]  131 	ret
+   0042                     132 00108$:
+                            133 ;src/game.c:51: } else if (res == LevelCompleteFail) {
+   0042 7D            [ 4]  134 	ld	a, l
+   0043 D6 02         [ 7]  135 	sub	a, #0x02
+   0045 C0            [11]  136 	ret	NZ
+                            137 ;src/game.c:52: lives_left -= 1;
+   0046 FD 21r08r00   [14]  138 	ld	iy, #_lives_left
+   004A FD 35 00      [23]  139 	dec	0 (iy)
+                            140 ;src/game.c:53: if (lives_left == 0) {
+   004D FD 7E 00      [19]  141 	ld	a, 0 (iy)
+   0050 B7            [ 4]  142 	or	a, a
+   0051 20 03         [12]  143 	jr	NZ,00104$
+                            144 ;src/game.c:54: return GameOver;
+   0053 2E 04         [ 7]  145 	ld	l, #0x04
+   0055 C9            [10]  146 	ret
+   0056                     147 00104$:
+                            148 ;src/game.c:56: level_continue_from_death();
+   0056 CDr00r00      [17]  149 	call	_level_continue_from_death
+                            150 ;src/game.c:57: hud_continue_from_death();
+   0059 CDr00r00      [17]  151 	call	_hud_continue_from_death
+                            152 ;src/game.c:58: res = Continue;
+   005C 2E 00         [ 7]  153 	ld	l, #0x00
+                            154 ;src/game.c:62: return res;
+   005E C9            [10]  155 	ret
+                            156 ;src/game.c:65: void module_game_initialize()
+                            157 ;	---------------------------------
+                            158 ; Function module_game_initialize
+                            159 ; ---------------------------------
+   005F                     160 _module_game_initialize::
+                            161 ;src/game.c:67: scene_game.initialize = game_initialize;
+   005F 21r00r00      [10]  162 	ld	hl, #_game_initialize
+   0062 22r00r00      [16]  163 	ld	(_scene_game), hl
+                            164 ;src/game.c:68: scene_game.update = game_update;
+   0065 21r1Er00      [10]  165 	ld	hl, #_game_update
+   0068 22r04r00      [16]  166 	ld	((_scene_game + 0x0004)), hl
+                            167 ;src/game.c:69: scene_game.draw = game_draw;
+   006B 21r18r00      [10]  168 	ld	hl, #_game_draw
+   006E 22r02r00      [16]  169 	ld	((_scene_game + 0x0002)), hl
+   0071 C9            [10]  170 	ret
+                            171 ;src/game.c:72: void initialise_level() {
+                            172 ;	---------------------------------
+                            173 ; Function initialise_level
+                            174 ; ---------------------------------
+   0072                     175 _initialise_level::
+                            176 ;src/game.c:73: current_level = level_definitions + current_level_num;
+   0072 01r00r00      [10]  177 	ld	bc, #_level_definitions+0
+   0075 ED 5Br07r00   [20]  178 	ld	de, (_current_level_num)
+   0079 16 00         [ 7]  179 	ld	d, #0x00
+   007B 6B            [ 4]  180 	ld	l, e
+   007C 62            [ 4]  181 	ld	h, d
+   007D 29            [11]  182 	add	hl, hl
+   007E 19            [11]  183 	add	hl, de
+   007F 29            [11]  184 	add	hl, hl
+   0080 09            [11]  185 	add	hl, bc
+   0081 22r00r00      [16]  186 	ld	(_current_level), hl
+                            187 ;src/game.c:74: level_initialize();
+   0084 CDr00r00      [17]  188 	call	_level_initialize
+                            189 ;src/game.c:75: hud_initialize();
+   0087 C3r00r00      [10]  190 	jp  _hud_initialize
+                            191 	.area _CODE
+                            192 	.area _INITIALIZER
+                            193 	.area _CABS (ABS)

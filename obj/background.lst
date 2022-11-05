@@ -1,0 +1,322 @@
+                              1 ;--------------------------------------------------------
+                              2 ; File Created by SDCC : free open source ANSI-C Compiler
+                              3 ; Version 3.6.8 #9946 (Linux)
+                              4 ;--------------------------------------------------------
+                              5 	.module background
+                              6 	.optsdcc -mz80
+                              7 	
+                              8 ;--------------------------------------------------------
+                              9 ; Public variables in this module
+                             10 ;--------------------------------------------------------
+                             11 	.globl _cpct_etm_setTileset2x4
+                             12 	.globl _cpct_etm_drawTileBox2x4
+                             13 	.globl _cpct_etm_drawTilemap2x4_f
+                             14 	.globl _cpct_getScreenPtr
+                             15 	.globl _cpct_drawSolidBox
+                             16 	.globl _pvmem
+                             17 	.globl _background_initialize
+                             18 	.globl _background_bounce_ball
+                             19 	.globl _background_restore_world_coords
+                             20 	.globl _background_debug_box_wc
+                             21 ;--------------------------------------------------------
+                             22 ; special function registers
+                             23 ;--------------------------------------------------------
+                             24 ;--------------------------------------------------------
+                             25 ; ram data
+                             26 ;--------------------------------------------------------
+                             27 	.area _DATA
+   0000                      28 _pvmem::
+   0000                      29 	.ds 2
+                             30 ;--------------------------------------------------------
+                             31 ; ram data
+                             32 ;--------------------------------------------------------
+                             33 	.area _INITIALIZED
+                             34 ;--------------------------------------------------------
+                             35 ; absolute external ram data
+                             36 ;--------------------------------------------------------
+                             37 	.area _DABS (ABS)
+                             38 ;--------------------------------------------------------
+                             39 ; global & static initialisations
+                             40 ;--------------------------------------------------------
+                             41 	.area _HOME
+                             42 	.area _GSINIT
+                             43 	.area _GSFINAL
+                             44 	.area _GSINIT
+                             45 ;--------------------------------------------------------
+                             46 ; Home
+                             47 ;--------------------------------------------------------
+                             48 	.area _HOME
+                             49 	.area _HOME
+                             50 ;--------------------------------------------------------
+                             51 ; code
+                             52 ;--------------------------------------------------------
+                             53 	.area _CODE
+                             54 ;src/background.c:10: void background_initialize()
+                             55 ;	---------------------------------
+                             56 ; Function background_initialize
+                             57 ; ---------------------------------
+   0000                      58 _background_initialize::
+                             59 ;src/background.c:13: pvmem = cpct_getScreenPtr(CPCT_VMEM_START, TILE_MAP_SCREEN_BYTE_OFFSET_X, TILE_MAP_SCREEN_PIXEL_OFFSET_Y);
+   0000 21 08 00      [10]   60 	ld	hl, #0x0008
+   0003 E5            [11]   61 	push	hl
+   0004 21 00 C0      [10]   62 	ld	hl, #0xc000
+   0007 E5            [11]   63 	push	hl
+   0008 CDr00r00      [17]   64 	call	_cpct_getScreenPtr
+   000B 22r00r00      [16]   65 	ld	(_pvmem), hl
+                             66 ;src/background.c:15: cpct_etm_setTileset2x4(g_tileset);
+   000E 21r00r00      [10]   67 	ld	hl, #_g_tileset
+   0011 CDr00r00      [17]   68 	call	_cpct_etm_setTileset2x4
+                             69 ;src/background.c:18: cpct_etm_drawTilemap2x4_f(BACKGROUND_TILMAP_W, BACKGROUND_TILMAP_H, pvmem, current_level->background_tilemap);    
+   0014 2Ar00r00      [16]   70 	ld	hl, (_current_level)
+   0017 4E            [ 7]   71 	ld	c, (hl)
+   0018 23            [ 6]   72 	inc	hl
+   0019 46            [ 7]   73 	ld	b, (hl)
+   001A 2Ar00r00      [16]   74 	ld	hl, (_pvmem)
+   001D C5            [11]   75 	push	bc
+   001E E5            [11]   76 	push	hl
+   001F 21 1E 32      [10]   77 	ld	hl, #0x321e
+   0022 E5            [11]   78 	push	hl
+   0023 CDr00r00      [17]   79 	call	_cpct_etm_drawTilemap2x4_f
+   0026 C9            [10]   80 	ret
+                             81 ;src/background.c:21: BounceHits background_bounce_ball(i16 at_wx, i16 at_wy) {
+                             82 ;	---------------------------------
+                             83 ; Function background_bounce_ball
+                             84 ; ---------------------------------
+   0027                      85 _background_bounce_ball::
+                             86 ;src/background.c:23: BounceHits bounces = at_wx < 0 ? BOUNCE_X : 0;
+   0027 21 03 00      [10]   87 	ld	hl, #2+1
+   002A 39            [11]   88 	add	hl, sp
+   002B CB 7E         [12]   89 	bit	7, (hl)
+   002D 28 04         [12]   90 	jr	Z,00103$
+   002F 0E 01         [ 7]   91 	ld	c, #0x01
+   0031 18 02         [12]   92 	jr	00104$
+   0033                      93 00103$:
+   0033 0E 00         [ 7]   94 	ld	c, #0x00
+   0035                      95 00104$:
+                             96 ;src/background.c:25: bounces |= (at_wx + BALL_WIDTH)  > PLAY_AREA_WIDTH ? BOUNCE_X : BOUNCE_NONE;
+   0035 21 02 00      [10]   97 	ld	hl, #2
+   0038 39            [11]   98 	add	hl, sp
+   0039 5E            [ 7]   99 	ld	e, (hl)
+   003A 23            [ 6]  100 	inc	hl
+   003B 56            [ 7]  101 	ld	d, (hl)
+   003C 13            [ 6]  102 	inc	de
+   003D 13            [ 6]  103 	inc	de
+   003E 13            [ 6]  104 	inc	de
+   003F 3E 34         [ 7]  105 	ld	a, #0x34
+   0041 BB            [ 4]  106 	cp	a, e
+   0042 3E 00         [ 7]  107 	ld	a, #0x00
+   0044 9A            [ 4]  108 	sbc	a, d
+   0045 E2r4Ar00      [10]  109 	jp	PO, 00121$
+   0048 EE 80         [ 7]  110 	xor	a, #0x80
+   004A                     111 00121$:
+   004A F2r51r00      [10]  112 	jp	P, 00105$
+   004D 3E 01         [ 7]  113 	ld	a, #0x01
+   004F 18 02         [12]  114 	jr	00106$
+   0051                     115 00105$:
+   0051 3E 00         [ 7]  116 	ld	a, #0x00
+   0053                     117 00106$:
+   0053 B1            [ 4]  118 	or	a, c
+   0054 4F            [ 4]  119 	ld	c, a
+                            120 ;src/background.c:27: bounces |= (at_wy < 0) ? BOUNCE_Y : BOUNCE_NONE;
+   0055 21 05 00      [10]  121 	ld	hl, #4+1
+   0058 39            [11]  122 	add	hl, sp
+   0059 CB 7E         [12]  123 	bit	7, (hl)
+   005B 28 04         [12]  124 	jr	Z,00107$
+   005D 3E 02         [ 7]  125 	ld	a, #0x02
+   005F 18 02         [12]  126 	jr	00108$
+   0061                     127 00107$:
+   0061 3E 00         [ 7]  128 	ld	a, #0x00
+   0063                     129 00108$:
+   0063 B1            [ 4]  130 	or	a, c
+   0064 6F            [ 4]  131 	ld	l, a
+                            132 ;src/background.c:29: return bounces;
+   0065 C9            [10]  133 	ret
+                            134 ;src/background.c:32: void background_restore_world_coords(i16 wx, i16 wy, u8 width, u8 height) {
+                            135 ;	---------------------------------
+                            136 ; Function background_restore_world_coords
+                            137 ; ---------------------------------
+   0066                     138 _background_restore_world_coords::
+   0066 DD E5         [15]  139 	push	ix
+   0068 DD 21 00 00   [14]  140 	ld	ix,#0
+   006C DD 39         [15]  141 	add	ix,sp
+   006E F5            [11]  142 	push	af
+   006F F5            [11]  143 	push	af
+                            144 ;src/background.c:38: u8 tileX =  (wx / 2) + 2;
+   0070 DD 4E 04      [19]  145 	ld	c,4 (ix)
+   0073 DD 46 05      [19]  146 	ld	b,5 (ix)
+   0076 CB 78         [ 8]  147 	bit	7, b
+   0078 28 01         [12]  148 	jr	Z,00109$
+   007A 03            [ 6]  149 	inc	bc
+   007B                     150 00109$:
+   007B CB 28         [ 8]  151 	sra	b
+   007D CB 19         [ 8]  152 	rr	c
+   007F 79            [ 4]  153 	ld	a, c
+   0080 C6 02         [ 7]  154 	add	a, #0x02
+   0082 DD 77 FC      [19]  155 	ld	-4 (ix), a
+                            156 ;src/background.c:39: u8 tileY = (wy / 4) + 2;
+   0085 DD 4E 06      [19]  157 	ld	c,6 (ix)
+   0088 DD 46 07      [19]  158 	ld	b,7 (ix)
+   008B CB 78         [ 8]  159 	bit	7, b
+   008D 28 03         [12]  160 	jr	Z,00110$
+   008F 03            [ 6]  161 	inc	bc
+   0090 03            [ 6]  162 	inc	bc
+   0091 03            [ 6]  163 	inc	bc
+   0092                     164 00110$:
+   0092 CB 28         [ 8]  165 	sra	b
+   0094 CB 19         [ 8]  166 	rr	c
+   0096 CB 28         [ 8]  167 	sra	b
+   0098 CB 19         [ 8]  168 	rr	c
+   009A 79            [ 4]  169 	ld	a, c
+   009B C6 02         [ 7]  170 	add	a, #0x02
+   009D DD 77 FD      [19]  171 	ld	-3 (ix), a
+                            172 ;src/background.c:40: u8 tileW = width / 2;
+   00A0 DD 5E 08      [19]  173 	ld	e, 8 (ix)
+   00A3 CB 3B         [ 8]  174 	srl	e
+                            175 ;src/background.c:41: u8 tileH = height / 4;
+   00A5 DD 56 09      [19]  176 	ld	d, 9 (ix)
+   00A8 CB 3A         [ 8]  177 	srl	d
+   00AA CB 3A         [ 8]  178 	srl	d
+                            179 ;src/background.c:44: if (height % 4 > 0)
+   00AC DD 7E 09      [19]  180 	ld	a, 9 (ix)
+   00AF E6 03         [ 7]  181 	and	a, #0x03
+   00B1 28 01         [12]  182 	jr	Z,00102$
+                            183 ;src/background.c:46: tileH++;
+   00B3 14            [ 4]  184 	inc	d
+   00B4                     185 00102$:
+                            186 ;src/background.c:50: if (width % 2 > 0)
+   00B4 DD CB 08 46   [20]  187 	bit	0, 8 (ix)
+   00B8 28 01         [12]  188 	jr	Z,00104$
+                            189 ;src/background.c:52: tileW++;
+   00BA 1C            [ 4]  190 	inc	e
+   00BB                     191 00104$:
+                            192 ;src/background.c:56: if (wx & 1 == 1)
+   00BB DD CB 04 46   [20]  193 	bit	0, 4 (ix)
+   00BF 28 01         [12]  194 	jr	Z,00106$
+                            195 ;src/background.c:58: tileW += 1;
+   00C1 1C            [ 4]  196 	inc	e
+   00C2                     197 00106$:
+                            198 ;src/background.c:61: cpct_etm_drawTileBox2x4(tileX, tileY, tileW, tileH, BACKGROUND_TILMAP_W, pvmem, current_level->background_tilemap);
+   00C2 2Ar00r00      [16]  199 	ld	hl, (_current_level)
+   00C5 4E            [ 7]  200 	ld	c, (hl)
+   00C6 23            [ 6]  201 	inc	hl
+   00C7 46            [ 7]  202 	ld	b, (hl)
+   00C8 DD 71 FE      [19]  203 	ld	-2 (ix), c
+   00CB DD 70 FF      [19]  204 	ld	-1 (ix), b
+   00CE 2Ar00r00      [16]  205 	ld	hl, (_pvmem)
+   00D1 DD 4E FE      [19]  206 	ld	c,-2 (ix)
+   00D4 DD 46 FF      [19]  207 	ld	b,-1 (ix)
+   00D7 C5            [11]  208 	push	bc
+   00D8 E5            [11]  209 	push	hl
+   00D9 3E 1E         [ 7]  210 	ld	a, #0x1e
+   00DB F5            [11]  211 	push	af
+   00DC 33            [ 6]  212 	inc	sp
+   00DD D5            [11]  213 	push	de
+   00DE 33            [ 6]  214 	inc	sp
+   00DF 53            [ 4]  215 	ld	d, e
+   00E0 DD 5E FD      [19]  216 	ld	e, -3 (ix)
+   00E3 D5            [11]  217 	push	de
+   00E4 DD 7E FC      [19]  218 	ld	a, -4 (ix)
+   00E7 F5            [11]  219 	push	af
+   00E8 33            [ 6]  220 	inc	sp
+   00E9 CDr00r00      [17]  221 	call	_cpct_etm_drawTileBox2x4
+   00EC DD F9         [10]  222 	ld	sp, ix
+   00EE DD E1         [14]  223 	pop	ix
+   00F0 C9            [10]  224 	ret
+                            225 ;src/background.c:65: void background_debug_box_wc(i16 wx, i16 wy, u8 width, u8 height) {
+                            226 ;	---------------------------------
+                            227 ; Function background_debug_box_wc
+                            228 ; ---------------------------------
+   00F1                     229 _background_debug_box_wc::
+   00F1 DD E5         [15]  230 	push	ix
+   00F3 DD 21 00 00   [14]  231 	ld	ix,#0
+   00F7 DD 39         [15]  232 	add	ix,sp
+                            233 ;src/background.c:71: u8 tileX =  (wx / 2) + 2;
+   00F9 DD 6E 04      [19]  234 	ld	l,4 (ix)
+   00FC DD 66 05      [19]  235 	ld	h,5 (ix)
+   00FF CB 7C         [ 8]  236 	bit	7, h
+   0101 28 01         [12]  237 	jr	Z,00109$
+   0103 23            [ 6]  238 	inc	hl
+   0104                     239 00109$:
+   0104 CB 2C         [ 8]  240 	sra	h
+   0106 CB 1D         [ 8]  241 	rr	l
+   0108 2C            [ 4]  242 	inc	l
+   0109 2C            [ 4]  243 	inc	l
+                            244 ;src/background.c:72: u8 tileY = (wy / 4) + 2;
+   010A DD 4E 06      [19]  245 	ld	c,6 (ix)
+   010D DD 46 07      [19]  246 	ld	b,7 (ix)
+   0110 CB 78         [ 8]  247 	bit	7, b
+   0112 28 03         [12]  248 	jr	Z,00110$
+   0114 03            [ 6]  249 	inc	bc
+   0115 03            [ 6]  250 	inc	bc
+   0116 03            [ 6]  251 	inc	bc
+   0117                     252 00110$:
+   0117 CB 28         [ 8]  253 	sra	b
+   0119 CB 19         [ 8]  254 	rr	c
+   011B CB 28         [ 8]  255 	sra	b
+   011D CB 19         [ 8]  256 	rr	c
+   011F 0C            [ 4]  257 	inc	c
+   0120 0C            [ 4]  258 	inc	c
+                            259 ;src/background.c:73: u8 tileW = width / 2;
+   0121 DD 5E 08      [19]  260 	ld	e, 8 (ix)
+   0124 CB 3B         [ 8]  261 	srl	e
+                            262 ;src/background.c:74: u8 tileH = height / 4;
+   0126 DD 56 09      [19]  263 	ld	d, 9 (ix)
+   0129 CB 3A         [ 8]  264 	srl	d
+   012B CB 3A         [ 8]  265 	srl	d
+                            266 ;src/background.c:77: if (height % 4 > 0)
+   012D DD 7E 09      [19]  267 	ld	a, 9 (ix)
+   0130 E6 03         [ 7]  268 	and	a, #0x03
+   0132 28 01         [12]  269 	jr	Z,00102$
+                            270 ;src/background.c:79: tileH++;
+   0134 14            [ 4]  271 	inc	d
+   0135                     272 00102$:
+                            273 ;src/background.c:83: if (width % 2 > 0)
+   0135 DD CB 08 46   [20]  274 	bit	0, 8 (ix)
+   0139 28 01         [12]  275 	jr	Z,00104$
+                            276 ;src/background.c:85: tileW++;
+   013B 1C            [ 4]  277 	inc	e
+   013C                     278 00104$:
+                            279 ;src/background.c:89: if (wx & 1 == 1)
+   013C DD CB 04 46   [20]  280 	bit	0, 4 (ix)
+   0140 28 01         [12]  281 	jr	Z,00106$
+                            282 ;src/background.c:91: tileW += 1;
+   0142 1C            [ 4]  283 	inc	e
+   0143                     284 00106$:
+                            285 ;src/background.c:95: tileY * TILE_H );
+   0143 CB 21         [ 8]  286 	sla	c
+   0145 CB 21         [ 8]  287 	sla	c
+                            288 ;src/background.c:94: pvm = cpct_getScreenPtr(CPCT_VMEM_START, (tileX * TILE_W) + (4*TILE_W),
+   0147 7D            [ 4]  289 	ld	a, l
+   0148 87            [ 4]  290 	add	a, a
+   0149 C6 08         [ 7]  291 	add	a, #0x08
+   014B 47            [ 4]  292 	ld	b, a
+   014C D5            [11]  293 	push	de
+   014D 79            [ 4]  294 	ld	a, c
+   014E F5            [11]  295 	push	af
+   014F 33            [ 6]  296 	inc	sp
+   0150 C5            [11]  297 	push	bc
+   0151 33            [ 6]  298 	inc	sp
+   0152 21 00 C0      [10]  299 	ld	hl, #0xc000
+   0155 E5            [11]  300 	push	hl
+   0156 CDr00r00      [17]  301 	call	_cpct_getScreenPtr
+   0159 4D            [ 4]  302 	ld	c, l
+   015A 44            [ 4]  303 	ld	b, h
+   015B D1            [10]  304 	pop	de
+                            305 ;src/background.c:97: cpct_drawSolidBox(pvm, 255, tileW * TILE_W , tileH + TILE_H );
+   015C 14            [ 4]  306 	inc	d
+   015D 14            [ 4]  307 	inc	d
+   015E 14            [ 4]  308 	inc	d
+   015F 14            [ 4]  309 	inc	d
+   0160 7B            [ 4]  310 	ld	a, e
+   0161 87            [ 4]  311 	add	a, a
+   0162 5F            [ 4]  312 	ld	e, a
+   0163 D5            [11]  313 	push	de
+   0164 21 FF 00      [10]  314 	ld	hl, #0x00ff
+   0167 E5            [11]  315 	push	hl
+   0168 C5            [11]  316 	push	bc
+   0169 CDr00r00      [17]  317 	call	_cpct_drawSolidBox
+   016C DD E1         [14]  318 	pop	ix
+   016E C9            [10]  319 	ret
+                            320 	.area _CODE
+                            321 	.area _INITIALIZER
+                            322 	.area _CABS (ABS)

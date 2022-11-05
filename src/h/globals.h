@@ -12,7 +12,8 @@
 #define TRUE 1
 #define FALSE 0
 
-
+#define SP_FONT_CHAR_W 2
+#define SP_FONT_CHAR_H 8
 
 #define WinApe_Brk __asm__(".dw #0xFFED");
 
