@@ -7,6 +7,7 @@ A simple game using cpc telera
 
 ## todo
 - bat physics is bust
+- score
 - block physics and 
 - move writing to font based not big sprites
 - give ball bounce some personality
@@ -14,6 +15,7 @@ A simple game using cpc telera
     - bigger bat
     - door to next level
     - multi ball
+    - laster blaster
 
 - debug place ball code?
 - game fail screen

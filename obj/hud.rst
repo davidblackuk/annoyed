@@ -27,8 +27,8 @@
                              27 ; ram data
                              28 ;--------------------------------------------------------
                              29 	.area _DATA
-   881B                      30 _digits::
-   881B                      31 	.ds 20
+   8810                      30 _digits::
+   8810                      31 	.ds 20
                              32 ;--------------------------------------------------------
                              33 ; ram data
                              34 ;--------------------------------------------------------
@@ -60,34 +60,34 @@
    771C                      60 _hud_initialize::
                              61 ;src/hud.c:34: digits[0] = sp_font_00; 
    771C 21 F4 5B      [10]   62 	ld	hl, #_sp_font_00
-   771F 22 1B 88      [16]   63 	ld	(_digits), hl
+   771F 22 10 88      [16]   63 	ld	(_digits), hl
                              64 ;src/hud.c:35: digits[1] = sp_font_01; 
    7722 21 04 5C      [10]   65 	ld	hl, #_sp_font_01
-   7725 22 1D 88      [16]   66 	ld	((_digits + 0x0002)), hl
+   7725 22 12 88      [16]   66 	ld	((_digits + 0x0002)), hl
                              67 ;src/hud.c:36: digits[2] = sp_font_02; 
    7728 21 14 5C      [10]   68 	ld	hl, #_sp_font_02
-   772B 22 1F 88      [16]   69 	ld	((_digits + 0x0004)), hl
+   772B 22 14 88      [16]   69 	ld	((_digits + 0x0004)), hl
                              70 ;src/hud.c:37: digits[3] = sp_font_03; 
    772E 21 24 5C      [10]   71 	ld	hl, #_sp_font_03
-   7731 22 21 88      [16]   72 	ld	((_digits + 0x0006)), hl
+   7731 22 16 88      [16]   72 	ld	((_digits + 0x0006)), hl
                              73 ;src/hud.c:38: digits[4] = sp_font_04; 
    7734 21 34 5C      [10]   74 	ld	hl, #_sp_font_04
-   7737 22 23 88      [16]   75 	ld	((_digits + 0x0008)), hl
+   7737 22 18 88      [16]   75 	ld	((_digits + 0x0008)), hl
                              76 ;src/hud.c:39: digits[5] = sp_font_05; 
    773A 21 44 5C      [10]   77 	ld	hl, #_sp_font_05
-   773D 22 25 88      [16]   78 	ld	((_digits + 0x000a)), hl
+   773D 22 1A 88      [16]   78 	ld	((_digits + 0x000a)), hl
                              79 ;src/hud.c:40: digits[6] = sp_font_06; 
    7740 21 54 5C      [10]   80 	ld	hl, #_sp_font_06
-   7743 22 27 88      [16]   81 	ld	((_digits + 0x000c)), hl
+   7743 22 1C 88      [16]   81 	ld	((_digits + 0x000c)), hl
                              82 ;src/hud.c:41: digits[7] = sp_font_07; 
    7746 21 64 5C      [10]   83 	ld	hl, #_sp_font_07
-   7749 22 29 88      [16]   84 	ld	((_digits + 0x000e)), hl
+   7749 22 1E 88      [16]   84 	ld	((_digits + 0x000e)), hl
                              85 ;src/hud.c:42: digits[8] = sp_font_08; 
    774C 21 74 5C      [10]   86 	ld	hl, #_sp_font_08
-   774F 22 2B 88      [16]   87 	ld	((_digits + 0x0010)), hl
+   774F 22 20 88      [16]   87 	ld	((_digits + 0x0010)), hl
                              88 ;src/hud.c:43: digits[9] = sp_font_09; 
    7752 21 84 5C      [10]   89 	ld	hl, #_sp_font_09
-   7755 22 2D 88      [16]   90 	ld	((_digits + 0x0012)), hl
+   7755 22 22 88      [16]   90 	ld	((_digits + 0x0012)), hl
                              91 ;src/hud.c:45: hud_initialize_internal(FALSE);
    7758 AF            [ 4]   92 	xor	a, a
    7759 F5            [11]   93 	push	af
@@ -138,7 +138,7 @@
    7772 DD 39         [15]  138 	add	ix,sp
    7774 F5            [11]  139 	push	af
                             140 ;src/hud.c:71: u8 initial_y = SCREEN_HEIGHT_ROWS - (((lives_left - 1) / 2) * 8) - 8;
-   7775 21 14 88      [10]  141 	ld	hl,#_lives_left + 0
+   7775 21 09 88      [10]  141 	ld	hl,#_lives_left + 0
    7778 5E            [ 7]  142 	ld	e, (hl)
    7779 16 00         [ 7]  143 	ld	d, #0x00
    777B 6B            [ 4]  144 	ld	l, e
@@ -168,7 +168,7 @@
    779A 3E 0B         [ 7]  168 	ld	a, #0x0b
    779C F5            [11]  169 	push	af
    779D 33            [ 6]  170 	inc	sp
-   779E 2A 15 88      [16]  171 	ld	hl, (_current_score)
+   779E 2A 0A 88      [16]  171 	ld	hl, (_current_score)
    77A1 E5            [11]  172 	push	hl
    77A2 CD 5C 78      [17]  173 	call	_hud_draw_score_with_added_last_zero
    77A5 F1            [10]  174 	pop	af
@@ -177,7 +177,7 @@
    77A7 3E 33         [ 7]  177 	ld	a, #0x33
    77A9 F5            [11]  178 	push	af
    77AA 33            [ 6]  179 	inc	sp
-   77AB 2A 17 88      [16]  180 	ld	hl, (_high_score)
+   77AB 2A 0C 88      [16]  180 	ld	hl, (_high_score)
    77AE E5            [11]  181 	push	hl
    77AF CD 5C 78      [17]  182 	call	_hud_draw_score_with_added_last_zero
    77B2 F1            [10]  183 	pop	af
@@ -185,7 +185,7 @@
                             185 ;src/hud.c:79: for (u8 i = 0; i < lives_left; i++)
    77B4 0E 00         [ 7]  186 	ld	c, #0x00
    77B6                     187 00103$:
-   77B6 21 14 88      [10]  188 	ld	hl, #_lives_left
+   77B6 21 09 88      [10]  188 	ld	hl, #_lives_left
    77B9 79            [ 4]  189 	ld	a, c
    77BA 96            [ 7]  190 	sub	a, (hl)
    77BB 30 33         [12]  191 	jr	NC,00105$
@@ -215,13 +215,13 @@
    77D8 33            [ 6]  215 	inc	sp
    77D9 21 00 C0      [10]  216 	ld	hl, #0xc000
    77DC E5            [11]  217 	push	hl
-   77DD CD C9 82      [17]  218 	call	_cpct_getScreenPtr
+   77DD CD BE 82      [17]  218 	call	_cpct_getScreenPtr
    77E0 11 05 06      [10]  219 	ld	de, #0x0605
    77E3 D5            [11]  220 	push	de
    77E4 E5            [11]  221 	push	hl
    77E5 21 48 5F      [10]  222 	ld	hl, #_sp_life
    77E8 E5            [11]  223 	push	hl
-   77E9 CD 5E 7F      [17]  224 	call	_cpct_drawSprite
+   77E9 CD 53 7F      [17]  224 	call	_cpct_drawSprite
    77EC C1            [10]  225 	pop	bc
                             226 ;src/hud.c:79: for (u8 i = 0; i < lives_left; i++)
    77ED 0C            [ 4]  227 	inc	c
@@ -240,7 +240,7 @@
    77F8 E5            [11]  240 	push	hl
    77F9 21 00 C0      [10]  241 	ld	hl, #0xc000
    77FC E5            [11]  242 	push	hl
-   77FD CD C9 82      [17]  243 	call	_cpct_getScreenPtr
+   77FD CD BE 82      [17]  243 	call	_cpct_getScreenPtr
    7800 4D            [ 4]  244 	ld	c, l
    7801 44            [ 4]  245 	ld	b, h
                             246 ;src/hud.c:93: cpct_drawSprite(sp_score, svmem, SP_SCORE_W, SP_SCORE_H);
@@ -249,46 +249,46 @@
    7806 C5            [11]  249 	push	bc
    7807 21 02 5F      [10]  250 	ld	hl, #_sp_score
    780A E5            [11]  251 	push	hl
-   780B CD 5E 7F      [17]  252 	call	_cpct_drawSprite
+   780B CD 53 7F      [17]  252 	call	_cpct_drawSprite
                             253 ;src/hud.c:96: svmem = cpct_getScreenPtr(CPCT_VMEM_START, HUD_LEFT + 2, 1 + (3 * HUD_TEXT_SPACING));
    780E 21 46 1F      [10]  254 	ld	hl, #0x1f46
    7811 E5            [11]  255 	push	hl
    7812 21 00 C0      [10]  256 	ld	hl, #0xc000
    7815 E5            [11]  257 	push	hl
-   7816 CD C9 82      [17]  258 	call	_cpct_getScreenPtr
+   7816 CD BE 82      [17]  258 	call	_cpct_getScreenPtr
                             259 ;src/hud.c:97: cpct_drawSprite(sp_high, svmem, SP_HIGH_W, SP_HIGH_H);
    7819 01 84 5E      [10]  260 	ld	bc, #_sp_high+0
    781C 11 08 07      [10]  261 	ld	de, #0x0708
    781F D5            [11]  262 	push	de
    7820 E5            [11]  263 	push	hl
    7821 C5            [11]  264 	push	bc
-   7822 CD 5E 7F      [17]  265 	call	_cpct_drawSprite
+   7822 CD 53 7F      [17]  265 	call	_cpct_drawSprite
                             266 ;src/hud.c:100: svmem = cpct_getScreenPtr(CPCT_VMEM_START, HUD_LEFT + 1, 1 + (4 * HUD_TEXT_SPACING));
    7825 21 45 29      [10]  267 	ld	hl, #0x2945
    7828 E5            [11]  268 	push	hl
    7829 21 00 C0      [10]  269 	ld	hl, #0xc000
    782C E5            [11]  270 	push	hl
-   782D CD C9 82      [17]  271 	call	_cpct_getScreenPtr
+   782D CD BE 82      [17]  271 	call	_cpct_getScreenPtr
                             272 ;src/hud.c:101: cpct_drawSprite(sp_score, svmem, SP_SCORE_W, SP_SCORE_H);
    7830 01 0A 07      [10]  273 	ld	bc, #0x070a
    7833 C5            [11]  274 	push	bc
    7834 E5            [11]  275 	push	hl
    7835 21 02 5F      [10]  276 	ld	hl, #_sp_score
    7838 E5            [11]  277 	push	hl
-   7839 CD 5E 7F      [17]  278 	call	_cpct_drawSprite
+   7839 CD 53 7F      [17]  278 	call	_cpct_drawSprite
                             279 ;src/hud.c:104: svmem = cpct_getScreenPtr(CPCT_VMEM_START, HUD_LEFT + 1, 1 + (7 * HUD_TEXT_SPACING));
    783C 21 45 47      [10]  280 	ld	hl, #0x4745
    783F E5            [11]  281 	push	hl
    7840 21 00 C0      [10]  282 	ld	hl, #0xc000
    7843 E5            [11]  283 	push	hl
-   7844 CD C9 82      [17]  284 	call	_cpct_getScreenPtr
+   7844 CD BE 82      [17]  284 	call	_cpct_getScreenPtr
                             285 ;src/hud.c:105: cpct_drawSprite(sp_level, svmem, SP_LEVEL_W, SP_LEVEL_H);
    7847 01 BC 5E      [10]  286 	ld	bc, #_sp_level+0
    784A 11 0A 07      [10]  287 	ld	de, #0x070a
    784D D5            [11]  288 	push	de
    784E E5            [11]  289 	push	hl
    784F C5            [11]  290 	push	bc
-   7850 CD 5E 7F      [17]  291 	call	_cpct_drawSprite
+   7850 CD 53 7F      [17]  291 	call	_cpct_drawSprite
                             292 ;src/hud.c:107: hud_draw_lives(1 + (8 * HUD_TEXT_SPACING));
    7853 3E 51         [ 7]  293 	ld	a, #0x51
    7855 F5            [11]  294 	push	af
@@ -312,7 +312,7 @@
    786B D5            [11]  312 	push	de
    786C 21 00 C0      [10]  313 	ld	hl, #0xc000
    786F E5            [11]  314 	push	hl
-   7870 CD C9 82      [17]  315 	call	_cpct_getScreenPtr
+   7870 CD BE 82      [17]  315 	call	_cpct_getScreenPtr
    7873 33            [ 6]  316 	inc	sp
    7874 33            [ 6]  317 	inc	sp
                             318 ;src/hud.c:121: cpct_drawSprite(sp_font_00, svmem, SP_FONT_CHAR_W, SP_FONT_CHAR_H);
@@ -324,7 +324,7 @@
    787C C5            [11]  324 	push	bc
    787D 21 F4 5B      [10]  325 	ld	hl, #_sp_font_00
    7880 E5            [11]  326 	push	hl
-   7881 CD 5E 7F      [17]  327 	call	_cpct_drawSprite
+   7881 CD 53 7F      [17]  327 	call	_cpct_drawSprite
                             328 ;src/hud.c:124: for (i = 0; i < 5; i++)
    7884 DD 36 FF 00   [19]  329 	ld	-1 (ix), #0x00
    7888                     330 00102$:
@@ -334,7 +334,7 @@
    788C DD 6E 04      [19]  334 	ld	l,4 (ix)
    788F DD 66 05      [19]  335 	ld	h,5 (ix)
    7892 E5            [11]  336 	push	hl
-   7893 CD 9E 80      [17]  337 	call	__moduint
+   7893 CD 93 80      [17]  337 	call	__moduint
    7896 F1            [10]  338 	pop	af
    7897 F1            [10]  339 	pop	af
    7898 4D            [ 4]  340 	ld	c, l
@@ -352,7 +352,7 @@
    78AA 69            [ 4]  352 	ld	l, c
    78AB 26 00         [ 7]  353 	ld	h, #0x00
    78AD 29            [11]  354 	add	hl, hl
-   78AE 01 1B 88      [10]  355 	ld	bc, #_digits
+   78AE 01 10 88      [10]  355 	ld	bc, #_digits
    78B1 09            [11]  356 	add	hl, bc
    78B2 4E            [ 7]  357 	ld	c, (hl)
    78B3 23            [ 6]  358 	inc	hl
@@ -361,14 +361,14 @@
    78B8 E5            [11]  361 	push	hl
    78B9 D5            [11]  362 	push	de
    78BA C5            [11]  363 	push	bc
-   78BB CD 5E 7F      [17]  364 	call	_cpct_drawSprite
+   78BB CD 53 7F      [17]  364 	call	_cpct_drawSprite
                             365 ;src/hud.c:129: score /= 10;
    78BE 21 0A 00      [10]  366 	ld	hl, #0x000a
    78C1 E5            [11]  367 	push	hl
    78C2 DD 6E 04      [19]  368 	ld	l,4 (ix)
    78C5 DD 66 05      [19]  369 	ld	h,5 (ix)
    78C8 E5            [11]  370 	push	hl
-   78C9 CD 84 7E      [17]  371 	call	__divuint
+   78C9 CD 79 7E      [17]  371 	call	__divuint
    78CC F1            [10]  372 	pop	af
    78CD F1            [10]  373 	pop	af
    78CE DD 75 04      [19]  374 	ld	4 (ix), l
@@ -392,7 +392,7 @@
    78EB F5            [11]  392 	push	af
    78EC 3B            [ 6]  393 	dec	sp
                             394 ;src/hud.c:137: u8 num = current_level_num + 1;
-   78ED 3A 13 88      [13]  395 	ld	a,(#_current_level_num + 0)
+   78ED 3A 08 88      [13]  395 	ld	a,(#_current_level_num + 0)
    78F0 3C            [ 4]  396 	inc	a
    78F1 DD 77 FD      [19]  397 	ld	-3 (ix), a
                             398 ;src/hud.c:138: u8 *svmem = cpct_getScreenPtr(CPCT_VMEM_START, 74, row);
@@ -401,7 +401,7 @@
    78F9 D5            [11]  401 	push	de
    78FA 21 00 C0      [10]  402 	ld	hl, #0xc000
    78FD E5            [11]  403 	push	hl
-   78FE CD C9 82      [17]  404 	call	_cpct_getScreenPtr
+   78FE CD BE 82      [17]  404 	call	_cpct_getScreenPtr
    7901 DD 75 FE      [19]  405 	ld	-2 (ix), l
    7904 DD 74 FF      [19]  406 	ld	-1 (ix), h
                             407 ;src/hud.c:141: u8 digit =  (num % 10);
@@ -411,7 +411,7 @@
    790B DD 7E FD      [19]  411 	ld	a, -3 (ix)
    790E F5            [11]  412 	push	af
    790F 33            [ 6]  413 	inc	sp
-   7910 CD 92 80      [17]  414 	call	__moduchar
+   7910 CD 87 80      [17]  414 	call	__moduchar
    7913 F1            [10]  415 	pop	af
    7914 4D            [ 4]  416 	ld	c, l
                             417 ;src/hud.c:142: cpct_drawSprite(digits[digit], svmem , SP_FONT_CHAR_W, SP_FONT_CHAR_H);
@@ -420,7 +420,7 @@
    791B 69            [ 4]  420 	ld	l, c
    791C 26 00         [ 7]  421 	ld	h, #0x00
    791E 29            [11]  422 	add	hl, hl
-   791F 01 1B 88      [10]  423 	ld	bc, #_digits
+   791F 01 10 88      [10]  423 	ld	bc, #_digits
    7922 09            [11]  424 	add	hl, bc
    7923 4E            [ 7]  425 	ld	c, (hl)
    7924 23            [ 6]  426 	inc	hl
@@ -429,7 +429,7 @@
    7929 E5            [11]  429 	push	hl
    792A D5            [11]  430 	push	de
    792B C5            [11]  431 	push	bc
-   792C CD 5E 7F      [17]  432 	call	_cpct_drawSprite
+   792C CD 53 7F      [17]  432 	call	_cpct_drawSprite
                             433 ;src/hud.c:144: digit =  ((num / 10) % 10);
    792F 3E 0A         [ 7]  434 	ld	a, #0x0a
    7931 F5            [11]  435 	push	af
@@ -437,7 +437,7 @@
    7933 DD 7E FD      [19]  437 	ld	a, -3 (ix)
    7936 F5            [11]  438 	push	af
    7937 33            [ 6]  439 	inc	sp
-   7938 CD 8C 7E      [17]  440 	call	__divuchar
+   7938 CD 81 7E      [17]  440 	call	__divuchar
    793B F1            [10]  441 	pop	af
    793C 45            [ 4]  442 	ld	b, l
    793D 3E 0A         [ 7]  443 	ld	a, #0x0a
@@ -445,7 +445,7 @@
    7940 33            [ 6]  445 	inc	sp
    7941 C5            [11]  446 	push	bc
    7942 33            [ 6]  447 	inc	sp
-   7943 CD 92 80      [17]  448 	call	__moduchar
+   7943 CD 87 80      [17]  448 	call	__moduchar
    7946 F1            [10]  449 	pop	af
                             450 ;src/hud.c:145: cpct_drawSprite(digits[digit], svmem - 2 , SP_FONT_CHAR_W, SP_FONT_CHAR_H);
    7947 DD 5E FE      [19]  451 	ld	e, -2 (ix)
@@ -454,7 +454,7 @@
    794E 1B            [ 6]  454 	dec	de
    794F 26 00         [ 7]  455 	ld	h, #0x00
    7951 29            [11]  456 	add	hl, hl
-   7952 01 1B 88      [10]  457 	ld	bc, #_digits
+   7952 01 10 88      [10]  457 	ld	bc, #_digits
    7955 09            [11]  458 	add	hl, bc
    7956 4E            [ 7]  459 	ld	c, (hl)
    7957 23            [ 6]  460 	inc	hl
@@ -463,7 +463,7 @@
    795C E5            [11]  463 	push	hl
    795D D5            [11]  464 	push	de
    795E C5            [11]  465 	push	bc
-   795F CD 5E 7F      [17]  466 	call	_cpct_drawSprite
+   795F CD 53 7F      [17]  466 	call	_cpct_drawSprite
    7962 DD F9         [10]  467 	ld	sp, ix
    7964 DD E1         [14]  468 	pop	ix
    7966 C9            [10]  469 	ret

@@ -43,7 +43,7 @@
 ; code
 ;--------------------------------------------------------
 	.area _CODE
-;src/debug.c:4: void dbg_displayNumber(u8 char_row, i16 num)
+;src/debug.c:14: void dbg_displayNumber(u8 char_row, i16 num)
 ;	---------------------------------
 ; Function dbg_displayNumber
 ; ---------------------------------
@@ -53,9 +53,9 @@ _dbg_displayNumber::
 	add	ix,sp
 	push	af
 	dec	sp
-;src/debug.c:7: u8 negative  = 0;
+;src/debug.c:17: u8 negative = 0;
 	ld	-1 (ix), #0x00
-;src/debug.c:8: u8 *pv = cpct_getScreenPtr(CPCT_VMEM_START,74, char_row * 10);
+;src/debug.c:18: u8 *pv = cpct_getScreenPtr(CPCT_VMEM_START, 74, char_row * 10);
 	ld	a, 4 (ix)
 	ld	c, a
 	add	a, a
@@ -74,33 +74,33 @@ _dbg_displayNumber::
 	inc	sp
 	inc	sp
 	push	hl
-;src/debug.c:10: if (num < 0){
+;src/debug.c:20: if (num < 0)
 	bit	7, 6 (ix)
 	jr	Z,00102$
-;src/debug.c:11: negative = 1;
+;src/debug.c:22: negative = 1;
 	ld	-1 (ix), #0x01
-;src/debug.c:12: num = -num;
+;src/debug.c:23: num = -num;
 	xor	a, a
 	sub	a, 5 (ix)
 	ld	5 (ix), a
 	ld	a, #0x00
 	sbc	a, 6 (ix)
 	ld	6 (ix), a
-;src/debug.c:14: cpct_setDrawCharM0(AN_PEN_BRIGHT_RED, AN_PEN_ORANGE);
+;src/debug.c:25: cpct_setDrawCharM0(AN_PEN_BRIGHT_RED, AN_PEN_ORANGE);
 	ld	hl, #0x0205
 	push	hl
 	call	_cpct_setDrawCharM0
 	jr	00112$
 00102$:
-;src/debug.c:16: cpct_setDrawCharM0(AN_PEN_SKY_BLUE, AN_PEN_BLUE);
+;src/debug.c:29: cpct_setDrawCharM0(AN_PEN_SKY_BLUE, AN_PEN_BLUE);
 	ld	hl, #0x0a06
 	push	hl
 	call	_cpct_setDrawCharM0
-;src/debug.c:21: for (i = 0; i < 5; i++)
+;src/debug.c:32: for (i = 0; i < 5; i++)
 00112$:
 	ld	bc, #0x0000
 00107$:
-;src/debug.c:23: u8 digit = '0' + (num % 10);
+;src/debug.c:34: u8 digit = '0' + (num % 10);
 	push	bc
 	ld	hl, #0x000a
 	push	hl
@@ -114,7 +114,7 @@ _dbg_displayNumber::
 	ld	a, l
 	add	a, #0x30
 	ld	e, a
-;src/debug.c:24: cpct_drawCharM0((void *)(pv - 4 * i), digit);
+;src/debug.c:35: cpct_drawCharM0((void *)(pv - 4 * i), digit);
 	ld	d, #0x00
 	ld	l, c
 	ld	h, b
@@ -141,7 +141,7 @@ _dbg_displayNumber::
 	pop	bc
 	ld	5 (ix), l
 	ld	6 (ix), h
-;src/debug.c:21: for (i = 0; i < 5; i++)
+;src/debug.c:32: for (i = 0; i < 5; i++)
 	inc	bc
 	ld	a, c
 	sub	a, #0x05
@@ -151,11 +151,11 @@ _dbg_displayNumber::
 	rra
 	sbc	a, #0x80
 	jr	C,00107$
-;src/debug.c:27: if (negative){
+;src/debug.c:38: if (negative)
 	ld	a, -1 (ix)
 	or	a, a
 	jr	Z,00109$
-;src/debug.c:28: cpct_drawCharM0((void *)(pv - 20), '-');
+;src/debug.c:40: cpct_drawCharM0((void *)(pv - 20), '-');
 	ld	a, -3 (ix)
 	add	a, #0xec
 	ld	c, a

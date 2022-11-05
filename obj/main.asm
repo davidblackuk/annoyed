@@ -49,58 +49,54 @@
 ; code
 ;--------------------------------------------------------
 	.area _CODE
-;src/main.c:9: void initializeCpc()
+;src/main.c:21: void initializeCpc()
 ;	---------------------------------
 ; Function initializeCpc
 ; ---------------------------------
 _initializeCpc::
-;src/main.c:13: cpct_disableFirmware();
+;src/main.c:25: cpct_disableFirmware();
 	call	_cpct_disableFirmware
-;src/main.c:15: cpct_setBorder(HW_BLACK);
+;src/main.c:27: cpct_setBorder(HW_BLACK);
 	ld	hl, #0x1410
 	push	hl
 	call	_cpct_setPALColour
-;src/main.c:16: cpct_setBorder(HW_WHITE);
-	ld	hl, #0x0010
-	push	hl
-	call	_cpct_setPALColour
-;src/main.c:19: cpct_setVideoMode(0);
+;src/main.c:31: cpct_setVideoMode(0);
 	ld	l, #0x00
 	call	_cpct_setVideoMode
-;src/main.c:21: cpct_setPalette((u8 *)g_palette, 16);
+;src/main.c:33: cpct_setPalette((u8 *)g_palette, 16);
 	ld	hl, #0x0010
 	push	hl
 	ld	hl, #_g_palette
 	push	hl
 	call	_cpct_setPalette
 	ret
-;src/main.c:24: void main(void)
+;src/main.c:36: void main(void)
 ;	---------------------------------
 ; Function main
 ; ---------------------------------
 _main::
-;src/main.c:26: high_score = 1000;
+;src/main.c:38: high_score = 1000;
 	ld	hl, #0x03e8
 	ld	(_high_score), hl
-;src/main.c:27: initializeCpc();
+;src/main.c:39: initializeCpc();
 	call	_initializeCpc
-;src/main.c:28: module_menu_initialize();
+;src/main.c:40: module_menu_initialize();
 	call	_module_menu_initialize
-;src/main.c:29: module_game_initialize();
+;src/main.c:41: module_game_initialize();
 	call	_module_game_initialize
-;src/main.c:31: while (1)
+;src/main.c:43: while (1)
 00102$:
-;src/main.c:33: play_scene(&scene_menu);
+;src/main.c:45: play_scene(&scene_menu);
 	ld	hl, #_scene_menu
 	push	hl
 	call	_play_scene
-;src/main.c:34: play_scene(&scene_game);
+;src/main.c:46: play_scene(&scene_game);
 	ld	hl, #_scene_game
 	ex	(sp),hl
 	call	_play_scene
 	pop	af
 	jr	00102$
-;src/main.c:38: void play_scene(Scene *scene)
+;src/main.c:54: void play_scene(Scene *scene)
 ;	---------------------------------
 ; Function play_scene
 ; ---------------------------------
@@ -109,7 +105,7 @@ _play_scene::
 	ld	ix,#0
 	add	ix,sp
 	push	af
-;src/main.c:42: scene->initialize();
+;src/main.c:58: scene->initialize();
 	ld	c,4 (ix)
 	ld	b,5 (ix)
 	ld	l, c
@@ -121,16 +117,16 @@ _play_scene::
 	ld	l, e
 	call	___sdcc_call_hl
 	pop	bc
-;src/main.c:44: do
+;src/main.c:60: do
 	inc	sp
 	inc	sp
 	push	bc
 00102$:
-;src/main.c:49: cpct_waitVSYNC();
+;src/main.c:65: cpct_waitVSYNC();
 	push	bc
 	call	_cpct_waitVSYNC
 	pop	bc
-;src/main.c:51: scene->draw();
+;src/main.c:67: scene->draw();
 	pop	hl
 	push	hl
 	inc	hl
@@ -142,7 +138,7 @@ _play_scene::
 	ld	l, e
 	call	___sdcc_call_hl
 	pop	bc
-;src/main.c:52: state = scene->update();
+;src/main.c:68: state = scene->update();
 	ld	l, c
 	ld	h, b
 	ld	de, #0x0004
@@ -154,7 +150,7 @@ _play_scene::
 	ld	l, e
 	call	___sdcc_call_hl
 	pop	bc
-;src/main.c:57: for (i16 i = 0; i < t; i++)
+;src/main.c:73: for (i16 i = 0; i < t; i++)
 	ld	de, #0x0000
 00106$:
 	ld	a, e
@@ -168,7 +164,7 @@ _play_scene::
 	inc	de
 	jr	00106$
 00103$:
-;src/main.c:63: } while (state == Continue);
+;src/main.c:79: } while (state == Continue);
 	ld	a, l
 	or	a, a
 	jr	Z,00102$

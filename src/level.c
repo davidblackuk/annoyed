@@ -9,7 +9,19 @@
 #include "h/keys.h"
 #include "h/autoplay.h"
 
+// ---------------------------------------------------------------------------
+// Module private declarations
+// ---------------------------------------------------------------------------
+
 void level_initialize_internal(u8 is_restart);
+
+// ---------------------------------------------------------------------------
+// Module public state externally used
+// ---------------------------------------------------------------------------
+
+// ---------------------------------------------------------------------------
+// Module public methods
+// ---------------------------------------------------------------------------
 
 /// @brief initialize the level from scratch
 void level_initialize()
@@ -18,10 +30,10 @@ void level_initialize()
 }
 
 /// @brief initialize the level but keep any blocks that were previously removed
-void level_continue_from_death() {
+void level_continue_from_death()
+{
     level_initialize_internal(TRUE);
 }
-
 
 void level_draw()
 {
@@ -54,18 +66,18 @@ SceneState level_update()
     if (balls_get_first_active() == NULL)
     {
         res = LevelCompleteFail;
-    } 
-    if (blocks_remaining == 0) {
+    }
+    if (blocks_remaining == 0)
+    {
         res = LevelCompleteSuccess;
     }
 
     return res;
 }
 
-
-// -----------------------------------------------
-// private method implementations
-// -----------------------------------------------
+// ---------------------------------------------------------------------------
+// Module private methods
+// ---------------------------------------------------------------------------
 
 void level_initialize_internal(u8 is_restart)
 {
@@ -78,7 +90,4 @@ void level_initialize_internal(u8 is_restart)
     keys_initialize();
     bat_initialize();
     balls_initialize();
-
 }
-
-

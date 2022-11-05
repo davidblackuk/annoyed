@@ -4,6 +4,10 @@
 #include <h/level.h>
 #include <h/game.h>
 
+// ---------------------------------------------------------------------------
+// Module private declarations
+// ---------------------------------------------------------------------------
+
 Scene scene_game;
 
 SceneState current_state;
@@ -14,6 +18,10 @@ u16 current_score;
 u16 high_score;
 
 void initialise_level();
+
+// ---------------------------------------------------------------------------
+// Module public methods
+// ---------------------------------------------------------------------------
 
 void game_initialize()
 {
@@ -68,6 +76,10 @@ void module_game_initialize()
     scene_game.update = game_update;
     scene_game.draw = game_draw;
 }
+
+// ---------------------------------------------------------------------------
+// Module private methods
+// ---------------------------------------------------------------------------
 
 void initialise_level() {
     current_level = level_definitions + current_level_num;

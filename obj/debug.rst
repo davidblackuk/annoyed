@@ -43,7 +43,7 @@
                              43 ; code
                              44 ;--------------------------------------------------------
                              45 	.area _CODE
-                             46 ;src/debug.c:4: void dbg_displayNumber(u8 char_row, i16 num)
+                             46 ;src/debug.c:14: void dbg_displayNumber(u8 char_row, i16 num)
                              47 ;	---------------------------------
                              48 ; Function dbg_displayNumber
                              49 ; ---------------------------------
@@ -53,9 +53,9 @@
    75CB DD 39         [15]   53 	add	ix,sp
    75CD F5            [11]   54 	push	af
    75CE 3B            [ 6]   55 	dec	sp
-                             56 ;src/debug.c:7: u8 negative  = 0;
+                             56 ;src/debug.c:17: u8 negative = 0;
    75CF DD 36 FF 00   [19]   57 	ld	-1 (ix), #0x00
-                             58 ;src/debug.c:8: u8 *pv = cpct_getScreenPtr(CPCT_VMEM_START,74, char_row * 10);
+                             58 ;src/debug.c:18: u8 *pv = cpct_getScreenPtr(CPCT_VMEM_START, 74, char_row * 10);
    75D3 DD 7E 04      [19]   59 	ld	a, 4 (ix)
    75D6 4F            [ 4]   60 	ld	c, a
    75D7 87            [ 4]   61 	add	a, a
@@ -70,51 +70,51 @@
    75E1 33            [ 6]   70 	inc	sp
    75E2 21 00 C0      [10]   71 	ld	hl, #0xc000
    75E5 E5            [11]   72 	push	hl
-   75E6 CD C9 82      [17]   73 	call	_cpct_getScreenPtr
+   75E6 CD BE 82      [17]   73 	call	_cpct_getScreenPtr
    75E9 33            [ 6]   74 	inc	sp
    75EA 33            [ 6]   75 	inc	sp
    75EB E5            [11]   76 	push	hl
-                             77 ;src/debug.c:10: if (num < 0){
+                             77 ;src/debug.c:20: if (num < 0)
    75EC DD CB 06 7E   [20]   78 	bit	7, 6 (ix)
    75F0 28 1C         [12]   79 	jr	Z,00102$
-                             80 ;src/debug.c:11: negative = 1;
+                             80 ;src/debug.c:22: negative = 1;
    75F2 DD 36 FF 01   [19]   81 	ld	-1 (ix), #0x01
-                             82 ;src/debug.c:12: num = -num;
+                             82 ;src/debug.c:23: num = -num;
    75F6 AF            [ 4]   83 	xor	a, a
    75F7 DD 96 05      [19]   84 	sub	a, 5 (ix)
    75FA DD 77 05      [19]   85 	ld	5 (ix), a
    75FD 3E 00         [ 7]   86 	ld	a, #0x00
    75FF DD 9E 06      [19]   87 	sbc	a, 6 (ix)
    7602 DD 77 06      [19]   88 	ld	6 (ix), a
-                             89 ;src/debug.c:14: cpct_setDrawCharM0(AN_PEN_BRIGHT_RED, AN_PEN_ORANGE);
+                             89 ;src/debug.c:25: cpct_setDrawCharM0(AN_PEN_BRIGHT_RED, AN_PEN_ORANGE);
    7605 21 05 02      [10]   90 	ld	hl, #0x0205
    7608 E5            [11]   91 	push	hl
-   7609 CD A4 82      [17]   92 	call	_cpct_setDrawCharM0
+   7609 CD 99 82      [17]   92 	call	_cpct_setDrawCharM0
    760C 18 07         [12]   93 	jr	00112$
    760E                      94 00102$:
-                             95 ;src/debug.c:16: cpct_setDrawCharM0(AN_PEN_SKY_BLUE, AN_PEN_BLUE);
+                             95 ;src/debug.c:29: cpct_setDrawCharM0(AN_PEN_SKY_BLUE, AN_PEN_BLUE);
    760E 21 06 0A      [10]   96 	ld	hl, #0x0a06
    7611 E5            [11]   97 	push	hl
-   7612 CD A4 82      [17]   98 	call	_cpct_setDrawCharM0
-                             99 ;src/debug.c:21: for (i = 0; i < 5; i++)
+   7612 CD 99 82      [17]   98 	call	_cpct_setDrawCharM0
+                             99 ;src/debug.c:32: for (i = 0; i < 5; i++)
    7615                     100 00112$:
    7615 01 00 00      [10]  101 	ld	bc, #0x0000
    7618                     102 00107$:
-                            103 ;src/debug.c:23: u8 digit = '0' + (num % 10);
+                            103 ;src/debug.c:34: u8 digit = '0' + (num % 10);
    7618 C5            [11]  104 	push	bc
    7619 21 0A 00      [10]  105 	ld	hl, #0x000a
    761C E5            [11]  106 	push	hl
    761D DD 6E 05      [19]  107 	ld	l,5 (ix)
    7620 DD 66 06      [19]  108 	ld	h,6 (ix)
    7623 E5            [11]  109 	push	hl
-   7624 CD 97 82      [17]  110 	call	__modsint
+   7624 CD 8C 82      [17]  110 	call	__modsint
    7627 F1            [10]  111 	pop	af
    7628 F1            [10]  112 	pop	af
    7629 C1            [10]  113 	pop	bc
    762A 7D            [ 4]  114 	ld	a, l
    762B C6 30         [ 7]  115 	add	a, #0x30
    762D 5F            [ 4]  116 	ld	e, a
-                            117 ;src/debug.c:24: cpct_drawCharM0((void *)(pv - 4 * i), digit);
+                            117 ;src/debug.c:35: cpct_drawCharM0((void *)(pv - 4 * i), digit);
    762E 16 00         [ 7]  118 	ld	d, #0x00
    7630 69            [ 4]  119 	ld	l, c
    7631 60            [ 4]  120 	ld	h, b
@@ -129,19 +129,19 @@
    763E C5            [11]  129 	push	bc
    763F D5            [11]  130 	push	de
    7640 E5            [11]  131 	push	hl
-   7641 CD A9 80      [17]  132 	call	_cpct_drawCharM0
+   7641 CD 9E 80      [17]  132 	call	_cpct_drawCharM0
    7644 21 0A 00      [10]  133 	ld	hl, #0x000a
    7647 E5            [11]  134 	push	hl
    7648 DD 6E 05      [19]  135 	ld	l,5 (ix)
    764B DD 66 06      [19]  136 	ld	h,6 (ix)
    764E E5            [11]  137 	push	hl
-   764F CD DF 82      [17]  138 	call	__divsint
+   764F CD D4 82      [17]  138 	call	__divsint
    7652 F1            [10]  139 	pop	af
    7653 F1            [10]  140 	pop	af
    7654 C1            [10]  141 	pop	bc
    7655 DD 75 05      [19]  142 	ld	5 (ix), l
    7658 DD 74 06      [19]  143 	ld	6 (ix), h
-                            144 ;src/debug.c:21: for (i = 0; i < 5; i++)
+                            144 ;src/debug.c:32: for (i = 0; i < 5; i++)
    765B 03            [ 6]  145 	inc	bc
    765C 79            [ 4]  146 	ld	a, c
    765D D6 05         [ 7]  147 	sub	a, #0x05
@@ -151,11 +151,11 @@
    7662 1F            [ 4]  151 	rra
    7663 DE 80         [ 7]  152 	sbc	a, #0x80
    7665 38 B1         [12]  153 	jr	C,00107$
-                            154 ;src/debug.c:27: if (negative){
+                            154 ;src/debug.c:38: if (negative)
    7667 DD 7E FF      [19]  155 	ld	a, -1 (ix)
    766A B7            [ 4]  156 	or	a, a
    766B 28 14         [12]  157 	jr	Z,00109$
-                            158 ;src/debug.c:28: cpct_drawCharM0((void *)(pv - 20), '-');
+                            158 ;src/debug.c:40: cpct_drawCharM0((void *)(pv - 20), '-');
    766D DD 7E FD      [19]  159 	ld	a, -3 (ix)
    7670 C6 EC         [ 7]  160 	add	a, #0xec
    7672 4F            [ 4]  161 	ld	c, a
@@ -165,7 +165,7 @@
    7679 21 2D 00      [10]  165 	ld	hl, #0x002d
    767C E5            [11]  166 	push	hl
    767D C5            [11]  167 	push	bc
-   767E CD A9 80      [17]  168 	call	_cpct_drawCharM0
+   767E CD 9E 80      [17]  168 	call	_cpct_drawCharM0
    7681                     169 00109$:
    7681 DD F9         [10]  170 	ld	sp, ix
    7683 DD E1         [14]  171 	pop	ix

@@ -44,12 +44,12 @@
                              44 ; code
                              45 ;--------------------------------------------------------
                              46 	.area _CODE
-                             47 ;src/text.c:7: void text_write_centered_string(u8 y, char * text) {
+                             47 ;src/text.c:19: void text_write_centered_string(u8 y, char *text)
                              48 ;	---------------------------------
                              49 ; Function text_write_centered_string
                              50 ; ---------------------------------
    0000                      51 _text_write_centered_string::
-                             52 ;src/text.c:10: u8 x = (SCREEN_WIDTH_BYTES - strlen(text) * 2) / 2;
+                             52 ;src/text.c:21: u8 x = (SCREEN_WIDTH_BYTES - strlen(text) * SP_FONT_CHAR_W) / 2;
    0000 21 03 00      [10]   53 	ld	hl, #3
    0003 39            [11]   54 	add	hl, sp
    0004 4E            [ 7]   55 	ld	c, (hl)
@@ -70,7 +70,7 @@
    0017 CB 38         [ 8]   70 	srl	b
    0019 CB 19         [ 8]   71 	rr	c
    001B 41            [ 4]   72 	ld	b, c
-                             73 ;src/text.c:11: text_write_string(x, y, text);
+                             73 ;src/text.c:22: text_write_string(x, y, text);
    001C 21 03 00      [10]   74 	ld	hl, #3
    001F 39            [11]   75 	add	hl, sp
    0020 7E            [ 7]   76 	ld	a, (hl)
@@ -89,7 +89,7 @@
    0031 F1            [10]   89 	pop	af
    0032 F1            [10]   90 	pop	af
    0033 C9            [10]   91 	ret
-                             92 ;src/text.c:15: void text_write_string(u8 x, u8 y, char * text) {
+                             92 ;src/text.c:25: void text_write_string(u8 x, u8 y, char *text)
                              93 ;	---------------------------------
                              94 ; Function text_write_string
                              95 ; ---------------------------------
@@ -100,44 +100,44 @@
    003C 21 F9 FF      [10]  100 	ld	hl, #-7
    003F 39            [11]  101 	add	hl, sp
    0040 F9            [ 6]  102 	ld	sp, hl
-                            103 ;src/text.c:16: u8 *svmem = cpct_getScreenPtr(CPCT_VMEM_START, x, y);
+                            103 ;src/text.c:27: u8 *svmem = cpct_getScreenPtr(CPCT_VMEM_START, x, y);
    0041 DD 66 05      [19]  104 	ld	h, 5 (ix)
    0044 DD 6E 04      [19]  105 	ld	l, 4 (ix)
    0047 E5            [11]  106 	push	hl
    0048 21 00 C0      [10]  107 	ld	hl, #0xc000
    004B E5            [11]  108 	push	hl
    004C CDr00r00      [17]  109 	call	_cpct_getScreenPtr
-   004F DD 75 FD      [19]  110 	ld	-3 (ix), l
-   0052 DD 74 FE      [19]  111 	ld	-2 (ix), h
-                            112 ;src/text.c:20: while (*text) {
+   004F DD 75 FB      [19]  110 	ld	-5 (ix), l
+   0052 DD 74 FC      [19]  111 	ld	-4 (ix), h
+                            112 ;src/text.c:31: while (*text)
    0055 DD 7E 06      [19]  113 	ld	a, 6 (ix)
-   0058 DD 77 FB      [19]  114 	ld	-5 (ix), a
+   0058 DD 77 FD      [19]  114 	ld	-3 (ix), a
    005B DD 7E 07      [19]  115 	ld	a, 7 (ix)
-   005E DD 77 FC      [19]  116 	ld	-4 (ix), a
-   0061                     117 00125$:
-   0061 DD 6E FB      [19]  118 	ld	l,-5 (ix)
-   0064 DD 66 FC      [19]  119 	ld	h,-4 (ix)
+   005E DD 77 FE      [19]  116 	ld	-2 (ix), a
+   0061                     117 00117$:
+   0061 DD 6E FD      [19]  118 	ld	l,-3 (ix)
+   0064 DD 66 FE      [19]  119 	ld	h,-2 (ix)
    0067 7E            [ 7]  120 	ld	a, (hl)
    0068 DD 77 FF      [19]  121 	ld	-1 (ix), a
    006B B7            [ 4]  122 	or	a, a
-   006C CAr40r01      [10]  123 	jp	Z, 00128$
-                            124 ;src/text.c:21: charsprite = 0;
+   006C CAr40r01      [10]  123 	jp	Z, 00120$
+                            124 ;src/text.c:33: charsprite = 0;
    006F 21 00 00      [10]  125 	ld	hl, #0x0000
    0072 E3            [19]  126 	ex	(sp), hl
-                            127 ;src/text.c:23: index = (*text) - '0'; 
+                            127 ;src/text.c:36: index = (*text) - '0';
    0073 DD 4E FF      [19]  128 	ld	c, -1 (ix)
-                            129 ;src/text.c:22: if (*text >= '0' && *text <= '9') {
+                            129 ;src/text.c:34: if (*text >= '0' && *text <= '9')
    0076 DD 7E FF      [19]  130 	ld	a, -1 (ix)
    0079 D6 30         [ 7]  131 	sub	a, #0x30
-   007B 38 1B         [12]  132 	jr	C,00120$
+   007B 38 1B         [12]  132 	jr	C,00112$
    007D 3E 39         [ 7]  133 	ld	a, #0x39
    007F DD 96 FF      [19]  134 	sub	a, -1 (ix)
-   0082 38 14         [12]  135 	jr	C,00120$
-                            136 ;src/text.c:23: index = (*text) - '0'; 
+   0082 38 14         [12]  135 	jr	C,00112$
+                            136 ;src/text.c:36: index = (*text) - '0';
    0084 79            [ 4]  137 	ld	a, c
    0085 C6 D0         [ 7]  138 	add	a, #0xd0
    0087 6F            [ 4]  139 	ld	l, a
-                            140 ;src/text.c:24: charsprite = sp_font_00 + (index * (SP_FONT_CHAR_W * SP_FONT_CHAR_H));           
+                            140 ;src/text.c:37: charsprite = sp_font_00 + (index * (SP_FONT_CHAR_W * SP_FONT_CHAR_H));
    0088 26 00         [ 7]  141 	ld	h, #0x00
    008A 29            [11]  142 	add	hl, hl
    008B 29            [11]  143 	add	hl, hl
@@ -148,20 +148,20 @@
    0092 33            [ 6]  148 	inc	sp
    0093 33            [ 6]  149 	inc	sp
    0094 E5            [11]  150 	push	hl
-   0095 C3r0Cr01      [10]  151 	jp	00121$
-   0098                     152 00120$:
-                            153 ;src/text.c:25: } else if (*text >= 'A' && *text <= 'Z') {
+   0095 C3r0Er01      [10]  151 	jp	00113$
+   0098                     152 00112$:
+                            153 ;src/text.c:39: else if (*text >= 'A' && *text <= 'Z')
    0098 DD 7E FF      [19]  154 	ld	a, -1 (ix)
    009B D6 41         [ 7]  155 	sub	a, #0x41
-   009D 38 1A         [12]  156 	jr	C,00116$
+   009D 38 1A         [12]  156 	jr	C,00108$
    009F 3E 5A         [ 7]  157 	ld	a, #0x5a
    00A1 DD 96 FF      [19]  158 	sub	a, -1 (ix)
-   00A4 38 13         [12]  159 	jr	C,00116$
-                            160 ;src/text.c:26: index = (*text) - 'A'; 
+   00A4 38 13         [12]  159 	jr	C,00108$
+                            160 ;src/text.c:41: index = (*text) - 'A';
    00A6 79            [ 4]  161 	ld	a, c
    00A7 C6 BF         [ 7]  162 	add	a, #0xbf
    00A9 6F            [ 4]  163 	ld	l, a
-                            164 ;src/text.c:27: charsprite = sp_font_10 + (index * (SP_FONT_CHAR_W * SP_FONT_CHAR_H));           
+                            164 ;src/text.c:42: charsprite = sp_font_10 + (index * (SP_FONT_CHAR_W * SP_FONT_CHAR_H));
    00AA 26 00         [ 7]  165 	ld	h, #0x00
    00AC 29            [11]  166 	add	hl, hl
    00AD 29            [11]  167 	add	hl, hl
@@ -172,84 +172,94 @@
    00B4 33            [ 6]  172 	inc	sp
    00B5 33            [ 6]  173 	inc	sp
    00B6 E5            [11]  174 	push	hl
-   00B7 18 53         [12]  175 	jr	00121$
-   00B9                     176 00116$:
-                            177 ;src/text.c:29: } else if (*text == ':') {
+   00B7 18 55         [12]  175 	jr	00113$
+   00B9                     176 00108$:
+                            177 ;src/text.c:46: switch (*text)
    00B9 DD 7E FF      [19]  178 	ld	a, -1 (ix)
-   00BC D6 3A         [ 7]  179 	sub	a, #0x3a
-   00BE 20 0A         [12]  180 	jr	NZ,00113$
-                            181 ;src/text.c:30: charsprite = sp_font_36;                       
-   00C0 DD 36 F9r00   [19]  182 	ld	-7 (ix), #<(_sp_font_36)
-   00C4 DD 36 FAs00   [19]  183 	ld	-6 (ix), #>(_sp_font_36)
-   00C8 18 42         [12]  184 	jr	00121$
-   00CA                     185 00113$:
-                            186 ;src/text.c:31: } else if (*text == '?') {
-   00CA DD 7E FF      [19]  187 	ld	a, -1 (ix)
-   00CD D6 3F         [ 7]  188 	sub	a, #0x3f
-   00CF 20 0A         [12]  189 	jr	NZ,00110$
-                            190 ;src/text.c:32: charsprite = sp_font_37;                       
-   00D1 DD 36 F9r00   [19]  191 	ld	-7 (ix), #<(_sp_font_37)
-   00D5 DD 36 FAs00   [19]  192 	ld	-6 (ix), #>(_sp_font_37)
-   00D9 18 31         [12]  193 	jr	00121$
-   00DB                     194 00110$:
-                            195 ;src/text.c:33: } else if (*text == ' ') {
-   00DB DD 7E FF      [19]  196 	ld	a, -1 (ix)
-   00DE D6 20         [ 7]  197 	sub	a, #0x20
-   00E0 20 0A         [12]  198 	jr	NZ,00107$
-                            199 ;src/text.c:34: charsprite = sp_font_38;                       
-   00E2 DD 36 F9r00   [19]  200 	ld	-7 (ix), #<(_sp_font_38)
-   00E6 DD 36 FAs00   [19]  201 	ld	-6 (ix), #>(_sp_font_38)
-   00EA 18 20         [12]  202 	jr	00121$
-   00EC                     203 00107$:
-                            204 ;src/text.c:35: } else if (*text == '.') {
-   00EC DD 7E FF      [19]  205 	ld	a, -1 (ix)
-   00EF D6 2E         [ 7]  206 	sub	a, #0x2e
-   00F1 20 0A         [12]  207 	jr	NZ,00104$
-                            208 ;src/text.c:36: charsprite = sp_font_39;                       
-   00F3 DD 36 F9r00   [19]  209 	ld	-7 (ix), #<(_sp_font_39)
-   00F7 DD 36 FAs00   [19]  210 	ld	-6 (ix), #>(_sp_font_39)
-   00FB 18 0F         [12]  211 	jr	00121$
-   00FD                     212 00104$:
-                            213 ;src/text.c:37: } else if (*text == ',') {
-   00FD DD 7E FF      [19]  214 	ld	a, -1 (ix)
-   0100 D6 2C         [ 7]  215 	sub	a, #0x2c
-   0102 20 08         [12]  216 	jr	NZ,00121$
-                            217 ;src/text.c:38: charsprite = sp_font_40;                       
-   0104 DD 36 F9r00   [19]  218 	ld	-7 (ix), #<(_sp_font_40)
-   0108 DD 36 FAs00   [19]  219 	ld	-6 (ix), #>(_sp_font_40)
-   010C                     220 00121$:
-                            221 ;src/text.c:41: if (charsprite != 0) {
-   010C DD 7E FA      [19]  222 	ld	a, -6 (ix)
-   010F DD B6 F9      [19]  223 	or	a,-7 (ix)
-   0112 28 11         [12]  224 	jr	Z,00124$
-                            225 ;src/text.c:42: cpct_drawSprite(charsprite, svmem , SP_FONT_CHAR_W, SP_FONT_CHAR_H);
-   0114 DD 4E FD      [19]  226 	ld	c,-3 (ix)
-   0117 DD 46 FE      [19]  227 	ld	b,-2 (ix)
-   011A D1            [10]  228 	pop	de
-   011B D5            [11]  229 	push	de
-   011C 21 02 08      [10]  230 	ld	hl, #0x0802
-   011F E5            [11]  231 	push	hl
-   0120 C5            [11]  232 	push	bc
-   0121 D5            [11]  233 	push	de
-   0122 CDr00r00      [17]  234 	call	_cpct_drawSprite
-   0125                     235 00124$:
-                            236 ;src/text.c:45: text++;
-   0125 DD 34 FB      [23]  237 	inc	-5 (ix)
-   0128 20 03         [12]  238 	jr	NZ,00189$
-   012A DD 34 FC      [23]  239 	inc	-4 (ix)
-   012D                     240 00189$:
-                            241 ;src/text.c:46: svmem += 2;
-   012D DD 7E FD      [19]  242 	ld	a, -3 (ix)
-   0130 C6 02         [ 7]  243 	add	a, #0x02
-   0132 DD 77 FD      [19]  244 	ld	-3 (ix), a
-   0135 DD 7E FE      [19]  245 	ld	a, -2 (ix)
-   0138 CE 00         [ 7]  246 	adc	a, #0x00
-   013A DD 77 FE      [19]  247 	ld	-2 (ix), a
-   013D C3r61r00      [10]  248 	jp	00125$
-   0140                     249 00128$:
-   0140 DD F9         [10]  250 	ld	sp, ix
-   0142 DD E1         [14]  251 	pop	ix
-   0144 C9            [10]  252 	ret
-                            253 	.area _CODE
-                            254 	.area _INITIALIZER
-                            255 	.area _CABS (ABS)
+   00BC D6 20         [ 7]  179 	sub	a, #0x20
+   00BE 28 32         [12]  180 	jr	Z,00103$
+   00C0 DD 7E FF      [19]  181 	ld	a, -1 (ix)
+   00C3 D6 2C         [ 7]  182 	sub	a, #0x2c
+   00C5 28 3F         [12]  183 	jr	Z,00105$
+   00C7 DD 7E FF      [19]  184 	ld	a, -1 (ix)
+   00CA D6 2E         [ 7]  185 	sub	a, #0x2e
+   00CC 28 2E         [12]  186 	jr	Z,00104$
+   00CE DD 7E FF      [19]  187 	ld	a, -1 (ix)
+   00D1 D6 3A         [ 7]  188 	sub	a, #0x3a
+   00D3 28 09         [12]  189 	jr	Z,00101$
+   00D5 DD 7E FF      [19]  190 	ld	a, -1 (ix)
+   00D8 D6 3F         [ 7]  191 	sub	a, #0x3f
+   00DA 28 0C         [12]  192 	jr	Z,00102$
+   00DC 18 30         [12]  193 	jr	00113$
+                            194 ;src/text.c:48: case ':':
+   00DE                     195 00101$:
+                            196 ;src/text.c:49: charsprite = sp_font_36;
+   00DE DD 36 F9r00   [19]  197 	ld	-7 (ix), #<(_sp_font_36)
+   00E2 DD 36 FAs00   [19]  198 	ld	-6 (ix), #>(_sp_font_36)
+                            199 ;src/text.c:50: break;
+   00E6 18 26         [12]  200 	jr	00113$
+                            201 ;src/text.c:51: case '?':
+   00E8                     202 00102$:
+                            203 ;src/text.c:52: charsprite = sp_font_37;
+   00E8 DD 36 F9r00   [19]  204 	ld	-7 (ix), #<(_sp_font_37)
+   00EC DD 36 FAs00   [19]  205 	ld	-6 (ix), #>(_sp_font_37)
+                            206 ;src/text.c:53: break;
+   00F0 18 1C         [12]  207 	jr	00113$
+                            208 ;src/text.c:54: case ' ':
+   00F2                     209 00103$:
+                            210 ;src/text.c:55: charsprite = sp_font_38;
+   00F2 DD 36 F9r00   [19]  211 	ld	-7 (ix), #<(_sp_font_38)
+   00F6 DD 36 FAs00   [19]  212 	ld	-6 (ix), #>(_sp_font_38)
+                            213 ;src/text.c:56: break;
+   00FA 18 12         [12]  214 	jr	00113$
+                            215 ;src/text.c:57: case '.':
+   00FC                     216 00104$:
+                            217 ;src/text.c:58: charsprite = sp_font_39;
+   00FC DD 36 F9r00   [19]  218 	ld	-7 (ix), #<(_sp_font_39)
+   0100 DD 36 FAs00   [19]  219 	ld	-6 (ix), #>(_sp_font_39)
+                            220 ;src/text.c:59: break;
+   0104 18 08         [12]  221 	jr	00113$
+                            222 ;src/text.c:60: case ',':
+   0106                     223 00105$:
+                            224 ;src/text.c:61: charsprite = sp_font_40;
+   0106 DD 36 F9r00   [19]  225 	ld	-7 (ix), #<(_sp_font_40)
+   010A DD 36 FAs00   [19]  226 	ld	-6 (ix), #>(_sp_font_40)
+                            227 ;src/text.c:63: }
+   010E                     228 00113$:
+                            229 ;src/text.c:66: if (charsprite != 0)
+   010E DD 7E FA      [19]  230 	ld	a, -6 (ix)
+   0111 DD B6 F9      [19]  231 	or	a,-7 (ix)
+   0114 28 0F         [12]  232 	jr	Z,00116$
+                            233 ;src/text.c:68: cpct_drawSprite(charsprite, svmem, SP_FONT_CHAR_W, SP_FONT_CHAR_H);
+   0116 D1            [10]  234 	pop	de
+   0117 C1            [10]  235 	pop	bc
+   0118 C5            [11]  236 	push	bc
+   0119 D5            [11]  237 	push	de
+   011A D1            [10]  238 	pop	de
+   011B D5            [11]  239 	push	de
+   011C 21 02 08      [10]  240 	ld	hl, #0x0802
+   011F E5            [11]  241 	push	hl
+   0120 C5            [11]  242 	push	bc
+   0121 D5            [11]  243 	push	de
+   0122 CDr00r00      [17]  244 	call	_cpct_drawSprite
+   0125                     245 00116$:
+                            246 ;src/text.c:71: text++;
+   0125 DD 34 FD      [23]  247 	inc	-3 (ix)
+   0128 20 03         [12]  248 	jr	NZ,00176$
+   012A DD 34 FE      [23]  249 	inc	-2 (ix)
+   012D                     250 00176$:
+                            251 ;src/text.c:72: svmem += 2;
+   012D DD 7E FB      [19]  252 	ld	a, -5 (ix)
+   0130 C6 02         [ 7]  253 	add	a, #0x02
+   0132 DD 77 FB      [19]  254 	ld	-5 (ix), a
+   0135 DD 7E FC      [19]  255 	ld	a, -4 (ix)
+   0138 CE 00         [ 7]  256 	adc	a, #0x00
+   013A DD 77 FC      [19]  257 	ld	-4 (ix), a
+   013D C3r61r00      [10]  258 	jp	00117$
+   0140                     259 00120$:
+   0140 DD F9         [10]  260 	ld	sp, ix
+   0142 DD E1         [14]  261 	pop	ix
+   0144 C9            [10]  262 	ret
+                            263 	.area _CODE
+                            264 	.area _INITIALIZER
+                            265 	.area _CABS (ABS)

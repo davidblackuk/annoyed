@@ -1,11 +1,18 @@
-
-
 #include <cpctelera.h>
-#include <map/tiles.h>               // Tile declarations      (file generated after processing img/tiles.png)
+#include <map/tiles.h>
 #include "h/balls.h"
 #include "h/background.h"
 #include "h/globals.h"
+
+// ---------------------------------------------------------------------------
+// Module private declarations
+// ---------------------------------------------------------------------------
+
 u8 *pvmem;
+
+// ---------------------------------------------------------------------------
+// Module public methods
+// ---------------------------------------------------------------------------
 
 void background_initialize()
 {
@@ -15,27 +22,29 @@ void background_initialize()
     cpct_etm_setTileset2x4(g_tileset);
 
     // TODO: Should extract tile map width and height into seperate constants
-    cpct_etm_drawTilemap2x4_f(BACKGROUND_TILMAP_W, BACKGROUND_TILMAP_H, pvmem, current_level->background_tilemap);    
+    cpct_etm_drawTilemap2x4_f(BACKGROUND_TILMAP_W, BACKGROUND_TILMAP_H, pvmem, current_level->background_tilemap);
 }
 
-BounceHits background_bounce_ball(i16 at_wx, i16 at_wy) {
-    
+BounceHits background_bounce_ball(i16 at_wx, i16 at_wy)
+{
+
     BounceHits bounces = at_wx < 0 ? BOUNCE_X : 0;
-    
-    bounces |= (at_wx + BALL_WIDTH)  > PLAY_AREA_WIDTH ? BOUNCE_X : BOUNCE_NONE;
-    
+
+    bounces |= (at_wx + BALL_WIDTH) > PLAY_AREA_WIDTH ? BOUNCE_X : BOUNCE_NONE;
+
     bounces |= (at_wy < 0) ? BOUNCE_Y : BOUNCE_NONE;
-    
+
     return bounces;
 }
 
-void background_restore_world_coords(i16 wx, i16 wy, u8 width, u8 height) {
-    
+void background_restore_world_coords(i16 wx, i16 wy, u8 width, u8 height)
+{
+
     // the world coordinates are 0 based at the top left of the play area
     // when restoring the background we paint the tilemap who's origin is
     // to the left and top of the play area: two tiles left and two above
 
-    u8 tileX =  (wx / 2) + 2;
+    u8 tileX = (wx / 2) + 2;
     u8 tileY = (wy / 4) + 2;
     u8 tileW = width / 2;
     u8 tileH = height / 4;
@@ -59,16 +68,16 @@ void background_restore_world_coords(i16 wx, i16 wy, u8 width, u8 height) {
     }
 
     cpct_etm_drawTileBox2x4(tileX, tileY, tileW, tileH, BACKGROUND_TILMAP_W, pvmem, current_level->background_tilemap);
- 
 }
 
-void background_debug_box_wc(i16 wx, i16 wy, u8 width, u8 height) {
-    u8 *pvm;       
+void background_debug_box_wc(i16 wx, i16 wy, u8 width, u8 height)
+{
+    u8 *pvm;
     // the world coordinates are 0 based at the top left of the play area
     // when restoring the background we paint the tilemap who's origin is
     // to the left and top of the play area: two tiles left and two above
 
-    u8 tileX =  (wx / 2) + 2;
+    u8 tileX = (wx / 2) + 2;
     u8 tileY = (wy / 4) + 2;
     u8 tileW = width / 2;
     u8 tileH = height / 4;
@@ -91,9 +100,12 @@ void background_debug_box_wc(i16 wx, i16 wy, u8 width, u8 height) {
         tileW += 1;
     }
 
-    pvm = cpct_getScreenPtr(CPCT_VMEM_START, (tileX * TILE_W) + (4*TILE_W),
-     tileY * TILE_H );
+    pvm = cpct_getScreenPtr(CPCT_VMEM_START, (tileX * TILE_W) + (4 * TILE_W),
+                            tileY * TILE_H);
 
-    cpct_drawSolidBox(pvm, 255, tileW * TILE_W , tileH + TILE_H );
-
+    cpct_drawSolidBox(pvm, 255, tileW * TILE_W, tileH + TILE_H);
 }
+
+// ---------------------------------------------------------------------------
+// Module private methods
+// ---------------------------------------------------------------------------

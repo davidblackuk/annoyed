@@ -8,41 +8,35 @@
 #include "h/keys.h"
 #include "h/text.h"
 
-#define COLOR_CYCLE_FREQ 10
+// ---------------------------------------------------------------------------
+// Module private declarations
+// ---------------------------------------------------------------------------
+
+void write_text();
+
+// ---------------------------------------------------------------------------
+// Module public state externally used
+// ---------------------------------------------------------------------------
 
 Scene scene_menu;
 
-u8 loop_counter;
-u8 current_ink;
+// ---------------------------------------------------------------------------
+// Module public methods
+// ---------------------------------------------------------------------------
 
 void menu_initialize()
 {
     u8 *pvmem = cpct_getScreenPtr(CPCT_VMEM_START, (SCREEN_WIDTH_BYTES - SP_LOGO_W) / 2, 0);
     cpct_clearScreen(AN_PEN_BLACK);
-    
+
     keys_initialize();
 
-    loop_counter = 0;
     cpct_drawSprite(sp_logo, pvmem, SP_LOGO_W, SP_LOGO_H);
-
-
+    write_text();
 }
 
 void menu_draw()
 {
-    text_write_string(0,64, "AFTER A SERIES OF FRANKLY BIZZARE EVENTS");
-    text_write_string(0,76, "YOUR SPACESHIP IS IN TROUBLE.");
-
-    text_write_string(0,96, "INEXPLICABLY, TO SURVIVE, YOU NEED TO");
-    text_write_string(0,108, "REMOVE BLOCKS FROM A WALL USING A BALL.");
-
-
-    text_write_string(0,132, "YEAH, WE KNOW...");
-
-    text_write_string(0,156, "WASD OR ARROW KEYS TO PLAY. UP TO SERVE");
-
-   text_write_centered_string(200-8, "PRESS ANY OLD KEY TO START");
-
 }
 
 SceneState menu_update()
@@ -63,3 +57,22 @@ void module_menu_initialize()
     scene_menu.draw = menu_draw;
 }
 
+// ---------------------------------------------------------------------------
+// Module private methods
+// ---------------------------------------------------------------------------
+
+void write_text()
+{
+    text_write_centered_string(64, "AFTER A SERIES OF FRANKLY BIZZARE EVENTS");
+    text_write_centered_string(76, "YOUR SPACESHIP IS IN TROUBLE.");
+
+    text_write_centered_string(96, "INEXPLICABLY, TO SURVIVE, YOU NEED TO");
+    text_write_centered_string(108, "REMOVE BLOCKS FROM A WALL USING A BALL.");
+
+    text_write_centered_string(132, "YEAH, WE KNOW...");
+
+    text_write_centered_string(156, "WASD OR ARROW KEYS TO PLAY.");
+    text_write_centered_string(168, "UP TO SERVE");
+
+    text_write_centered_string(200 - 8, "PRESS ANY OLD KEY TO START");
+}

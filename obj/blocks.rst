@@ -29,10 +29,10 @@
                              29 ; ram data
                              30 ;--------------------------------------------------------
                              31 	.area _DATA
-   83C6                      32 _block_meta::
-   83C6                      33 	.ds 1092
-   880A                      34 _blocks_remaining::
-   880A                      35 	.ds 2
+   83BB                      32 _block_meta::
+   83BB                      33 	.ds 1092
+   87FF                      34 _blocks_remaining::
+   87FF                      35 	.ds 2
                              36 ;--------------------------------------------------------
                              37 ; ram data
                              38 ;--------------------------------------------------------
@@ -397,9 +397,9 @@
    723E AF            [ 4]  397 	xor	a, a
    723F 12            [ 7]  398 	ld	(de), a
                             399 ;src/blocks.c:119: blocks_remaining -= 1;
-   7240 2A 0A 88      [16]  400 	ld	hl, (_blocks_remaining)
+   7240 2A FF 87      [16]  400 	ld	hl, (_blocks_remaining)
    7243 2B            [ 6]  401 	dec	hl
-   7244 22 0A 88      [16]  402 	ld	(_blocks_remaining), hl
+   7244 22 FF 87      [16]  402 	ld	(_blocks_remaining), hl
    7247                     403 00105$:
                             404 ;src/blocks.c:125: (meta->block_tile_y * TILE_H) + 24, 
    7247 D5            [11]  405 	push	de
@@ -523,7 +523,7 @@
    72E4 09            [11]  523 	add	hl, bc
    72E5 29            [11]  524 	add	hl, hl
    72E6 29            [11]  525 	add	hl, hl
-   72E7 01 C6 83      [10]  526 	ld	bc,#_block_meta
+   72E7 01 BB 83      [10]  526 	ld	bc,#_block_meta
    72EA 09            [11]  527 	add	hl,bc
    72EB 4D            [ 4]  528 	ld	c, l
    72EC 44            [ 4]  529 	ld	b, h
@@ -558,7 +558,7 @@
    730A E5            [11]  558 	push	hl
    730B 21 00 C0      [10]  559 	ld	hl, #0xc000
    730E E5            [11]  560 	push	hl
-   730F CD C9 82      [17]  561 	call	_cpct_getScreenPtr
+   730F CD BE 82      [17]  561 	call	_cpct_getScreenPtr
    7312 EB            [ 4]  562 	ex	de,hl
                             563 ;src/blocks.c:175: for (u8 y = 0; y < BLOCKS_MAP_H / 2; y++)
    7313 0E 00         [ 7]  564 	ld	c, #0x00
@@ -594,7 +594,7 @@
    7338 29            [11]  594 	add	hl, hl
    7339 29            [11]  595 	add	hl, hl
    733A D1            [10]  596 	pop	de
-   733B 3E C6         [ 7]  597 	ld	a, #<(_block_meta)
+   733B 3E BB         [ 7]  597 	ld	a, #<(_block_meta)
    733D 85            [ 4]  598 	add	a, l
    733E 6F            [ 4]  599 	ld	l, a
    733F 3E 83         [ 7]  600 	ld	a, #>(_block_meta)
@@ -611,7 +611,7 @@
    734D B7            [ 4]  611 	or	a, a
    734E 28 2A         [12]  612 	jr	Z,00107$
                             613 ;src/blocks.c:184: current_level->blocks_tilemap);
-   7350 2A 19 88      [16]  614 	ld	hl, (_current_level)
+   7350 2A 0E 88      [16]  614 	ld	hl, (_current_level)
    7353 23            [ 6]  615 	inc	hl
    7354 23            [ 6]  616 	inc	hl
    7355 7E            [ 7]  617 	ld	a, (hl)
@@ -636,7 +636,7 @@
    736E DD 66 FE      [19]  636 	ld	h, -2 (ix)
    7371 DD 6E FD      [19]  637 	ld	l, -3 (ix)
    7374 E5            [11]  638 	push	hl
-   7375 CD 03 80      [17]  639 	call	_cpct_etm_drawTileBox2x4
+   7375 CD F8 7F      [17]  639 	call	_cpct_etm_drawTileBox2x4
    7378 D1            [10]  640 	pop	de
    7379 C1            [10]  641 	pop	bc
    737A                     642 00107$:
@@ -664,7 +664,7 @@
    738F 3B            [ 6]  664 	dec	sp
                             665 ;src/blocks.c:195: blocks_remaining = 0;
    7390 21 00 00      [10]  666 	ld	hl, #0x0000
-   7393 22 0A 88      [16]  667 	ld	(_blocks_remaining), hl
+   7393 22 FF 87      [16]  667 	ld	(_blocks_remaining), hl
                             668 ;src/blocks.c:197: for (u8 y = 0; y < BLOCKS_MAP_H; y += 2)
    7396 DD 36 FC 00   [19]  669 	ld	-4 (ix), #0x00
    739A                     670 00119$:
@@ -697,7 +697,7 @@
    73C8 D6 1A         [ 7]  697 	sub	a, #0x1a
    73CA D2 48 75      [10]  698 	jp	NC, 00120$
                             699 ;src/blocks.c:201: u8 tile = current_level->blocks_tilemap[(y * BLOCKS_MAP_W) + x];
-   73CD 2A 19 88      [16]  700 	ld	hl, (_current_level)
+   73CD 2A 0E 88      [16]  700 	ld	hl, (_current_level)
    73D0 23            [ 6]  701 	inc	hl
    73D1 23            [ 6]  702 	inc	hl
    73D2 4E            [ 7]  703 	ld	c, (hl)
@@ -871,12 +871,12 @@
                             871 ;src/blocks.c:228: case STEEL_BLOCK:
    74D0                     872 00109$:
                             873 ;src/blocks.c:231: current_level->steel_hits_to_destroy);
-   74D0 2A 19 88      [16]  874 	ld	hl, (_current_level)
+   74D0 2A 0E 88      [16]  874 	ld	hl, (_current_level)
    74D3 11 05 00      [10]  875 	ld	de, #0x0005
    74D6 19            [11]  876 	add	hl, de
    74D7 56            [ 7]  877 	ld	d, (hl)
                             878 ;src/blocks.c:230: current_level->steel_score, 
-   74D8 FD 2A 19 88   [20]  879 	ld	iy, (_current_level)
+   74D8 FD 2A 0E 88   [20]  879 	ld	iy, (_current_level)
                             880 ;src/blocks.c:229: plant_tile_meta(x, y, STEEL_BLOCK, 
    74DC FD 5E 04      [19]  881 	ld	e, 4 (iy)
    74DF D5            [11]  882 	push	de
@@ -925,7 +925,7 @@
    7518 09            [11]  925 	add	hl, bc
    7519 29            [11]  926 	add	hl, hl
    751A 29            [11]  927 	add	hl, hl
-   751B 01 C6 83      [10]  928 	ld	bc,#_block_meta
+   751B 01 BB 83      [10]  928 	ld	bc,#_block_meta
    751E 09            [11]  929 	add	hl,bc
    751F 4D            [ 4]  930 	ld	c, l
    7520 44            [ 4]  931 	ld	b, h
@@ -981,14 +981,14 @@
    7561 3C            [ 4]  981 	inc	a
    7562 28 0C         [12]  982 	jr	Z,00102$
                             983 ;src/blocks.c:251: blocks_remaining += 1;
-   7564 FD 21 0A 88   [14]  984 	ld	iy, #_blocks_remaining
+   7564 FD 21 FF 87   [14]  984 	ld	iy, #_blocks_remaining
    7568 FD 34 00      [23]  985 	inc	0 (iy)
    756B 20 03         [12]  986 	jr	NZ,00110$
    756D FD 34 01      [23]  987 	inc	1 (iy)
    7570                     988 00110$:
    7570                     989 00102$:
                             990 ;src/blocks.c:254: block_meta[map_x / 2][map_y / 2].is_active = 1;
-   7570 01 C6 83      [10]  991 	ld	bc, #_block_meta+0
+   7570 01 BB 83      [10]  991 	ld	bc, #_block_meta+0
    7573 DD 5E 04      [19]  992 	ld	e, 4 (ix)
    7576 CB 3B         [ 8]  993 	srl	e
    7578 16 00         [ 7]  994 	ld	d,#0x00

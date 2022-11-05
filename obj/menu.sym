@@ -7,37 +7,37 @@ Symbol Table
     .__.ABS.                                                    =  0000 G
     .__.CPU.                                                    =  0000 L
     .__.H$L.                                                    =  0000 L
-  0 ___str_0                                                       0085 R
-  0 ___str_1                                                       00AE R
-  0 ___str_2                                                       00CC R
-  0 ___str_3                                                       00F2 R
-  0 ___str_4                                                       011A R
-  0 ___str_5                                                       012B R
-  0 ___str_6                                                       0153 R
+  0 ___str_0                                                       00B4 R
+  0 ___str_1                                                       00DD R
+  0 ___str_2                                                       00FB R
+  0 ___str_3                                                       0121 R
+  0 ___str_4                                                       0149 R
+  0 ___str_5                                                       015A R
+  0 ___str_6                                                       0176 R
+  0 ___str_7                                                       0182 R
     _cpct_drawSprite                                               **** GX
     _cpct_getScreenPtr                                             **** GX
     _cpct_isAnyKeyPressed                                          **** GX
     _cpct_memset                                                   **** GX
-  1 _current_ink                                                   0007 GR
     _keys_initialize                                               **** GX
     _keys_update                                                   **** GX
-  1 _loop_counter                                                  0006 GR
-  0 _menu_draw                                                     002F GR
+  0 _menu_draw                                                     002E GR
   0 _menu_initialize                                               0000 GR
-  0 _menu_update                                                   016E GR
-  0 _module_menu_initialize                                        017E GR
+  0 _menu_update                                                   002F GR
+  0 _module_menu_initialize                                        003F GR
   1 _scene_menu                                                    0000 GR
     _sp_logo                                                       **** GX
     _text_write_centered_string                                    **** GX
-    _text_write_string                                             **** GX
+  0 _write_text                                                    0052 GR
+
 
 ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 2.
 Hexadecimal [16-Bits]
 
 Area Table
 
-   0 _CODE                                      size  191   flags    0
-   1 _DATA                                      size    8   flags    0
+   0 _CODE                                      size  19D   flags    0
+   1 _DATA                                      size    6   flags    0
    2 _INITIALIZED                               size    0   flags    0
    3 _DABS                                      size    0   flags    8
    4 _HOME                                      size    0   flags    0

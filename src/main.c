@@ -4,7 +4,19 @@
 #include "h/game.h"
 #include "h/menu.h"
 
+// ---------------------------------------------------------------------------
+// Module private declarations
+// ---------------------------------------------------------------------------
+
 void play_scene(Scene *scene);
+
+// ---------------------------------------------------------------------------
+// Module public state externally used
+// ---------------------------------------------------------------------------
+
+// ---------------------------------------------------------------------------
+// Module public methods
+// ---------------------------------------------------------------------------
 
 void initializeCpc()
 {
@@ -13,7 +25,7 @@ void initializeCpc()
    cpct_disableFirmware();
 
    cpct_setBorder(HW_BLACK);
-   cpct_setBorder(HW_WHITE);
+   // cpct_setBorder(HW_WHITE);
 
    // set screen mode 0, 16 colors
    cpct_setVideoMode(0);
@@ -34,6 +46,10 @@ void main(void)
       play_scene(&scene_game);
    }
 }
+
+// ---------------------------------------------------------------------------
+// Module private methods
+// ---------------------------------------------------------------------------
 
 void play_scene(Scene *scene)
 {

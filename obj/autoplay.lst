@@ -46,25 +46,25 @@
                              46 ; code
                              47 ;--------------------------------------------------------
                              48 	.area _CODE
-                             49 ;src/autoplay.c:10: void auto_initialize() {
+                             49 ;src/autoplay.c:17: void auto_initialize()
                              50 ;	---------------------------------
                              51 ; Function auto_initialize
                              52 ; ---------------------------------
    0000                      53 _auto_initialize::
-                             54 ;src/autoplay.c:11: is_controling = 0;
+                             54 ;src/autoplay.c:19: is_controling = 0;
    0000 21r00r00      [10]   55 	ld	hl,#_is_controling + 0
    0003 36 00         [10]   56 	ld	(hl), #0x00
    0005 C9            [10]   57 	ret
-                             58 ;src/autoplay.c:14: void auto_update() {
+                             58 ;src/autoplay.c:22: void auto_update()
                              59 ;	---------------------------------
                              60 ; Function auto_update
                              61 ; ---------------------------------
    0006                      62 _auto_update::
-                             63 ;src/autoplay.c:17: if (key_auto_is_pressed) {
+                             63 ;src/autoplay.c:26: if (key_auto_is_pressed)
    0006 3Ar00r00      [13]   64 	ld	a,(#_key_auto_is_pressed + 0)
    0009 B7            [ 4]   65 	or	a, a
    000A 28 10         [12]   66 	jr	Z,00102$
-                             67 ;src/autoplay.c:18: is_controling = is_controling ? 0 : 1;
+                             67 ;src/autoplay.c:28: is_controling = is_controling ? 0 : 1;
    000C 3Ar00r00      [13]   68 	ld	a,(#_is_controling + 0)
    000F B7            [ 4]   69 	or	a, a
    0010 28 04         [12]   70 	jr	Z,00117$
@@ -76,37 +76,37 @@
    0018 21r00r00      [10]   76 	ld	hl,#_is_controling + 0
    001B 71            [ 7]   77 	ld	(hl), c
    001C                      78 00102$:
-                             79 ;src/autoplay.c:21: if (is_controling) {
+                             79 ;src/autoplay.c:31: if (is_controling)
    001C 3Ar00r00      [13]   80 	ld	a,(#_is_controling + 0)
    001F B7            [ 4]   81 	or	a, a
    0020 C8            [11]   82 	ret	Z
-                             83 ;src/autoplay.c:22: Ball* ball = balls_get_first_active();
+                             83 ;src/autoplay.c:33: Ball *ball = balls_get_first_active();
    0021 CDr00r00      [17]   84 	call	_balls_get_first_active
-                             85 ;src/autoplay.c:24: keys_resetAllKeys();
+                             85 ;src/autoplay.c:35: keys_resetAllKeys();
    0024 E5            [11]   86 	push	hl
    0025 CDr00r00      [17]   87 	call	_keys_resetAllKeys
    0028 C1            [10]   88 	pop	bc
-                             89 ;src/autoplay.c:25: if (ball != NULL) {
+                             89 ;src/autoplay.c:36: if (ball != NULL)
    0029 78            [ 4]   90 	ld	a, b
    002A B1            [ 4]   91 	or	a,c
    002B C8            [11]   92 	ret	Z
-                             93 ;src/autoplay.c:26: mid_bat_x = batX + (batW / 2);
+                             93 ;src/autoplay.c:38: mid_bat_x = batX + (batW / 2);
    002C 21r00r00      [10]   94 	ld	hl,#_batW + 0
    002F 5E            [ 7]   95 	ld	e, (hl)
    0030 CB 3B         [ 8]   96 	srl	e
    0032 3Ar00r00      [13]   97 	ld	a,(#_batX + 0)
    0035 83            [ 4]   98 	add	a, e
    0036 5F            [ 4]   99 	ld	e, a
-                            100 ;src/autoplay.c:27: if (serving) {
+                            100 ;src/autoplay.c:39: if (serving)
    0037 3Ar00r00      [13]  101 	ld	a,(#_serving + 0)
    003A B7            [ 4]  102 	or	a, a
    003B 28 06         [12]  103 	jr	Z,00109$
-                            104 ;src/autoplay.c:28: key_serve_is_pressed = 1;
+                            104 ;src/autoplay.c:41: key_serve_is_pressed = 1;
    003D 21r00r00      [10]  105 	ld	hl,#_key_serve_is_pressed + 0
    0040 36 01         [10]  106 	ld	(hl), #0x01
    0042 C9            [10]  107 	ret
    0043                     108 00109$:
-                            109 ;src/autoplay.c:29: } else if (mid_bat_x < ball->x ) {
+                            109 ;src/autoplay.c:43: else if (mid_bat_x < ball->x)
    0043 69            [ 4]  110 	ld	l, c
    0044 60            [ 4]  111 	ld	h, b
    0045 23            [ 6]  112 	inc	hl
@@ -122,12 +122,12 @@
    0052 EE 80         [ 7]  122 	xor	a, #0x80
    0054                     123 00147$:
    0054 F2r5Dr00      [10]  124 	jp	P, 00106$
-                            125 ;src/autoplay.c:30: key_right_is_pressed = 1;
+                            125 ;src/autoplay.c:45: key_right_is_pressed = 1;
    0057 21r00r00      [10]  126 	ld	hl,#_key_right_is_pressed + 0
    005A 36 01         [10]  127 	ld	(hl), #0x01
    005C C9            [10]  128 	ret
    005D                     129 00106$:
-                            130 ;src/autoplay.c:31: } else if (mid_bat_x > ball->x ) {
+                            130 ;src/autoplay.c:47: else if (mid_bat_x > ball->x)
    005D 79            [ 4]  131 	ld	a, c
    005E 93            [ 4]  132 	sub	a, e
    005F 78            [ 4]  133 	ld	a, b
@@ -136,7 +136,7 @@
    0064 EE 80         [ 7]  136 	xor	a, #0x80
    0066                     137 00148$:
    0066 F0            [11]  138 	ret	P
-                            139 ;src/autoplay.c:32: key_left_is_pressed = 1;
+                            139 ;src/autoplay.c:49: key_left_is_pressed = 1;
    0067 21r00r00      [10]  140 	ld	hl,#_key_left_is_pressed + 0
    006A 36 01         [10]  141 	ld	(hl), #0x01
    006C C9            [10]  142 	ret

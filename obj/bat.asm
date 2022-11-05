@@ -60,53 +60,53 @@ _batW::
 ; code
 ;--------------------------------------------------------
 	.area _CODE
-;src/bat.c:34: void bat_initialize() {
+;src/bat.c:40: void bat_initialize()
 ;	---------------------------------
 ; Function bat_initialize
 ; ---------------------------------
 _bat_initialize::
-;src/bat.c:35: batW = 8;
+;src/bat.c:42: batW = 8;
 	ld	hl,#_batW + 0
 	ld	(hl), #0x08
-;src/bat.c:36: batX = (PLAY_AREA_WIDTH- batW) / 2;
+;src/bat.c:43: batX = (PLAY_AREA_WIDTH - batW) / 2;
 	ld	hl,#_batX + 0
 	ld	(hl), #0x16
-;src/bat.c:37: batY = PLAY_AREA_HEIGHT - BAT_HEIGHT_PIXELS - BAT_BOTTOM_OFFSET_PIXELS;
+;src/bat.c:44: batY = PLAY_AREA_HEIGHT - BAT_HEIGHT_PIXELS - BAT_BOTTOM_OFFSET_PIXELS;
 	ld	hl,#_batY + 0
 	ld	(hl), #0xb0
-;src/bat.c:38: oldBatX = batX;
+;src/bat.c:45: oldBatX = batX;
 	ld	hl,#_oldBatX + 0
 	ld	(hl), #0x16
 	ret
-;src/bat.c:42: void bat_update() {
+;src/bat.c:48: void bat_update()
 ;	---------------------------------
 ; Function bat_update
 ; ---------------------------------
 _bat_update::
-;src/bat.c:45: oldBatX = batX;
+;src/bat.c:54: oldBatX = batX;
 	ld	hl,#_batX + 0
 	ld	c, (hl)
-;src/bat.c:43: if (key_left_is_pressed) {
+;src/bat.c:50: if (key_left_is_pressed)
 	ld	a,(#_key_left_is_pressed + 0)
 	or	a, a
 	jr	Z,00108$
-;src/bat.c:44: if (batX > 0) {
+;src/bat.c:52: if (batX > 0)
 	ld	a,(#_batX + 0)
 	or	a, a
 	ret	Z
-;src/bat.c:45: oldBatX = batX;
+;src/bat.c:54: oldBatX = batX;
 	ld	hl,#_oldBatX + 0
 	ld	(hl), c
-;src/bat.c:46: batX--;
+;src/bat.c:55: batX--;
 	ld	hl, #_batX+0
 	dec	(hl)
 	ret
 00108$:
-;src/bat.c:48: } else if (key_right_is_pressed) {
+;src/bat.c:58: else if (key_right_is_pressed)
 	ld	a,(#_key_right_is_pressed + 0)
 	or	a, a
 	ret	Z
-;src/bat.c:49: if (batX < PLAY_AREA_WIDTH - batW) {
+;src/bat.c:60: if (batX < PLAY_AREA_WIDTH - batW)
 	ld	hl,#_batW + 0
 	ld	e, (hl)
 	ld	d, #0x00
@@ -125,19 +125,19 @@ _bat_update::
 	xor	a, #0x80
 00128$:
 	ret	P
-;src/bat.c:50: oldBatX = batX;
+;src/bat.c:62: oldBatX = batX;
 	ld	hl,#_oldBatX + 0
 	ld	(hl), c
-;src/bat.c:51: batX++;
+;src/bat.c:63: batX++;
 	ld	hl, #_batX+0
 	inc	(hl)
 	ret
-;src/bat.c:56: void bat_restore_background() {
+;src/bat.c:68: void bat_restore_background()
 ;	---------------------------------
 ; Function bat_restore_background
 ; ---------------------------------
 _bat_restore_background::
-;src/bat.c:57: background_restore_world_coords(oldBatX, batY, batW, BAT_HEIGHT_PIXELS);
+;src/bat.c:70: background_restore_world_coords(oldBatX, batY, batW, BAT_HEIGHT_PIXELS);
 	ld	hl,#_batY + 0
 	ld	e, (hl)
 	ld	d, #0x00
@@ -157,12 +157,12 @@ _bat_restore_background::
 	add	hl, sp
 	ld	sp, hl
 	ret
-;src/bat.c:60: void bat_draw()
+;src/bat.c:73: void bat_draw()
 ;	---------------------------------
 ; Function bat_draw
 ; ---------------------------------
 _bat_draw::
-;src/bat.c:64: svmem = cpct_getScreenPtr(CPCT_VMEM_START, W_2_S_X(batX), W_2_S_Y(batY));
+;src/bat.c:77: svmem = cpct_getScreenPtr(CPCT_VMEM_START, W_2_S_X(batX), W_2_S_Y(batY));
 	ld	a,(#_batY + 0)
 	add	a, #0x08
 	ld	d, a
@@ -175,7 +175,7 @@ _bat_draw::
 	call	_cpct_getScreenPtr
 	ld	c, l
 	ld	b, h
-;src/bat.c:67: cpct_drawSpriteMasked(sp_masked_bat_left, svmem, SP_BAT_SEG_W, SP_BAT_SEG_H);
+;src/bat.c:79: cpct_drawSpriteMasked(sp_masked_bat_left, svmem, SP_BAT_SEG_W, SP_BAT_SEG_H);
 	ld	e, c
 	ld	d, b
 	push	bc
@@ -186,7 +186,7 @@ _bat_draw::
 	push	hl
 	call	_cpct_drawSpriteMasked
 	pop	bc
-;src/bat.c:69: cpct_drawSprite(sp_bat_mid, svmem + BAT_SEGMENT_WIDTH_BYTES, SP_BAT_MID_W, SP_BAT_MID_H);
+;src/bat.c:81: cpct_drawSprite(sp_bat_mid, svmem + BAT_SEGMENT_WIDTH_BYTES, SP_BAT_MID_W, SP_BAT_MID_H);
 	ld	e, c
 	ld	d, b
 	inc	de
@@ -199,7 +199,7 @@ _bat_draw::
 	push	hl
 	call	_cpct_drawSprite
 	pop	bc
-;src/bat.c:70: cpct_drawSprite(sp_bat_mid, svmem + 2*BAT_SEGMENT_WIDTH_BYTES, SP_BAT_MID_W, SP_BAT_MID_H);
+;src/bat.c:82: cpct_drawSprite(sp_bat_mid, svmem + 2 * BAT_SEGMENT_WIDTH_BYTES, SP_BAT_MID_W, SP_BAT_MID_H);
 	ld	hl, #0x0004
 	add	hl, bc
 	push	bc
@@ -210,7 +210,7 @@ _bat_draw::
 	push	hl
 	call	_cpct_drawSprite
 	pop	bc
-;src/bat.c:72: cpct_drawSpriteMasked(sp_masked_bat_right, svmem+ 3*BAT_SEGMENT_WIDTH_BYTES, SP_BAT_SEG_W, SP_BAT_SEG_H);
+;src/bat.c:84: cpct_drawSpriteMasked(sp_masked_bat_right, svmem + 3 * BAT_SEGMENT_WIDTH_BYTES, SP_BAT_SEG_W, SP_BAT_SEG_H);
 	ld	hl, #0x0006
 	add	hl, bc
 	ld	bc, #_sp_masked_bat_right+0
@@ -220,7 +220,7 @@ _bat_draw::
 	push	bc
 	call	_cpct_drawSpriteMasked
 	ret
-;src/bat.c:81: BounceHits bat_bounce_ball(Ball * ball, i16 at_x, i16 at_y) 
+;src/bat.c:87: BounceHits bat_bounce_ball(Ball *ball, i16 at_x, i16 at_y)
 ;	---------------------------------
 ; Function bat_bounce_ball
 ; ---------------------------------
@@ -231,9 +231,9 @@ _bat_bounce_ball::
 	push	af
 	push	af
 	dec	sp
-;src/bat.c:83: BounceHits bounces = BOUNCE_NONE;
+;src/bat.c:89: BounceHits bounces = BOUNCE_NONE;
 	ld	-5 (ix), #0x00
-;src/bat.c:87: if (ball->dy > 0 &&
+;src/bat.c:91: if (ball->dy > 0 &&
 	ld	c,4 (ix)
 	ld	b,5 (ix)
 	ld	l, c
@@ -250,28 +250,28 @@ _bat_bounce_ball::
 	xor	a, #0x80
 00129$:
 	jp	P, 00102$
-;src/bat.c:88: (ball->x + BALL_WIDTH > batX && ball->x < batX + batW) &&
+;src/bat.c:92: (ball->x + BALL_WIDTH > batX && ball->x < batX + batW) &&
 	ld	l, c
 	ld	h, b
 	inc	hl
 	ld	a, (hl)
-	ld	-4 (ix), a
+	ld	-2 (ix), a
 	inc	hl
 	ld	a, (hl)
-	ld	-3 (ix), a
-	ld	a, -4 (ix)
-	add	a, #0x03
-	ld	-2 (ix), a
-	ld	a, -3 (ix)
-	adc	a, #0x00
 	ld	-1 (ix), a
+	ld	a, -2 (ix)
+	add	a, #0x03
+	ld	-4 (ix), a
+	ld	a, -1 (ix)
+	adc	a, #0x00
+	ld	-3 (ix), a
 	ld	hl,#_batX + 0
 	ld	e, (hl)
 	ld	d, #0x00
 	ld	a, e
-	sub	a, -2 (ix)
+	sub	a, -4 (ix)
 	ld	a, d
-	sbc	a, -1 (ix)
+	sbc	a, -3 (ix)
 	jp	PO, 00130$
 	xor	a, #0x80
 00130$:
@@ -280,15 +280,15 @@ _bat_bounce_ball::
 	ld	l, 0 (iy)
 	ld	h, #0x00
 	add	hl, de
-	ld	a, -4 (ix)
+	ld	a, -2 (ix)
 	sub	a, l
-	ld	a, -3 (ix)
+	ld	a, -1 (ix)
 	sbc	a, h
 	jp	PO, 00131$
 	xor	a, #0x80
 00131$:
 	jp	P, 00102$
-;src/bat.c:89: (ball->y + BALL_HEIGHT > batY && ball->y < batY + SP_BAT_SEG_H))
+;src/bat.c:93: (ball->y + BALL_HEIGHT > batY && ball->y < batY + SP_BAT_SEG_H))
 	ld	l, c
 	ld	h, b
 	inc	hl
@@ -321,10 +321,10 @@ _bat_bounce_ball::
 	xor	a, #0x80
 00133$:
 	jp	P, 00102$
-;src/bat.c:91: bounces |= BOUNCE_Y;        
+;src/bat.c:95: bounces |= BOUNCE_Y;
 	ld	-5 (ix), #0x02
 00102$:
-;src/bat.c:94: return bounces;
+;src/bat.c:98: return bounces;
 	ld	l, -5 (ix)
 	ld	sp, ix
 	pop	ix

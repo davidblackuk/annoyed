@@ -16,10 +16,10 @@ Symbol Table
     _g_palette                                                     **** GX
     _high_score                                                    **** GX
   0 _initializeCpc                                                 0000 GR
-  0 _main                                                          0022 GR
+  0 _main                                                          001B GR
     _module_game_initialize                                        **** GX
     _module_menu_initialize                                        **** GX
-  0 _play_scene                                                    0042 GR
+  0 _play_scene                                                    003B GR
     _scene_game                                                    **** GX
     _scene_menu                                                    **** GX
 
@@ -29,7 +29,7 @@ Hexadecimal [16-Bits]
 
 Area Table
 
-   0 _CODE                                      size   9A   flags    0
+   0 _CODE                                      size   93   flags    0
    1 _DATA                                      size    0   flags    0
    2 _INITIALIZED                               size    0   flags    0
    3 _DABS                                      size    0   flags    8

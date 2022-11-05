@@ -35,7 +35,6 @@ obj/level.rel
 obj/main.rel
 obj/masked-sprites.rel
 obj/menu.rel
-obj/strings.rel
 obj/text.rel
 
 -e
