@@ -102,8 +102,8 @@ _g_tilemap_l02_background:
 	.db #0x3e	; 62
 	.db #0x3f	; 63
 	.db #0x40	; 64
-	.db #0x2d	; 45
-	.db #0x2e	; 46
+	.db #0x2f	; 47
+	.db #0x30	; 48	'0'
 	.db #0x34	; 52	'4'
 	.db #0x35	; 53	'5'
 	.db #0x36	; 54	'6'
@@ -130,10 +130,10 @@ _g_tilemap_l02_background:
 	.db #0x36	; 54	'6'
 	.db #0x34	; 52	'4'
 	.db #0x35	; 53	'5'
-	.db #0x2d	; 45
-	.db #0x2e	; 46
-	.db #0x2d	; 45
-	.db #0x2e	; 46
+	.db #0x2f	; 47
+	.db #0x30	; 48	'0'
+	.db #0x43	; 67	'C'
+	.db #0x44	; 68	'D'
 	.db #0x48	; 72	'H'
 	.db #0x49	; 73	'I'
 	.db #0x4a	; 74	'J'
@@ -160,10 +160,10 @@ _g_tilemap_l02_background:
 	.db #0x4a	; 74	'J'
 	.db #0x48	; 72	'H'
 	.db #0x49	; 73	'I'
-	.db #0x2d	; 45
-	.db #0x2e	; 46
-	.db #0x2d	; 45
-	.db #0x2e	; 46
+	.db #0x43	; 67	'C'
+	.db #0x44	; 68	'D'
+	.db #0x57	; 87	'W'
+	.db #0x58	; 88	'X'
 	.db #0x34	; 52	'4'
 	.db #0x35	; 53	'5'
 	.db #0x36	; 54	'6'
@@ -190,10 +190,10 @@ _g_tilemap_l02_background:
 	.db #0x36	; 54	'6'
 	.db #0x34	; 52	'4'
 	.db #0x35	; 53	'5'
-	.db #0x2d	; 45
-	.db #0x2e	; 46
-	.db #0x2d	; 45
-	.db #0x2e	; 46
+	.db #0x57	; 87	'W'
+	.db #0x58	; 88	'X'
+	.db #0x6b	; 107	'k'
+	.db #0x6c	; 108	'l'
 	.db #0x48	; 72	'H'
 	.db #0x49	; 73	'I'
 	.db #0x4a	; 74	'J'
@@ -220,10 +220,10 @@ _g_tilemap_l02_background:
 	.db #0x4a	; 74	'J'
 	.db #0x48	; 72	'H'
 	.db #0x49	; 73	'I'
-	.db #0x2d	; 45
-	.db #0x2e	; 46
-	.db #0x2d	; 45
-	.db #0x2e	; 46
+	.db #0x6b	; 107	'k'
+	.db #0x6c	; 108	'l'
+	.db #0x2f	; 47
+	.db #0x30	; 48	'0'
 	.db #0x34	; 52	'4'
 	.db #0x35	; 53	'5'
 	.db #0x36	; 54	'6'
@@ -250,10 +250,10 @@ _g_tilemap_l02_background:
 	.db #0x36	; 54	'6'
 	.db #0x34	; 52	'4'
 	.db #0x35	; 53	'5'
-	.db #0x2d	; 45
-	.db #0x2e	; 46
-	.db #0x2d	; 45
-	.db #0x2e	; 46
+	.db #0x2f	; 47
+	.db #0x30	; 48	'0'
+	.db #0x43	; 67	'C'
+	.db #0x44	; 68	'D'
 	.db #0x48	; 72	'H'
 	.db #0x49	; 73	'I'
 	.db #0x4a	; 74	'J'
@@ -280,10 +280,10 @@ _g_tilemap_l02_background:
 	.db #0x4a	; 74	'J'
 	.db #0x48	; 72	'H'
 	.db #0x49	; 73	'I'
-	.db #0x2d	; 45
-	.db #0x2e	; 46
-	.db #0x2d	; 45
-	.db #0x2e	; 46
+	.db #0x43	; 67	'C'
+	.db #0x44	; 68	'D'
+	.db #0x57	; 87	'W'
+	.db #0x58	; 88	'X'
 	.db #0x34	; 52	'4'
 	.db #0x35	; 53	'5'
 	.db #0x36	; 54	'6'
@@ -310,10 +310,10 @@ _g_tilemap_l02_background:
 	.db #0x36	; 54	'6'
 	.db #0x34	; 52	'4'
 	.db #0x35	; 53	'5'
-	.db #0x2d	; 45
-	.db #0x2e	; 46
-	.db #0x2d	; 45
-	.db #0x2e	; 46
+	.db #0x57	; 87	'W'
+	.db #0x58	; 88	'X'
+	.db #0x6b	; 107	'k'
+	.db #0x6c	; 108	'l'
 	.db #0x48	; 72	'H'
 	.db #0x49	; 73	'I'
 	.db #0x4a	; 74	'J'
@@ -340,10 +340,10 @@ _g_tilemap_l02_background:
 	.db #0x4a	; 74	'J'
 	.db #0x48	; 72	'H'
 	.db #0x49	; 73	'I'
-	.db #0x2d	; 45
-	.db #0x2e	; 46
-	.db #0x2d	; 45
-	.db #0x2e	; 46
+	.db #0x6b	; 107	'k'
+	.db #0x6c	; 108	'l'
+	.db #0x2f	; 47
+	.db #0x30	; 48	'0'
 	.db #0x34	; 52	'4'
 	.db #0x35	; 53	'5'
 	.db #0x36	; 54	'6'
@@ -370,10 +370,10 @@ _g_tilemap_l02_background:
 	.db #0x36	; 54	'6'
 	.db #0x34	; 52	'4'
 	.db #0x35	; 53	'5'
-	.db #0x2d	; 45
-	.db #0x2e	; 46
-	.db #0x2d	; 45
-	.db #0x2e	; 46
+	.db #0x2f	; 47
+	.db #0x30	; 48	'0'
+	.db #0x43	; 67	'C'
+	.db #0x44	; 68	'D'
 	.db #0x48	; 72	'H'
 	.db #0x49	; 73	'I'
 	.db #0x4a	; 74	'J'
@@ -400,10 +400,10 @@ _g_tilemap_l02_background:
 	.db #0x4a	; 74	'J'
 	.db #0x48	; 72	'H'
 	.db #0x49	; 73	'I'
-	.db #0x2d	; 45
-	.db #0x2e	; 46
-	.db #0x2d	; 45
-	.db #0x2e	; 46
+	.db #0x43	; 67	'C'
+	.db #0x44	; 68	'D'
+	.db #0x57	; 87	'W'
+	.db #0x58	; 88	'X'
 	.db #0x34	; 52	'4'
 	.db #0x35	; 53	'5'
 	.db #0x36	; 54	'6'
@@ -430,10 +430,10 @@ _g_tilemap_l02_background:
 	.db #0x36	; 54	'6'
 	.db #0x34	; 52	'4'
 	.db #0x35	; 53	'5'
-	.db #0x2d	; 45
-	.db #0x2e	; 46
-	.db #0x2d	; 45
-	.db #0x2e	; 46
+	.db #0x57	; 87	'W'
+	.db #0x58	; 88	'X'
+	.db #0x6b	; 107	'k'
+	.db #0x6c	; 108	'l'
 	.db #0x48	; 72	'H'
 	.db #0x49	; 73	'I'
 	.db #0x4a	; 74	'J'
@@ -460,10 +460,10 @@ _g_tilemap_l02_background:
 	.db #0x4a	; 74	'J'
 	.db #0x48	; 72	'H'
 	.db #0x49	; 73	'I'
-	.db #0x2d	; 45
-	.db #0x2e	; 46
-	.db #0x2d	; 45
-	.db #0x2e	; 46
+	.db #0x6b	; 107	'k'
+	.db #0x6c	; 108	'l'
+	.db #0x2f	; 47
+	.db #0x30	; 48	'0'
 	.db #0x34	; 52	'4'
 	.db #0x35	; 53	'5'
 	.db #0x36	; 54	'6'
@@ -490,10 +490,10 @@ _g_tilemap_l02_background:
 	.db #0x36	; 54	'6'
 	.db #0x34	; 52	'4'
 	.db #0x35	; 53	'5'
-	.db #0x2d	; 45
-	.db #0x2e	; 46
-	.db #0x2d	; 45
-	.db #0x2e	; 46
+	.db #0x2f	; 47
+	.db #0x30	; 48	'0'
+	.db #0x43	; 67	'C'
+	.db #0x44	; 68	'D'
 	.db #0x48	; 72	'H'
 	.db #0x49	; 73	'I'
 	.db #0x4a	; 74	'J'
@@ -520,10 +520,10 @@ _g_tilemap_l02_background:
 	.db #0x4a	; 74	'J'
 	.db #0x48	; 72	'H'
 	.db #0x49	; 73	'I'
-	.db #0x2d	; 45
-	.db #0x2e	; 46
-	.db #0x2d	; 45
-	.db #0x2e	; 46
+	.db #0x43	; 67	'C'
+	.db #0x44	; 68	'D'
+	.db #0x57	; 87	'W'
+	.db #0x58	; 88	'X'
 	.db #0x34	; 52	'4'
 	.db #0x35	; 53	'5'
 	.db #0x36	; 54	'6'
@@ -550,10 +550,10 @@ _g_tilemap_l02_background:
 	.db #0x36	; 54	'6'
 	.db #0x34	; 52	'4'
 	.db #0x35	; 53	'5'
-	.db #0x2d	; 45
-	.db #0x2e	; 46
-	.db #0x2d	; 45
-	.db #0x2e	; 46
+	.db #0x57	; 87	'W'
+	.db #0x58	; 88	'X'
+	.db #0x6b	; 107	'k'
+	.db #0x6c	; 108	'l'
 	.db #0x48	; 72	'H'
 	.db #0x49	; 73	'I'
 	.db #0x4a	; 74	'J'
@@ -580,10 +580,10 @@ _g_tilemap_l02_background:
 	.db #0x4a	; 74	'J'
 	.db #0x48	; 72	'H'
 	.db #0x49	; 73	'I'
-	.db #0x2d	; 45
-	.db #0x2e	; 46
-	.db #0x2d	; 45
-	.db #0x2e	; 46
+	.db #0x6b	; 107	'k'
+	.db #0x6c	; 108	'l'
+	.db #0x2f	; 47
+	.db #0x30	; 48	'0'
 	.db #0x34	; 52	'4'
 	.db #0x35	; 53	'5'
 	.db #0x36	; 54	'6'
@@ -610,10 +610,10 @@ _g_tilemap_l02_background:
 	.db #0x36	; 54	'6'
 	.db #0x34	; 52	'4'
 	.db #0x35	; 53	'5'
-	.db #0x2d	; 45
-	.db #0x2e	; 46
-	.db #0x2d	; 45
-	.db #0x2e	; 46
+	.db #0x2f	; 47
+	.db #0x30	; 48	'0'
+	.db #0x43	; 67	'C'
+	.db #0x44	; 68	'D'
 	.db #0x48	; 72	'H'
 	.db #0x49	; 73	'I'
 	.db #0x4a	; 74	'J'
@@ -640,10 +640,10 @@ _g_tilemap_l02_background:
 	.db #0x4a	; 74	'J'
 	.db #0x48	; 72	'H'
 	.db #0x49	; 73	'I'
-	.db #0x2d	; 45
-	.db #0x2e	; 46
-	.db #0x2d	; 45
-	.db #0x2e	; 46
+	.db #0x43	; 67	'C'
+	.db #0x44	; 68	'D'
+	.db #0x57	; 87	'W'
+	.db #0x58	; 88	'X'
 	.db #0x34	; 52	'4'
 	.db #0x35	; 53	'5'
 	.db #0x36	; 54	'6'
@@ -670,10 +670,10 @@ _g_tilemap_l02_background:
 	.db #0x36	; 54	'6'
 	.db #0x34	; 52	'4'
 	.db #0x35	; 53	'5'
-	.db #0x2d	; 45
-	.db #0x2e	; 46
-	.db #0x2d	; 45
-	.db #0x2e	; 46
+	.db #0x57	; 87	'W'
+	.db #0x58	; 88	'X'
+	.db #0x6b	; 107	'k'
+	.db #0x6c	; 108	'l'
 	.db #0x48	; 72	'H'
 	.db #0x49	; 73	'I'
 	.db #0x4a	; 74	'J'
@@ -700,10 +700,10 @@ _g_tilemap_l02_background:
 	.db #0x4a	; 74	'J'
 	.db #0x48	; 72	'H'
 	.db #0x49	; 73	'I'
-	.db #0x2d	; 45
-	.db #0x2e	; 46
-	.db #0x2d	; 45
-	.db #0x2e	; 46
+	.db #0x6b	; 107	'k'
+	.db #0x6c	; 108	'l'
+	.db #0x2f	; 47
+	.db #0x30	; 48	'0'
 	.db #0x34	; 52	'4'
 	.db #0x35	; 53	'5'
 	.db #0x36	; 54	'6'
@@ -730,10 +730,10 @@ _g_tilemap_l02_background:
 	.db #0x36	; 54	'6'
 	.db #0x34	; 52	'4'
 	.db #0x35	; 53	'5'
-	.db #0x2d	; 45
-	.db #0x2e	; 46
-	.db #0x2d	; 45
-	.db #0x2e	; 46
+	.db #0x2f	; 47
+	.db #0x30	; 48	'0'
+	.db #0x43	; 67	'C'
+	.db #0x44	; 68	'D'
 	.db #0x48	; 72	'H'
 	.db #0x49	; 73	'I'
 	.db #0x4a	; 74	'J'
@@ -760,10 +760,10 @@ _g_tilemap_l02_background:
 	.db #0x4a	; 74	'J'
 	.db #0x48	; 72	'H'
 	.db #0x49	; 73	'I'
-	.db #0x2d	; 45
-	.db #0x2e	; 46
-	.db #0x2d	; 45
-	.db #0x2e	; 46
+	.db #0x43	; 67	'C'
+	.db #0x44	; 68	'D'
+	.db #0x57	; 87	'W'
+	.db #0x58	; 88	'X'
 	.db #0x34	; 52	'4'
 	.db #0x35	; 53	'5'
 	.db #0x36	; 54	'6'
@@ -790,10 +790,10 @@ _g_tilemap_l02_background:
 	.db #0x36	; 54	'6'
 	.db #0x34	; 52	'4'
 	.db #0x35	; 53	'5'
-	.db #0x2d	; 45
-	.db #0x2e	; 46
-	.db #0x2d	; 45
-	.db #0x2e	; 46
+	.db #0x57	; 87	'W'
+	.db #0x58	; 88	'X'
+	.db #0x6b	; 107	'k'
+	.db #0x6c	; 108	'l'
 	.db #0x48	; 72	'H'
 	.db #0x49	; 73	'I'
 	.db #0x4a	; 74	'J'
@@ -820,10 +820,10 @@ _g_tilemap_l02_background:
 	.db #0x4a	; 74	'J'
 	.db #0x48	; 72	'H'
 	.db #0x49	; 73	'I'
-	.db #0x2d	; 45
-	.db #0x2e	; 46
-	.db #0x2d	; 45
-	.db #0x2e	; 46
+	.db #0x6b	; 107	'k'
+	.db #0x6c	; 108	'l'
+	.db #0x2f	; 47
+	.db #0x30	; 48	'0'
 	.db #0x34	; 52	'4'
 	.db #0x35	; 53	'5'
 	.db #0x36	; 54	'6'
@@ -850,10 +850,10 @@ _g_tilemap_l02_background:
 	.db #0x36	; 54	'6'
 	.db #0x34	; 52	'4'
 	.db #0x35	; 53	'5'
-	.db #0x2d	; 45
-	.db #0x2e	; 46
-	.db #0x2d	; 45
-	.db #0x2e	; 46
+	.db #0x2f	; 47
+	.db #0x30	; 48	'0'
+	.db #0x43	; 67	'C'
+	.db #0x44	; 68	'D'
 	.db #0x48	; 72	'H'
 	.db #0x49	; 73	'I'
 	.db #0x4a	; 74	'J'
@@ -880,10 +880,10 @@ _g_tilemap_l02_background:
 	.db #0x4a	; 74	'J'
 	.db #0x48	; 72	'H'
 	.db #0x49	; 73	'I'
-	.db #0x2d	; 45
-	.db #0x2e	; 46
-	.db #0x2d	; 45
-	.db #0x2e	; 46
+	.db #0x43	; 67	'C'
+	.db #0x44	; 68	'D'
+	.db #0x57	; 87	'W'
+	.db #0x58	; 88	'X'
 	.db #0x34	; 52	'4'
 	.db #0x35	; 53	'5'
 	.db #0x36	; 54	'6'
@@ -910,10 +910,10 @@ _g_tilemap_l02_background:
 	.db #0x36	; 54	'6'
 	.db #0x34	; 52	'4'
 	.db #0x35	; 53	'5'
-	.db #0x2d	; 45
-	.db #0x2e	; 46
-	.db #0x2d	; 45
-	.db #0x2e	; 46
+	.db #0x57	; 87	'W'
+	.db #0x58	; 88	'X'
+	.db #0x6b	; 107	'k'
+	.db #0x6c	; 108	'l'
 	.db #0x48	; 72	'H'
 	.db #0x49	; 73	'I'
 	.db #0x4a	; 74	'J'
@@ -940,10 +940,10 @@ _g_tilemap_l02_background:
 	.db #0x4a	; 74	'J'
 	.db #0x48	; 72	'H'
 	.db #0x49	; 73	'I'
-	.db #0x2d	; 45
-	.db #0x2e	; 46
-	.db #0x2d	; 45
-	.db #0x2e	; 46
+	.db #0x6b	; 107	'k'
+	.db #0x6c	; 108	'l'
+	.db #0x2f	; 47
+	.db #0x30	; 48	'0'
 	.db #0x34	; 52	'4'
 	.db #0x35	; 53	'5'
 	.db #0x36	; 54	'6'
@@ -970,10 +970,10 @@ _g_tilemap_l02_background:
 	.db #0x36	; 54	'6'
 	.db #0x34	; 52	'4'
 	.db #0x35	; 53	'5'
-	.db #0x2d	; 45
-	.db #0x2e	; 46
-	.db #0x2d	; 45
-	.db #0x2e	; 46
+	.db #0x2f	; 47
+	.db #0x30	; 48	'0'
+	.db #0x43	; 67	'C'
+	.db #0x44	; 68	'D'
 	.db #0x48	; 72	'H'
 	.db #0x49	; 73	'I'
 	.db #0x4a	; 74	'J'
@@ -1000,10 +1000,10 @@ _g_tilemap_l02_background:
 	.db #0x4a	; 74	'J'
 	.db #0x48	; 72	'H'
 	.db #0x49	; 73	'I'
-	.db #0x2d	; 45
-	.db #0x2e	; 46
-	.db #0x2d	; 45
-	.db #0x2e	; 46
+	.db #0x43	; 67	'C'
+	.db #0x44	; 68	'D'
+	.db #0x57	; 87	'W'
+	.db #0x58	; 88	'X'
 	.db #0x34	; 52	'4'
 	.db #0x35	; 53	'5'
 	.db #0x36	; 54	'6'
@@ -1030,10 +1030,10 @@ _g_tilemap_l02_background:
 	.db #0x36	; 54	'6'
 	.db #0x34	; 52	'4'
 	.db #0x35	; 53	'5'
-	.db #0x2d	; 45
-	.db #0x2e	; 46
-	.db #0x2d	; 45
-	.db #0x2e	; 46
+	.db #0x57	; 87	'W'
+	.db #0x58	; 88	'X'
+	.db #0x6b	; 107	'k'
+	.db #0x6c	; 108	'l'
 	.db #0x48	; 72	'H'
 	.db #0x49	; 73	'I'
 	.db #0x4a	; 74	'J'
@@ -1060,10 +1060,10 @@ _g_tilemap_l02_background:
 	.db #0x4a	; 74	'J'
 	.db #0x48	; 72	'H'
 	.db #0x49	; 73	'I'
-	.db #0x2d	; 45
-	.db #0x2e	; 46
-	.db #0x2d	; 45
-	.db #0x2e	; 46
+	.db #0x6b	; 107	'k'
+	.db #0x6c	; 108	'l'
+	.db #0x2f	; 47
+	.db #0x30	; 48	'0'
 	.db #0x34	; 52	'4'
 	.db #0x35	; 53	'5'
 	.db #0x36	; 54	'6'
@@ -1090,10 +1090,10 @@ _g_tilemap_l02_background:
 	.db #0x36	; 54	'6'
 	.db #0x34	; 52	'4'
 	.db #0x35	; 53	'5'
-	.db #0x2d	; 45
-	.db #0x2e	; 46
-	.db #0x2d	; 45
-	.db #0x2e	; 46
+	.db #0x2f	; 47
+	.db #0x30	; 48	'0'
+	.db #0x43	; 67	'C'
+	.db #0x44	; 68	'D'
 	.db #0x48	; 72	'H'
 	.db #0x49	; 73	'I'
 	.db #0x4a	; 74	'J'
@@ -1120,10 +1120,10 @@ _g_tilemap_l02_background:
 	.db #0x4a	; 74	'J'
 	.db #0x48	; 72	'H'
 	.db #0x49	; 73	'I'
-	.db #0x2d	; 45
-	.db #0x2e	; 46
-	.db #0x2d	; 45
-	.db #0x2e	; 46
+	.db #0x43	; 67	'C'
+	.db #0x44	; 68	'D'
+	.db #0x57	; 87	'W'
+	.db #0x58	; 88	'X'
 	.db #0x34	; 52	'4'
 	.db #0x35	; 53	'5'
 	.db #0x36	; 54	'6'
@@ -1150,10 +1150,10 @@ _g_tilemap_l02_background:
 	.db #0x36	; 54	'6'
 	.db #0x34	; 52	'4'
 	.db #0x35	; 53	'5'
-	.db #0x2d	; 45
-	.db #0x2e	; 46
-	.db #0x2d	; 45
-	.db #0x2e	; 46
+	.db #0x57	; 87	'W'
+	.db #0x58	; 88	'X'
+	.db #0x6b	; 107	'k'
+	.db #0x6c	; 108	'l'
 	.db #0x48	; 72	'H'
 	.db #0x49	; 73	'I'
 	.db #0x4a	; 74	'J'
@@ -1180,10 +1180,10 @@ _g_tilemap_l02_background:
 	.db #0x4a	; 74	'J'
 	.db #0x48	; 72	'H'
 	.db #0x49	; 73	'I'
-	.db #0x2d	; 45
-	.db #0x2e	; 46
-	.db #0x2d	; 45
-	.db #0x2e	; 46
+	.db #0x6b	; 107	'k'
+	.db #0x6c	; 108	'l'
+	.db #0x2f	; 47
+	.db #0x30	; 48	'0'
 	.db #0x34	; 52	'4'
 	.db #0x35	; 53	'5'
 	.db #0x36	; 54	'6'
@@ -1210,10 +1210,10 @@ _g_tilemap_l02_background:
 	.db #0x36	; 54	'6'
 	.db #0x34	; 52	'4'
 	.db #0x35	; 53	'5'
-	.db #0x2d	; 45
-	.db #0x2e	; 46
-	.db #0x2d	; 45
-	.db #0x2e	; 46
+	.db #0x2f	; 47
+	.db #0x30	; 48	'0'
+	.db #0x43	; 67	'C'
+	.db #0x44	; 68	'D'
 	.db #0x48	; 72	'H'
 	.db #0x49	; 73	'I'
 	.db #0x4a	; 74	'J'
@@ -1240,10 +1240,10 @@ _g_tilemap_l02_background:
 	.db #0x4a	; 74	'J'
 	.db #0x48	; 72	'H'
 	.db #0x49	; 73	'I'
-	.db #0x2d	; 45
-	.db #0x2e	; 46
-	.db #0x2d	; 45
-	.db #0x2e	; 46
+	.db #0x43	; 67	'C'
+	.db #0x44	; 68	'D'
+	.db #0x57	; 87	'W'
+	.db #0x58	; 88	'X'
 	.db #0x34	; 52	'4'
 	.db #0x35	; 53	'5'
 	.db #0x36	; 54	'6'
@@ -1270,10 +1270,10 @@ _g_tilemap_l02_background:
 	.db #0x36	; 54	'6'
 	.db #0x34	; 52	'4'
 	.db #0x35	; 53	'5'
-	.db #0x2d	; 45
-	.db #0x2e	; 46
-	.db #0x2d	; 45
-	.db #0x2e	; 46
+	.db #0x57	; 87	'W'
+	.db #0x58	; 88	'X'
+	.db #0x6b	; 107	'k'
+	.db #0x6c	; 108	'l'
 	.db #0x48	; 72	'H'
 	.db #0x49	; 73	'I'
 	.db #0x4a	; 74	'J'
@@ -1300,10 +1300,10 @@ _g_tilemap_l02_background:
 	.db #0x4a	; 74	'J'
 	.db #0x48	; 72	'H'
 	.db #0x49	; 73	'I'
-	.db #0x2d	; 45
-	.db #0x2e	; 46
-	.db #0x2d	; 45
-	.db #0x2e	; 46
+	.db #0x6b	; 107	'k'
+	.db #0x6c	; 108	'l'
+	.db #0x2f	; 47
+	.db #0x30	; 48	'0'
 	.db #0x34	; 52	'4'
 	.db #0x35	; 53	'5'
 	.db #0x36	; 54	'6'
@@ -1330,10 +1330,10 @@ _g_tilemap_l02_background:
 	.db #0x36	; 54	'6'
 	.db #0x34	; 52	'4'
 	.db #0x35	; 53	'5'
-	.db #0x2d	; 45
-	.db #0x2e	; 46
-	.db #0x2d	; 45
-	.db #0x2e	; 46
+	.db #0x2f	; 47
+	.db #0x30	; 48	'0'
+	.db #0x43	; 67	'C'
+	.db #0x44	; 68	'D'
 	.db #0x48	; 72	'H'
 	.db #0x49	; 73	'I'
 	.db #0x4a	; 74	'J'
@@ -1360,10 +1360,10 @@ _g_tilemap_l02_background:
 	.db #0x4a	; 74	'J'
 	.db #0x48	; 72	'H'
 	.db #0x49	; 73	'I'
-	.db #0x2d	; 45
-	.db #0x2e	; 46
-	.db #0x2d	; 45
-	.db #0x2e	; 46
+	.db #0x43	; 67	'C'
+	.db #0x44	; 68	'D'
+	.db #0x57	; 87	'W'
+	.db #0x58	; 88	'X'
 	.db #0x34	; 52	'4'
 	.db #0x35	; 53	'5'
 	.db #0x36	; 54	'6'
@@ -1390,10 +1390,10 @@ _g_tilemap_l02_background:
 	.db #0x36	; 54	'6'
 	.db #0x34	; 52	'4'
 	.db #0x35	; 53	'5'
-	.db #0x2d	; 45
-	.db #0x2e	; 46
-	.db #0x2d	; 45
-	.db #0x2e	; 46
+	.db #0x57	; 87	'W'
+	.db #0x58	; 88	'X'
+	.db #0x6b	; 107	'k'
+	.db #0x6c	; 108	'l'
 	.db #0x48	; 72	'H'
 	.db #0x49	; 73	'I'
 	.db #0x4a	; 74	'J'
@@ -1420,10 +1420,10 @@ _g_tilemap_l02_background:
 	.db #0x4a	; 74	'J'
 	.db #0x48	; 72	'H'
 	.db #0x49	; 73	'I'
-	.db #0x2d	; 45
-	.db #0x2e	; 46
-	.db #0x2d	; 45
-	.db #0x2e	; 46
+	.db #0x6b	; 107	'k'
+	.db #0x6c	; 108	'l'
+	.db #0x2f	; 47
+	.db #0x30	; 48	'0'
 	.db #0x34	; 52	'4'
 	.db #0x35	; 53	'5'
 	.db #0x36	; 54	'6'
@@ -1450,10 +1450,10 @@ _g_tilemap_l02_background:
 	.db #0x36	; 54	'6'
 	.db #0x34	; 52	'4'
 	.db #0x35	; 53	'5'
-	.db #0x2d	; 45
-	.db #0x2e	; 46
-	.db #0x2d	; 45
-	.db #0x2e	; 46
+	.db #0x2f	; 47
+	.db #0x30	; 48	'0'
+	.db #0x43	; 67	'C'
+	.db #0x44	; 68	'D'
 	.db #0x48	; 72	'H'
 	.db #0x49	; 73	'I'
 	.db #0x4a	; 74	'J'
@@ -1480,10 +1480,10 @@ _g_tilemap_l02_background:
 	.db #0x4a	; 74	'J'
 	.db #0x48	; 72	'H'
 	.db #0x49	; 73	'I'
-	.db #0x2d	; 45
-	.db #0x2e	; 46
-	.db #0x2d	; 45
-	.db #0x2e	; 46
+	.db #0x43	; 67	'C'
+	.db #0x44	; 68	'D'
+	.db #0x57	; 87	'W'
+	.db #0x58	; 88	'X'
 	.db #0x34	; 52	'4'
 	.db #0x35	; 53	'5'
 	.db #0x36	; 54	'6'
@@ -1510,10 +1510,10 @@ _g_tilemap_l02_background:
 	.db #0x36	; 54	'6'
 	.db #0x34	; 52	'4'
 	.db #0x35	; 53	'5'
-	.db #0x2d	; 45
-	.db #0x2e	; 46
-	.db #0x41	; 65	'A'
-	.db #0x42	; 66	'B'
+	.db #0x57	; 87	'W'
+	.db #0x58	; 88	'X'
+	.db #0x6b	; 107	'k'
+	.db #0x6c	; 108	'l'
 	.db #0x48	; 72	'H'
 	.db #0x49	; 73	'I'
 	.db #0x4a	; 74	'J'
@@ -1540,7 +1540,7 @@ _g_tilemap_l02_background:
 	.db #0x4a	; 74	'J'
 	.db #0x48	; 72	'H'
 	.db #0x49	; 73	'I'
-	.db #0x41	; 65	'A'
-	.db #0x42	; 66	'B'
+	.db #0x6b	; 107	'k'
+	.db #0x6c	; 108	'l'
 	.area _INITIALIZER
 	.area _CABS (ABS)

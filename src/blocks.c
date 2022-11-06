@@ -7,6 +7,7 @@
 #include "h/globals.h"
 #include "h/debug.h"
 #include "h/background.h"
+#include "h/game.h"
 
 // ---------------------------------------------------------------------------
 // Module private declarations
@@ -106,7 +107,7 @@ BounceHits is_ball_colliding_with_block(Ball *ball, i16 wx, i16 wy, BounceHits b
 {
     BounceHits bounces = BOUNCE_NONE;
     BlockMeta *meta;
-
+    u8 *pvm;
     meta = get_metaData_at(wx, wy);
     if (meta)
     {
@@ -117,13 +118,26 @@ BounceHits is_ball_colliding_with_block(Ball *ball, i16 wx, i16 wy, BounceHits b
                 meta->remaining_hits = 0;
                 meta->is_active = 0;
                 blocks_remaining -= 1;
+                current_score += meta->score;
+
+                // just try to draw tile thats removed
+                pvm = cpct_getScreenPtr(CPCT_VMEM_START, 
+                            W_2_S_X(meta->block_tile_x * TILE_W),
+                            BRICKS_MAP_PIXEL_TOP_SCR + (meta->block_tile_y * TILE_H ) );
+
+                cpct_drawSolidBox(pvm, 0, TILE_W * 2, TILE_H * 2);
+                
+                background_restore_tiles_exact(meta->block_tile_x + 2,
+                meta->block_tile_y + 6,
+                2,2);
+
             }
         }
 
 
-        background_debug_box_wc((meta->block_tile_x) * TILE_W,
-                                (meta->block_tile_y * TILE_H) + 24, 
-                                BALL_WIDTH, BALL_HEIGHT);
+        // background_debug_box_wc((meta->block_tile_x) * TILE_W,
+        //                         (meta->block_tile_y * TILE_H) + BRICKS_MAP_PIXEL_TOP_SCR, 
+        //                         BALL_WIDTH, BALL_HEIGHT);
 
         // background_restore_world_coords((meta->block_tile_x) * TILE_W,
         //   (meta->block_tile_y * TILE_H)+24, BALL_WIDTH, BALL_HEIGHT);

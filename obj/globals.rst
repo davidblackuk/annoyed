@@ -17,8 +17,8 @@
                              17 ; ram data
                              18 ;--------------------------------------------------------
                              19 	.area _DATA
-   880E                      20 _current_level::
-   880E                      21 	.ds 2
+   934F                      20 _current_level::
+   934F                      21 	.ds 2
                              22 ;--------------------------------------------------------
                              23 ; ram data
                              24 ;--------------------------------------------------------
@@ -44,14 +44,18 @@
                              44 ;--------------------------------------------------------
                              45 	.area _CODE
                              46 	.area _CODE
-   7710                      47 _level_definitions:
-   7710 8C 4B                48 	.dw _g_tilemap_l01_background
-   7712 B4 48                49 	.dw _g_tilemap_l01_blocks
-   7714 32                   50 	.db #0x32	; 50	'2'
-   7715 02                   51 	.db #0x02	; 2
-   7716 D8 42                52 	.dw _g_tilemap_l02_background
-   7718 00 40                53 	.dw _g_tilemap_l02_blocks
-   771A 64                   54 	.db #0x64	; 100	'd'
-   771B 02                   55 	.db #0x02	; 2
-                             56 	.area _INITIALIZER
-                             57 	.area _CABS (ABS)
+   8239                      47 _level_definitions:
+   8239 40 54                48 	.dw _g_tilemap_l01_background
+   823B 1C 5A                49 	.dw _g_tilemap_debug_blocks
+   823D 05                   50 	.db #0x05	; 5
+   823E 02                   51 	.db #0x02	; 2
+   823F 8C 4B                52 	.dw _g_tilemap_l02_background
+   8241 B4 48                53 	.dw _g_tilemap_l02_blocks
+   8243 0A                   54 	.db #0x0a	; 10
+   8244 02                   55 	.db #0x02	; 2
+   8245 D8 42                56 	.dw _g_tilemap_l03_background
+   8247 00 40                57 	.dw _g_tilemap_l03_blocks
+   8249 0F                   58 	.db #0x0f	; 15
+   824A 02                   59 	.db #0x02	; 2
+                             60 	.area _INITIALIZER
+                             61 	.area _CABS (ABS)

@@ -75,9 +75,9 @@
                              75 ; Function game_initialize
                              76 ; ---------------------------------
    0000                      77 _game_initialize::
-                             78 ;src/game.c:28: current_level_num = 0;
+                             78 ;src/game.c:28: current_level_num = 2;
    0000 21r07r00      [10]   79 	ld	hl,#_current_level_num + 0
-   0003 36 00         [10]   80 	ld	(hl), #0x00
+   0003 36 02         [10]   80 	ld	(hl), #0x02
                              81 ;src/game.c:29: current_score = 0;
    0005 21 00 00      [10]   82 	ld	hl, #0x0000
    0008 22r09r00      [16]   83 	ld	(_current_score), hl
@@ -118,7 +118,7 @@
    002F FD 34 00      [23]  118 	inc	0 (iy)
                             119 ;src/game.c:53: if (current_level_num >= NUM_LEVELS) {
    0032 FD 7E 00      [19]  120 	ld	a, 0 (iy)
-   0035 D6 02         [ 7]  121 	sub	a, #0x02
+   0035 D6 03         [ 7]  121 	sub	a, #0x03
    0037 38 03         [12]  122 	jr	C,00102$
                             123 ;src/game.c:54: return GameOver;
    0039 2E 04         [ 7]  124 	ld	l, #0x04

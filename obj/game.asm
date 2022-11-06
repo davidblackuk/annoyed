@@ -75,9 +75,9 @@ _high_score::
 ; Function game_initialize
 ; ---------------------------------
 _game_initialize::
-;src/game.c:28: current_level_num = 0;
+;src/game.c:28: current_level_num = 2;
 	ld	hl,#_current_level_num + 0
-	ld	(hl), #0x00
+	ld	(hl), #0x02
 ;src/game.c:29: current_score = 0;
 	ld	hl, #0x0000
 	ld	(_current_score), hl
@@ -118,7 +118,7 @@ _game_update::
 	inc	0 (iy)
 ;src/game.c:53: if (current_level_num >= NUM_LEVELS) {
 	ld	a, 0 (iy)
-	sub	a, #0x02
+	sub	a, #0x03
 	jr	C,00102$
 ;src/game.c:54: return GameOver;
 	ld	l, #0x04

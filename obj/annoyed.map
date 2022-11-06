@@ -17,414 +17,416 @@ Area                                    Addr        Size        Decimal Bytes (A
      00000000  s__DABS                         
      00000004  l__INITIALIZED                  
      00000004  l__INITIALIZER                  
-     000004A0  l__DATA                         
+     000004A2  l__DATA                         
      00004000  s__CODE                         
-     00004390  l__CODE                         
-     00008390  s__DATA                         
-     00008830  s__INITIALIZED                  
-     00008834  s__GSFINAL                      
-     00008834  s__GSINIT                       
-     00008834  s__HOME                         
-     00008834  s__INITIALIZER                  
+     00004ED1  l__CODE                         
+     00008ED1  s__DATA                         
+     00009373  s__INITIALIZED                  
+     00009377  s__GSFINAL                      
+     00009377  s__GSINIT                       
+     00009377  s__HOME                         
+     00009377  s__INITIALIZER                  
 
 ASxxxx Linker V03.00 + NoICE + sdld,  page 2.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-_CODE                               00004000    00004390 =       17296. bytes (REL,CON)
+_CODE                               00004000    00004ED1 =       20177. bytes (REL,CON)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-     00004000  _g_tilemap_l02_blocks              level_02_blocks
-     000042D8  _g_tilemap_l02_background          level_02_background
-     000048B4  _g_tilemap_l01_blocks              level_01_blocks
-     00004B8C  _g_tilemap_l01_background          level_01_background
-     00005168  _g_tilemap_debug_background        debug_background
-     00005744  _g_tileset                         tiles
-     00005834  _g_tiles_000                       tiles
-     0000583C  _g_tiles_001                       tiles
-     00005844  _g_tiles_002                       tiles
-     0000584C  _g_tiles_003                       tiles
-     00005854  _g_tiles_004                       tiles
-     0000585C  _g_tiles_005                       tiles
-     00005864  _g_tiles_006                       tiles
-     0000586C  _g_tiles_007                       tiles
-     00005874  _g_tiles_008                       tiles
-     0000587C  _g_tiles_009                       tiles
-     00005884  _g_tiles_010                       tiles
-     0000588C  _g_tiles_011                       tiles
-     00005894  _g_tiles_012                       tiles
-     0000589C  _g_tiles_013                       tiles
-     000058A4  _g_tiles_014                       tiles
-     000058AC  _g_tiles_015                       tiles
-     000058B4  _g_tiles_016                       tiles
-     000058BC  _g_tiles_017                       tiles
-     000058C4  _g_tiles_018                       tiles
-     000058CC  _g_tiles_019                       tiles
-     000058D4  _g_tiles_020                       tiles
-     000058DC  _g_tiles_021                       tiles
-     000058E4  _g_tiles_022                       tiles
-     000058EC  _g_tiles_023                       tiles
-     000058F4  _g_tiles_024                       tiles
-     000058FC  _g_tiles_025                       tiles
-     00005904  _g_tiles_026                       tiles
-     0000590C  _g_tiles_027                       tiles
-     00005914  _g_tiles_028                       tiles
-     0000591C  _g_tiles_029                       tiles
-     00005924  _g_tiles_030                       tiles
-     0000592C  _g_tiles_031                       tiles
-     00005934  _g_tiles_032                       tiles
-     0000593C  _g_tiles_033                       tiles
-     00005944  _g_tiles_034                       tiles
-     0000594C  _g_tiles_035                       tiles
-     00005954  _g_tiles_036                       tiles
-     0000595C  _g_tiles_037                       tiles
-     00005964  _g_tiles_038                       tiles
-     0000596C  _g_tiles_039                       tiles
-     00005974  _g_tiles_040                       tiles
-     0000597C  _g_tiles_041                       tiles
-     00005984  _g_tiles_042                       tiles
-     0000598C  _g_tiles_043                       tiles
+     00004000  _g_tilemap_l03_blocks              level_03_blocks
+     000042D8  _g_tilemap_l03_background          level_03_background
+     000048B4  _g_tilemap_l02_blocks              level_02_blocks
+     00004B8C  _g_tilemap_l02_background          level_02_background
+     00005168  _g_tilemap_l01_blocks              level_01_blocks
+     00005440  _g_tilemap_l01_background          level_01_background
+     00005A1C  _g_tilemap_debug_blocks            debug_blocks
+     00005CF4  _g_tilemap_debug_background        debug_background
+     000062D0  _g_tileset                         tiles
+     000063C0  _g_tiles_000                       tiles
+     000063C8  _g_tiles_001                       tiles
+     000063D0  _g_tiles_002                       tiles
+     000063D8  _g_tiles_003                       tiles
+     000063E0  _g_tiles_004                       tiles
+     000063E8  _g_tiles_005                       tiles
+     000063F0  _g_tiles_006                       tiles
+     000063F8  _g_tiles_007                       tiles
+     00006400  _g_tiles_008                       tiles
+     00006408  _g_tiles_009                       tiles
+     00006410  _g_tiles_010                       tiles
+     00006418  _g_tiles_011                       tiles
+     00006420  _g_tiles_012                       tiles
+     00006428  _g_tiles_013                       tiles
+     00006430  _g_tiles_014                       tiles
+     00006438  _g_tiles_015                       tiles
+     00006440  _g_tiles_016                       tiles
+     00006448  _g_tiles_017                       tiles
+     00006450  _g_tiles_018                       tiles
+     00006458  _g_tiles_019                       tiles
+     00006460  _g_tiles_020                       tiles
+     00006468  _g_tiles_021                       tiles
+     00006470  _g_tiles_022                       tiles
+     00006478  _g_tiles_023                       tiles
+     00006480  _g_tiles_024                       tiles
+     00006488  _g_tiles_025                       tiles
+     00006490  _g_tiles_026                       tiles
+     00006498  _g_tiles_027                       tiles
+     000064A0  _g_tiles_028                       tiles
+     000064A8  _g_tiles_029                       tiles
+     000064B0  _g_tiles_030                       tiles
+     000064B8  _g_tiles_031                       tiles
+     000064C0  _g_tiles_032                       tiles
+     000064C8  _g_tiles_033                       tiles
+     000064D0  _g_tiles_034                       tiles
+     000064D8  _g_tiles_035                       tiles
+     000064E0  _g_tiles_036                       tiles
+     000064E8  _g_tiles_037                       tiles
+     000064F0  _g_tiles_038                       tiles
+     000064F8  _g_tiles_039                       tiles
+     00006500  _g_tiles_040                       tiles
 ASxxxx Linker V03.00 + NoICE + sdld,  page 3.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-_CODE                               00004000    00004390 =       17296. bytes (REL,CON)
+_CODE                               00004000    00004ED1 =       20177. bytes (REL,CON)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-     00005994  _g_tiles_044                       tiles
-     0000599C  _g_tiles_045                       tiles
-     000059A4  _g_tiles_046                       tiles
-     000059AC  _g_tiles_047                       tiles
-     000059B4  _g_tiles_048                       tiles
-     000059BC  _g_tiles_049                       tiles
-     000059C4  _g_tiles_050                       tiles
-     000059CC  _g_tiles_051                       tiles
-     000059D4  _g_tiles_052                       tiles
-     000059DC  _g_tiles_053                       tiles
-     000059E4  _g_tiles_054                       tiles
-     000059EC  _g_tiles_055                       tiles
-     000059F4  _g_tiles_056                       tiles
-     000059FC  _g_tiles_057                       tiles
-     00005A04  _g_tiles_058                       tiles
-     00005A0C  _g_tiles_059                       tiles
-     00005A14  _g_tiles_060                       tiles
-     00005A1C  _g_tiles_061                       tiles
-     00005A24  _g_tiles_062                       tiles
-     00005A2C  _g_tiles_063                       tiles
-     00005A34  _g_tiles_064                       tiles
-     00005A3C  _g_tiles_065                       tiles
-     00005A44  _g_tiles_066                       tiles
-     00005A4C  _g_tiles_067                       tiles
-     00005A54  _g_tiles_068                       tiles
-     00005A5C  _g_tiles_069                       tiles
-     00005A64  _g_tiles_070                       tiles
-     00005A6C  _g_tiles_071                       tiles
-     00005A74  _g_tiles_072                       tiles
-     00005A7C  _g_tiles_073                       tiles
-     00005A84  _g_tiles_074                       tiles
-     00005A8C  _g_tiles_075                       tiles
-     00005A94  _g_tiles_076                       tiles
-     00005A9C  _g_tiles_077                       tiles
-     00005AA4  _g_tiles_078                       tiles
-     00005AAC  _g_tiles_079                       tiles
-     00005AB4  _g_tiles_080                       tiles
-     00005ABC  _g_tiles_081                       tiles
-     00005AC4  _g_tiles_082                       tiles
-     00005ACC  _g_tiles_083                       tiles
-     00005AD4  _g_tiles_084                       tiles
-     00005ADC  _g_tiles_085                       tiles
-     00005AE4  _g_tiles_086                       tiles
-     00005AEC  _g_tiles_087                       tiles
-     00005AF4  _g_tiles_088                       tiles
-     00005AFC  _g_tiles_089                       tiles
-     00005B04  _g_tiles_090                       tiles
-     00005B0C  _g_tiles_091                       tiles
-     00005B14  _g_tiles_092                       tiles
-     00005B1C  _g_tiles_093                       tiles
-     00005B24  _g_tiles_094                       tiles
+     00006508  _g_tiles_041                       tiles
+     00006510  _g_tiles_042                       tiles
+     00006518  _g_tiles_043                       tiles
+     00006520  _g_tiles_044                       tiles
+     00006528  _g_tiles_045                       tiles
+     00006530  _g_tiles_046                       tiles
+     00006538  _g_tiles_047                       tiles
+     00006540  _g_tiles_048                       tiles
+     00006548  _g_tiles_049                       tiles
+     00006550  _g_tiles_050                       tiles
+     00006558  _g_tiles_051                       tiles
+     00006560  _g_tiles_052                       tiles
+     00006568  _g_tiles_053                       tiles
+     00006570  _g_tiles_054                       tiles
+     00006578  _g_tiles_055                       tiles
+     00006580  _g_tiles_056                       tiles
+     00006588  _g_tiles_057                       tiles
+     00006590  _g_tiles_058                       tiles
+     00006598  _g_tiles_059                       tiles
+     000065A0  _g_tiles_060                       tiles
+     000065A8  _g_tiles_061                       tiles
+     000065B0  _g_tiles_062                       tiles
+     000065B8  _g_tiles_063                       tiles
+     000065C0  _g_tiles_064                       tiles
+     000065C8  _g_tiles_065                       tiles
+     000065D0  _g_tiles_066                       tiles
+     000065D8  _g_tiles_067                       tiles
+     000065E0  _g_tiles_068                       tiles
+     000065E8  _g_tiles_069                       tiles
+     000065F0  _g_tiles_070                       tiles
+     000065F8  _g_tiles_071                       tiles
+     00006600  _g_tiles_072                       tiles
+     00006608  _g_tiles_073                       tiles
+     00006610  _g_tiles_074                       tiles
+     00006618  _g_tiles_075                       tiles
+     00006620  _g_tiles_076                       tiles
+     00006628  _g_tiles_077                       tiles
+     00006630  _g_tiles_078                       tiles
+     00006638  _g_tiles_079                       tiles
+     00006640  _g_tiles_080                       tiles
+     00006648  _g_tiles_081                       tiles
+     00006650  _g_tiles_082                       tiles
+     00006658  _g_tiles_083                       tiles
+     00006660  _g_tiles_084                       tiles
+     00006668  _g_tiles_085                       tiles
+     00006670  _g_tiles_086                       tiles
+     00006678  _g_tiles_087                       tiles
+     00006680  _g_tiles_088                       tiles
+     00006688  _g_tiles_089                       tiles
+     00006690  _g_tiles_090                       tiles
+     00006698  _g_tiles_091                       tiles
 ASxxxx Linker V03.00 + NoICE + sdld,  page 4.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-_CODE                               00004000    00004390 =       17296. bytes (REL,CON)
+_CODE                               00004000    00004ED1 =       20177. bytes (REL,CON)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-     00005B2C  _g_tiles_095                       tiles
-     00005B34  _g_tiles_096                       tiles
-     00005B3C  _g_tiles_097                       tiles
-     00005B44  _g_tiles_098                       tiles
-     00005B4C  _g_tiles_099                       tiles
-     00005B54  _g_tiles_100                       tiles
-     00005B5C  _g_tiles_101                       tiles
-     00005B64  _g_tiles_102                       tiles
-     00005B6C  _g_tiles_103                       tiles
-     00005B74  _g_tiles_104                       tiles
-     00005B7C  _g_tiles_105                       tiles
-     00005B84  _g_tiles_106                       tiles
-     00005B8C  _g_tiles_107                       tiles
-     00005B94  _g_tiles_108                       tiles
-     00005B9C  _g_tiles_109                       tiles
-     00005BA4  _g_tiles_110                       tiles
-     00005BAC  _g_tiles_111                       tiles
-     00005BB4  _g_tiles_112                       tiles
-     00005BBC  _g_tiles_113                       tiles
-     00005BC4  _g_tiles_114                       tiles
-     00005BCC  _g_tiles_115                       tiles
-     00005BD4  _g_tiles_116                       tiles
-     00005BDC  _g_tiles_117                       tiles
-     00005BE4  _g_tiles_118                       tiles
-     00005BEC  _g_tiles_119                       tiles
-     00005BF4  _sp_font_00                        font
-     00005C04  _sp_font_01                        font
-     00005C14  _sp_font_02                        font
-     00005C24  _sp_font_03                        font
-     00005C34  _sp_font_04                        font
-     00005C44  _sp_font_05                        font
-     00005C54  _sp_font_06                        font
-     00005C64  _sp_font_07                        font
-     00005C74  _sp_font_08                        font
-     00005C84  _sp_font_09                        font
-     00005C94  _sp_font_10                        font
-     00005CA4  _sp_font_11                        font
-     00005CB4  _sp_font_12                        font
-     00005CC4  _sp_font_13                        font
-     00005CD4  _sp_font_14                        font
-     00005CE4  _sp_font_15                        font
-     00005CF4  _sp_font_16                        font
-     00005D04  _sp_font_17                        font
-     00005D14  _sp_font_18                        font
-     00005D24  _sp_font_19                        font
-     00005D34  _sp_font_20                        font
-     00005D44  _sp_font_21                        font
-     00005D54  _sp_font_22                        font
-     00005D64  _sp_font_23                        font
-     00005D74  _sp_font_24                        font
-     00005D84  _sp_font_25                        font
+     000066A0  _g_tiles_092                       tiles
+     000066A8  _g_tiles_093                       tiles
+     000066B0  _g_tiles_094                       tiles
+     000066B8  _g_tiles_095                       tiles
+     000066C0  _g_tiles_096                       tiles
+     000066C8  _g_tiles_097                       tiles
+     000066D0  _g_tiles_098                       tiles
+     000066D8  _g_tiles_099                       tiles
+     000066E0  _g_tiles_100                       tiles
+     000066E8  _g_tiles_101                       tiles
+     000066F0  _g_tiles_102                       tiles
+     000066F8  _g_tiles_103                       tiles
+     00006700  _g_tiles_104                       tiles
+     00006708  _g_tiles_105                       tiles
+     00006710  _g_tiles_106                       tiles
+     00006718  _g_tiles_107                       tiles
+     00006720  _g_tiles_108                       tiles
+     00006728  _g_tiles_109                       tiles
+     00006730  _g_tiles_110                       tiles
+     00006738  _g_tiles_111                       tiles
+     00006740  _g_tiles_112                       tiles
+     00006748  _g_tiles_113                       tiles
+     00006750  _g_tiles_114                       tiles
+     00006758  _g_tiles_115                       tiles
+     00006760  _g_tiles_116                       tiles
+     00006768  _g_tiles_117                       tiles
+     00006770  _g_tiles_118                       tiles
+     00006778  _g_tiles_119                       tiles
+     00006780  _sp_font_00                        font
+     00006790  _sp_font_01                        font
+     000067A0  _sp_font_02                        font
+     000067B0  _sp_font_03                        font
+     000067C0  _sp_font_04                        font
+     000067D0  _sp_font_05                        font
+     000067E0  _sp_font_06                        font
+     000067F0  _sp_font_07                        font
+     00006800  _sp_font_08                        font
+     00006810  _sp_font_09                        font
+     00006820  _sp_font_10                        font
+     00006830  _sp_font_11                        font
+     00006840  _sp_font_12                        font
+     00006850  _sp_font_13                        font
+     00006860  _sp_font_14                        font
+     00006870  _sp_font_15                        font
+     00006880  _sp_font_16                        font
+     00006890  _sp_font_17                        font
+     000068A0  _sp_font_18                        font
+     000068B0  _sp_font_19                        font
+     000068C0  _sp_font_20                        font
+     000068D0  _sp_font_21                        font
+     000068E0  _sp_font_22                        font
 ASxxxx Linker V03.00 + NoICE + sdld,  page 5.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-_CODE                               00004000    00004390 =       17296. bytes (REL,CON)
+_CODE                               00004000    00004ED1 =       20177. bytes (REL,CON)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-     00005D94  _sp_font_26                        font
-     00005DA4  _sp_font_27                        font
-     00005DB4  _sp_font_28                        font
-     00005DC4  _sp_font_29                        font
-     00005DD4  _sp_font_30                        font
-     00005DE4  _sp_font_31                        font
-     00005DF4  _sp_font_32                        font
-     00005E04  _sp_font_33                        font
-     00005E14  _sp_font_34                        font
-     00005E24  _sp_font_35                        font
-     00005E34  _sp_font_36                        font
-     00005E44  _sp_font_37                        font
-     00005E54  _sp_font_38                        font
-     00005E64  _sp_font_39                        font
-     00005E74  _sp_font_40                        font
-     00005E84  _sp_high                           hi
-     00005EBC  _sp_level                          level
-     00005F02  _sp_score                          score
-     00005F48  _sp_life                           life_marker
-     00005F66  _sp_logo                           annoyed
-     0000696B  _sp_bat_mid                        bat_mid
-     0000697B  _g_palette                         g_palette
-     0000698B  _auto_initialize                   autoplay
-     00006991  _auto_update                       autoplay
-     000069F8  _background_initialize             background
-     00006A1F  _background_bounce_ball            background
-     00006A5E  _background_restore_world_coords   background
-     00006AE9  _background_debug_box_wc           background
-     00006B67  _balls_initialize                  balls
-     00006B78  _balls_update                      balls
-     00006BAB  _balls_restore_background          balls
-     00006C05  _balls_draw                        balls
-     00006C5A  _balls_get_first_active            balls
-     00006C8E  _initialize_balls                  balls
-     00006CDF  _center_ball                       balls
-     00006D49  _handle_serve                      balls
-     00006D95  _update_ball                       balls
-     00006ED4  _bat_initialize                    bat
-     00006EE9  _bat_update                        bat
-     00006F2B  _bat_restore_background            bat
-     00006F4B  _bat_draw                          bat
-     00006FA6  _bat_bounce_ball                   bat
-     00007059  _blocks_initialize                 blocks
-     00007068  _blocks_draw                       blocks
-     00007069  _blocks_restore_background         blocks
-     0000706A  _blocks_bounce_ball                blocks
-     00007205  _is_ball_colliding_with_block      blocks
-     00007275  _get_metaData_at                   blocks
-     000072FD  _draw_current_blocks               blocks
-     00007385  _map_blocks_to_meta                blocks
-     00007556  _plant_tile_meta                   blocks
+     000068F0  _sp_font_23                        font
+     00006900  _sp_font_24                        font
+     00006910  _sp_font_25                        font
+     00006920  _sp_font_26                        font
+     00006930  _sp_font_27                        font
+     00006940  _sp_font_28                        font
+     00006950  _sp_font_29                        font
+     00006960  _sp_font_30                        font
+     00006970  _sp_font_31                        font
+     00006980  _sp_font_32                        font
+     00006990  _sp_font_33                        font
+     000069A0  _sp_font_34                        font
+     000069B0  _sp_font_35                        font
+     000069C0  _sp_font_36                        font
+     000069D0  _sp_font_37                        font
+     000069E0  _sp_font_38                        font
+     000069F0  _sp_font_39                        font
+     00006A00  _sp_font_40                        font
+     00006A10  _sp_life                           life_marker
+     00006A2E  _sp_logo                           annoyed
+     00007433  _sp_bat_mid                        bat_mid
+     00007443  _g_palette                         g_palette
+     00007453  _auto_initialize                   autoplay
+     00007459  _auto_update                       autoplay
+     000074C0  _background_initialize             background
+     000074E7  _background_bounce_ball            background
+     00007526  _background_restore_world_coords   background
+     000075B1  _background_restore_tiles_exact    background
+     000075E0  _background_debug_box_wc           background
+     0000765E  _balls_initialize                  balls
+     0000766F  _balls_update                      balls
+     000076A2  _balls_restore_background          balls
+     000076FC  _balls_draw                        balls
+     00007751  _balls_get_first_active            balls
+     00007785  _initialize_balls                  balls
+     000077D6  _center_ball                       balls
+     00007840  _handle_serve                      balls
+     0000788C  _update_ball                       balls
+     000079CB  _bat_initialize                    bat
+     000079E0  _bat_update                        bat
+     00007A22  _bat_restore_background            bat
+     00007A42  _bat_draw                          bat
+     00007A9D  _bat_bounce_ball                   bat
+     00007B50  _blocks_initialize                 blocks
+     00007B5F  _blocks_draw                       blocks
+     00007B60  _blocks_restore_background         blocks
+     00007B61  _blocks_bounce_ball                blocks
+     00007CF4  _is_ball_colliding_with_block      blocks
+     00007D9E  _get_metaData_at                   blocks
+     00007E26  _draw_current_blocks               blocks
+     00007EAE  _map_blocks_to_meta                blocks
 ASxxxx Linker V03.00 + NoICE + sdld,  page 6.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-_CODE                               00004000    00004390 =       17296. bytes (REL,CON)
+_CODE                               00004000    00004ED1 =       20177. bytes (REL,CON)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-     000075C5  _dbg_displayNumber                 debug
-     00007686  _game_initialize                   game
-     0000769E  _game_draw                         game
-     000076A4  _game_update                       game
-     000076E5  _module_game_initialize            game
-     000076F8  _initialise_level                  game
-     00007710  _level_definitions                 globals
-     0000771C  _hud_initialize                    hud
-     00007760  _hud_continue_from_death           hud
-     00007769  _hud_update                        hud
-     0000776A  _hud_restore_background            hud
-     0000776B  _hud_draw                          hud
-     0000776C  _hud_initialize_internal           hud
-     000077F5  _hud_initialize_static_text        hud
-     0000785C  _hud_draw_score_with_added_last_   hud
-     000078E3  _hud_draw_lives                    hud
-     00007967  _keys_initialize                   keys
-     0000796A  _keys_resetAllKeys                 keys
-     00007984  _keys_update                       keys
-     00007A06  _level_initialize                  level
-     00007A0E  _level_continue_from_death         level
-     00007A17  _level_draw                        level
-     00007A29  _level_update                      level
-     00007A78  _level_initialize_internal         level
-     00007AA0  _initializeCpc                     main
-     00007ABB  _main                              main
-     00007ADB  _play_scene                        main
-     00007B33  _sp_masked_bat_left                masked_sprites
-     00007B53  _sp_masked_bat_right               masked_sprites
-     00007B73  _sp_masked_ball                    masked_sprites
-     00007B97  _menu_initialize                   menu
-     00007BC5  _menu_draw                         menu
-     00007BC6  _menu_update                       menu
-     00007BD6  _module_menu_initialize            menu
-     00007BE9  _write_text                        menu
-     00007D34  _text_write_centered_string        text
-     00007D68  _text_write_string                 text
-     00007E79  __divuint                          
-     00007E81  __divuchar                         
-     00007E88  __divu8                            
-     00007E8B  __divu16                           
-     00007EBA  _cpct_setPalette                   cpct_video
-     00007ED1  _cpct_isKeyPressed                 cpct_keyboard
-     00007ED1  cpct_isKeyPressed_asm              cpct_keyboard
-     00007EDD  _cpct_scanKeyboard_f               cpct_keyboard
-     00007EDD  cpct_scanKeyboard_f_asm            cpct_keyboard
-     00007F47  _cpct_setPALColour                 cpct_video
-     00007F53  _cpct_drawSprite                   cpct_sprites
-     00007FF8  _cpct_etm_drawTileBox2x4           cpct_easytilemaps
-     00008087  __moduchar                         
-     00008093  __moduint                          
+     0000807F  _plant_tile_meta                   blocks
+     000080EE  _dbg_displayNumber                 debug
+     000081AF  _game_initialize                   game
+     000081C7  _game_draw                         game
+     000081CD  _game_update                       game
+     0000820E  _module_game_initialize            game
+     00008221  _initialise_level                  game
+     00008239  _level_definitions                 globals
+     0000824B  _hud_initialize                    hud
+     0000828F  _hud_continue_from_death           hud
+     00008298  _hud_update                        hud
+     000082B5  _hud_restore_background            hud
+     000082B6  _hud_draw                          hud
+     000082C4  _hud_initialize_internal           hud
+     00008353  _hud_initialize_static_text        hud
+     0000839D  _hud_draw_score_with_added_last_   hud
+     00008424  _hud_draw_lives                    hud
+     000084A8  _keys_initialize                   keys
+     000084AB  _keys_resetAllKeys                 keys
+     000084C5  _keys_update                       keys
+     00008547  _level_initialize                  level
+     0000854F  _level_continue_from_death         level
+     00008558  _level_draw                        level
+     0000856A  _level_update                      level
+     000085B9  _level_initialize_internal         level
+     000085E1  _initializeCpc                     main
+     000085FC  _main                              main
+     0000861C  _play_scene                        main
+     00008674  _sp_masked_bat_left                masked_sprites
+     00008694  _sp_masked_bat_right               masked_sprites
+     000086B4  _sp_masked_ball                    masked_sprites
+     000086D8  _menu_initialize                   menu
+     00008706  _menu_draw                         menu
+     00008707  _menu_update                       menu
+     00008717  _module_menu_initialize            menu
+     0000872A  _write_text                        menu
+     00008875  _text_write_centered_string        text
+     000088A9  _text_write_string                 text
+     000089BA  __divuint                          
+     000089C2  __divuchar                         
+     000089C9  __divu8                            
+     000089CC  __divu16                           
+     000089FB  _cpct_setPalette                   cpct_video
+     00008A12  _cpct_isKeyPressed                 cpct_keyboard
+     00008A12  cpct_isKeyPressed_asm              cpct_keyboard
+     00008A1E  _cpct_scanKeyboard_f               cpct_keyboard
+     00008A1E  cpct_scanKeyboard_f_asm            cpct_keyboard
+     00008A88  _cpct_setPALColour                 cpct_video
+     00008A94  _cpct_drawSprite                   cpct_sprites
+     00008B39  _cpct_etm_drawTileBox2x4           cpct_easytilemaps
+     00008BC8  __moduchar                         
 ASxxxx Linker V03.00 + NoICE + sdld,  page 7.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-_CODE                               00004000    00004390 =       17296. bytes (REL,CON)
+_CODE                               00004000    00004ED1 =       20177. bytes (REL,CON)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-     0000809E  _cpct_drawCharM0                   cpct_strings
-     000080C1  _cpct_etm_setTileset2x4            cpct_easytilemaps
-     000080C1  cpct_etm_setTileset2x4_asm         cpct_easytilemaps
-     000080C5  _cpct_keyboardStatusBuffer         cpct_keyboard
-     000080CF  _cpct_etm_drawTileRow2x4           cpct_easytilemaps
-     000080D6  cpct_etm_drawTileRow2x4_asm        cpct_easytilemaps
-     000080D8  dtr_restore_ptileset               cpct_easytilemaps
-     000080F0  _cpct_drawSpriteMasked             cpct_sprites
-     0000811F  ___sdcc_call_hl                    
-     00008120  _cpct_etm_drawTilemap2x4_f         cpct_easytilemaps
-     0000814C  _cpct_isAnyKeyPressed              cpct_keyboard
-     0000814C  cpct_isAnyKeyPressed_asm           cpct_keyboard
-     00008159  _cpct_waitVSYNC                    cpct_video
-     00008159  cpct_waitVSYNC_asm                 cpct_video
-     00008161  _cpct_setVideoMode                 cpct_video
-     0000816F  _cpct_isAnyKeyPressed_f            cpct_keyboard
-     0000816F  cpct_isAnyKeyPressed_f_asm         cpct_keyboard
-     0000818A  _cpct_memset                       cpct_memutils
-     00008198  _strlen                            
-     000081A7  _cpct_disableFirmware              cpct_firmware
-     000081A7  _cpct_removeInterruptHandler       cpct_firmware
-     000081A7  cpct_disableFirmware_asm           cpct_firmware
-     000081A7  cpct_removeInterruptHandler_asm    cpct_firmware
-     000081B7  _cpct_drawSolidBox                 cpct_sprites
-     0000825E  cpct_drawTileAligned2x4_f_asm      cpct_sprites
-     0000827F  __modschar                         
-     0000828C  __modsint                          
-     00008298  _cpct_mode_rom_status              cpct_firmware
-     00008299  _cpct_setDrawCharM0                cpct_strings
-     000082BE  _cpct_getScreenPtr                 cpct_video
-     000082D4  __divsint                          
-     000082DD  __divschar                         
-     000082E4  __div8                             
-     000082E8  __div_signexte                     
-     000082EC  __div16                            
-     00008312  __get_remainder                    
-     0000831C  cpct_drawCharM0_inner_asm          cpct_strings
-     0000837C  dc_2pxtableM0                      cpct_strings
-     00008380  dc_mode0_ct                        cpct_strings
-
+     00008BD4  __moduint                          
+     00008BDF  _cpct_drawCharM0                   cpct_strings
+     00008C02  _cpct_etm_setTileset2x4            cpct_easytilemaps
+     00008C02  cpct_etm_setTileset2x4_asm         cpct_easytilemaps
+     00008C06  _cpct_keyboardStatusBuffer         cpct_keyboard
+     00008C10  _cpct_etm_drawTileRow2x4           cpct_easytilemaps
+     00008C17  cpct_etm_drawTileRow2x4_asm        cpct_easytilemaps
+     00008C19  dtr_restore_ptileset               cpct_easytilemaps
+     00008C31  _cpct_drawSpriteMasked             cpct_sprites
+     00008C60  ___sdcc_call_hl                    
+     00008C61  _cpct_etm_drawTilemap2x4_f         cpct_easytilemaps
+     00008C8D  _cpct_isAnyKeyPressed              cpct_keyboard
+     00008C8D  cpct_isAnyKeyPressed_asm           cpct_keyboard
+     00008C9A  _cpct_waitVSYNC                    cpct_video
+     00008C9A  cpct_waitVSYNC_asm                 cpct_video
+     00008CA2  _cpct_setVideoMode                 cpct_video
+     00008CB0  _cpct_isAnyKeyPressed_f            cpct_keyboard
+     00008CB0  cpct_isAnyKeyPressed_f_asm         cpct_keyboard
+     00008CCB  _cpct_memset                       cpct_memutils
+     00008CD9  _strlen                            
+     00008CE8  _cpct_disableFirmware              cpct_firmware
+     00008CE8  _cpct_removeInterruptHandler       cpct_firmware
+     00008CE8  cpct_disableFirmware_asm           cpct_firmware
+     00008CE8  cpct_removeInterruptHandler_asm    cpct_firmware
+     00008CF8  _cpct_drawSolidBox                 cpct_sprites
+     00008D9F  cpct_drawTileAligned2x4_f_asm      cpct_sprites
+     00008DC0  __modschar                         
+     00008DCD  __modsint                          
+     00008DD9  _cpct_mode_rom_status              cpct_firmware
+     00008DDA  _cpct_setDrawCharM0                cpct_strings
+     00008DFF  _cpct_getScreenPtr                 cpct_video
+     00008E15  __divsint                          
+     00008E1E  __divschar                         
+     00008E25  __div8                             
+     00008E29  __div_signexte                     
+     00008E2D  __div16                            
+     00008E53  __get_remainder                    
+     00008E5D  cpct_drawCharM0_inner_asm          cpct_strings
+     00008EBD  dc_2pxtableM0                      cpct_strings
+     00008EC1  dc_mode0_ct                        cpct_strings
 ASxxxx Linker V03.00 + NoICE + sdld,  page 8.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-_DATA                               00008390    000004A0 =        1184. bytes (REL,CON)
+_DATA                               00008ED1    000004A2 =        1186. bytes (REL,CON)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-     00008390  _is_controling                     autoplay
-     00008391  _pvmem                             background
-     00008393  _all_balls                         balls
-     000083BA  _serving                           balls
-     000083BB  _block_meta                        blocks
-     000087FF  _blocks_remaining                  blocks
-     00008801  _scene_game                        game
-     00008807  _current_state                     game
-     00008808  _current_level_num                 game
-     00008809  _lives_left                        game
-     0000880A  _current_score                     game
-     0000880C  _high_score                        game
-     0000880E  _current_level                     globals
-     00008810  _digits                            hud
-     00008824  _key_left_is_pressed               keys
-     00008825  _key_right_is_pressed              keys
-     00008826  _key_serve_is_pressed              keys
-     00008827  _key_auto_is_pressed               keys
-     00008828  _key_any_is_pressed                keys
-     00008829  _key_pause_is_pressed              keys
-     0000882A  _scene_menu                        menu
+     00008ED1  _is_controling                     autoplay
+     00008ED2  _pvmem                             background
+     00008ED4  _all_balls                         balls
+     00008EFB  _serving                           balls
+     00008EFC  _block_meta                        blocks
+     00009340  _blocks_remaining                  blocks
+     00009342  _scene_game                        game
+     00009348  _current_state                     game
+     00009349  _current_level_num                 game
+     0000934A  _lives_left                        game
+     0000934B  _current_score                     game
+     0000934D  _high_score                        game
+     0000934F  _current_level                     globals
+     00009351  _displayed_score                   hud
+     00009353  _digits                            hud
+     00009367  _key_left_is_pressed               keys
+     00009368  _key_right_is_pressed              keys
+     00009369  _key_serve_is_pressed              keys
+     0000936A  _key_auto_is_pressed               keys
+     0000936B  _key_any_is_pressed                keys
+     0000936C  _key_pause_is_pressed              keys
+     0000936D  _scene_menu                        menu
+
 ASxxxx Linker V03.00 + NoICE + sdld,  page 9.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-_INITIALIZED                        00008830    00000004 =           4. bytes (REL,CON)
+_INITIALIZED                        00009373    00000004 =           4. bytes (REL,CON)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-     00008830  _batY                              bat
-     00008831  _batX                              bat
-     00008832  _oldBatX                           bat
-     00008833  _batW                              bat
+     00009373  _batY                              bat
+     00009374  _batX                              bat
+     00009375  _oldBatX                           bat
+     00009376  _batW                              bat
 
 ASxxxx Linker V03.00 + NoICE + sdld,  page 10.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-_INITIALIZER                        00008834    00000004 =           4. bytes (REL,CON)
+_INITIALIZER                        00009377    00000004 =           4. bytes (REL,CON)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
@@ -432,16 +434,16 @@ _INITIALIZER                        00008834    00000004 =           4. bytes (R
 
 Files Linked                              [ module(s) ]
 
+obj/map/level-03-blocks.rel               [ level_03_blocks ]
+obj/map/level-03-background.rel           [ level_03_background ]
 obj/map/level-02-blocks.rel               [ level_02_blocks ]
 obj/map/level-02-background.rel           [ level_02_background ]
 obj/map/level-01-blocks.rel               [ level_01_blocks ]
 obj/map/level-01-background.rel           [ level_01_background ]
+obj/map/debug-blocks.rel                  [ debug_blocks ]
 obj/map/debug-background.rel              [ debug_background ]
 obj/map/tiles.rel                         [ tiles ]
 obj/sprites/font.rel                      [ font ]
-obj/sprites/hi.rel                        [ hi ]
-obj/sprites/level.rel                     [ level ]
-obj/sprites/score.rel                     [ score ]
 obj/sprites/life-marker.rel               [ life_marker ]
 obj/sprites/annoyed.rel                   [ annoyed ]
 obj/sprites/bat-mid.rel                   [ bat_mid ]

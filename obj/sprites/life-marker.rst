@@ -41,36 +41,36 @@
                              41 ;--------------------------------------------------------
                              42 	.area _CODE
                              43 	.area _CODE
-   5F48                      44 _sp_life:
-   5F48 51                   45 	.db #0x51	; 81	'Q'
-   5F49 A7                   46 	.db #0xa7	; 167
-   5F4A 0F                   47 	.db #0x0f	; 15
-   5F4B 5B                   48 	.db #0x5b	; 91
-   5F4C A2                   49 	.db #0xa2	; 162
-   5F4D 04                   50 	.db #0x04	; 4
-   5F4E 4D                   51 	.db #0x4d	; 77	'M'
-   5F4F CF                   52 	.db #0xcf	; 207
-   5F50 8E                   53 	.db #0x8e	; 142
-   5F51 08                   54 	.db #0x08	; 8
-   5F52 E0                   55 	.db #0xe0	; 224
-   5F53 C0                   56 	.db #0xc0	; 192
-   5F54 C0                   57 	.db #0xc0	; 192
-   5F55 C0                   58 	.db #0xc0	; 192
-   5F56 D0                   59 	.db #0xd0	; 208
-   5F57 A4                   60 	.db #0xa4	; 164
-   5F58 1C                   61 	.db #0x1c	; 28
-   5F59 3C                   62 	.db #0x3c	; 60
-   5F5A 2C                   63 	.db #0x2c	; 44
-   5F5B 58                   64 	.db #0x58	; 88	'X'
-   5F5C 04                   65 	.db #0x04	; 4
-   5F5D 4D                   66 	.db #0x4d	; 77	'M'
-   5F5E CF                   67 	.db #0xcf	; 207
-   5F5F 8E                   68 	.db #0x8e	; 142
-   5F60 08                   69 	.db #0x08	; 8
-   5F61 51                   70 	.db #0x51	; 81	'Q'
-   5F62 A7                   71 	.db #0xa7	; 167
-   5F63 0F                   72 	.db #0x0f	; 15
-   5F64 5B                   73 	.db #0x5b	; 91
-   5F65 A2                   74 	.db #0xa2	; 162
+   6A10                      44 _sp_life:
+   6A10 51                   45 	.db #0x51	; 81	'Q'
+   6A11 A7                   46 	.db #0xa7	; 167
+   6A12 0F                   47 	.db #0x0f	; 15
+   6A13 5B                   48 	.db #0x5b	; 91
+   6A14 A2                   49 	.db #0xa2	; 162
+   6A15 04                   50 	.db #0x04	; 4
+   6A16 4D                   51 	.db #0x4d	; 77	'M'
+   6A17 CF                   52 	.db #0xcf	; 207
+   6A18 8E                   53 	.db #0x8e	; 142
+   6A19 08                   54 	.db #0x08	; 8
+   6A1A E0                   55 	.db #0xe0	; 224
+   6A1B C0                   56 	.db #0xc0	; 192
+   6A1C C0                   57 	.db #0xc0	; 192
+   6A1D C0                   58 	.db #0xc0	; 192
+   6A1E D0                   59 	.db #0xd0	; 208
+   6A1F A4                   60 	.db #0xa4	; 164
+   6A20 1C                   61 	.db #0x1c	; 28
+   6A21 3C                   62 	.db #0x3c	; 60
+   6A22 2C                   63 	.db #0x2c	; 44
+   6A23 58                   64 	.db #0x58	; 88	'X'
+   6A24 04                   65 	.db #0x04	; 4
+   6A25 4D                   66 	.db #0x4d	; 77	'M'
+   6A26 CF                   67 	.db #0xcf	; 207
+   6A27 8E                   68 	.db #0x8e	; 142
+   6A28 08                   69 	.db #0x08	; 8
+   6A29 51                   70 	.db #0x51	; 81	'Q'
+   6A2A A7                   71 	.db #0xa7	; 167
+   6A2B 0F                   72 	.db #0x0f	; 15
+   6A2C 5B                   73 	.db #0x5b	; 91
+   6A2D A2                   74 	.db #0xa2	; 162
                              75 	.area _INITIALIZER
                              76 	.area _CABS (ABS)

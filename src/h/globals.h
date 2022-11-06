@@ -96,7 +96,7 @@ typedef struct
 // Level definition
 // ---------------------------------------------------------------------
 
-#define NUM_LEVELS 2
+#define NUM_LEVELS 3
 
 typedef struct
 {

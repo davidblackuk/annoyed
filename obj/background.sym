@@ -8,8 +8,9 @@ Symbol Table
     .__.CPU.                                                    =  0000 L
     .__.H$L.                                                    =  0000 L
   0 _background_bounce_ball                                        0027 GR
-  0 _background_debug_box_wc                                       00F1 GR
+  0 _background_debug_box_wc                                       0120 GR
   0 _background_initialize                                         0000 GR
+  0 _background_restore_tiles_exact                                00F1 GR
   0 _background_restore_world_coords                               0066 GR
     _cpct_drawSolidBox                                             **** GX
     _cpct_etm_drawTileBox2x4                                       **** GX
@@ -26,7 +27,7 @@ Hexadecimal [16-Bits]
 
 Area Table
 
-   0 _CODE                                      size  16F   flags    0
+   0 _CODE                                      size  19E   flags    0
    1 _DATA                                      size    2   flags    0
    2 _INITIALIZED                               size    0   flags    0
    3 _DABS                                      size    0   flags    8

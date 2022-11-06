@@ -706,23 +706,23 @@ _g_tiles_046:
 	.db #0x6d	; 109	'm'
 	.db #0x0a	; 10
 _g_tiles_047:
+	.db #0x4f	; 79	'O'
 	.db #0x68	; 104	'h'
-	.db #0x94	; 148
+	.db #0x05	; 5
 	.db #0xc0	; 192
-	.db #0x3c	; 60
+	.db #0x4f	; 79	'O'
 	.db #0x68	; 104	'h'
-	.db #0x3c	; 60
+	.db #0x4f	; 79	'O'
 	.db #0x68	; 104	'h'
-	.db #0x3c	; 60
 _g_tiles_048:
-	.db #0xdf	; 223
-	.db #0x00	; 0
-	.db #0xdf	; 223
-	.db #0x00	; 0
-	.db #0xdf	; 223
-	.db #0x00	; 0
-	.db #0xdf	; 223
-	.db #0x00	; 0
+	.db #0x94	; 148
+	.db #0x8f	; 143
+	.db #0x3c	; 60
+	.db #0x8f	; 143
+	.db #0x3c	; 60
+	.db #0x8f	; 143
+	.db #0x3c	; 60
+	.db #0x8f	; 143
 _g_tiles_049:
 	.db #0x2d	; 45
 	.db #0x2d	; 45
@@ -886,23 +886,23 @@ _g_tiles_066:
 	.db #0x00	; 0
 	.db #0x00	; 0
 _g_tiles_067:
+	.db #0x4f	; 79	'O'
 	.db #0x68	; 104	'h'
-	.db #0x3c	; 60
 	.db #0x05	; 5
-	.db #0xcf	; 207
+	.db #0x0f	; 15
+	.db #0x4f	; 79	'O'
 	.db #0x68	; 104	'h'
-	.db #0x3c	; 60
 	.db #0x05	; 5
-	.db #0xcf	; 207
+	.db #0x0f	; 15
 _g_tiles_068:
-	.db #0xdf	; 223
-	.db #0x00	; 0
-	.db #0x8a	; 138
-	.db #0x00	; 0
-	.db #0xdf	; 223
-	.db #0x00	; 0
-	.db #0xdf	; 223
-	.db #0x00	; 0
+	.db #0x3c	; 60
+	.db #0x8f	; 143
+	.db #0xcf	; 207
+	.db #0x8f	; 143
+	.db #0x3c	; 60
+	.db #0x8f	; 143
+	.db #0xcf	; 207
+	.db #0x8f	; 143
 _g_tiles_069:
 	.db #0x0f	; 15
 	.db #0x1e	; 30
@@ -1048,41 +1048,41 @@ _g_tiles_084:
 	.db #0x00	; 0
 	.db #0x00	; 0
 _g_tiles_085:
-	.db #0x00	; 0
-	.db #0x00	; 0
-	.db #0x00	; 0
-	.db #0x00	; 0
-	.db #0x00	; 0
-	.db #0x00	; 0
-	.db #0x00	; 0
-	.db #0x00	; 0
-_g_tiles_086:
-	.db #0x00	; 0
-	.db #0x00	; 0
-	.db #0x00	; 0
-	.db #0x00	; 0
-	.db #0x00	; 0
-	.db #0x00	; 0
-	.db #0x00	; 0
-	.db #0x00	; 0
-_g_tiles_087:
-	.db #0x68	; 104	'h'
-	.db #0x3c	; 60
-	.db #0x05	; 5
+	.db #0x0f	; 15
+	.db #0x0f	; 15
 	.db #0xcf	; 207
-	.db #0x68	; 104	'h'
+	.db #0xcf	; 207
 	.db #0x3c	; 60
-	.db #0x68	; 104	'h'
 	.db #0x3c	; 60
+	.db #0x94	; 148
+	.db #0x3c	; 60
+_g_tiles_086:
+	.db #0x0f	; 15
+	.db #0x0f	; 15
+	.db #0xcf	; 207
+	.db #0xcf	; 207
+	.db #0x9e	; 158
+	.db #0xcf	; 207
+	.db #0x9e	; 158
+	.db #0x28	; 40
+_g_tiles_087:
+	.db #0x4f	; 79	'O'
+	.db #0x68	; 104	'h'
+	.db #0x05	; 5
+	.db #0x0f	; 15
+	.db #0x4f	; 79	'O'
+	.db #0x68	; 104	'h'
+	.db #0x4f	; 79	'O'
+	.db #0x68	; 104	'h'
 _g_tiles_088:
-	.db #0xdf	; 223
-	.db #0x00	; 0
-	.db #0x8a	; 138
-	.db #0x00	; 0
-	.db #0xdf	; 223
-	.db #0x00	; 0
-	.db #0xdf	; 223
-	.db #0x00	; 0
+	.db #0x3c	; 60
+	.db #0x8f	; 143
+	.db #0xcf	; 207
+	.db #0x8f	; 143
+	.db #0x3c	; 60
+	.db #0x8f	; 143
+	.db #0x3c	; 60
+	.db #0x8f	; 143
 _g_tiles_089:
 	.db #0x00	; 0
 	.db #0x00	; 0
@@ -1228,41 +1228,41 @@ _g_tiles_104:
 	.db #0x00	; 0
 	.db #0x00	; 0
 _g_tiles_105:
+	.db #0xc0	; 192
+	.db #0xc0	; 192
 	.db #0x68	; 104	'h'
 	.db #0x3c	; 60
-	.db #0x68	; 104	'h'
-	.db #0x3c	; 60
-	.db #0x68	; 104	'h'
-	.db #0x3c	; 60
-	.db #0x68	; 104	'h'
-	.db #0x3c	; 60
+	.db #0x8f	; 143
+	.db #0xcf	; 207
+	.db #0x0a	; 10
+	.db #0x0f	; 15
 _g_tiles_106:
-	.db #0xdf	; 223
+	.db #0x4a	; 74	'J'
+	.db #0x85	; 133
+	.db #0x1e	; 30
 	.db #0x00	; 0
-	.db #0xdf	; 223
-	.db #0x00	; 0
-	.db #0xdf	; 223
-	.db #0x00	; 0
-	.db #0xdf	; 223
-	.db #0x00	; 0
-_g_tiles_107:
-	.db #0x68	; 104	'h'
-	.db #0x3c	; 60
-	.db #0x68	; 104	'h'
-	.db #0x3c	; 60
-	.db #0x40	; 64
-	.db #0x6d	; 109	'm'
+	.db #0x4f	; 79	'O'
+	.db #0xcf	; 207
 	.db #0x05	; 5
-	.db #0x45	; 69	'E'
+	.db #0x0f	; 15
+_g_tiles_107:
+	.db #0x4f	; 79	'O'
+	.db #0x68	; 104	'h'
+	.db #0x4f	; 79	'O'
+	.db #0x68	; 104	'h'
+	.db #0x4f	; 79	'O'
+	.db #0x40	; 64
+	.db #0x4f	; 79	'O'
+	.db #0x05	; 5
 _g_tiles_108:
-	.db #0xdf	; 223
-	.db #0x00	; 0
-	.db #0xdf	; 223
-	.db #0x00	; 0
-	.db #0xdf	; 223
-	.db #0x00	; 0
-	.db #0xdf	; 223
-	.db #0x00	; 0
+	.db #0x3c	; 60
+	.db #0x8f	; 143
+	.db #0x3c	; 60
+	.db #0x8f	; 143
+	.db #0x6d	; 109	'm'
+	.db #0x8f	; 143
+	.db #0x45	; 69	'E'
+	.db #0x8f	; 143
 _g_tiles_109:
 	.db #0x00	; 0
 	.db #0x00	; 0

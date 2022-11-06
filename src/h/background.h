@@ -22,6 +22,8 @@ extern void background_initialize();
 /// @param height height in pixels of the are to redraw
 extern void background_restore_world_coords(i16 x, i16 y, u8 width, u8 height);
 
+extern void background_restore_tiles_exact(u16 tx, u16 ty, u8 tw, u8 th);
+
 /// @brief Test the ball coordinates and return a set of bounces (collisions) 
 ///        that apply to the ball.
 /// @param at_wx The world X coordinate to test for collisions

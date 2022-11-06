@@ -17,6 +17,7 @@
 	.globl _background_initialize
 	.globl _background_bounce_ball
 	.globl _background_restore_world_coords
+	.globl _background_restore_tiles_exact
 	.globl _background_debug_box_wc
 ;--------------------------------------------------------
 ; special function registers
@@ -222,7 +223,40 @@ _background_restore_world_coords::
 	ld	sp, ix
 	pop	ix
 	ret
-;src/background.c:73: void background_debug_box_wc(i16 wx, i16 wy, u8 width, u8 height)
+;src/background.c:73: void background_restore_tiles_exact(u16 tx, u16 ty, u8 tw, u8 th) {
+;	---------------------------------
+; Function background_restore_tiles_exact
+; ---------------------------------
+_background_restore_tiles_exact::
+	push	ix
+	ld	ix,#0
+	add	ix,sp
+;src/background.c:75: pvmem, current_level->background_tilemap);
+	ld	hl, (_current_level)
+	ld	c, (hl)
+	inc	hl
+	ld	b, (hl)
+	ld	hl, (_pvmem)
+;src/background.c:74: cpct_etm_drawTileBox2x4(tx, ty, tw, th, BACKGROUND_TILMAP_W, 
+	ld	e, 6 (ix)
+	ld	d, 4 (ix)
+	push	bc
+	push	hl
+	ld	a, #0x1e
+	push	af
+	inc	sp
+	ld	h, 9 (ix)
+	ld	l, 8 (ix)
+	push	hl
+	ld	a, e
+	push	af
+	inc	sp
+	push	de
+	inc	sp
+	call	_cpct_etm_drawTileBox2x4
+	pop	ix
+	ret
+;src/background.c:80: void background_debug_box_wc(i16 tx, i16 ty, u8 width, u8 height)
 ;	---------------------------------
 ; Function background_debug_box_wc
 ; ---------------------------------
@@ -230,7 +264,7 @@ _background_debug_box_wc::
 	push	ix
 	ld	ix,#0
 	add	ix,sp
-;src/background.c:80: u8 tileX = (wx / 2) + 2;
+;src/background.c:87: u8 tileX = (tx / 2) + 2;
 	ld	l,4 (ix)
 	ld	h,5 (ix)
 	bit	7, h
@@ -241,7 +275,7 @@ _background_debug_box_wc::
 	rr	l
 	inc	l
 	inc	l
-;src/background.c:81: u8 tileY = (wy / 4) + 2;
+;src/background.c:88: u8 tileY = (ty / 4) + 2;
 	ld	c,6 (ix)
 	ld	b,7 (ix)
 	bit	7, b
@@ -256,36 +290,36 @@ _background_debug_box_wc::
 	rr	c
 	inc	c
 	inc	c
-;src/background.c:82: u8 tileW = width / 2;
+;src/background.c:89: u8 tileW = width / 2;
 	ld	e, 8 (ix)
 	srl	e
-;src/background.c:83: u8 tileH = height / 4;
+;src/background.c:90: u8 tileH = height / 4;
 	ld	d, 9 (ix)
 	srl	d
 	srl	d
-;src/background.c:86: if (height % 4 > 0)
+;src/background.c:93: if (height % 4 > 0)
 	ld	a, 9 (ix)
 	and	a, #0x03
 	jr	Z,00102$
-;src/background.c:88: tileH++;
+;src/background.c:95: tileH++;
 	inc	d
 00102$:
-;src/background.c:92: if (width % 2 > 0)
+;src/background.c:99: if (width % 2 > 0)
 	bit	0, 8 (ix)
 	jr	Z,00104$
-;src/background.c:94: tileW++;
+;src/background.c:101: tileW++;
 	inc	e
 00104$:
-;src/background.c:98: if (wx & 1 == 1)
+;src/background.c:105: if (tx & 1 == 1)
 	bit	0, 4 (ix)
 	jr	Z,00106$
-;src/background.c:100: tileW += 1;
+;src/background.c:107: tileW += 1;
 	inc	e
 00106$:
-;src/background.c:104: tileY * TILE_H);
+;src/background.c:111: tileY * TILE_H);
 	sla	c
 	sla	c
-;src/background.c:103: pvm = cpct_getScreenPtr(CPCT_VMEM_START, (tileX * TILE_W) + (4 * TILE_W),
+;src/background.c:110: pvm = cpct_getScreenPtr(CPCT_VMEM_START, (tileX * TILE_W) + (4 * TILE_W),
 	ld	a, l
 	add	a, a
 	add	a, #0x08
@@ -302,7 +336,7 @@ _background_debug_box_wc::
 	ld	c, l
 	ld	b, h
 	pop	de
-;src/background.c:106: cpct_drawSolidBox(pvm, 255, tileW * TILE_W, tileH + TILE_H);
+;src/background.c:113: cpct_drawSolidBox(pvm, 255, tileW * TILE_W, tileH + TILE_H);
 	inc	d
 	inc	d
 	inc	d

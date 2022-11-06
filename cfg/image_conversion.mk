@@ -1,11 +1,6 @@
 
-##
-## NEW MACROS
-##
-
 # see
 # https://www.cpcwiki.eu/index.php/CPC_Palette
-
 
 # black,  Bright White, Orange, Pastel Cyan, Pastel Green, Bright red, Sky blue, Pastel Magenta, Pastel Yellow, White (grey), Blue, Bright blue, yellow, red, Pastel Blue , ???
 # 000000, FFFFFF, FF8000, 80FFF, 80FF80, FF0000, 0080FF, FF80FF, FFFF80, 808080, 000080, 0000FF, 808000, 800000 8080ff FF0080
@@ -13,8 +8,6 @@
 # we have NO spares at the moment
 # we use 008080 for transparent (dull green pallete no. 11)
 PALETTE=0 26 15 23 22 6 11 17 25 13 1 2 12 3 14 7
-
-
 
 ## Default values
 #$(eval $(call IMG2SP, SET_MODE        , 0                  ))  { 0, 1, 2 }
@@ -35,11 +28,6 @@ $(eval $(call IMG2SP, CONVERT_PALETTE , $(PALETTE), g_palette ))
 $(eval $(call IMG2SP, CONVERT         , assets/bat-mid.png , 0, 0, sp_bat_mid))
 $(eval $(call IMG2SP, CONVERT         , assets/annoyed.png , 0, 0, sp_logo))
 $(eval $(call IMG2SP, CONVERT         , assets/life-marker.png , 0, 0, sp_life))
-
-$(eval $(call IMG2SP, CONVERT         , assets/score.png , 0, 0, sp_score))
-$(eval $(call IMG2SP, CONVERT         , assets/level.png , 0, 0, sp_level))
-$(eval $(call IMG2SP, CONVERT         , assets/hi.png , 0, 0, sp_high))
-
 
 $(eval $(call IMG2SP, CONVERT         , assets/font.png , 4, 8, sp_font))
 

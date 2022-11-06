@@ -70,15 +70,22 @@ void background_restore_world_coords(i16 wx, i16 wy, u8 width, u8 height)
     cpct_etm_drawTileBox2x4(tileX, tileY, tileW, tileH, BACKGROUND_TILMAP_W, pvmem, current_level->background_tilemap);
 }
 
-void background_debug_box_wc(i16 wx, i16 wy, u8 width, u8 height)
+void background_restore_tiles_exact(u16 tx, u16 ty, u8 tw, u8 th) {
+    cpct_etm_drawTileBox2x4(tx, ty, tw, th, BACKGROUND_TILMAP_W, 
+        pvmem, current_level->background_tilemap);
+}
+
+
+// this is remove tile
+void background_debug_box_wc(i16 tx, i16 ty, u8 width, u8 height)
 {
     u8 *pvm;
     // the world coordinates are 0 based at the top left of the play area
     // when restoring the background we paint the tilemap who's origin is
     // to the left and top of the play area: two tiles left and two above
 
-    u8 tileX = (wx / 2) + 2;
-    u8 tileY = (wy / 4) + 2;
+    u8 tileX = (tx / 2) + 2;
+    u8 tileY = (ty / 4) + 2;
     u8 tileW = width / 2;
     u8 tileH = height / 4;
 
@@ -95,7 +102,7 @@ void background_debug_box_wc(i16 wx, i16 wy, u8 width, u8 height)
     }
 
     // if we are on an odd pixel, increment the width as 2 pixels per byte
-    if (wx & 1 == 1)
+    if (tx & 1 == 1)
     {
         tileW += 1;
     }

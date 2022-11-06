@@ -7,16 +7,16 @@
 -k /home/davidb/Git/cpctelera/cpctelera/tools/sdcc-3.6.8-r9946/share/sdcc/lib/z80
 -l /home/davidb/Git/cpctelera/cpctelera/cpctelera.lib
 -l z80
+obj/map/level-03-blocks.rel
+obj/map/level-03-background.rel
 obj/map/level-02-blocks.rel
 obj/map/level-02-background.rel
 obj/map/level-01-blocks.rel
 obj/map/level-01-background.rel
+obj/map/debug-blocks.rel
 obj/map/debug-background.rel
 obj/map/tiles.rel
 obj/sprites/font.rel
-obj/sprites/hi.rel
-obj/sprites/level.rel
-obj/sprites/score.rel
 obj/sprites/life-marker.rel
 obj/sprites/annoyed.rel
 obj/sprites/bat-mid.rel
