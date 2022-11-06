@@ -19,18 +19,18 @@ Symbol Table
     _cpct_getScreenPtr                                             **** GX
     _current_level                                                 **** GX
     _current_score                                                 **** GX
-  0 _draw_current_blocks                                           02D6 GR
-  0 _get_metaData_at                                               024E GR
-  0 _is_ball_colliding_with_block                                  01A4 GR
-  0 _map_blocks_to_meta                                            035E GR
-  0 _plant_tile_meta                                               052F GR
+  0 _draw_current_blocks                                           021B GR
+  0 _get_metaData_at                                               0193 GR
+  0 _is_ball_colliding_with_block                                  00E9 GR
+  0 _map_blocks_to_meta                                            02A3 GR
+  0 _plant_tile_meta                                               0474 GR
 
 ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 2.
 Hexadecimal [16-Bits]
 
 Area Table
 
-   0 _CODE                                      size  59E   flags    0
+   0 _CODE                                      size  4E3   flags    0
    1 _DATA                                      size  446   flags    0
    2 _INITIALIZED                               size    0   flags    0
    3 _DABS                                      size    0   flags    8

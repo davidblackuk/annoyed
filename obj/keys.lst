@@ -141,7 +141,7 @@
    008A CDr00r00      [17]  141 	call	_cpct_isKeyPressed
    008D FD 21r05r00   [14]  142 	ld	iy, #_key_pause_is_pressed
    0091 FD 75 00      [19]  143 	ld	0 (iy), l
-                            144 ;src/keys.c:47: key_any_is_pressed = cpct_isAnyKeyPressed_f();
+                            144 ;src/keys.c:48: key_any_is_pressed = cpct_isAnyKeyPressed_f();
    0094 CDr00r00      [17]  145 	call	_cpct_isAnyKeyPressed_f
    0097 FD 21r04r00   [14]  146 	ld	iy, #_key_any_is_pressed
    009B FD 75 00      [19]  147 	ld	0 (iy), l

@@ -32,14 +32,14 @@
                              32 ; ram data
                              33 ;--------------------------------------------------------
                              34 	.area _INITIALIZED
-   9373                      35 _batY::
-   9373                      36 	.ds 1
-   9374                      37 _batX::
-   9374                      38 	.ds 1
-   9375                      39 _oldBatX::
-   9375                      40 	.ds 1
-   9376                      41 _batW::
-   9376                      42 	.ds 1
+   92B8                      35 _batY::
+   92B8                      36 	.ds 1
+   92B9                      37 _batX::
+   92B9                      38 	.ds 1
+   92BA                      39 _oldBatX::
+   92BA                      40 	.ds 1
+   92BB                      41 _batW::
+   92BB                      42 	.ds 1
                              43 ;--------------------------------------------------------
                              44 ; absolute external ram data
                              45 ;--------------------------------------------------------
@@ -66,16 +66,16 @@
                              66 ; ---------------------------------
    79CB                      67 _bat_initialize::
                              68 ;src/bat.c:42: batW = 8;
-   79CB 21 76 93      [10]   69 	ld	hl,#_batW + 0
+   79CB 21 BB 92      [10]   69 	ld	hl,#_batW + 0
    79CE 36 08         [10]   70 	ld	(hl), #0x08
                              71 ;src/bat.c:43: batX = (PLAY_AREA_WIDTH - batW) / 2;
-   79D0 21 74 93      [10]   72 	ld	hl,#_batX + 0
+   79D0 21 B9 92      [10]   72 	ld	hl,#_batX + 0
    79D3 36 16         [10]   73 	ld	(hl), #0x16
                              74 ;src/bat.c:44: batY = PLAY_AREA_HEIGHT - BAT_HEIGHT_PIXELS - BAT_BOTTOM_OFFSET_PIXELS;
-   79D5 21 73 93      [10]   75 	ld	hl,#_batY + 0
+   79D5 21 B8 92      [10]   75 	ld	hl,#_batY + 0
    79D8 36 B0         [10]   76 	ld	(hl), #0xb0
                              77 ;src/bat.c:45: oldBatX = batX;
-   79DA 21 75 93      [10]   78 	ld	hl,#_oldBatX + 0
+   79DA 21 BA 92      [10]   78 	ld	hl,#_oldBatX + 0
    79DD 36 16         [10]   79 	ld	(hl), #0x16
    79DF C9            [10]   80 	ret
                              81 ;src/bat.c:48: void bat_update()
@@ -84,30 +84,30 @@
                              84 ; ---------------------------------
    79E0                      85 _bat_update::
                              86 ;src/bat.c:54: oldBatX = batX;
-   79E0 21 74 93      [10]   87 	ld	hl,#_batX + 0
+   79E0 21 B9 92      [10]   87 	ld	hl,#_batX + 0
    79E3 4E            [ 7]   88 	ld	c, (hl)
                              89 ;src/bat.c:50: if (key_left_is_pressed)
-   79E4 3A 67 93      [13]   90 	ld	a,(#_key_left_is_pressed + 0)
+   79E4 3A AC 92      [13]   90 	ld	a,(#_key_left_is_pressed + 0)
    79E7 B7            [ 4]   91 	or	a, a
    79E8 28 0E         [12]   92 	jr	Z,00108$
                              93 ;src/bat.c:52: if (batX > 0)
-   79EA 3A 74 93      [13]   94 	ld	a,(#_batX + 0)
+   79EA 3A B9 92      [13]   94 	ld	a,(#_batX + 0)
    79ED B7            [ 4]   95 	or	a, a
    79EE C8            [11]   96 	ret	Z
                              97 ;src/bat.c:54: oldBatX = batX;
-   79EF 21 75 93      [10]   98 	ld	hl,#_oldBatX + 0
+   79EF 21 BA 92      [10]   98 	ld	hl,#_oldBatX + 0
    79F2 71            [ 7]   99 	ld	(hl), c
                             100 ;src/bat.c:55: batX--;
-   79F3 21 74 93      [10]  101 	ld	hl, #_batX+0
+   79F3 21 B9 92      [10]  101 	ld	hl, #_batX+0
    79F6 35            [11]  102 	dec	(hl)
    79F7 C9            [10]  103 	ret
    79F8                     104 00108$:
                             105 ;src/bat.c:58: else if (key_right_is_pressed)
-   79F8 3A 68 93      [13]  106 	ld	a,(#_key_right_is_pressed + 0)
+   79F8 3A AD 92      [13]  106 	ld	a,(#_key_right_is_pressed + 0)
    79FB B7            [ 4]  107 	or	a, a
    79FC C8            [11]  108 	ret	Z
                             109 ;src/bat.c:60: if (batX < PLAY_AREA_WIDTH - batW)
-   79FD 21 76 93      [10]  110 	ld	hl,#_batW + 0
+   79FD 21 BB 92      [10]  110 	ld	hl,#_batW + 0
    7A00 5E            [ 7]  111 	ld	e, (hl)
    7A01 16 00         [ 7]  112 	ld	d, #0x00
    7A03 3E 34         [ 7]  113 	ld	a, #0x34
@@ -116,7 +116,7 @@
    7A07 3E 00         [ 7]  116 	ld	a, #0x00
    7A09 9A            [ 4]  117 	sbc	a, d
    7A0A 5F            [ 4]  118 	ld	e, a
-   7A0B 3A 74 93      [13]  119 	ld	a,(#_batX + 0)
+   7A0B 3A B9 92      [13]  119 	ld	a,(#_batX + 0)
    7A0E 16 00         [ 7]  120 	ld	d, #0x00
    7A10 90            [ 4]  121 	sub	a, b
    7A11 7A            [ 4]  122 	ld	a, d
@@ -126,10 +126,10 @@
    7A18                     126 00128$:
    7A18 F0            [11]  127 	ret	P
                             128 ;src/bat.c:62: oldBatX = batX;
-   7A19 21 75 93      [10]  129 	ld	hl,#_oldBatX + 0
+   7A19 21 BA 92      [10]  129 	ld	hl,#_oldBatX + 0
    7A1C 71            [ 7]  130 	ld	(hl), c
                             131 ;src/bat.c:63: batX++;
-   7A1D 21 74 93      [10]  132 	ld	hl, #_batX+0
+   7A1D 21 B9 92      [10]  132 	ld	hl, #_batX+0
    7A20 34            [11]  133 	inc	(hl)
    7A21 C9            [10]  134 	ret
                             135 ;src/bat.c:68: void bat_restore_background()
@@ -138,16 +138,16 @@
                             138 ; ---------------------------------
    7A22                     139 _bat_restore_background::
                             140 ;src/bat.c:70: background_restore_world_coords(oldBatX, batY, batW, BAT_HEIGHT_PIXELS);
-   7A22 21 73 93      [10]  141 	ld	hl,#_batY + 0
+   7A22 21 B8 92      [10]  141 	ld	hl,#_batY + 0
    7A25 5E            [ 7]  142 	ld	e, (hl)
    7A26 16 00         [ 7]  143 	ld	d, #0x00
-   7A28 21 75 93      [10]  144 	ld	hl,#_oldBatX + 0
+   7A28 21 BA 92      [10]  144 	ld	hl,#_oldBatX + 0
    7A2B 4E            [ 7]  145 	ld	c, (hl)
    7A2C 06 00         [ 7]  146 	ld	b, #0x00
    7A2E 3E 08         [ 7]  147 	ld	a, #0x08
    7A30 F5            [11]  148 	push	af
    7A31 33            [ 6]  149 	inc	sp
-   7A32 3A 76 93      [13]  150 	ld	a, (_batW)
+   7A32 3A BB 92      [13]  150 	ld	a, (_batW)
    7A35 F5            [11]  151 	push	af
    7A36 33            [ 6]  152 	inc	sp
    7A37 D5            [11]  153 	push	de
@@ -163,16 +163,16 @@
                             163 ; ---------------------------------
    7A42                     164 _bat_draw::
                             165 ;src/bat.c:77: svmem = cpct_getScreenPtr(CPCT_VMEM_START, W_2_S_X(batX), W_2_S_Y(batY));
-   7A42 3A 73 93      [13]  166 	ld	a,(#_batY + 0)
+   7A42 3A B8 92      [13]  166 	ld	a,(#_batY + 0)
    7A45 C6 08         [ 7]  167 	add	a, #0x08
    7A47 57            [ 4]  168 	ld	d, a
-   7A48 3A 74 93      [13]  169 	ld	a,(#_batX + 0)
+   7A48 3A B9 92      [13]  169 	ld	a,(#_batX + 0)
    7A4B C6 0C         [ 7]  170 	add	a, #0x0c
    7A4D 5F            [ 4]  171 	ld	e,a
    7A4E D5            [11]  172 	push	de
    7A4F 21 00 C0      [10]  173 	ld	hl, #0xc000
    7A52 E5            [11]  174 	push	hl
-   7A53 CD FF 8D      [17]  175 	call	_cpct_getScreenPtr
+   7A53 CD 44 8D      [17]  175 	call	_cpct_getScreenPtr
    7A56 4D            [ 4]  176 	ld	c, l
    7A57 44            [ 4]  177 	ld	b, h
                             178 ;src/bat.c:79: cpct_drawSpriteMasked(sp_masked_bat_left, svmem, SP_BAT_SEG_W, SP_BAT_SEG_H);
@@ -182,9 +182,9 @@
    7A5B 21 02 08      [10]  182 	ld	hl, #0x0802
    7A5E E5            [11]  183 	push	hl
    7A5F D5            [11]  184 	push	de
-   7A60 21 74 86      [10]  185 	ld	hl, #_sp_masked_bat_left
+   7A60 21 B9 85      [10]  185 	ld	hl, #_sp_masked_bat_left
    7A63 E5            [11]  186 	push	hl
-   7A64 CD 31 8C      [17]  187 	call	_cpct_drawSpriteMasked
+   7A64 CD 76 8B      [17]  187 	call	_cpct_drawSpriteMasked
    7A67 C1            [10]  188 	pop	bc
                             189 ;src/bat.c:81: cpct_drawSprite(sp_bat_mid, svmem + BAT_SEGMENT_WIDTH_BYTES, SP_BAT_MID_W, SP_BAT_MID_H);
    7A68 59            [ 4]  190 	ld	e, c
@@ -197,7 +197,7 @@
    7A71 D5            [11]  197 	push	de
    7A72 21 33 74      [10]  198 	ld	hl, #_sp_bat_mid
    7A75 E5            [11]  199 	push	hl
-   7A76 CD 94 8A      [17]  200 	call	_cpct_drawSprite
+   7A76 CD D9 89      [17]  200 	call	_cpct_drawSprite
    7A79 C1            [10]  201 	pop	bc
                             202 ;src/bat.c:82: cpct_drawSprite(sp_bat_mid, svmem + 2 * BAT_SEGMENT_WIDTH_BYTES, SP_BAT_MID_W, SP_BAT_MID_H);
    7A7A 21 04 00      [10]  203 	ld	hl, #0x0004
@@ -208,17 +208,17 @@
    7A83 E5            [11]  208 	push	hl
    7A84 21 33 74      [10]  209 	ld	hl, #_sp_bat_mid
    7A87 E5            [11]  210 	push	hl
-   7A88 CD 94 8A      [17]  211 	call	_cpct_drawSprite
+   7A88 CD D9 89      [17]  211 	call	_cpct_drawSprite
    7A8B C1            [10]  212 	pop	bc
                             213 ;src/bat.c:84: cpct_drawSpriteMasked(sp_masked_bat_right, svmem + 3 * BAT_SEGMENT_WIDTH_BYTES, SP_BAT_SEG_W, SP_BAT_SEG_H);
    7A8C 21 06 00      [10]  214 	ld	hl, #0x0006
    7A8F 09            [11]  215 	add	hl, bc
-   7A90 01 94 86      [10]  216 	ld	bc, #_sp_masked_bat_right+0
+   7A90 01 D9 85      [10]  216 	ld	bc, #_sp_masked_bat_right+0
    7A93 11 02 08      [10]  217 	ld	de, #0x0802
    7A96 D5            [11]  218 	push	de
    7A97 E5            [11]  219 	push	hl
    7A98 C5            [11]  220 	push	bc
-   7A99 CD 31 8C      [17]  221 	call	_cpct_drawSpriteMasked
+   7A99 CD 76 8B      [17]  221 	call	_cpct_drawSpriteMasked
    7A9C C9            [10]  222 	ret
                             223 ;src/bat.c:87: BounceHits bat_bounce_ball(Ball *ball, i16 at_x, i16 at_y)
                             224 ;	---------------------------------
@@ -265,7 +265,7 @@
    7ADA DD 7E FF      [19]  265 	ld	a, -1 (ix)
    7ADD CE 00         [ 7]  266 	adc	a, #0x00
    7ADF DD 77 FD      [19]  267 	ld	-3 (ix), a
-   7AE2 21 74 93      [10]  268 	ld	hl,#_batX + 0
+   7AE2 21 B9 92      [10]  268 	ld	hl,#_batX + 0
    7AE5 5E            [ 7]  269 	ld	e, (hl)
    7AE6 16 00         [ 7]  270 	ld	d, #0x00
    7AE8 7B            [ 4]  271 	ld	a, e
@@ -276,7 +276,7 @@
    7AF3 EE 80         [ 7]  276 	xor	a, #0x80
    7AF5                     277 00130$:
    7AF5 F2 48 7B      [10]  278 	jp	P, 00102$
-   7AF8 FD 21 76 93   [14]  279 	ld	iy, #_batW
+   7AF8 FD 21 BB 92   [14]  279 	ld	iy, #_batW
    7AFC FD 6E 00      [19]  280 	ld	l, 0 (iy)
    7AFF 26 00         [ 7]  281 	ld	h, #0x00
    7B01 19            [11]  282 	add	hl, de
@@ -300,7 +300,7 @@
    7B1A 21 06 00      [10]  300 	ld	hl, #0x0006
    7B1D 09            [11]  301 	add	hl,bc
    7B1E EB            [ 4]  302 	ex	de,hl
-   7B1F FD 21 73 93   [14]  303 	ld	iy, #_batY
+   7B1F FD 21 B8 92   [14]  303 	ld	iy, #_batY
    7B23 FD 6E 00      [19]  304 	ld	l, 0 (iy)
    7B26 26 00         [ 7]  305 	ld	h, #0x00
    7B28 7D            [ 4]  306 	ld	a, l
@@ -331,12 +331,12 @@
    7B4F C9            [10]  331 	ret
                             332 	.area _CODE
                             333 	.area _INITIALIZER
-   9377                     334 __xinit__batY:
-   9377 00                  335 	.db #0x00	; 0
-   9378                     336 __xinit__batX:
-   9378 00                  337 	.db #0x00	; 0
-   9379                     338 __xinit__oldBatX:
-   9379 00                  339 	.db #0x00	; 0
-   937A                     340 __xinit__batW:
-   937A 00                  341 	.db #0x00	; 0
+   92BC                     334 __xinit__batY:
+   92BC 00                  335 	.db #0x00	; 0
+   92BD                     336 __xinit__batX:
+   92BD 00                  337 	.db #0x00	; 0
+   92BE                     338 __xinit__oldBatX:
+   92BE 00                  339 	.db #0x00	; 0
+   92BF                     340 __xinit__batW:
+   92BF 00                  341 	.db #0x00	; 0
                             342 	.area _CABS (ABS)

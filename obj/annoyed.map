@@ -19,20 +19,20 @@ Area                                    Addr        Size        Decimal Bytes (A
      00000004  l__INITIALIZER                  
      000004A2  l__DATA                         
      00004000  s__CODE                         
-     00004ED1  l__CODE                         
-     00008ED1  s__DATA                         
-     00009373  s__INITIALIZED                  
-     00009377  s__GSFINAL                      
-     00009377  s__GSINIT                       
-     00009377  s__HOME                         
-     00009377  s__INITIALIZER                  
+     00004E16  l__CODE                         
+     00008E16  s__DATA                         
+     000092B8  s__INITIALIZED                  
+     000092BC  s__GSFINAL                      
+     000092BC  s__GSINIT                       
+     000092BC  s__HOME                         
+     000092BC  s__INITIALIZER                  
 
 ASxxxx Linker V03.00 + NoICE + sdld,  page 2.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-_CODE                               00004000    00004ED1 =       20177. bytes (REL,CON)
+_CODE                               00004000    00004E16 =       19990. bytes (REL,CON)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
@@ -91,7 +91,7 @@ Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-_CODE                               00004000    00004ED1 =       20177. bytes (REL,CON)
+_CODE                               00004000    00004E16 =       19990. bytes (REL,CON)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
@@ -151,7 +151,7 @@ Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-_CODE                               00004000    00004ED1 =       20177. bytes (REL,CON)
+_CODE                               00004000    00004E16 =       19990. bytes (REL,CON)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
@@ -211,7 +211,7 @@ Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-_CODE                               00004000    00004ED1 =       20177. bytes (REL,CON)
+_CODE                               00004000    00004E16 =       19990. bytes (REL,CON)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
@@ -262,171 +262,171 @@ _CODE                               00004000    00004ED1 =       20177. bytes (R
      00007B5F  _blocks_draw                       blocks
      00007B60  _blocks_restore_background         blocks
      00007B61  _blocks_bounce_ball                blocks
-     00007CF4  _is_ball_colliding_with_block      blocks
-     00007D9E  _get_metaData_at                   blocks
-     00007E26  _draw_current_blocks               blocks
-     00007EAE  _map_blocks_to_meta                blocks
+     00007C39  _is_ball_colliding_with_block      blocks
+     00007CE3  _get_metaData_at                   blocks
+     00007D6B  _draw_current_blocks               blocks
+     00007DF3  _map_blocks_to_meta                blocks
 ASxxxx Linker V03.00 + NoICE + sdld,  page 6.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-_CODE                               00004000    00004ED1 =       20177. bytes (REL,CON)
+_CODE                               00004000    00004E16 =       19990. bytes (REL,CON)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-     0000807F  _plant_tile_meta                   blocks
-     000080EE  _dbg_displayNumber                 debug
-     000081AF  _game_initialize                   game
-     000081C7  _game_draw                         game
-     000081CD  _game_update                       game
-     0000820E  _module_game_initialize            game
-     00008221  _initialise_level                  game
-     00008239  _level_definitions                 globals
-     0000824B  _hud_initialize                    hud
-     0000828F  _hud_continue_from_death           hud
-     00008298  _hud_update                        hud
-     000082B5  _hud_restore_background            hud
-     000082B6  _hud_draw                          hud
-     000082C4  _hud_initialize_internal           hud
-     00008353  _hud_initialize_static_text        hud
-     0000839D  _hud_draw_score_with_added_last_   hud
-     00008424  _hud_draw_lives                    hud
-     000084A8  _keys_initialize                   keys
-     000084AB  _keys_resetAllKeys                 keys
-     000084C5  _keys_update                       keys
-     00008547  _level_initialize                  level
-     0000854F  _level_continue_from_death         level
-     00008558  _level_draw                        level
-     0000856A  _level_update                      level
-     000085B9  _level_initialize_internal         level
-     000085E1  _initializeCpc                     main
-     000085FC  _main                              main
-     0000861C  _play_scene                        main
-     00008674  _sp_masked_bat_left                masked_sprites
-     00008694  _sp_masked_bat_right               masked_sprites
-     000086B4  _sp_masked_ball                    masked_sprites
-     000086D8  _menu_initialize                   menu
-     00008706  _menu_draw                         menu
-     00008707  _menu_update                       menu
-     00008717  _module_menu_initialize            menu
-     0000872A  _write_text                        menu
-     00008875  _text_write_centered_string        text
-     000088A9  _text_write_string                 text
-     000089BA  __divuint                          
-     000089C2  __divuchar                         
-     000089C9  __divu8                            
-     000089CC  __divu16                           
-     000089FB  _cpct_setPalette                   cpct_video
-     00008A12  _cpct_isKeyPressed                 cpct_keyboard
-     00008A12  cpct_isKeyPressed_asm              cpct_keyboard
-     00008A1E  _cpct_scanKeyboard_f               cpct_keyboard
-     00008A1E  cpct_scanKeyboard_f_asm            cpct_keyboard
-     00008A88  _cpct_setPALColour                 cpct_video
-     00008A94  _cpct_drawSprite                   cpct_sprites
-     00008B39  _cpct_etm_drawTileBox2x4           cpct_easytilemaps
-     00008BC8  __moduchar                         
+     00007FC4  _plant_tile_meta                   blocks
+     00008033  _dbg_displayNumber                 debug
+     000080F4  _game_initialize                   game
+     0000810C  _game_draw                         game
+     00008112  _game_update                       game
+     00008153  _module_game_initialize            game
+     00008166  _initialise_level                  game
+     0000817E  _level_definitions                 globals
+     00008190  _hud_initialize                    hud
+     000081D4  _hud_continue_from_death           hud
+     000081DD  _hud_update                        hud
+     000081FA  _hud_restore_background            hud
+     000081FB  _hud_draw                          hud
+     00008209  _hud_initialize_internal           hud
+     00008298  _hud_initialize_static_text        hud
+     000082E2  _hud_draw_score_with_added_last_   hud
+     00008369  _hud_draw_lives                    hud
+     000083ED  _keys_initialize                   keys
+     000083F0  _keys_resetAllKeys                 keys
+     0000840A  _keys_update                       keys
+     0000848C  _level_initialize                  level
+     00008494  _level_continue_from_death         level
+     0000849D  _level_draw                        level
+     000084AF  _level_update                      level
+     000084FE  _level_initialize_internal         level
+     00008526  _initializeCpc                     main
+     00008541  _main                              main
+     00008561  _play_scene                        main
+     000085B9  _sp_masked_bat_left                masked_sprites
+     000085D9  _sp_masked_bat_right               masked_sprites
+     000085F9  _sp_masked_ball                    masked_sprites
+     0000861D  _menu_initialize                   menu
+     0000864B  _menu_draw                         menu
+     0000864C  _menu_update                       menu
+     0000865C  _module_menu_initialize            menu
+     0000866F  _write_text                        menu
+     000087BA  _text_write_centered_string        text
+     000087EE  _text_write_string                 text
+     000088FF  __divuint                          
+     00008907  __divuchar                         
+     0000890E  __divu8                            
+     00008911  __divu16                           
+     00008940  _cpct_setPalette                   cpct_video
+     00008957  _cpct_isKeyPressed                 cpct_keyboard
+     00008957  cpct_isKeyPressed_asm              cpct_keyboard
+     00008963  _cpct_scanKeyboard_f               cpct_keyboard
+     00008963  cpct_scanKeyboard_f_asm            cpct_keyboard
+     000089CD  _cpct_setPALColour                 cpct_video
+     000089D9  _cpct_drawSprite                   cpct_sprites
+     00008A7E  _cpct_etm_drawTileBox2x4           cpct_easytilemaps
+     00008B0D  __moduchar                         
 ASxxxx Linker V03.00 + NoICE + sdld,  page 7.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-_CODE                               00004000    00004ED1 =       20177. bytes (REL,CON)
+_CODE                               00004000    00004E16 =       19990. bytes (REL,CON)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-     00008BD4  __moduint                          
-     00008BDF  _cpct_drawCharM0                   cpct_strings
-     00008C02  _cpct_etm_setTileset2x4            cpct_easytilemaps
-     00008C02  cpct_etm_setTileset2x4_asm         cpct_easytilemaps
-     00008C06  _cpct_keyboardStatusBuffer         cpct_keyboard
-     00008C10  _cpct_etm_drawTileRow2x4           cpct_easytilemaps
-     00008C17  cpct_etm_drawTileRow2x4_asm        cpct_easytilemaps
-     00008C19  dtr_restore_ptileset               cpct_easytilemaps
-     00008C31  _cpct_drawSpriteMasked             cpct_sprites
-     00008C60  ___sdcc_call_hl                    
-     00008C61  _cpct_etm_drawTilemap2x4_f         cpct_easytilemaps
-     00008C8D  _cpct_isAnyKeyPressed              cpct_keyboard
-     00008C8D  cpct_isAnyKeyPressed_asm           cpct_keyboard
-     00008C9A  _cpct_waitVSYNC                    cpct_video
-     00008C9A  cpct_waitVSYNC_asm                 cpct_video
-     00008CA2  _cpct_setVideoMode                 cpct_video
-     00008CB0  _cpct_isAnyKeyPressed_f            cpct_keyboard
-     00008CB0  cpct_isAnyKeyPressed_f_asm         cpct_keyboard
-     00008CCB  _cpct_memset                       cpct_memutils
-     00008CD9  _strlen                            
-     00008CE8  _cpct_disableFirmware              cpct_firmware
-     00008CE8  _cpct_removeInterruptHandler       cpct_firmware
-     00008CE8  cpct_disableFirmware_asm           cpct_firmware
-     00008CE8  cpct_removeInterruptHandler_asm    cpct_firmware
-     00008CF8  _cpct_drawSolidBox                 cpct_sprites
-     00008D9F  cpct_drawTileAligned2x4_f_asm      cpct_sprites
-     00008DC0  __modschar                         
-     00008DCD  __modsint                          
-     00008DD9  _cpct_mode_rom_status              cpct_firmware
-     00008DDA  _cpct_setDrawCharM0                cpct_strings
-     00008DFF  _cpct_getScreenPtr                 cpct_video
-     00008E15  __divsint                          
-     00008E1E  __divschar                         
-     00008E25  __div8                             
-     00008E29  __div_signexte                     
-     00008E2D  __div16                            
-     00008E53  __get_remainder                    
-     00008E5D  cpct_drawCharM0_inner_asm          cpct_strings
-     00008EBD  dc_2pxtableM0                      cpct_strings
-     00008EC1  dc_mode0_ct                        cpct_strings
+     00008B19  __moduint                          
+     00008B24  _cpct_drawCharM0                   cpct_strings
+     00008B47  _cpct_etm_setTileset2x4            cpct_easytilemaps
+     00008B47  cpct_etm_setTileset2x4_asm         cpct_easytilemaps
+     00008B4B  _cpct_keyboardStatusBuffer         cpct_keyboard
+     00008B55  _cpct_etm_drawTileRow2x4           cpct_easytilemaps
+     00008B5C  cpct_etm_drawTileRow2x4_asm        cpct_easytilemaps
+     00008B5E  dtr_restore_ptileset               cpct_easytilemaps
+     00008B76  _cpct_drawSpriteMasked             cpct_sprites
+     00008BA5  ___sdcc_call_hl                    
+     00008BA6  _cpct_etm_drawTilemap2x4_f         cpct_easytilemaps
+     00008BD2  _cpct_isAnyKeyPressed              cpct_keyboard
+     00008BD2  cpct_isAnyKeyPressed_asm           cpct_keyboard
+     00008BDF  _cpct_waitVSYNC                    cpct_video
+     00008BDF  cpct_waitVSYNC_asm                 cpct_video
+     00008BE7  _cpct_setVideoMode                 cpct_video
+     00008BF5  _cpct_isAnyKeyPressed_f            cpct_keyboard
+     00008BF5  cpct_isAnyKeyPressed_f_asm         cpct_keyboard
+     00008C10  _cpct_memset                       cpct_memutils
+     00008C1E  _strlen                            
+     00008C2D  _cpct_disableFirmware              cpct_firmware
+     00008C2D  _cpct_removeInterruptHandler       cpct_firmware
+     00008C2D  cpct_disableFirmware_asm           cpct_firmware
+     00008C2D  cpct_removeInterruptHandler_asm    cpct_firmware
+     00008C3D  _cpct_drawSolidBox                 cpct_sprites
+     00008CE4  cpct_drawTileAligned2x4_f_asm      cpct_sprites
+     00008D05  __modschar                         
+     00008D12  __modsint                          
+     00008D1E  _cpct_mode_rom_status              cpct_firmware
+     00008D1F  _cpct_setDrawCharM0                cpct_strings
+     00008D44  _cpct_getScreenPtr                 cpct_video
+     00008D5A  __divsint                          
+     00008D63  __divschar                         
+     00008D6A  __div8                             
+     00008D6E  __div_signexte                     
+     00008D72  __div16                            
+     00008D98  __get_remainder                    
+     00008DA2  cpct_drawCharM0_inner_asm          cpct_strings
+     00008E02  dc_2pxtableM0                      cpct_strings
+     00008E06  dc_mode0_ct                        cpct_strings
 ASxxxx Linker V03.00 + NoICE + sdld,  page 8.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-_DATA                               00008ED1    000004A2 =        1186. bytes (REL,CON)
+_DATA                               00008E16    000004A2 =        1186. bytes (REL,CON)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-     00008ED1  _is_controling                     autoplay
-     00008ED2  _pvmem                             background
-     00008ED4  _all_balls                         balls
-     00008EFB  _serving                           balls
-     00008EFC  _block_meta                        blocks
-     00009340  _blocks_remaining                  blocks
-     00009342  _scene_game                        game
-     00009348  _current_state                     game
-     00009349  _current_level_num                 game
-     0000934A  _lives_left                        game
-     0000934B  _current_score                     game
-     0000934D  _high_score                        game
-     0000934F  _current_level                     globals
-     00009351  _displayed_score                   hud
-     00009353  _digits                            hud
-     00009367  _key_left_is_pressed               keys
-     00009368  _key_right_is_pressed              keys
-     00009369  _key_serve_is_pressed              keys
-     0000936A  _key_auto_is_pressed               keys
-     0000936B  _key_any_is_pressed                keys
-     0000936C  _key_pause_is_pressed              keys
-     0000936D  _scene_menu                        menu
+     00008E16  _is_controling                     autoplay
+     00008E17  _pvmem                             background
+     00008E19  _all_balls                         balls
+     00008E40  _serving                           balls
+     00008E41  _block_meta                        blocks
+     00009285  _blocks_remaining                  blocks
+     00009287  _scene_game                        game
+     0000928D  _current_state                     game
+     0000928E  _current_level_num                 game
+     0000928F  _lives_left                        game
+     00009290  _current_score                     game
+     00009292  _high_score                        game
+     00009294  _current_level                     globals
+     00009296  _displayed_score                   hud
+     00009298  _digits                            hud
+     000092AC  _key_left_is_pressed               keys
+     000092AD  _key_right_is_pressed              keys
+     000092AE  _key_serve_is_pressed              keys
+     000092AF  _key_auto_is_pressed               keys
+     000092B0  _key_any_is_pressed                keys
+     000092B1  _key_pause_is_pressed              keys
+     000092B2  _scene_menu                        menu
 
 ASxxxx Linker V03.00 + NoICE + sdld,  page 9.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-_INITIALIZED                        00009373    00000004 =           4. bytes (REL,CON)
+_INITIALIZED                        000092B8    00000004 =           4. bytes (REL,CON)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-     00009373  _batY                              bat
-     00009374  _batX                              bat
-     00009375  _oldBatX                           bat
-     00009376  _batW                              bat
+     000092B8  _batY                              bat
+     000092B9  _batX                              bat
+     000092BA  _oldBatX                           bat
+     000092BB  _batW                              bat
 
 ASxxxx Linker V03.00 + NoICE + sdld,  page 10.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-_INITIALIZER                        00009377    00000004 =           4. bytes (REL,CON)
+_INITIALIZER                        000092BC    00000004 =           4. bytes (REL,CON)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------

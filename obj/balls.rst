@@ -32,10 +32,10 @@
                              32 ; ram data
                              33 ;--------------------------------------------------------
                              34 	.area _DATA
-   8ED4                      35 _all_balls::
-   8ED4                      36 	.ds 39
-   8EFB                      37 _serving::
-   8EFB                      38 	.ds 1
+   8E19                      35 _all_balls::
+   8E19                      36 	.ds 39
+   8E40                      37 _serving::
+   8E40                      38 	.ds 1
                              39 ;--------------------------------------------------------
                              40 ; ram data
                              41 ;--------------------------------------------------------
@@ -66,12 +66,12 @@
                              66 ; ---------------------------------
    765E                      67 _balls_initialize::
                              68 ;src/balls.c:33: serving = 1;
-   765E 21 FB 8E      [10]   69 	ld	hl,#_serving + 0
+   765E 21 40 8E      [10]   69 	ld	hl,#_serving + 0
    7661 36 01         [10]   70 	ld	(hl), #0x01
                              71 ;src/balls.c:35: initialize_balls();
    7663 CD 85 77      [17]   72 	call	_initialize_balls
                              73 ;src/balls.c:38: center_ball(all_balls);
-   7666 21 D4 8E      [10]   74 	ld	hl, #_all_balls
+   7666 21 19 8E      [10]   74 	ld	hl, #_all_balls
    7669 E5            [11]   75 	push	hl
    766A CD D6 77      [17]   76 	call	_center_ball
    766D F1            [10]   77 	pop	af
@@ -82,9 +82,9 @@
                              82 ; ---------------------------------
    766F                      83 _balls_update::
                              84 ;src/balls.c:43: Ball *ball = all_balls;
-   766F 01 D4 8E      [10]   85 	ld	bc, #_all_balls+0
+   766F 01 19 8E      [10]   85 	ld	bc, #_all_balls+0
                              86 ;src/balls.c:44: if (serving)
-   7672 3A FB 8E      [13]   87 	ld	a,(#_serving + 0)
+   7672 3A 40 8E      [13]   87 	ld	a,(#_serving + 0)
    7675 B7            [ 4]   88 	or	a, a
    7676 28 12         [12]   89 	jr	Z,00115$
                              90 ;src/balls.c:46: center_ball(ball);
@@ -94,7 +94,7 @@
    767D F1            [10]   94 	pop	af
    767E C1            [10]   95 	pop	bc
                              96 ;src/balls.c:47: if (key_serve_is_pressed)
-   767F 3A 69 93      [13]   97 	ld	a,(#_key_serve_is_pressed + 0)
+   767F 3A AE 92      [13]   97 	ld	a,(#_key_serve_is_pressed + 0)
    7682 B7            [ 4]   98 	or	a, a
    7683 C8            [11]   99 	ret	Z
                             100 ;src/balls.c:49: handle_serve(ball);
@@ -136,7 +136,7 @@
    76AA F5            [11]  136 	push	af
    76AB 3B            [ 6]  137 	dec	sp
                             138 ;src/balls.c:64: Ball *ball = all_balls;
-   76AC 01 D4 8E      [10]  139 	ld	bc, #_all_balls+0
+   76AC 01 19 8E      [10]  139 	ld	bc, #_all_balls+0
                             140 ;src/balls.c:65: for (u8 i = 0; i < MAX_BALLS; i++)
    76AF DD 36 FD 00   [19]  141 	ld	-3 (ix), #0x00
    76B3                     142 00105$:
@@ -196,7 +196,7 @@
    7702 DD 39         [15]  196 	add	ix,sp
    7704 3B            [ 6]  197 	dec	sp
                             198 ;src/balls.c:78: Ball *ball = all_balls;
-   7705 01 D4 8E      [10]  199 	ld	bc, #_all_balls+0
+   7705 01 19 8E      [10]  199 	ld	bc, #_all_balls+0
                             200 ;src/balls.c:79: for (u8 i = 0; i < MAX_BALLS; i++)
    7708 DD 36 FF 00   [19]  201 	ld	-1 (ix), #0x00
    770C                     202 00105$:
@@ -231,13 +231,13 @@
    772D D5            [11]  231 	push	de
    772E 21 00 C0      [10]  232 	ld	hl, #0xc000
    7731 E5            [11]  233 	push	hl
-   7732 CD FF 8D      [17]  234 	call	_cpct_getScreenPtr
+   7732 CD 44 8D      [17]  234 	call	_cpct_getScreenPtr
    7735 11 03 06      [10]  235 	ld	de, #0x0603
    7738 D5            [11]  236 	push	de
    7739 E5            [11]  237 	push	hl
-   773A 21 B4 86      [10]  238 	ld	hl, #_sp_masked_ball
+   773A 21 F9 85      [10]  238 	ld	hl, #_sp_masked_ball
    773D E5            [11]  239 	push	hl
-   773E CD 31 8C      [17]  240 	call	_cpct_drawSpriteMasked
+   773E CD 76 8B      [17]  240 	call	_cpct_drawSpriteMasked
    7741 C1            [10]  241 	pop	bc
                             242 ;src/balls.c:87: ball++;
    7742 21 0D 00      [10]  243 	ld	hl, #0x000d
@@ -262,7 +262,7 @@
    7757 DD 39         [15]  262 	add	ix,sp
    7759 F5            [11]  263 	push	af
                             264 ;src/balls.c:94: Ball *ball = all_balls;
-   775A DD 36 FE D4   [19]  265 	ld	-2 (ix), #<(_all_balls)
+   775A DD 36 FE 19   [19]  265 	ld	-2 (ix), #<(_all_balls)
    775E DD 36 FF 8E   [19]  266 	ld	-1 (ix), #>(_all_balls)
                             267 ;src/balls.c:95: for (u8 i = 0; i < MAX_BALLS; i++)
    7762 E1            [10]  268 	pop	hl
@@ -318,7 +318,7 @@
    7793 29            [11]  318 	add	hl, hl
    7794 09            [11]  319 	add	hl, bc
    7795 EB            [ 4]  320 	ex	de,hl
-   7796 21 D4 8E      [10]  321 	ld	hl, #_all_balls
+   7796 21 19 8E      [10]  321 	ld	hl, #_all_balls
    7799 19            [11]  322 	add	hl,de
    779A EB            [ 4]  323 	ex	de,hl
    779B AF            [ 4]  324 	xor	a, a
@@ -374,7 +374,7 @@
    77CE 18 B7         [12]  374 	jr	00103$
    77D0                     375 00101$:
                             376 ;src/balls.c:125: all_balls[0].active = 1;
-   77D0 21 D4 8E      [10]  377 	ld	hl, #_all_balls
+   77D0 21 19 8E      [10]  377 	ld	hl, #_all_balls
    77D3 36 01         [10]  378 	ld	(hl), #0x01
    77D5 C9            [10]  379 	ret
                             380 ;src/balls.c:128: void center_ball(Ball *ball)
@@ -418,10 +418,10 @@
    780A FD 73 00      [19]  418 	ld	0 (iy), e
    780D FD 72 01      [19]  419 	ld	1 (iy), d
                             420 ;src/balls.c:135: ball->x = batX + (batW / 4);
-   7810 21 74 93      [10]  421 	ld	hl,#_batX + 0
+   7810 21 B9 92      [10]  421 	ld	hl,#_batX + 0
    7813 5E            [ 7]  422 	ld	e, (hl)
    7814 16 00         [ 7]  423 	ld	d, #0x00
-   7816 FD 21 76 93   [14]  424 	ld	iy, #_batW
+   7816 FD 21 BB 92   [14]  424 	ld	iy, #_batW
    781A FD 6E 00      [19]  425 	ld	l, 0 (iy)
    781D CB 3D         [ 8]  426 	srl	l
    781F CB 3D         [ 8]  427 	srl	l
@@ -434,7 +434,7 @@
    7828 7A            [ 4]  434 	ld	a, d
    7829 02            [ 7]  435 	ld	(bc), a
                             436 ;src/balls.c:136: ball->y = batY - SP_BALL_H;
-   782A 3A 73 93      [13]  437 	ld	a,(#_batY + 0)
+   782A 3A B8 92      [13]  437 	ld	a,(#_batY + 0)
    782D 06 00         [ 7]  438 	ld	b, #0x00
    782F C6 FA         [ 7]  439 	add	a, #0xfa
    7831 4F            [ 4]  440 	ld	c, a
@@ -458,7 +458,7 @@
    7842 DD 21 00 00   [14]  458 	ld	ix,#0
    7846 DD 39         [15]  459 	add	ix,sp
                             460 ;src/balls.c:142: serving = 0;
-   7848 21 FB 8E      [10]  461 	ld	hl,#_serving + 0
+   7848 21 40 8E      [10]  461 	ld	hl,#_serving + 0
    784B 36 00         [10]  462 	ld	(hl), #0x00
                             463 ;src/balls.c:145: ball->dx = 1;
    784D DD 5E 04      [19]  464 	ld	e,4 (ix)

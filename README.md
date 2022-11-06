@@ -6,6 +6,8 @@ A simple game using cpc telera
 
 
 ## todo
+- move block tile removal to remove background via a queue of some sort
+- ball background replace, move to copy and replace, not tile based
 - bat physics is bust
 - score
 - block physics and 

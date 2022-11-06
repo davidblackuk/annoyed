@@ -141,7 +141,7 @@ _keys_update::
 	call	_cpct_isKeyPressed
 	ld	iy, #_key_pause_is_pressed
 	ld	0 (iy), l
-;src/keys.c:47: key_any_is_pressed = cpct_isAnyKeyPressed_f();
+;src/keys.c:48: key_any_is_pressed = cpct_isAnyKeyPressed_f();
 	call	_cpct_isAnyKeyPressed_f
 	ld	iy, #_key_any_is_pressed
 	ld	0 (iy), l

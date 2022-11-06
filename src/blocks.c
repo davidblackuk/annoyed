@@ -29,11 +29,11 @@ u16 blocks_remaining;
 // ---------------------------------------------------------------------------
 
 //
-// Draw the tile map for the blocks layer over the background. this is a one 
+// Draw the tile map for the blocks layer over the background. this is a one
 // off initialization.
 //
-// We take the tile map definition and use this to initialize a further map 
-// that converts tile numbers into tile meta data, including the score for 
+// We take the tile map definition and use this to initialize a further map
+// that converts tile numbers into tile meta data, including the score for
 // the brick position, visibility, type etc.
 //
 void blocks_initialize(u8 is_restart)
@@ -44,7 +44,7 @@ void blocks_initialize(u8 is_restart)
         map_blocks_to_meta();
     }
 
-    // render the block map tile by tile to the screen so that levels can be 
+    // render the block map tile by tile to the screen so that levels can be
     // continued after a life is lost, with a partial board
     draw_current_blocks();
 }
@@ -72,7 +72,7 @@ BounceHits blocks_bounce_ball(Ball *ball, i16 at_x, i16 at_y)
 
     if (ball->dy < 0)
     {
-        // going up
+        // going up11111
         bounces |= is_ball_colliding_with_block(ball, at_x, at_y, BOUNCE_Y);
         bounces |= is_ball_colliding_with_block(ball, at_x + 3, at_y, BOUNCE_Y);
     }
@@ -83,17 +83,20 @@ BounceHits blocks_bounce_ball(Ball *ball, i16 at_x, i16 at_y)
         bounces |= is_ball_colliding_with_block(ball, at_x + 3, at_y + 6, BOUNCE_Y);
     }
 
-    if (ball->dx < 0)
+    if (bounces & BOUNCE_Y == 0)
     {
-        // going left
-        bounces |= is_ball_colliding_with_block(ball, at_x, at_y, BOUNCE_X);
-        bounces |= is_ball_colliding_with_block(ball, at_x, at_y + 6, BOUNCE_X);
-    }
-    else
-    {
-        // going right
-        bounces |= is_ball_colliding_with_block(ball, at_x + 3, at_y, BOUNCE_X);
-        bounces |= is_ball_colliding_with_block(ball, at_x + 3, at_y + 6, BOUNCE_X);
+        if (ball->dx < 0)
+        {
+            // going left
+            bounces |= is_ball_colliding_with_block(ball, at_x, at_y, BOUNCE_X);
+            bounces |= is_ball_colliding_with_block(ball, at_x, at_y + 6, BOUNCE_X);
+        }
+        else
+        {
+            // going right
+            bounces |= is_ball_colliding_with_block(ball, at_x + 3, at_y, BOUNCE_X);
+            bounces |= is_ball_colliding_with_block(ball, at_x + 3, at_y + 6, BOUNCE_X);
+        }
     }
 
     return bounces;
@@ -111,32 +114,34 @@ BounceHits is_ball_colliding_with_block(Ball *ball, i16 wx, i16 wy, BounceHits b
     meta = get_metaData_at(wx, wy);
     if (meta)
     {
-        if (meta->remaining_hits != INDESTRUCTABLE) {
-            if (meta->remaining_hits > 1) {
+        if (meta->remaining_hits != INDESTRUCTABLE)
+        {
+            if (meta->remaining_hits > 1)
+            {
                 meta->remaining_hits -= 1;
-            } else {
+            }
+            else
+            {
                 meta->remaining_hits = 0;
                 meta->is_active = 0;
                 blocks_remaining -= 1;
                 current_score += meta->score;
 
                 // just try to draw tile thats removed
-                pvm = cpct_getScreenPtr(CPCT_VMEM_START, 
-                            W_2_S_X(meta->block_tile_x * TILE_W),
-                            BRICKS_MAP_PIXEL_TOP_SCR + (meta->block_tile_y * TILE_H ) );
+                pvm = cpct_getScreenPtr(CPCT_VMEM_START,
+                                        W_2_S_X(meta->block_tile_x * TILE_W),
+                                        BRICKS_MAP_PIXEL_TOP_SCR + (meta->block_tile_y * TILE_H));
 
                 cpct_drawSolidBox(pvm, 0, TILE_W * 2, TILE_H * 2);
-                
-                background_restore_tiles_exact(meta->block_tile_x + 2,
-                meta->block_tile_y + 6,
-                2,2);
 
+                background_restore_tiles_exact(meta->block_tile_x + 2,
+                                               meta->block_tile_y + 6,
+                                               2, 2);
             }
         }
 
-
         // background_debug_box_wc((meta->block_tile_x) * TILE_W,
-        //                         (meta->block_tile_y * TILE_H) + BRICKS_MAP_PIXEL_TOP_SCR, 
+        //                         (meta->block_tile_y * TILE_H) + BRICKS_MAP_PIXEL_TOP_SCR,
         //                         BALL_WIDTH, BALL_HEIGHT);
 
         // background_restore_world_coords((meta->block_tile_x) * TILE_W,
@@ -240,9 +245,9 @@ void map_blocks_to_meta()
                 plant_tile_meta(x, y, YELLOW_BLOCK, YELLOW_SCORE, SINGLE_HIT_TO_REMOVE);
                 break;
             case STEEL_BLOCK:
-                plant_tile_meta(x, y, STEEL_BLOCK, 
-                    current_level->steel_score, 
-                    current_level->steel_hits_to_destroy);
+                plant_tile_meta(x, y, STEEL_BLOCK,
+                                current_level->steel_score,
+                                current_level->steel_hits_to_destroy);
                 break;
             case GOLD_BLOCK:
                 plant_tile_meta(x, y, GOLD_BLOCK, 0, INDESTRUCTABLE);
@@ -261,7 +266,8 @@ void map_blocks_to_meta()
 
 void plant_tile_meta(u8 map_x, u8 map_y, u8 tile_type, u8 score, u8 hits_to_destroy)
 {
-    if (hits_to_destroy != INDESTRUCTABLE) {
+    if (hits_to_destroy != INDESTRUCTABLE)
+    {
         blocks_remaining += 1;
     }
 
