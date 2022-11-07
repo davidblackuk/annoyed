@@ -26,7 +26,7 @@
 const Level level_definitions[NUM_LEVELS] = {
     {   // level 1
         g_tilemap_l01_background,       // void *background_tilemap;
-        g_tilemap_debug_blocks,           // void *blocks_tilemap;
+        g_tilemap_l01_blocks,           // void *blocks_tilemap;
         5,                              // steel_score (50*level_number), scores are divided by 10
         2,                              // steel_hits_to_destroy (2 initially then 1 extra every 8 levels )
     },
