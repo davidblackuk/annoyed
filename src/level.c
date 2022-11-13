@@ -39,8 +39,8 @@ void level_draw()
 {
     // restore the background of moving items
     bat_restore_background();
-    blocks_restore_background();
     balls_restore_background();
+    blocks_restore_background();
 
     // draw that which must be drawn
     blocks_draw();
