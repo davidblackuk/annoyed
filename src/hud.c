@@ -24,7 +24,6 @@ u16 displayed_score;
 #define HUD_TOP 1
 #define HUD_TEXT_SPACING 10
 
-const u8 *digits[10];
 
 // ---------------------------------------------------------------------------
 // Module public methods
@@ -32,16 +31,6 @@ const u8 *digits[10];
 
 void hud_initialize()
 {
-    digits[0] = sp_font_00;
-    digits[1] = sp_font_01;
-    digits[2] = sp_font_02;
-    digits[3] = sp_font_03;
-    digits[4] = sp_font_04;
-    digits[5] = sp_font_05;
-    digits[6] = sp_font_06;
-    digits[7] = sp_font_07;
-    digits[8] = sp_font_08;
-    digits[9] = sp_font_09;
 
     hud_initialize_internal(FALSE);
 }

@@ -13,6 +13,27 @@
 // Module private declarations
 // ---------------------------------------------------------------------------
 
+
+// maximum number of blocks that a ball can destroy in a frame
+#define MAX_BLOCKS_PER_BALL 4
+#define MAX_BLOCKS_TO_REPLACE MAX_BLOCKS_PER_BALL * MAX_BALLS
+
+typedef struct {
+    u8 x;
+    u8 y;
+} RemovedTile;
+
+BlockMeta block_meta[BLOCKS_MAP_W / 2][BLOCKS_MAP_H / 2];
+
+u16 blocks_remaining;
+
+// the list of blocks to be replaced when restoring the background
+// it's mostlikely overkill in space size, possible source for optimization
+RemovedTile blocks_removed[MAX_BLOCKS_TO_REPLACE];
+
+// number of blocks in the queue that need to be processed
+u8 remove_count;
+
 void map_blocks_to_meta();
 void draw_current_blocks();
 
@@ -20,9 +41,7 @@ void plant_tile_meta(u8 map_x, u8 map_y, u8 tile_type, u8 score, u8 hits_to_dest
 BlockMeta *get_metaData_at(i16 wx, i16 wy);
 BounceHits is_ball_colliding_with_block(Ball *ball, i16 wx, i16 wy, BounceHits bounceType);
 
-BlockMeta block_meta[BLOCKS_MAP_W / 2][BLOCKS_MAP_H / 2];
-
-u16 blocks_remaining;
+void store_block_to_remove(u8 x, u8 y);
 
 // ---------------------------------------------------------------------------
 // Module public methods
@@ -38,6 +57,7 @@ u16 blocks_remaining;
 //
 void blocks_initialize(u8 is_restart)
 {
+    remove_count = 0;
     if (!is_restart)
     {
         // create a structure defining what blocks are on the screen
@@ -55,6 +75,13 @@ void blocks_draw()
 
 void blocks_restore_background()
 {
+    for (u8 block = 0; block < remove_count; block++)
+    {
+        background_restore_tiles_exact(blocks_removed[block].x + 2,
+                                               blocks_removed[block].y + 6,
+                                               2, 2);
+    }
+    remove_count = 0;
 }
 
 BounceHits blocks_bounce_ball(Ball *ball, i16 at_x, i16 at_y)
@@ -64,6 +91,7 @@ BounceHits blocks_bounce_ball(Ball *ball, i16 at_x, i16 at_y)
 
     // are we above or below the tilemap for blocks, if so no collision
     // is possible
+
     if (W_2_S_Y(at_y) < BRICKS_MAP_PIXEL_TOP_SCR ||
         W_2_S_Y(at_y) > BRICKS_MAP_PIXEL_BOTTOM_SCR)
     {
@@ -72,7 +100,7 @@ BounceHits blocks_bounce_ball(Ball *ball, i16 at_x, i16 at_y)
 
     if (ball->dy < 0)
     {
-        // going up11111
+        // going up
         bounces |= is_ball_colliding_with_block(ball, at_x, at_y, BOUNCE_Y);
         bounces |= is_ball_colliding_with_block(ball, at_x + 3, at_y, BOUNCE_Y);
     }
@@ -83,7 +111,7 @@ BounceHits blocks_bounce_ball(Ball *ball, i16 at_x, i16 at_y)
         bounces |= is_ball_colliding_with_block(ball, at_x + 3, at_y + 6, BOUNCE_Y);
     }
 
-    if (bounces & BOUNCE_Y == 0)
+    if ((bounces & BOUNCE_Y) == 0)
     {
         if (ball->dx < 0)
         {
@@ -98,6 +126,8 @@ BounceHits blocks_bounce_ball(Ball *ball, i16 at_x, i16 at_y)
             bounces |= is_ball_colliding_with_block(ball, at_x + 3, at_y + 6, BOUNCE_X);
         }
     }
+
+
 
     return bounces;
 }
@@ -132,20 +162,10 @@ BounceHits is_ball_colliding_with_block(Ball *ball, i16 wx, i16 wy, BounceHits b
                                         W_2_S_X(meta->block_tile_x * TILE_W),
                                         BRICKS_MAP_PIXEL_TOP_SCR + (meta->block_tile_y * TILE_H));
 
-                cpct_drawSolidBox(pvm, 0, TILE_W * 2, TILE_H * 2);
-
-                background_restore_tiles_exact(meta->block_tile_x + 2,
-                                               meta->block_tile_y + 6,
-                                               2, 2);
+                store_block_to_remove(meta->block_tile_x,
+                                               meta->block_tile_y);
             }
         }
-
-        // background_debug_box_wc((meta->block_tile_x) * TILE_W,
-        //                         (meta->block_tile_y * TILE_H) + BRICKS_MAP_PIXEL_TOP_SCR,
-        //                         BALL_WIDTH, BALL_HEIGHT);
-
-        // background_restore_world_coords((meta->block_tile_x) * TILE_W,
-        //   (meta->block_tile_y * TILE_H)+24, BALL_WIDTH, BALL_HEIGHT);
 
         bounces = bounceType;
     }
@@ -278,3 +298,25 @@ void plant_tile_meta(u8 map_x, u8 map_y, u8 tile_type, u8 score, u8 hits_to_dest
     block_meta[map_x / 2][map_y / 2].block_tile_x = map_x;
     block_meta[map_x / 2][map_y / 2].block_tile_y = map_y;
 }
+
+
+void store_block_to_remove(u8 x, u8 y) {
+
+    // too many blocks scheduled for removal?    
+    if (remove_count >= MAX_BLOCKS_TO_REPLACE) {
+        return;
+    }
+    
+    for (u8 curr = 0; curr < remove_count; curr++) {
+         // tile already in the list return
+        if (blocks_removed[curr].x == x && blocks_removed[curr].y == y) {           
+            return;
+        }
+    }
+
+    blocks_removed[remove_count].x = x;
+    blocks_removed[remove_count].y = y;
+    remove_count++;
+}
+
+

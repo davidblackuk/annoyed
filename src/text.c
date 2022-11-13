@@ -8,6 +8,19 @@
 // Module private declarations
 // ---------------------------------------------------------------------------
 
+u8 * const digits[10] = {
+    sp_font_00,
+    sp_font_01,
+    sp_font_02,
+    sp_font_03,
+    sp_font_04,
+    sp_font_05,
+    sp_font_06,
+    sp_font_07,
+    sp_font_08,
+    sp_font_09,
+};
+
 // ---------------------------------------------------------------------------
 // Module public state externally used
 // ---------------------------------------------------------------------------
@@ -26,7 +39,7 @@ void text_write_string(u8 x, u8 y, char *text)
 {
     u8 *svmem = cpct_getScreenPtr(CPCT_VMEM_START, x, y);
     u8 index = 0;
-    u8 *charsprite = 0;
+    const u8 *charsprite = 0;
 
     while (*text)
     {
@@ -70,6 +83,21 @@ void text_write_string(u8 x, u8 y, char *text)
 
         text++;
         svmem += 2;
+    }
+}
+
+void text_write_number(u8 x, u8 y, u16 number) {
+    u8 i;
+
+    // we draw 5 digits starting at the right most digit, so we offset x
+    u8 *svmem = cpct_getScreenPtr(CPCT_VMEM_START, x + 10, y);
+
+     for (i = 0; i < 5; i++)
+    {
+        u8 digit = (number % 10);
+        // cpct_drawCharM0((void *)(pv - 4 * i), digit);
+        cpct_drawSprite(digits[digit], (svmem - (2 * (i + 1))), SP_FONT_CHAR_W, SP_FONT_CHAR_H);
+        number /= 10;
     }
 }
 

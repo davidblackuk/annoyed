@@ -4,7 +4,8 @@
 #include <types.h>
 
 
-extern void dbg_displayNumber(u8 char_row, i16 num);
+extern void dbg_write_number(u8 x, u8 y, u16 num);
+extern void dbg_write_string(u8 x, u8 y, char * text);
 
 
 
