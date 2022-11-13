@@ -29,6 +29,8 @@ $(eval $(call IMG2SP, CONVERT         , assets/bat-mid.png , 0, 0, sp_bat_mid))
 $(eval $(call IMG2SP, CONVERT         , assets/annoyed.png , 0, 0, sp_logo))
 $(eval $(call IMG2SP, CONVERT         , assets/life-marker.png , 0, 0, sp_life))
 
+$(eval $(call IMG2SP, CONVERT         , assets/pow-green.png , 8, 8, sp_pow_green))
+
 $(eval $(call IMG2SP, CONVERT         , assets/font.png , 4, 8, sp_font))
 
 
