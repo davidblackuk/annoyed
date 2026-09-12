@@ -20,6 +20,11 @@
 // for the documentation about the tasks.json format
 {
     "version": "2.0.0",
+    "options": {
+        "env": {
+            "CPCT_PATH": "/home/davidb/cpctelera/cpctelera"
+        }
+    },
     "tasks": [
         {
             "label": "make",
@@ -62,6 +67,16 @@
                 "cleanall"
             ],
             "group": "build",
+            "problemMatcher": []
+        },
+        {
+            "label": "run_sna",
+            "type": "shell",
+            "command": "make",
+            "args": [
+                "run_sna"
+            ],
+            "group": "none",
             "problemMatcher": []
         },
         {

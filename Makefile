@@ -13,10 +13,10 @@ kill_old:
 	-killall --quiet -9 cpcemu
 
 run_sna:$(SNA) kill_old
-	cpcemu annoyed.sna
+	cpcemu annoyed.sna &
 
 run_dsk: $(DSK) kill_old
-	cpcemu annoyed.dsk
+	cpcemu annoyed.dsk &
 
 really_clean: clean
 	-rm annoyed.*
