@@ -92,6 +92,46 @@ BounceHits bat_bounce_ball(Ball *ball, i16 at_x, i16 at_y)
         (ball->x + BALL_WIDTH > batX && ball->x < batX + batW) &&
         (ball->y + BALL_HEIGHT > batY && ball->y < batY + SP_BAT_SEG_H))
     {
+        // Steer the ball based on which of the bat's 4 visual segments it
+        // struck (edges kick it out sharply, the middle two segments give
+        // a shallower angle), like the original Arkanoid paddle.
+        i16 offset = (ball->x + (BALL_WIDTH / 2)) - batX;
+        u8 segment;
+
+        if (offset < 0)
+        {
+            offset = 0;
+        }
+        else if (offset >= batW)
+        {
+            offset = batW - 1;
+        }
+        segment = offset / BAT_SEGMENT_WIDTH_BYTES;
+
+        // dy is set here too (rather than left to the automatic sign-flip
+        // below) so overall ball speed stays close to the serve speed for
+        // most hits, only picking up a little extra pace off the edges -
+        // not a big jump on every single bounce.
+        switch (segment)
+        {
+        case 0:
+            ball->dx = -2;
+            ball->dy = 2;
+            break;
+        case 1:
+            ball->dx = -1;
+            ball->dy = 2;
+            break;
+        case 2:
+            ball->dx = 1;
+            ball->dy = 2;
+            break;
+        default:
+            ball->dx = 2;
+            ball->dy = 2;
+            break;
+        }
+
         bounces |= BOUNCE_Y;
     }
 

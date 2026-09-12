@@ -39,7 +39,7 @@ void game_draw()
     hud_draw();
 
 
-    temp();
+    // temp();
 }
 
 void temp() {

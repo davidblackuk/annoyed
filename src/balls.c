@@ -147,9 +147,9 @@ void handle_serve(Ball *ball)
     // mark that we are no longer serving
     serving = 0;
 
-    // set the ball delta to 2 pixels up and 2 pixels right (1 byte)
+    // set the ball delta to 2 pixels up and 1 pixel right (1 byte)
     ball->dx = 1;
-    ball->dy = -3;
+    ball->dy = -2;
 
     // initialixe previous coords to current for background replacement
     ball->prev_x = ball->x;
