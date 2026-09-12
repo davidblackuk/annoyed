@@ -6,6 +6,7 @@
 
 extern void bat_initialize();
 extern void bat_update();
+extern void bat_move_towards(i16 target_x);
 extern void bat_restore_background();
 extern void bat_draw();
 extern BounceHits bat_bounce_ball(Ball * ball, i16 at_x, i16 at_y);

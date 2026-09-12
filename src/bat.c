@@ -28,6 +28,10 @@
 #define BAT_SEGMENT_WIDTH_PIXELS 4
 #define BAT_SEGMENT_WIDTH_BYTES 2
 
+// matches the ball's fastest possible dx (see balls.h) so the autoplay bat
+// can never be outrun by the ball, however hard the ball is bounced
+#define AUTO_BAT_MAX_STEP 2
+
 u8 batY = 0;
 u8 batX = 0;
 u8 oldBatX = 0;
@@ -62,6 +66,31 @@ void bat_update()
             oldBatX = batX;
             batX++;
         }
+    }
+}
+
+void bat_move_towards(i16 target_x)
+{
+    if (target_x < 0)
+    {
+        target_x = 0;
+    }
+    else if (target_x > PLAY_AREA_WIDTH - batW)
+    {
+        target_x = PLAY_AREA_WIDTH - batW;
+    }
+
+    oldBatX = batX;
+
+    if (target_x > batX)
+    {
+        u8 step = ((target_x - batX) > AUTO_BAT_MAX_STEP) ? AUTO_BAT_MAX_STEP : (u8)(target_x - batX);
+        batX += step;
+    }
+    else if (target_x < batX)
+    {
+        u8 step = ((batX - target_x) > AUTO_BAT_MAX_STEP) ? AUTO_BAT_MAX_STEP : (u8)(batX - target_x);
+        batX -= step;
     }
 }
 
