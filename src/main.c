@@ -59,22 +59,12 @@ void play_scene(Scene *scene)
 
    do
    {
-      int w = 0;
-
+     
       // wait for vsynv before rendering
       cpct_waitVSYNC();
 
       scene->draw();
       state = scene->update();
-
-      {
-         i16 q = 0;
-         i16 t = 5;
-         for (i16 i = 0; i < t; i++)
-         {
-            q = q + 1;
-         }
-      }
 
    } while (state == Continue);
 }
