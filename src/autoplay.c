@@ -10,6 +10,12 @@
 
 u8 is_controling;
 
+// tracks the previous frame's key_auto_is_pressed so the toggle below only
+// fires once per press - without this, holding the key for more than one
+// frame (~50 times/sec) flips is_controling back and forth repeatedly and
+// leaves it in whatever state it happened to land on at release
+u8 auto_key_was_pressed;
+
 // Autoplay rotates which of these zones across the bat's width it aims the
 // ball at, rather than always centering the ball on the bat. Always hitting
 // dead centre produces the same rebound angle every time (see
@@ -25,6 +31,8 @@ i16 auto_prev_ball_dy;
 // a paddle hit rather than the ball bouncing off the underside of a block
 #define AUTO_BAT_PROXIMITY 12
 
+i16 predict_ball_x_at_bat(Ball *ball);
+
 // ---------------------------------------------------------------------------
 // Module public methods
 // ---------------------------------------------------------------------------
@@ -34,14 +42,16 @@ void auto_initialize()
     is_controling = 0;
     auto_hit_zone = 0;
     auto_prev_ball_dy = 0;
+    auto_key_was_pressed = 0;
 }
 
 void auto_update()
 {
-    if (key_auto_is_pressed)
+    if (key_auto_is_pressed && !auto_key_was_pressed)
     {
         is_controling = is_controling ? 0 : 1;
     }
+    auto_key_was_pressed = key_auto_is_pressed;
 
     if (is_controling)
     {
@@ -56,11 +66,6 @@ void auto_update()
             }
             else
             {
-                u8 zone_width = batW / AUTO_HIT_ZONES;
-                i16 target_offset;
-                i16 ball_centre_x;
-                i16 target_bat_x;
-
                 // a downward bounce turning upward while close to bat height
                 // is a paddle hit - rotate to the next strike zone so the
                 // next approach lands on a different part of the bat
@@ -70,16 +75,29 @@ void auto_update()
                     auto_hit_zone = (auto_hit_zone + 1) % AUTO_HIT_ZONES;
                 }
 
-                target_offset = (auto_hit_zone * zone_width) + (zone_width / 2);
-                ball_centre_x = ball->x + (BALL_WIDTH / 2);
-                target_bat_x = ball_centre_x - target_offset;
+                if (ball->dy < 0)
+                {
+                    // ball is heading away from the bat (just been hit, or
+                    // bounced off the underside of a block) - like a squash
+                    // player returning to the centre of the court, park in
+                    // the middle and wait rather than chasing its every
+                    // wiggle off the side walls
+                    bat_move_towards((PLAY_AREA_WIDTH - batW) / 2);
+                }
+                else
+                {
+                    // ball is descending towards the bat - predict where it
+                    // will actually arrive (accounting for any remaining
+                    // wall bounces) and glide straight there, rather than
+                    // re-aiming at its current, zig-zagging position every
+                    // frame. If a block deflects it unexpectedly, this is
+                    // recomputed fresh next frame from the new trajectory.
+                    u8 zone_width = batW / AUTO_HIT_ZONES;
+                    i16 target_offset = (auto_hit_zone * zone_width) + (zone_width / 2);
+                    i16 predicted_centre_x = predict_ball_x_at_bat(ball) + (BALL_WIDTH / 2);
 
-                // move directly rather than via the 1px/frame key path -
-                // bat_move_towards can keep pace with the ball's fastest
-                // possible dx (2px/frame, from an edge hit), which plain
-                // key-driven movement cannot, so a hard bounce off an edge
-                // zone can never outrun the bat
-                bat_move_towards(target_bat_x);
+                    bat_move_towards(predicted_centre_x - target_offset);
+                }
             }
 
             auto_prev_ball_dy = ball->dy;
@@ -87,6 +105,47 @@ void auto_update()
     }
 }
 
+
+
 // ---------------------------------------------------------------------------
 // Module private methods
 // ---------------------------------------------------------------------------
+
+/// Predict the ball's (left-edge) world x when it reaches bat height,
+/// assuming a straight run with only side-wall bounces (blocks aren't
+/// modelled - if one deflects the ball this is simply wrong for one frame
+/// and self-corrects, since it's recomputed from scratch every frame).
+/// Uses the classic "unfold and reflect" trick: extend the straight-line
+/// path past the walls, then fold it back into the play area.
+i16 predict_ball_x_at_bat(Ball *ball)
+{
+    i16 frames_to_bat;
+    i16 unfolded_x;
+    i16 max_x;
+    i16 period;
+    i16 folded;
+
+    frames_to_bat = (batY - ball->y) / ball->dy;
+    if (frames_to_bat < 0)
+    {
+        frames_to_bat = 0;
+    }
+
+    unfolded_x = ball->x + (ball->dx * frames_to_bat);
+
+    max_x = PLAY_AREA_WIDTH - BALL_WIDTH;
+    period = 2 * max_x;
+
+    folded = unfolded_x % period;
+    if (folded < 0)
+    {
+        folded += period;
+    }
+
+    if (folded > max_x)
+    {
+        folded = period - folded;
+    }
+
+    return folded;
+}

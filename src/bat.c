@@ -96,7 +96,15 @@ void bat_move_towards(i16 target_x)
 
 void bat_restore_background()
 {
-    background_restore_world_coords(oldBatX, batY, batW, BAT_HEIGHT_PIXELS);
+    // Restoring only oldBatX (with width batW) is exactly correct for a
+    // 1px/frame move, but autoplay can jump the bat up to
+    // AUTO_BAT_MAX_STEP px in one frame. Restore the union of the old and
+    // new footprints instead, so the old sprite is always fully erased
+    // regardless of how far it moved this frame.
+    u8 restore_x = (oldBatX < batX) ? oldBatX : batX;
+    u8 spread = (oldBatX < batX) ? (batX - oldBatX) : (oldBatX - batX);
+
+    background_restore_world_coords(restore_x, batY, batW + spread, BAT_HEIGHT_PIXELS);
 }
 
 void bat_draw()
