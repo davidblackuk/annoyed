@@ -6,6 +6,8 @@
 
 extern void auto_initialize();
 
+extern void auto_reset_for_level();
+
 extern void auto_update();
 
 #endif

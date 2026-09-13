@@ -32,17 +32,26 @@ i16 auto_prev_ball_dy;
 #define AUTO_BAT_PROXIMITY 12
 
 i16 predict_ball_x_at_bat(Ball *ball);
+void auto_reset_tracking_state();
 
 // ---------------------------------------------------------------------------
 // Module public methods
 // ---------------------------------------------------------------------------
 
+/// @brief Full reset for the start of a brand new game - autoplay always
+/// starts off, regardless of whether it was left on from a previous game.
 void auto_initialize()
 {
     is_controling = 0;
-    auto_hit_zone = 0;
-    auto_prev_ball_dy = 0;
-    auto_key_was_pressed = 0;
+    auto_reset_tracking_state();
+}
+
+/// @brief Reset for moving to a new level or continuing after a life lost -
+/// is_controling is left as-is, so autoplay stays on/off across levels
+/// exactly as the player last set it.
+void auto_reset_for_level()
+{
+    auto_reset_tracking_state();
 }
 
 void auto_update()
@@ -110,6 +119,13 @@ void auto_update()
 // ---------------------------------------------------------------------------
 // Module private methods
 // ---------------------------------------------------------------------------
+
+void auto_reset_tracking_state()
+{
+    auto_hit_zone = 0;
+    auto_prev_ball_dy = 0;
+    auto_key_was_pressed = 0;
+}
 
 /// Predict the ball's (left-edge) world x when it reaches bat height,
 /// assuming a straight run with only side-wall bounces (blocks aren't

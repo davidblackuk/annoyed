@@ -85,8 +85,10 @@ void level_initialize_internal(u8 is_restart)
 
     background_initialize();
     blocks_initialize(is_restart);
-    auto_initialize();
 
+    // autoplay's on/off state is decided by the caller (see game.c) - a
+    // fresh game always starts with it off, but it should carry over as-is
+    // across a level advance or a life-lost continue
     keys_initialize();
     bat_initialize();
     balls_initialize();

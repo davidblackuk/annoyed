@@ -67,7 +67,8 @@ typedef enum
      SceneComplete,
      LevelCompleteFail,
      LevelCompleteSuccess,
-     GameOver,
+     GameOverWin,
+     GameOverLoose
 } SceneState;
 
 // flags storing edges bounced on
@@ -110,6 +111,6 @@ typedef struct
 extern const Level level_definitions[NUM_LEVELS];
 
 // A pointer to the current level
-extern Level *current_level;
+extern const Level *current_level;
 
 #endif

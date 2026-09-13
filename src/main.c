@@ -3,12 +3,14 @@
 #include "sprites/g_palette.h"
 #include "h/game.h"
 #include "h/menu.h"
+#include "h/scene_game_over_win.h"
+#include "h/scene_game_over_fail.h"
 
 // ---------------------------------------------------------------------------
 // Module private declarations
 // ---------------------------------------------------------------------------
 
-void play_scene(Scene *scene);
+SceneState play_scene(Scene *scene);
 
 // ---------------------------------------------------------------------------
 // Module public state externally used
@@ -25,7 +27,7 @@ void initializeCpc()
    cpct_disableFirmware();
 
    cpct_setBorder(HW_BLACK);
-   // cpct_setBorder(HW_WHITE);
+   cpct_setBorder(HW_WHITE);
 
    // set screen mode 0, 16 colors
    cpct_setVideoMode(0);
@@ -35,15 +37,28 @@ void initializeCpc()
 
 void main(void)
 {
+   SceneState game_result;
+
    high_score = 1000;
    initializeCpc();
    module_menu_initialize();
    module_game_initialize();
+   module_game_over_win_initialize();
+   module_game_over_fail_initialize();
 
    while (1)
    {
       play_scene(&scene_menu);
-      play_scene(&scene_game);
+      game_result = play_scene(&scene_game);
+
+      if (game_result == GameOverWin)
+      {
+         play_scene(&scene_game_over_win);
+      }
+      else
+      {
+         play_scene(&scene_game_over_fail);
+      }
    }
 }
 
@@ -51,7 +66,7 @@ void main(void)
 // Module private methods
 // ---------------------------------------------------------------------------
 
-void play_scene(Scene *scene)
+SceneState play_scene(Scene *scene)
 {
    SceneState state = Continue;
 
@@ -59,7 +74,7 @@ void play_scene(Scene *scene)
 
    do
    {
-     
+
       // wait for vsynv before rendering
       cpct_waitVSYNC();
 
@@ -67,4 +82,6 @@ void play_scene(Scene *scene)
       state = scene->update();
 
    } while (state == Continue);
+
+   return state;
 }

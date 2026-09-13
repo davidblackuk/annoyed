@@ -46,7 +46,7 @@ const Level level_definitions[NUM_LEVELS] = {
     }};
 
 // The global current level
-Level *current_level;
+const Level *current_level;
 
 // ---------------------------------------------------------------------------
 // Module public methods

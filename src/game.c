@@ -3,6 +3,7 @@
 #include <h/globals.h>
 #include <h/level.h>
 #include <h/game.h>
+#include <h/autoplay.h>
 #include "sprites/pow-green.h"
 // ---------------------------------------------------------------------------
 // Module private declarations
@@ -17,7 +18,7 @@ u8 lives_left;
 u16 current_score;
 u16 high_score;
 
-void initialise_level();
+void initialise_level(u8 is_new_game);
 void temp();
 // ---------------------------------------------------------------------------
 // Module public methods
@@ -29,7 +30,7 @@ void game_initialize()
     current_score = 0;
     lives_left = INITIAL_LIVES;
     current_state = Continue;
-    initialise_level();    
+    initialise_level(TRUE);
 }
 
 void game_draw()
@@ -61,17 +62,18 @@ SceneState game_update()
     if (res == LevelCompleteSuccess) {
         current_level_num += 1;
         if (current_level_num >= NUM_LEVELS) {
-            return GameOver;
+            return GameOverWin;
         }
-        initialise_level();
+        initialise_level(FALSE);
         res = Continue;
 
     } else if (res == LevelCompleteFail) {
         lives_left -= 1;
         if (lives_left == 0) {
-            return GameOver;
+            return GameOverLoose;
         }
         level_continue_from_death();
+        auto_reset_for_level();
         hud_continue_from_death();
         res = Continue;
     }
@@ -91,8 +93,17 @@ void module_game_initialize()
 // Module private methods
 // ---------------------------------------------------------------------------
 
-void initialise_level() {
+void initialise_level(u8 is_new_game) {
     current_level = level_definitions + current_level_num;
     level_initialize();
+
+    // a brand new game always starts with autoplay off; advancing to a new
+    // level keeps autoplay however the player currently has it set
+    if (is_new_game) {
+        auto_initialize();
+    } else {
+        auto_reset_for_level();
+    }
+
     hud_initialize();
 }

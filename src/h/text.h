@@ -4,7 +4,7 @@
 #include <types.h>
 
 /// @brief Pointers to the 10 sprites representing digits 0..9
-extern  u8 * const digits[10];
+extern  const u8 * const digits[10];
 
 
 /// @brief writes a string to the screen at the specified coordinates. 
