@@ -44,6 +44,12 @@ void level_draw()
 
     // draw that which must be drawn
     blocks_draw();
+
+    // capture ball backgrounds before the bat is drawn, so a ball
+    // overlapping the bat (as on every paddle bounce) never snapshots bat
+    // pixels into its restore buffer - see balls_store_background
+    balls_store_background();
+
     bat_draw();
     balls_draw();
 }

@@ -74,6 +74,25 @@ void balls_restore_background()
     }
 }
 
+// captures the background under each active ball's current position. Must
+// run after blocks_draw() but before bat_draw() - if it captured after the
+// bat was drawn, a ball overlapping the bat (as it does on every paddle
+// bounce) would snapshot bat pixels instead of the true background, and
+// later restore_bacgkround() would stamp that fragment onto the screen
+// permanently once the ball and bat had both moved away from that spot.
+void balls_store_background()
+{
+    Ball *ball = all_balls;
+    for (u8 i = 0; i < MAX_BALLS; i++)
+    {
+        if (ball->active)
+        {
+            store_bacgkround(ball);
+        }
+        ball++;
+    }
+}
+
 void balls_draw()
 {
     u8 *svmem;
@@ -82,13 +101,11 @@ void balls_draw()
     {
         if (ball->active)
         {
-            store_bacgkround(ball);
             svmem = cpct_getScreenPtr(CPCT_VMEM_START, W_2_S_X(ball->x), W_2_S_Y(ball->y));
 
             cpct_drawSpriteMasked(sp_masked_ball, svmem, SP_BALL_W, SP_BALL_H);
-
-            ball++;
         }
+        ball++;
     }
 }
 

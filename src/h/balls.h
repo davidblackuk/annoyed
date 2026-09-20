@@ -27,7 +27,12 @@ typedef struct
 extern void balls_initialize();
 extern void balls_update();
 extern void balls_restore_background();
-       
+
+// captures the background under each active ball's current position - must
+// be called after blocks are drawn but before the bat is drawn, so the
+// captured pixels never include the bat sprite (see balls_draw)
+extern void balls_store_background();
+
 extern void balls_draw();
 
 extern Ball * balls_get_first_active();
