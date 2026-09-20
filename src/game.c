@@ -4,7 +4,6 @@
 #include <h/level.h>
 #include <h/game.h>
 #include <h/autoplay.h>
-#include "sprites/pow-green.h"
 // ---------------------------------------------------------------------------
 // Module private declarations
 // ---------------------------------------------------------------------------
@@ -19,7 +18,6 @@ u16 current_score;
 u16 high_score;
 
 void initialise_level(u8 is_new_game);
-void temp();
 // ---------------------------------------------------------------------------
 // Module public methods
 // ---------------------------------------------------------------------------
@@ -38,17 +36,6 @@ void game_draw()
     level_draw();
 
     hud_draw();
-
-
-    // temp();
-}
-
-void temp() {
-    u8 *svmem = cpct_getScreenPtr(CPCT_VMEM_START, W_2_S_X(20), W_2_S_Y(55));
-    cpct_drawSprite(sp_pow_green, svmem, SP_POW_GREEN_W, SP_POW_GREEN_H);
-
-    svmem = cpct_getScreenPtr(CPCT_VMEM_START, W_2_S_X(20), W_2_S_Y(120));
-    cpct_drawSprite(sp_pow_green, svmem, SP_POW_GREEN_W, SP_POW_GREEN_H);
 }
 
 SceneState game_update()

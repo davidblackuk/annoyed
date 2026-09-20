@@ -37,6 +37,14 @@ extern void balls_draw();
 
 extern Ball * balls_get_first_active();
 
+// @brief the active ball most urgently descending toward the bat - for
+// autoplay targeting with multiple balls in play (see balls.c)
+extern Ball * balls_get_most_urgent_active();
+
+// @brief Disruption power-up: activate up to 2 more balls at source's
+// position, diverging from it
+extern void balls_split(Ball *source);
+
 extern u8 serving;
 
 #endif

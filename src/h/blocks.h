@@ -20,6 +20,10 @@
 #define BRICKS_MAP_PIXEL_TOP_SCR 24
 #define BRICKS_MAP_PIXEL_BOTTOM_SCR (BRICKS_MAP_PIXEL_TOP_SCR + (g_tilemap_l01_blocks_H * TILE_H))
 
+// world Y of a block's top edge, given its block_tile_y - inverse of the
+// tile-coordinate math in get_metaData_at()
+#define BLOCK_TOP_WORLD_Y(tile_y) ((BRICKS_MAP_PIXEL_TOP_SCR - TILE_H * 2) + (tile_y) * TILE_H)
+
 /// @brief Initialize the blocks for the level
 /// @param is_restart is this a restart? if so we keep the block states from the current run, 
 ///         otherwise we initialize the blocks from the level definition
@@ -69,6 +73,8 @@ typedef struct {
 
     u8 block_tile_x;
     u8 block_tile_y;
+
+    u8 carries_powerup;   // POWERUP_NONE / POWERUP_EXPAND / POWERUP_DISRUPTION
 } BlockMeta;
 
 

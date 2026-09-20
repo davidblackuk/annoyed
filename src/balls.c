@@ -123,6 +123,83 @@ Ball *balls_get_first_active()
     return NULL;
 }
 
+// @brief for autoplay targeting: which active ball most urgently needs the
+// bat's attention - the lowest (largest y) among those currently descending
+// toward the bat, falling back to the first active ball when none are
+// descending or only one ball is up. Doesn't multi-target, just avoids
+// fixating on a ball that's moving away while another is about to arrive.
+Ball *balls_get_most_urgent_active()
+{
+    Ball *ball = all_balls;
+    Ball *best = NULL;
+    for (u8 i = 0; i < MAX_BALLS; i++)
+    {
+        if (ball->active)
+        {
+            if (best == NULL)
+            {
+                best = ball;
+            }
+            else if (ball->dy > 0 && (best->dy <= 0 || ball->y > best->y))
+            {
+                best = ball;
+            }
+        }
+        ball++;
+    }
+    return best;
+}
+
+// @brief Disruption power-up: activate up to 2 currently-inactive balls at
+// source's position with fixed diverging dx, same dy as source.
+void balls_split(Ball *source)
+{
+    u8 spawned = 0;
+    Ball *ball = all_balls;
+
+    if (source == NULL)
+    {
+        return;
+    }
+
+    for (u8 i = 0; i < MAX_BALLS && spawned < 2; i++)
+    {
+        if (ball != source && !ball->active)
+        {
+            // spawn at source->prev_x/y (what's actually on screen right
+            // now, matching source->background below), not source->x/y -
+            // balls_update() already ran earlier this frame, so source->x/y
+            // is already its *next*, not-yet-drawn position
+            ball->x = source->prev_x;
+            ball->y = source->prev_y;
+            ball->prev_x = ball->x;
+            ball->prev_y = ball->y;
+            ball->dy = source->dy;
+            ball->dx = (spawned == 0) ? -2 : 2;
+            ball->active = 1;
+
+            // bootstrap its background buffer by copying source's, NOT by
+            // reading the live screen (store_bacgkround) - at this point in
+            // update(), this frame's draw() has already happened, so the
+            // *source* ball's own sprite is still visually sitting at this
+            // exact shared position. Reading the screen here would capture
+            // a copy of the source ball's sprite pixels as "background",
+            // which gets restored as a frozen ghost ball once this new ball
+            // has moved on a couple of frames later. source->background is
+            // already a valid true-background snapshot for source->prev_x/y
+            // (captured normally, before the source ball itself was ever
+            // drawn there), so copying it is correct by construction.
+            for (u8 b = 0; b < BALL_WIDTH * BALL_HEIGHT; b++)
+            {
+                ball->background[b] = source->background[b];
+            }
+
+            spawned++;
+        }
+        ball++;
+    }
+}
+
 // ---------------------------------------------------------------------------
 // Module private methods
 // ---------------------------------------------------------------------------
@@ -188,7 +265,14 @@ void  update_ball(Ball *ball)
 
         if (new_y >= YOUR_DEAD_Y)
         {
-            // ball lost or life lost, or game over
+            // ball lost or life lost, or game over. Restore its background
+            // immediately - once active drops to 0, balls_restore_background()
+            // only restores active balls, so this one would otherwise leave
+            // its last-drawn sprite as a permanent ghost. Harmless today
+            // (losing the only ball always clears the whole screen via the
+            // next level_initialize_internal()), but a real bug once
+            // Disruption lets some balls die while others stay in play.
+            restore_bacgkround(ball);
             ball->active = 0;
             ball->dy = 0;
             return;

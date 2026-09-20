@@ -78,6 +78,22 @@ typedef u8 BounceHits;
 #define BOUNCE_X 0x01
 #define BOUNCE_Y 0x02
 
+// power-up capsule effects
+#define POWERUP_NONE       0
+#define POWERUP_EXPAND     1
+#define POWERUP_DISRUPTION 2
+
+// a single carrier block for a level: tile_x/tile_y are the block's
+// top-left tile coordinates (the same values passed into plant_tile_meta /
+// stored in BlockMeta.block_tile_x/y), independent of the block's visual
+// colour - carrier status is invisible to the player until destroyed
+typedef struct
+{
+     u8 tile_x;
+     u8 tile_y;
+     u8 type;   // one of POWERUP_*
+} PowerupCarrier;
+
 // a method that requires no parameters
 typedef void (*Method)();
 
@@ -105,6 +121,9 @@ typedef struct
      u8 *blocks_tilemap;
      u8 steel_score;
      u8 steel_hits_to_destroy;
+
+     const PowerupCarrier *carriers;
+     u8 carrier_count;
 
 } Level;
 

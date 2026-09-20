@@ -8,6 +8,7 @@
 #include "h/blocks.h"
 #include "h/keys.h"
 #include "h/autoplay.h"
+#include "h/powerups.h"
 
 // ---------------------------------------------------------------------------
 // Module private declarations
@@ -37,21 +38,30 @@ void level_continue_from_death()
 
 void level_draw()
 {
-    // restore the background of moving items
+    // restore the background of moving items. powerups must restore before
+    // blocks do: a block a capsule is currently falling past can be
+    // destroyed this same frame (during update(), which runs after draw()),
+    // and blocks_restore_background() is deliberately the last restore call
+    // so it has final say over any tile a stale ball/capsule snapshot might
+    // have briefly resurrected.
     bat_restore_background();
     balls_restore_background();
+    powerups_restore_background();
     blocks_restore_background();
 
     // draw that which must be drawn
     blocks_draw();
 
-    // capture ball backgrounds before the bat is drawn, so a ball
-    // overlapping the bat (as on every paddle bounce) never snapshots bat
-    // pixels into its restore buffer - see balls_store_background
+    // capture ball/powerup backgrounds before the bat is drawn, so a ball
+    // or capsule overlapping the bat (as on every paddle bounce, or every
+    // catch) never snapshots bat pixels into its restore buffer - see
+    // balls_store_background
     balls_store_background();
+    powerups_store_background();
 
     bat_draw();
     balls_draw();
+    powerups_draw();
 }
 
 SceneState level_update()
@@ -64,9 +74,15 @@ SceneState level_update()
         keys_update();
     } while (key_pause_is_pressed);
 
+    // snapshot the bat's last-drawn footprint before anything below can
+    // move/resize it - see bat_begin_frame's own comment for why this must
+    // happen exactly once, up front, rather than scattered per-mutator
+    bat_begin_frame();
+
     auto_update();
     bat_update();
     balls_update();
+    powerups_update();
 
     // if there are no active balls left, we're dead
     if (balls_get_first_active() == NULL)
@@ -98,4 +114,5 @@ void level_initialize_internal(u8 is_restart)
     keys_initialize();
     bat_initialize();
     balls_initialize();
+    powerups_initialize();
 }

@@ -32,10 +32,20 @@
 // can never be outrun by the ball, however hard the ball is bounced
 #define AUTO_BAT_MAX_STEP 2
 
+#define NORMAL_BAT_WIDTH 8
+#define BAT_EXPANDED_WIDTH 16   // double width; stays a multiple of
+                                 // BAT_SEGMENT_WIDTH_BYTES, well inside
+                                 // PLAY_AREA_WIDTH
+#define EXPAND_DURATION_FRAMES 750   // ~15s @ 50fps
+
 u8 batY = 0;
 u8 batX = 0;
 u8 oldBatX = 0;
 u8 batW = 0;
+u8 oldBatW = 0;
+u16 expand_timer = 0;
+
+void bat_recenter_to_width(u8 new_width);
 
 // ---------------------------------------------------------------------------
 // Module public methods
@@ -43,10 +53,27 @@ u8 batW = 0;
 
 void bat_initialize()
 {
-    batW = 8;
+    batW = NORMAL_BAT_WIDTH;
     batX = (PLAY_AREA_WIDTH - batW) / 2;
     batY = PLAY_AREA_HEIGHT - BAT_HEIGHT_PIXELS - BAT_BOTTOM_OFFSET_PIXELS;
     oldBatX = batX;
+    oldBatW = batW;
+    expand_timer = 0;
+}
+
+// snapshot the position/width the bat was last actually drawn at, before
+// anything this frame's update() gets a chance to change either. Must run
+// exactly once, right at the start of level_update() - before auto_update/
+// bat_update/powerups_update, all of which can move and/or resize the bat
+// (sometimes more than one of them in the very same frame, e.g. the Expand
+// timer expiring and a fresh capsule being caught on the same frame).
+// Capturing once up front, rather than scattered across every mutator,
+// guarantees bat_restore_background() always sees the true last-drawn
+// footprint no matter how many of those changes land in one frame.
+void bat_begin_frame()
+{
+    oldBatX = batX;
+    oldBatW = batW;
 }
 
 void bat_update()
@@ -55,7 +82,6 @@ void bat_update()
     {
         if (batX > 0)
         {
-            oldBatX = batX;
             batX--;
         }
     }
@@ -63,8 +89,16 @@ void bat_update()
     {
         if (batX < PLAY_AREA_WIDTH - batW)
         {
-            oldBatX = batX;
             batX++;
+        }
+    }
+
+    if (expand_timer > 0)
+    {
+        expand_timer--;
+        if (expand_timer == 0)
+        {
+            bat_recenter_to_width(NORMAL_BAT_WIDTH);
         }
     }
 }
@@ -80,8 +114,6 @@ void bat_move_towards(i16 target_x)
         target_x = PLAY_AREA_WIDTH - batW;
     }
 
-    oldBatX = batX;
-
     if (target_x > batX)
     {
         u8 step = ((target_x - batX) > AUTO_BAT_MAX_STEP) ? AUTO_BAT_MAX_STEP : (u8)(target_x - batX);
@@ -96,29 +128,39 @@ void bat_move_towards(i16 target_x)
 
 void bat_restore_background()
 {
-    // Restoring only oldBatX (with width batW) is exactly correct for a
-    // 1px/frame move, but autoplay can jump the bat up to
-    // AUTO_BAT_MAX_STEP px in one frame. Restore the union of the old and
-    // new footprints instead, so the old sprite is always fully erased
-    // regardless of how far it moved this frame.
-    u8 restore_x = (oldBatX < batX) ? oldBatX : batX;
-    u8 spread = (oldBatX < batX) ? (batX - oldBatX) : (oldBatX - batX);
+    // Restore the union of the old and new footprints, so the old sprite
+    // is always fully erased regardless of how far the bat moved this
+    // frame (autoplay can jump it up to AUTO_BAT_MAX_STEP px) AND
+    // regardless of whether its width changed this frame too (Expand
+    // growing/reverting) - oldBatX/oldBatW capture exactly what was last
+    // actually drawn on screen, batX/batW is what's about to be drawn now.
+    u8 left = (oldBatX < batX) ? oldBatX : batX;
+    u8 old_right = oldBatX + oldBatW;
+    u8 new_right = batX + batW;
+    u8 right = (old_right > new_right) ? old_right : new_right;
 
-    background_restore_world_coords(restore_x, batY, batW + spread, BAT_HEIGHT_PIXELS);
+    background_restore_world_coords(left, batY, right - left, BAT_HEIGHT_PIXELS);
 }
 
 void bat_draw()
 {
     u8 *svmem;
+    u8 mid_segments;
 
     svmem = cpct_getScreenPtr(CPCT_VMEM_START, W_2_S_X(batX), W_2_S_Y(batY));
 
     cpct_drawSpriteMasked(sp_masked_bat_left, svmem, SP_BAT_SEG_W, SP_BAT_SEG_H);
 
-    cpct_drawSprite(sp_bat_mid, svmem + BAT_SEGMENT_WIDTH_BYTES, SP_BAT_MID_W, SP_BAT_MID_H);
-    cpct_drawSprite(sp_bat_mid, svmem + 2 * BAT_SEGMENT_WIDTH_BYTES, SP_BAT_MID_W, SP_BAT_MID_H);
+    // batW==8 (the normal width) gives mid_segments==2, drawn at the same
+    // two offsets as the original hardcoded version - Expand just widens
+    // this loop rather than needing new art
+    mid_segments = (batW / BAT_SEGMENT_WIDTH_BYTES) - 2;
+    for (u8 i = 0; i < mid_segments; i++)
+    {
+        cpct_drawSprite(sp_bat_mid, svmem + (1 + i) * BAT_SEGMENT_WIDTH_BYTES, SP_BAT_MID_W, SP_BAT_MID_H);
+    }
 
-    cpct_drawSpriteMasked(sp_masked_bat_right, svmem + 3 * BAT_SEGMENT_WIDTH_BYTES, SP_BAT_SEG_W, SP_BAT_SEG_H);
+    cpct_drawSpriteMasked(sp_masked_bat_right, svmem + (1 + mid_segments) * BAT_SEGMENT_WIDTH_BYTES, SP_BAT_SEG_W, SP_BAT_SEG_H);
 }
 
 BounceHits bat_bounce_ball(Ball *ball, i16 at_x, i16 at_y)
@@ -143,7 +185,18 @@ BounceHits bat_bounce_ball(Ball *ball, i16 at_x, i16 at_y)
         {
             offset = batW - 1;
         }
-        segment = offset / BAT_SEGMENT_WIDTH_BYTES;
+
+        // scale the 4 rebound zones proportionally to the current bat
+        // width, rather than assuming a fixed 8-byte bat, so a widened
+        // (Expand) bat still gets 4 distinct zones instead of everything
+        // past the original segment 2 landing in the sharpest-angle
+        // default case - identical result to the old fixed-width formula
+        // when batW is the normal 8
+        segment = (u8)((offset * 4) / batW);
+        if (segment > 3)
+        {
+            segment = 3;
+        }
 
         // dy is set here too (rather than left to the automatic sign-flip
         // below) so overall ball speed stays close to the serve speed for
@@ -175,6 +228,46 @@ BounceHits bat_bounce_ball(Ball *ball, i16 at_x, i16 at_y)
     return bounces;
 }
 
+u8 bat_is_catching(i16 x, i16 y, u8 w, u8 h)
+{
+    return (x + w > batX && x < batX + batW &&
+            y + h > batY && y < batY + BAT_HEIGHT_PIXELS);
+}
+
+void bat_apply_expand()
+{
+    if (batW != BAT_EXPANDED_WIDTH)
+    {
+        bat_recenter_to_width(BAT_EXPANDED_WIDTH);
+    }
+
+    // catching a second Expand while already expanded just refreshes the
+    // duration rather than stacking
+    expand_timer = EXPAND_DURATION_FRAMES;
+}
+
 // ---------------------------------------------------------------------------
 // Module private methods
 // ---------------------------------------------------------------------------
+
+// re-centres the bat on its current middle at a new width, clamped to stay
+// within the play area - used by both bat_apply_expand (growing) and the
+// expand_timer expiry (shrinking back), so growth and reversion look
+// symmetric rather than snapping to one edge
+void bat_recenter_to_width(u8 new_width)
+{
+    i16 center = batX + (batW / 2);
+    i16 new_x = center - (new_width / 2);
+
+    if (new_x < 0)
+    {
+        new_x = 0;
+    }
+    else if (new_x + new_width > PLAY_AREA_WIDTH)
+    {
+        new_x = PLAY_AREA_WIDTH - new_width;
+    }
+
+    batX = (u8)new_x;
+    batW = new_width;
+}

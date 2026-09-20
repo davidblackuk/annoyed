@@ -8,6 +8,7 @@
 #include "h/debug.h"
 #include "h/background.h"
 #include "h/game.h"
+#include "h/powerups.h"
 
 // ---------------------------------------------------------------------------
 // Module private declarations
@@ -38,6 +39,7 @@ void map_blocks_to_meta();
 void draw_current_blocks();
 
 void plant_tile_meta(u8 map_x, u8 map_y, u8 tile_type, u8 score, u8 hits_to_destroy);
+u8 find_carrier_type(u8 map_x, u8 map_y);
 BlockMeta *get_metaData_at(i16 wx, i16 wy);
 BounceHits is_ball_colliding_with_block(Ball *ball, i16 wx, i16 wy, BounceHits bounceType);
 
@@ -140,7 +142,6 @@ BounceHits is_ball_colliding_with_block(Ball *ball, i16 wx, i16 wy, BounceHits b
 {
     BounceHits bounces = BOUNCE_NONE;
     BlockMeta *meta;
-    u8 *pvm;
     meta = get_metaData_at(wx, wy);
     if (meta)
     {
@@ -157,13 +158,15 @@ BounceHits is_ball_colliding_with_block(Ball *ball, i16 wx, i16 wy, BounceHits b
                 blocks_remaining -= 1;
                 current_score += meta->score;
 
-                // just try to draw tile thats removed
-                pvm = cpct_getScreenPtr(CPCT_VMEM_START,
-                                        W_2_S_X(meta->block_tile_x * TILE_W),
-                                        BRICKS_MAP_PIXEL_TOP_SCR + (meta->block_tile_y * TILE_H));
-
                 store_block_to_remove(meta->block_tile_x,
                                                meta->block_tile_y);
+
+                if (meta->carries_powerup != POWERUP_NONE)
+                {
+                    powerups_spawn(meta->carries_powerup,
+                                    meta->block_tile_x * TILE_W,
+                                    BLOCK_TOP_WORLD_Y(meta->block_tile_y));
+                }
             }
         }
 
@@ -277,6 +280,7 @@ void map_blocks_to_meta()
                 block_meta[x / 2][y / 2].is_active = 0;
                 block_meta[x / 2][y / 2].score = 0;
                 block_meta[x / 2][y / 2].remaining_hits = 0;
+                block_meta[x / 2][y / 2].carries_powerup = POWERUP_NONE;
 
                 break;
             }
@@ -297,6 +301,24 @@ void plant_tile_meta(u8 map_x, u8 map_y, u8 tile_type, u8 score, u8 hits_to_dest
     block_meta[map_x / 2][map_y / 2].type = tile_type;
     block_meta[map_x / 2][map_y / 2].block_tile_x = map_x;
     block_meta[map_x / 2][map_y / 2].block_tile_y = map_y;
+    block_meta[map_x / 2][map_y / 2].carries_powerup = find_carrier_type(map_x, map_y);
+}
+
+// looks up whether (map_x, map_y) is a designated power-up carrier for the
+// current level - carrier status is level-design data, independent of the
+// block's visual colour/type, so it's kept separate from the tile switch
+// in map_blocks_to_meta() above
+u8 find_carrier_type(u8 map_x, u8 map_y)
+{
+    for (u8 i = 0; i < current_level->carrier_count; i++)
+    {
+        if (current_level->carriers[i].tile_x == map_x &&
+            current_level->carriers[i].tile_y == map_y)
+        {
+            return current_level->carriers[i].type;
+        }
+    }
+    return POWERUP_NONE;
 }
 
 

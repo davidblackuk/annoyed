@@ -64,7 +64,7 @@ void auto_update()
 
     if (is_controling)
     {
-        Ball *ball = balls_get_first_active();
+        Ball *ball = balls_get_most_urgent_active();
 
         keys_resetAllKeys();
         if (ball != NULL)
